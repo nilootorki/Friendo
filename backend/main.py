@@ -1,7 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI , Depends
 from dotenv import load_dotenv
 import os
-
+from sqlalchemy.orm import Session
+from database import engine, Session , base
+import db_models
 
 load_dotenv()
 
@@ -18,3 +20,15 @@ app=FastAPI() #assign the dastapi to main app/web
 def get_url():
     return{"massage":"Welcome to Friendo!"}
     
+
+base.metadata.create_all(bind=engine)  #ensure tables exist in the db
+
+
+#to avoid memory leaking
+def get_db():
+    db=Session()   #start a db session
+    try:
+        yield db    #provides the session to FastAPI routes 
+    finally:
+        db.close()   #close the session after the request is complete
+        
