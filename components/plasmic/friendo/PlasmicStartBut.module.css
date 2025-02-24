@@ -1,0 +1,25 @@
+.root:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+  transition-property: all;
+  transition-duration: 1s;
+  position: relative;
+  -webkit-transition-property: all;
+  -webkit-transition-duration: 1s;
+}
+.svg___3WsxH {
+  position: relative;
+  height: 1em;
+}
+.text {
+  white-space: pre;
+  font-size: 20px;
+  width: auto;
+  height: auto;
+  background: none;
+  color: var(--token-VUjw4RWtnAuM);
+  mix-blend-mode: lighten;
+}
+.svg__gMp6 {
+  position: relative;
+  height: 1em;
+}
