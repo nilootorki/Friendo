@@ -12,20 +12,18 @@ import * as React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import {
-  PlasmicImg as PlasmicImg__,
   classNames,
   createPlasmicElementProxy,
   deriveRenderOpts,
   ensureGlobalVariants,
   generateStateOnChangeProp,
-  get as $stateGet,
-  hasVariant,
+  generateStateValueProp,
   renderPlasmicSlot,
-  set as $stateSet,
   useDollarState
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
-import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
+import NavBar from "../../NavBar"; // plasmic-import: KnagBLotfm8n/component
+import Button from "../../Button"; // plasmic-import: R-SJru1lXq4W/component
 import Checkbox from "../../Checkbox"; // plasmic-import: qcH6HD0MTML6/component
 import { useScreenVariants as useScreenVariantss47GOinckgZx } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: s47GOinckgZX/globalVariant
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -71,40 +69,34 @@ function PlasmicHome__RenderFunc(props) {
   const stateSpecs = React.useMemo(
     () => [
       {
-        path: "profileTooltip",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => false
-      },
-      {
-        path: "statsTooltip",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => false
-      },
-      {
-        path: "callTooltip",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => false
-      },
-      {
-        path: "messageTooltip",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => false
-      },
-      {
-        path: "variable",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => ""
-      },
-      {
         path: "checkbox.isSelected",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "navBar.proTooltip",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "navBar.statTooltip",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "navBar.caltooltip",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "navBar.messTooltip",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
 
@@ -147,549 +139,79 @@ function PlasmicHome__RenderFunc(props) {
         >
           <div className={classNames(projectcss.all, sty.freeBox___1UhyR)}>
             <div className={classNames(projectcss.all, sty.freeBox___3MZl)}>
-              <div className={classNames(projectcss.all, sty.freeBox__raFt)}>
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__x1Xh8
-                  )}
-                >
-                  <React.Fragment>
-                    <span
-                      className={"plasmic_default__all plasmic_default__span"}
-                      style={{ color: "var(--token-iiqrps1yKdLE)" }}
-                    >
-                      {"Friendo"}
-                    </span>
-                  </React.Fragment>
-                </div>
-                <div className={classNames(projectcss.all, sty.freeBox__t9Njo)}>
-                  <div
-                    className={classNames(projectcss.all, sty.freeBox__gvkNi)}
-                    onMouseEnter={async event => {
-                      const $steps = {};
-                      $steps["updateProfileTooltip"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["profileTooltip"]
-                              },
-                              operation: 4
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-                              const oldValue = $stateGet(objRoot, variablePath);
-                              $stateSet(objRoot, variablePath, !oldValue);
-                              return !oldValue;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateProfileTooltip"] != null &&
-                        typeof $steps["updateProfileTooltip"] === "object" &&
-                        typeof $steps["updateProfileTooltip"].then ===
-                          "function"
-                      ) {
-                        $steps["updateProfileTooltip"] = await $steps[
-                          "updateProfileTooltip"
-                        ];
-                      }
-                    }}
-                    onMouseLeave={async event => {
-                      const $steps = {};
-                      $steps["updateProfileTooltip"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["profileTooltip"]
-                              },
-                              operation: 4
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-                              const oldValue = $stateGet(objRoot, variablePath);
-                              $stateSet(objRoot, variablePath, !oldValue);
-                              return !oldValue;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateProfileTooltip"] != null &&
-                        typeof $steps["updateProfileTooltip"] === "object" &&
-                        typeof $steps["updateProfileTooltip"].then ===
-                          "function"
-                      ) {
-                        $steps["updateProfileTooltip"] = await $steps[
-                          "updateProfileTooltip"
-                        ];
-                      }
-                    }}
-                  >
-                    <PlasmicImg__
-                      alt={""}
-                      className={classNames(sty.img__ruE6V)}
-                      displayHeight={
-                        hasVariant(globalVariants, "screen", "mobileOnly")
-                          ? "40px"
-                          : "40px"
-                      }
-                      displayMaxHeight={"none"}
-                      displayMaxWidth={"100%"}
-                      displayMinHeight={"0"}
-                      displayMinWidth={"0"}
-                      displayWidth={
-                        hasVariant(globalVariants, "screen", "mobileOnly")
-                          ? "40px"
-                          : "40px"
-                      }
-                      loading={"lazy"}
-                      src={{
-                        src: "/plasmic/friendo/images/icons8Customer64Png.png",
-                        fullWidth: 64,
-                        fullHeight: 64,
-                        aspectRatio: undefined
-                      }}
-                    />
-
-                    {(() => {
-                      try {
-                        return $state.profileTooltip;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return true;
-                        }
-                        throw e;
-                      }
-                    })() ? (
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__brx0E
-                        )}
-                      >
-                        {"Edit Profile"}
-                      </div>
-                    ) : null}
-                  </div>
-                  <div
-                    className={classNames(projectcss.all, sty.freeBox__mC9Z)}
-                    onMouseEnter={async event => {
-                      const $steps = {};
-                      $steps["updateStatsTooltip"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["statsTooltip"]
-                              },
-                              operation: 4
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-                              const oldValue = $stateGet(objRoot, variablePath);
-                              $stateSet(objRoot, variablePath, !oldValue);
-                              return !oldValue;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateStatsTooltip"] != null &&
-                        typeof $steps["updateStatsTooltip"] === "object" &&
-                        typeof $steps["updateStatsTooltip"].then === "function"
-                      ) {
-                        $steps["updateStatsTooltip"] = await $steps[
-                          "updateStatsTooltip"
-                        ];
-                      }
-                    }}
-                    onMouseLeave={async event => {
-                      const $steps = {};
-                      $steps["updateStatsTooltip"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["statsTooltip"]
-                              },
-                              operation: 4
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-                              const oldValue = $stateGet(objRoot, variablePath);
-                              $stateSet(objRoot, variablePath, !oldValue);
-                              return !oldValue;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateStatsTooltip"] != null &&
-                        typeof $steps["updateStatsTooltip"] === "object" &&
-                        typeof $steps["updateStatsTooltip"].then === "function"
-                      ) {
-                        $steps["updateStatsTooltip"] = await $steps[
-                          "updateStatsTooltip"
-                        ];
-                      }
-                    }}
-                  >
-                    <PlasmicImg__
-                      alt={""}
-                      className={classNames(sty.img___68ZMy)}
-                      displayHeight={
-                        hasVariant(globalVariants, "screen", "mobileOnly")
-                          ? "30px"
-                          : "25px"
-                      }
-                      displayMaxHeight={"none"}
-                      displayMaxWidth={"100%"}
-                      displayMinHeight={"0"}
-                      displayMinWidth={"0"}
-                      displayWidth={
-                        hasVariant(globalVariants, "screen", "mobileOnly")
-                          ? "30px"
-                          : "25px"
-                      }
-                      loading={"lazy"}
-                      src={{
-                        src: "/plasmic/friendo/images/icons8Statistics50Png.png",
-                        fullWidth: 50,
-                        fullHeight: 50,
-                        aspectRatio: undefined
-                      }}
-                    />
-
-                    {(() => {
-                      try {
-                        return $state.statsTooltip;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return true;
-                        }
-                        throw e;
-                      }
-                    })() ? (
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text___6OKmZ
-                        )}
-                      >
-                        {"See Statistics"}
-                      </div>
-                    ) : null}
-                  </div>
-                  <div
-                    className={classNames(projectcss.all, sty.freeBox__cj21F)}
-                    onMouseEnter={async event => {
-                      const $steps = {};
-                      $steps["updateCallTooltip"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["callTooltip"]
-                              },
-                              operation: 4
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-                              const oldValue = $stateGet(objRoot, variablePath);
-                              $stateSet(objRoot, variablePath, !oldValue);
-                              return !oldValue;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateCallTooltip"] != null &&
-                        typeof $steps["updateCallTooltip"] === "object" &&
-                        typeof $steps["updateCallTooltip"].then === "function"
-                      ) {
-                        $steps["updateCallTooltip"] = await $steps[
-                          "updateCallTooltip"
-                        ];
-                      }
-                    }}
-                    onMouseLeave={async event => {
-                      const $steps = {};
-                      $steps["updateCallTooltip"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["callTooltip"]
-                              },
-                              operation: 0
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateCallTooltip"] != null &&
-                        typeof $steps["updateCallTooltip"] === "object" &&
-                        typeof $steps["updateCallTooltip"].then === "function"
-                      ) {
-                        $steps["updateCallTooltip"] = await $steps[
-                          "updateCallTooltip"
-                        ];
-                      }
-                    }}
-                  >
-                    <PlasmicImg__
-                      alt={""}
-                      className={classNames(sty.img__txneq)}
-                      displayHeight={
-                        hasVariant(globalVariants, "screen", "mobileOnly")
-                          ? "35px"
-                          : "30px"
-                      }
-                      displayMaxHeight={"none"}
-                      displayMaxWidth={"100%"}
-                      displayMinHeight={"0"}
-                      displayMinWidth={"0"}
-                      displayWidth={
-                        hasVariant(globalVariants, "screen", "mobileOnly")
-                          ? "35px"
-                          : "30px"
-                      }
-                      loading={"lazy"}
-                      src={{
-                        src: "/plasmic/friendo/images/icons8Call48Png.png",
-                        fullWidth: 48,
-                        fullHeight: 48,
-                        aspectRatio: undefined
-                      }}
-                    />
-
-                    {(() => {
-                      try {
-                        return $state.callTooltip;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return true;
-                        }
-                        throw e;
-                      }
-                    })() ? (
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__bT8JA
-                        )}
-                      >
-                        {"Call History"}
-                      </div>
-                    ) : null}
-                  </div>
-                  <div
-                    className={classNames(projectcss.all, sty.freeBox__n3Ap)}
-                    onMouseEnter={async event => {
-                      const $steps = {};
-                      $steps["updateMessageTooltip"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["messageTooltip"]
-                              },
-                              operation: 4
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-                              const oldValue = $stateGet(objRoot, variablePath);
-                              $stateSet(objRoot, variablePath, !oldValue);
-                              return !oldValue;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateMessageTooltip"] != null &&
-                        typeof $steps["updateMessageTooltip"] === "object" &&
-                        typeof $steps["updateMessageTooltip"].then ===
-                          "function"
-                      ) {
-                        $steps["updateMessageTooltip"] = await $steps[
-                          "updateMessageTooltip"
-                        ];
-                      }
-                    }}
-                    onMouseLeave={async event => {
-                      const $steps = {};
-                      $steps["updateMessageTooltip"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["messageTooltip"]
-                              },
-                              operation: 0
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateMessageTooltip"] != null &&
-                        typeof $steps["updateMessageTooltip"] === "object" &&
-                        typeof $steps["updateMessageTooltip"].then ===
-                          "function"
-                      ) {
-                        $steps["updateMessageTooltip"] = await $steps[
-                          "updateMessageTooltip"
-                        ];
-                      }
-                    }}
-                  >
-                    <PlasmicImg__
-                      alt={""}
-                      className={classNames(sty.img___9BCok)}
-                      displayHeight={
-                        hasVariant(globalVariants, "screen", "mobileOnly")
-                          ? "35px"
-                          : "30px"
-                      }
-                      displayMaxHeight={"none"}
-                      displayMaxWidth={"100%"}
-                      displayMinHeight={"0"}
-                      displayMinWidth={"0"}
-                      displayWidth={
-                        hasVariant(globalVariants, "screen", "mobileOnly")
-                          ? "35px"
-                          : "30px"
-                      }
-                      loading={"lazy"}
-                      src={{
-                        src: "/plasmic/friendo/images/icons8Messages48Png.png",
-                        fullWidth: 48,
-                        fullHeight: 48,
-                        aspectRatio: undefined
-                      }}
-                    />
-
-                    {(() => {
-                      try {
-                        return $state.messageTooltip;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return true;
-                        }
-                        throw e;
-                      }
-                    })() ? (
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__ihs9E
-                        )}
-                      >
-                        {"Message History"}
-                      </div>
-                    ) : null}
-                  </div>
-                  <div
-                    className={classNames(projectcss.all, sty.freeBox__vuVxP)}
-                  >
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__tq1Ur
-                      )}
-                    >
-                      {"About Us"}
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <NavBar
+                data-plasmic-name={"navBar"}
+                data-plasmic-override={overrides.navBar}
+                caltooltip={generateStateValueProp($state, [
+                  "navBar",
+                  "caltooltip"
+                ])}
+                className={classNames("__wab_instance", sty.navBar)}
+                messTooltip={generateStateValueProp($state, [
+                  "navBar",
+                  "messTooltip"
+                ])}
+                onCaltooltipChange={async (...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "navBar",
+                    "caltooltip"
+                  ]).apply(null, eventArgs);
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onMessTooltipChange={async (...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "navBar",
+                    "messTooltip"
+                  ]).apply(null, eventArgs);
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onProTooltipChange={async (...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "navBar",
+                    "proTooltip"
+                  ]).apply(null, eventArgs);
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                onStatTooltipChange={async (...eventArgs) => {
+                  generateStateOnChangeProp($state, [
+                    "navBar",
+                    "statTooltip"
+                  ]).apply(null, eventArgs);
+                  if (
+                    eventArgs.length > 1 &&
+                    eventArgs[1] &&
+                    eventArgs[1]._plasmic_state_init_
+                  ) {
+                    return;
+                  }
+                }}
+                proTooltip={generateStateValueProp($state, [
+                  "navBar",
+                  "proTooltip"
+                ])}
+                statTooltip={generateStateValueProp($state, [
+                  "navBar",
+                  "statTooltip"
+                ])}
+              />
             </div>
             <div className={classNames(projectcss.all, sty.freeBox___70QMx)}>
               <div
@@ -701,36 +223,33 @@ function PlasmicHome__RenderFunc(props) {
               >
                 {"AI Recommendations"}
               </div>
-              <AntdButton
-                data-plasmic-name={"seefriendsbut"}
-                data-plasmic-override={overrides.seefriendsbut}
-                className={classNames("__wab_instance", sty.seefriendsbut)}
+              <Button
+                data-plasmic-name={"button"}
+                data-plasmic-override={overrides.button}
+                className={classNames("__wab_instance", sty.button)}
+                end={null}
+                label={
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text___9XrC
+                    )}
+                  >
+                    {"See All Friends"}
+                  </div>
+                }
+              />
+
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__xAnVj
+                )}
               >
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__yCwPf
-                  )}
-                >
-                  {"See All Friends"}
-                </div>
-              </AntdButton>
-              {(
-                hasVariant(globalVariants, "screen", "mobileOnly")
-                  ? true
-                  : false
-              ) ? (
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__xAnVj
-                  )}
-                >
-                  {"AI Recommendations"}
-                </div>
-              ) : null}
+                {"AI Recommendations"}
+              </div>
             </div>
             <div className={classNames(projectcss.all, sty.freeBox__bLmrx)}>
               <div className={classNames(projectcss.all, sty.freeBox__gDxqJ)}>
@@ -756,123 +275,42 @@ function PlasmicHome__RenderFunc(props) {
 
                 <div className={classNames(projectcss.all, sty.freeBox__gSkfn)}>
                   <div
+                    className={classNames(projectcss.all, sty.freeBox__ny76X)}
+                  />
+
+                  <div
                     className={classNames(projectcss.all, sty.freeBox___89Th2)}
                   >
-                    {renderPlasmicSlot({
-                      defaultContents:
-                        "You should call sara, its been a long time!",
-                      value: args.children,
-                      className: classNames(sty.slotTargetChildren)
-                    })}
-                  </div>
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text___1IXC
-                    )}
-                  >
-                    {"2 hours ago"}
-                  </div>
-                </div>
-              </div>
-              <div className={classNames(projectcss.all, sty.freeBox__lgCzw)}>
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__qOjJv
-                  )}
-                >
-                  {
-                    "Maryam was upset the other day, maybe you should check on her and see how she's doing."
-                  }
-                </div>
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__gsVSs
-                  )}
-                >
-                  {"4 hours ago"}
-                </div>
-              </div>
-              <div className={classNames(projectcss.all, sty.freeBox__mcddo)}>
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__cNGn
-                  )}
-                >
-                  {
-                    "You don't seem very happy today, going out with Mike can change your mood."
-                  }
-                </div>
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__tmZlY
-                  )}
-                >
-                  {"7 hours ago"}
-                </div>
-              </div>
-              <div className={classNames(projectcss.all, sty.freeBox___0LKDo)}>
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__kWjKs
-                  )}
-                >
-                  {
-                    "Based on your previous interactions, blocking Hedieh is a good idea!"
-                  }
-                </div>
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__zaugt
-                  )}
-                >
-                  {"1 day ago"}
-                </div>
-              </div>
-              <div className={classNames(projectcss.all, sty.freeBox__w35Zr)}>
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__hSSf1
-                  )}
-                >
-                  {""}
-                </div>
-                <div className={classNames(projectcss.all, sty.freeBox__ug9Ub)}>
-                  <div
-                    className={classNames(projectcss.all, sty.freeBox__hdCt)}
-                  >
                     <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__mqQ2R
-                      )}
+                      className={classNames(projectcss.all, sty.freeBox__ekCDn)}
                     >
-                      {"You should call George, its been a long time!"}
-                    </div>
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__kcj4E
-                      )}
-                    >
-                      {"2 days ago"}
+                      {renderPlasmicSlot({
+                        defaultContents: (
+                          <React.Fragment>
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.text__fYyVh
+                              )}
+                            >
+                              {"You should call sara, its been a long time!"}
+                            </div>
+                            <div
+                              className={classNames(
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.text___1IXC
+                              )}
+                            >
+                              {"2 hours ago"}
+                            </div>
+                          </React.Fragment>
+                        ),
+
+                        value: args.children,
+                        className: classNames(sty.slotTargetChildren)
+                      })}
                     </div>
                   </div>
                 </div>
@@ -895,8 +333,9 @@ function PlasmicHome__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "seefriendsbut", "checkbox"],
-  seefriendsbut: ["seefriendsbut"],
+  root: ["root", "navBar", "button", "checkbox"],
+  navBar: ["navBar"],
+  button: ["button"],
   checkbox: ["checkbox"]
 };
 
@@ -932,7 +371,8 @@ export const PlasmicHome = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
-    seefriendsbut: makeNodeComponent("seefriendsbut"),
+    navBar: makeNodeComponent("navBar"),
+    button: makeNodeComponent("button"),
     checkbox: makeNodeComponent("checkbox"),
     // Metadata about props expected for PlasmicHome
     internalVariantProps: PlasmicHome__VariantProps,

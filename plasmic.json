@@ -731,20 +731,6 @@
           "componentType": "component"
         },
         {
-          "id": "63kH-ijjFAGV",
-          "name": "NewPage",
-          "type": "managed",
-          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
-          "renderModuleFilePath": "plasmic/friendo/PlasmicNewPage.jsx",
-          "importSpec": {
-            "modulePath": "../pages/new-page.jsx"
-          },
-          "cssFilePath": "plasmic/friendo/PlasmicNewPage.module.css",
-          "scheme": "blackbox",
-          "componentType": "page",
-          "path": "/new-page"
-        },
-        {
           "id": "NyC0ja4FReyd",
           "name": "SignInPage",
           "type": "managed",
@@ -875,6 +861,47 @@
           "cssFilePath": "plasmic/friendo/PlasmicCheckbox.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "KY3VR_cw940f",
+          "name": "ProfileEdit",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicProfileEdit.jsx",
+          "importSpec": {
+            "modulePath": "../pages/profile-edit.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicProfileEdit.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/profile-edit"
+        },
+        {
+          "id": "KnagBLotfm8n",
+          "name": "NavBar",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicNavBar.jsx",
+          "importSpec": {
+            "modulePath": "NavBar.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicNavBar.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "J8RatPaeNNWJ",
+          "name": "SeeFriends",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicSeeFriends.jsx",
+          "importSpec": {
+            "modulePath": "../pages/see-friends.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicSeeFriends.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/see-friends"
         }
       ],
       "icons": [
@@ -979,6 +1006,11 @@
           "id": "F1lIpAQ-mskE",
           "name": "icons8-messages-48 -black.png",
           "filePath": "../public/plasmic/friendo/images/icons8Messages48BlackPng.png"
+        },
+        {
+          "id": "bertbCK5Fjuk",
+          "name": "icons8-edit-24.png",
+          "filePath": "../public/plasmic/friendo/images/icons8Edit24Png.png"
         }
       ],
       "indirect": false,

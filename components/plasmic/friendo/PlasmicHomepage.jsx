@@ -219,6 +219,24 @@ function PlasmicHomepage__RenderFunc(props) {
             >
               {"AI friendship quality assurance"}
             </div>
+            <PlasmicImg__
+              alt={""}
+              className={classNames(sty.img__cAKmw)}
+              displayHeight={"500px"}
+              displayMaxHeight={"none"}
+              displayMaxWidth={"100%"}
+              displayMinHeight={"0"}
+              displayMinWidth={"0"}
+              displayWidth={"500px"}
+              loading={"lazy"}
+              src={{
+                src: "/plasmic/friendo/images/d7A02Ad17A012Be9Afbd10644Cc7A41FJpg.jpg",
+                fullWidth: 736,
+                fullHeight: 900,
+                aspectRatio: undefined
+              }}
+            />
+
             <div className={classNames(projectcss.all, sty.freeBox__gJb74)}>
               <PlasmicImg__
                 alt={""}
@@ -238,24 +256,6 @@ function PlasmicHomepage__RenderFunc(props) {
                 }}
               />
             </div>
-            <PlasmicImg__
-              alt={""}
-              className={classNames(sty.img__cAKmw)}
-              displayHeight={"249px"}
-              displayMaxHeight={"none"}
-              displayMaxWidth={"100%"}
-              displayMinHeight={"0"}
-              displayMinWidth={"0"}
-              displayWidth={"250px"}
-              loading={"lazy"}
-              src={{
-                src: "/plasmic/friendo/images/d7A02Ad17A012Be9Afbd10644Cc7A41FJpg.jpg",
-                fullWidth: 736,
-                fullHeight: 900,
-                aspectRatio: undefined
-              }}
-            />
-
             <PlasmicImg__
               alt={""}
               className={classNames(sty.img__eij6)}
