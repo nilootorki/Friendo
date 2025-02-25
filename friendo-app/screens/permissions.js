@@ -15,7 +15,7 @@ import Text from "@kaloraat/react-native-text";
 import UserInput from "../Components/auth/UserInput";
 import SubmitBtn from "../Components/auth/SubmitButton";
 import axios from "axios";
-import requestPermissions from "../Components/getCallMessages/getCall";
+import getCallLogs from "../Components/getCallMessages/getCall";
 
 const GetPermissions = () => {
   return (
@@ -27,7 +27,7 @@ const GetPermissions = () => {
       }}
     >
       <Text>Request Permissions Demo</Text>
-      <Button title="Request Permissions" onPress={requestPermissions} />
+      <Button title="Request Permissions" onPress={getCallLogs} />
     </View>
   );
 };

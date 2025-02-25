@@ -1,35 +1,28 @@
-import { PermissionsAndroid, Platform } from 'react-native';
+import { PermissionsAndroid } from 'react-native';
+import CallLogs from 'react-native-call-log';
 
-
-async function requestPermissions() {
+async function getCallLogs() {
   try {
-    if (Platform.OS === 'android') {
-      const granted = await PermissionsAndroid.requestMultiple([
-        PermissionsAndroid.PERMISSIONS.READ_SMS,
-        PermissionsAndroid.PERMISSIONS.RECEIVE_SMS,
-        PermissionsAndroid.PERMISSIONS.READ_CALL_LOG,
-      ]);
-      
-      if (granted['android.permission.READ_SMS'] === PermissionsAndroid.RESULTS.GRANTED &&
-          granted['android.permission.READ_CALL_LOG'] === PermissionsAndroid.RESULTS.GRANTED) {
-        alert('SMS and Call Log permissions granted');
-      } else {
-        alert('Permissions denied');
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.READ_CALL_LOG,
+      {
+        title: 'Call Log Permission',
+        message: 'This app needs access to your call logs',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
       }
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      const logs = await CallLogs.load(10); // Get last 10 call logs
+      console.log(logs);
+    } else {
+      console.log('Call Log permission denied');
     }
   } catch (err) {
     console.warn(err);
   }
 }
 
-export default requestPermissions;
 
-
-async function getCallLogs() {
-  try {
-    const logs = await CallLogs.load(10); // Fetch 10 latest call logs
-    console.log('Call Logs: ', logs);
-  } catch (e) {
-    console.error(e);
-  }
-}
+export default getCallLogs;
