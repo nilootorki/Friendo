@@ -13,3 +13,10 @@ session=sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 base=declarative_base()  #to define db tables as python
 
+def get_db():
+    db=session()
+    try:
+        yield db
+    finally:
+        db.close
+    
