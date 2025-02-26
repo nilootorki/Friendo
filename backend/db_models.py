@@ -4,6 +4,8 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import JSON
 from database import base
 
+
+
 class User(base):
     __tablename__ = "users"
 
