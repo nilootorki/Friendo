@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload JSON</title>
+</head>
+<body>
+    <h2>Upload a JSON File</h2>
+    <input type="file" id="jsonFile">
+    <button onclick="uploadFile()">Upload</button>
+    <p id="response"></p>
+
+    <script>
+        async function uploadFile() {
+            const fileInput = document.getElementById("jsonFile");
+            if (!fileInput.files.length) {
+                alert("Please select a JSON file.");
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const response = await fetch("http://127.0.0.1:8000/upload-json/", {
+                method: "POST",
+                body: formData
+            });
+
+            const result = await response.json();
+            document.getElementById("response").innerText = JSON.stringify(result, null, 2);
+        }
+    </script>
+</body>
+</html>
