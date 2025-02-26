@@ -1,9 +1,12 @@
-from fastapi import FastAPI , Depends
+from fastapi import FastAPI , Depends, UploadFile, File, HTTPException
 from dotenv import load_dotenv
 import os
 from sqlalchemy.orm import Session
-from database import engine, Session , base
+from database import engine, session , base
 import db_models
+import pandas as pd
+import json
+import schemas
 
 load_dotenv()
 
@@ -32,3 +35,35 @@ def get_db():
     finally:
         db.close()   #close the session after the request is complete
         
+        
+@app.post("/upload_contacts/{user_id}")
+async def upload_contacts(user_id: int, file: UploadFile=File(...), db:Session=Depends(get_db)):
+    content=await file.read()
+    
+    if file.filename.endswith(".json"):
+        try:
+            contacts=json.load(content)  #convert json file content into a python dic.
+        except json.JSONDecodeError:
+            raise HTTPException(status_code=400,detail="Invalid JSON format!")
+        
+    elif file.filename.endswith(".csv"):
+        try:
+            df=pd.read_csv(file.file)
+            contacts=df.to_dict(orient="records")
+        except Exception:
+            raise HTTPException(status_code=400,detail=f"Error proccessing CSV:{str(Exception)}")
+        
+    else:
+        raise HTTPException(status_code=400,detail="only JSON or CSV file formats are allowed")
+    
+    #df validation:
+    
+    try:
+        contacts_validation=[schemas.FriendsBase(**contact).dict() for contact in contacts]
+    except Exception:
+        raise HTTPException(status_code=400, detail=f"Invalid contact list format:{str(Exception)}")
+    
+    
+    #save to database
+    user=db.query(db_models.User).filter(db_models.User.user_id==user_id).first()
+    if not user
