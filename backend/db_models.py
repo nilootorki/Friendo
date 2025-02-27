@@ -1,15 +1,14 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, CheckConstraint
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, CheckConstraint, Float
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import JSON
 from database import base
 
-
-
 class User(base):
     __tablename__ = "users"
 
     user_id = Column(Integer, primary_key=True, index=True)
+    username=Column(String(50), nullable=False)
     email = Column(String(255), unique=True, nullable=False)
     password_hash = Column(Text, nullable=False)
     personality_type = Column(String(50), nullable=True)
@@ -22,13 +21,27 @@ class UserFriend(base):
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"))
-    friend_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"))
+    username=Column(String(50), nullable=False)
+    friend_name = Column(String(50), nullable=False)
     interaction_type = Column(String(10), CheckConstraint("interaction_type IN ('Call', 'SMS')"))
-    #message_count = Column(Integer, default=0) 
-    #call_duration = Column(Integer, default=0)  
     timestamp = Column(DateTime, server_default=func.now())
     messages = Column(JSON, nullable=True)
     score=Column(JSON, nullable=True)
+    
+class UserSuggestion(base):
+    __tablename__="user_suggestions"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"))
+    username=Column(String(50), nullable=False)
+    friend_name = Column(String(50), nullable=False)
+    suggestion = Column(String(500), nullable=False)
+    gender = Column(String(50), nullable=True)
+    comment = Column(String(500), nullable=True)
+    timestamp = Column(DateTime, server_default=func.now())
+    total_score=Column(Float, nullable=True)
+    
+    
     
 # class Interaction(base):
 #     __tablename__ = "interactions"
