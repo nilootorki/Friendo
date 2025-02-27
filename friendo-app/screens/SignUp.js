@@ -17,7 +17,7 @@ import SubmitBtn from "../Components/auth/SubmitButton";
 import axios from "axios";
 import requestPermissions from "../Components/getCallMessages/getCall";
 import { useNavigation } from '@react-navigation/native';
-
+import ContactsList from "../Components/getContacts/getContacts";
 
 const SignUp = () => {
   const navigation = useNavigation();
@@ -29,7 +29,7 @@ const SignUp = () => {
   const handleSubmit = () => {
     if (name && email && password) {
       // Navigate to the RequestPermissions screen
-      navigation.navigate('GetPermissions');
+      navigation.navigate('ContactsList');
     } else {
       alert('Please fill all fields');
     }

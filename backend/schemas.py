@@ -22,7 +22,8 @@ class FriendsResponse(FriendsBase):
 class UserFriendSchema(BaseModel):
     id: int
     user_id: int
-    friend_id: int
+    username : str
+    friend_name: str
     interaction_type: str
     timestamp: datetime
     messages: Dict[str, Any]

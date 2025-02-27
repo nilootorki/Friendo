@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import SignUp from './screens/SignUp';
-import GetPermissions from './screens/permissions';
+import ContactsList from './Components/getContacts/getContacts';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,7 +13,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SignUp">
         <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="GetPermissions" component={GetPermissions} />
+        <Stack.Screen name="ContactsList" component={ContactsList} />
       </Stack.Navigator>
     </NavigationContainer>
   );

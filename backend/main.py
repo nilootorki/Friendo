@@ -144,13 +144,16 @@ def analyze_json(filename: str, db: Session=Depends(get_db)):
     with open(file_path, "r", encoding="utf-8") as f:
         json_content = json.load(f)
 
+    friend_name = json_content["name"]
+
     # Perform Analysis
     analysis_result = analyze_data(json_content)
 
     # Store Analysis in Database
     db_record = db_models.UserFriend(
         user_id = 1,
-        friend_id = 2,
+        username = "Nel",
+        friend_name = friend_name,
         interaction_type = "SMS",
         #message_count = Column(Integer, default=0) 
         #call_duration = Column(Integer, default=0)  
@@ -161,7 +164,8 @@ def analyze_json(filename: str, db: Session=Depends(get_db)):
     db.add(db_record)
     db.commit()
 
-    return {"filename": filename, "analysis": analysis_result}
+    return RedirectResponse(url=f"/suggest/?user_id=1&friend_name={friend_name}", status_code=303)
+
 
 
 def analyze_data(json_data):
@@ -279,7 +283,7 @@ def analyze_data(json_data):
     
 
 @app.get("/suggest/", response_model=List[UserFriendSchema])
-def suggestion(user_id: int, db: Session=Depends(get_db)):
+def suggestion(user_id: int, friend_name: str, db: Session=Depends(get_db)):
     record = db.query(db_models.UserFriend).filter(db_models.UserFriend.user_id == user_id).all()
 
     # Handle if no record is found
@@ -302,68 +306,68 @@ def suggestion(user_id: int, db: Session=Depends(get_db)):
                 print("Failed to parse 'score':", e)
 
         parsed_records.append(UserFriendSchema(**record_dict))
-    friend_ids = []
+
+    print(friend_name)
+    
+
+
+    
+    total_score = 0
+    total_messages = 0
+    total_score_you = 0
+    total_messages_you = 0
+    total_score_friend = 0
+    total_messages_friend = 0 
+    dates = []
+    latest_chat = datetime(1999,1, 1)
     for record in parsed_records:
-        if record.friend_id not in friend_ids:
-            friend_ids.append(record.friend_id)
+        print("REcord", record.friend_name)
+        if record.friend_name== friend_name:
+            analyse = pd.DataFrame(record.score)
+            print("Latest_chat:", analyse["latest_chat"].iloc[0])
 
-    print(friend_ids)
+            total_score += analyse["total_score"] * analyse["total_no_of_messages"]
+            total_messages += analyse["total_no_of_messages"]
 
-    for friend in friend_ids:
-        total_score = 0
-        total_messages = 0
-        total_score_you = 0
-        total_messages_you = 0
-        total_score_friend = 0
-        total_messages_friend = 0 
-        dates = []
-        latest_chat = datetime(1999,1, 1)
-        for record in parsed_records:
-            if record.friend_id == friend:
-                analyse = pd.DataFrame(record.score)
-                print("Latest_chat:", analyse["latest_chat"].iloc[0])
+            total_score_you += analyse["your_sentiment_score"] * analyse["total_no_of_your_messages"]
+            total_messages_you += analyse["total_no_of_your_messages"]
 
-                total_score += analyse["total_score"] * analyse["total_no_of_messages"]
-                total_messages += analyse["total_no_of_messages"]
+            total_score_friend += analyse["friend_sentiment_score"] * analyse["total_no_of_friend_messages"]
+            total_messages_friend += analyse["total_no_of_friend_messages"]
 
-                total_score_you += analyse["your_sentiment_score"] * analyse["total_no_of_your_messages"]
-                total_messages_you += analyse["total_no_of_your_messages"]
+            print(analyse)
 
-                total_score_friend += analyse["friend_sentiment_score"] * analyse["total_no_of_friend_messages"]
-                total_messages_friend += analyse["total_no_of_friend_messages"]
+            for dates_list in analyse["dates"]:
+                for date in dates_list:
+                    if date not in dates:
+                        dates.append(date)
 
-                print(analyse)
-
-                for dates_list in analyse["dates"]:
-                    for date in dates_list:
-                        if date not in dates:
-                            dates.append(date)
-
-                if datetime.strptime(analyse["latest_chat"].iloc[0], "%Y-%m-%d")> latest_chat:
-                    latest_chat = datetime.strptime(analyse["latest_chat"].iloc[0], "%Y-%m-%d")
+            if datetime.strptime(analyse["latest_chat"].iloc[0], "%Y-%m-%d")> latest_chat:
+                latest_chat = datetime.strptime(analyse["latest_chat"].iloc[0], "%Y-%m-%d")
                 
 
             
-        total_score /= total_messages
-        total_score_you /= total_messages_you
-        total_score_friend /= total_messages_friend
+    total_score /= total_messages
+    total_score_you /= total_messages_you
+    total_score_friend /= total_messages_friend
 
-        print("Dates", dates)
+    print("Dates", dates)
 
-        dates_df = pd.to_datetime(dates)
-        dates_diff = dates_df.diff().mean().days
+    dates_df = pd.to_datetime(dates)
+    dates_diff = dates_df.diff().mean().days
 
-        print(total_score.iloc[0], total_score_you.iloc[0], total_score_friend.iloc[0])
+    print(total_score.iloc[0], total_score_you.iloc[0], total_score_friend.iloc[0])
 
-        if total_score_you.iloc[0] <= -0.5:
-            print(f"It seems that {friend} brings you down. I suggest not communicating with {friend}.")
+    if total_score_you.iloc[0] <= -0.5:
+        print(f"It seems that {friend_name} brings you down. I suggest not communicating with {friend_name}.")
 
-        elif (pd.Timestamp.today() - latest_chat).days > dates_diff:
-            print(f"You should text {friend}, it's been a long time.")
+    elif (pd.Timestamp.today() - latest_chat).days > dates_diff:
+        print(f"You should text {friend_name}, it's been a long time.")
 
-        elif total_score_friend.iloc[0] < 0:
-            print(f"It's better to pay more attention to {friend}. She seems sad lately.")
+    elif total_score_friend.iloc[0] < 0:
+        print(f"It's better to pay more attention to {friend_name}. She seems sad lately.")
 
+    return []
 
 
         
