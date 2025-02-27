@@ -9,24 +9,37 @@ password = 'npg_HDO2KL6TFcZQ'
 CREATE_TABLES_SQL="""
 CREATE TABLE IF NOT EXISTS users(
     user_id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
     personality_type VARCHAR(50) CHECK (personality_type IN ('Introvert','Extrovert','Ambivert')) DEFAULT NULL,
     mbti VARCHAR(4) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    contacts JSONB DEFAULT NULL,
+    contacts JSONB DEFAULT NULL
 );
 
-CREATE TABLE user_friends (
+CREATE TABLE IF NOT EXISTS user_friends ( 
     id SERIAL PRIMARY KEY,  
     user_id INT REFERENCES users(user_id) ON DELETE CASCADE,  
-    friend_id INT REFERENCES users(user_id) ON DELETE CASCADE,  
+    username VARCHAR(50) NOT NULL,
+    friend_name VARCHAR(50) NOT NULL,  
     interaction_type VARCHAR(10) CHECK (interaction_type IN ('Call', 'SMS')),  
-    message_count INT DEFAULT 0,  
-    call_duration INT DEFAULT 0,  
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    messages JSONB DEFAULT NULL
+    messages JSONB DEFAULT NULL,
     score JSONB DEFAULT NULL  
+);
+
+
+CREATE TABLE IF NOT EXISTS user_suggestions (
+    id SERIAL PRIMARY KEY,  
+    user_id INT REFERENCES users(user_id) ON DELETE CASCADE,  
+    username VARCHAR(50) NOT NULL,
+    friend_name VARCHAR(50) NOT NULL,  
+    suggestion VARCHAR(500) NOT NULL,   
+    gender VARCHAR(50) DEFAULT NULL,
+    comment VARCHAR(500) DEFAULT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    total_score FLOAT DEFAULT NULL 
 );
 
 
