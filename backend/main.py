@@ -21,6 +21,8 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForSeque
 from datetime import datetime, date
 from fastapi.staticfiles import StaticFiles
 
+from schemas import UserFriendSchema
+from typing import List
 
 
 tokenizer = AutoTokenizer.from_pretrained("persiannlp/mt5-large-parsinlu-sentiment-analysis")
@@ -246,6 +248,7 @@ def analyze_data(json_data):
     friend_sentiment_result["sentiment_score"] = friend_sentiment_result["sentiment_score"] * friend_sentiment_result["no_of_messages"]
     friend_total_no_of_messages = friend_sentiment_result["no_of_messages"].sum()
     friend_sentiment_score = friend_sentiment_result["sentiment_score"].sum()/friend_total_no_of_messages
+    dates = df["date"].unique().tolist()
 
     analysis_result = {
         "total_score" : [total_sentiment_score], 
@@ -254,6 +257,8 @@ def analyze_data(json_data):
         "total_no_of_your_messages" : [total_no_of_your_messages],
         "friend_sentiment_score" : [friend_sentiment_score],
         "total_no_of_friend_messages" : [friend_total_no_of_messages],
+        "latest_chat" : [dates[-1]],
+        "dates" : [dates]      
     }
     analysis_df = pd.DataFrame(analysis_result)
 
@@ -271,3 +276,100 @@ def analyze_data(json_data):
         return {"type": "Array", "num_items": num_items}
     else:
         return {"error": "Unsupported JSON format"}
+    
+
+@app.get("/suggest/", response_model=List[UserFriendSchema])
+def suggestion(user_id: int, db: Session=Depends(get_db)):
+    record = db.query(db_models.UserFriend).filter(db_models.UserFriend.user_id == user_id).all()
+
+    # Handle if no record is found
+    parsed_records = []
+    for r in record:
+        # Convert the ORM object to a dictionary
+        record_dict = r.__dict__.copy()
+        
+        # Parse 'messages' and 'score' fields if they are JSON strings
+        if isinstance(record_dict['messages'], str):
+            try:
+                record_dict['messages'] = json.loads(record_dict['messages'])
+            except json.JSONDecodeError as e:
+                print("Failed to parse 'messages':", e)
+        
+        if isinstance(record_dict['score'], str):
+            try:
+                record_dict['score'] = json.loads(record_dict['score'])
+            except json.JSONDecodeError as e:
+                print("Failed to parse 'score':", e)
+
+        parsed_records.append(UserFriendSchema(**record_dict))
+    friend_ids = []
+    for record in parsed_records:
+        if record.friend_id not in friend_ids:
+            friend_ids.append(record.friend_id)
+
+    print(friend_ids)
+
+    for friend in friend_ids:
+        total_score = 0
+        total_messages = 0
+        total_score_you = 0
+        total_messages_you = 0
+        total_score_friend = 0
+        total_messages_friend = 0 
+        dates = []
+        latest_chat = datetime(1999,1, 1)
+        for record in parsed_records:
+            if record.friend_id == friend:
+                analyse = pd.DataFrame(record.score)
+                print("Latest_chat:", analyse["latest_chat"].iloc[0])
+
+                total_score += analyse["total_score"] * analyse["total_no_of_messages"]
+                total_messages += analyse["total_no_of_messages"]
+
+                total_score_you += analyse["your_sentiment_score"] * analyse["total_no_of_your_messages"]
+                total_messages_you += analyse["total_no_of_your_messages"]
+
+                total_score_friend += analyse["friend_sentiment_score"] * analyse["total_no_of_friend_messages"]
+                total_messages_friend += analyse["total_no_of_friend_messages"]
+
+                print(analyse)
+
+                for dates_list in analyse["dates"]:
+                    for date in dates_list:
+                        if date not in dates:
+                            dates.append(date)
+
+                if datetime.strptime(analyse["latest_chat"].iloc[0], "%Y-%m-%d")> latest_chat:
+                    latest_chat = datetime.strptime(analyse["latest_chat"].iloc[0], "%Y-%m-%d")
+                
+
+            
+        total_score /= total_messages
+        total_score_you /= total_messages_you
+        total_score_friend /= total_messages_friend
+
+        print("Dates", dates)
+
+        dates_df = pd.to_datetime(dates)
+        dates_diff = dates_df.diff().mean().days
+
+        print(total_score.iloc[0], total_score_you.iloc[0], total_score_friend.iloc[0])
+
+        if total_score_you.iloc[0] <= -0.5:
+            print(f"It seems that {friend} brings you down. I suggest not communicating with {friend}.")
+
+        elif (pd.Timestamp.today() - latest_chat).days > dates_diff:
+            print(f"You should text {friend}, it's been a long time.")
+
+        elif total_score_friend.iloc[0] < 0:
+            print(f"It's better to pay more attention to {friend}. She seems sad lately.")
+
+
+
+        
+
+        
+
+
+
+    
