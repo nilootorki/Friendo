@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
   "name": "friendo",
   "version": "0.1.0",
   "private": true,
@@ -22,5 +23,10 @@
   "devDependencies": {
     "eslint": "^8",
     "eslint-config-next": "14.2.24"
+=======
+  "dependencies": {
+    "@plasmicapp/react-web": "^0.2.374",
+    "@plasmicpkgs/plasmic-basic-components": "^0.0.234"
+>>>>>>> Stashed changes
   }
 }
