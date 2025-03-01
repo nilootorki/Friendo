@@ -16,22 +16,44 @@ import UserInput from "../Components/auth/UserInput";
 import SubmitBtn from "../Components/auth/SubmitButton";
 import axios from "axios";
 import requestPermissions from "../Components/getCallMessages/getCall";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import ContactsList from "../Components/getContacts/getContacts";
 
 const SignUp = () => {
   const navigation = useNavigation();
 
-  const [name, setName] = useState("");
+  const [username, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
-  const handleSubmit = () => {
-    if (name && email && password) {
-      // Navigate to the RequestPermissions screen
-      navigation.navigate('ContactsList');
+  const handleSubmit = async () => {
+    if (username && email && password) {
+      try {
+        const response = await axios.post(
+          "http://10.0.2.2:8000/signup/",
+          {
+            username,
+            email,
+            password,
+          },
+          {
+            headers: { "Content-Type": "application/json" }, // Ensure JSON format
+          }
+        );
+
+        // Check the backend response and handle accordingly
+        if (response.data.success) {
+          alert("Success", response.data.message);
+          navigation.navigate("ContactsList");
+        } else {
+          alert(response.data.message);
+        }
+      } catch (error) {
+        console.error(error);
+        alert("Error", "Failed to connect to server.");
+      }
     } else {
-      alert('Please fill all fields');
+      alert("Please fill all fields");
     }
   };
 
@@ -49,7 +71,7 @@ const SignUp = () => {
       hideSubscription.remove();
     };
   }, []);
-         
+
   useEffect(() => {
     requestPermissions(); // Request permissions when the app loads
   }, []);
@@ -76,7 +98,7 @@ const SignUp = () => {
 
               <UserInput
                 name="Name"
-                value={name}
+                value={username}
                 setValue={setName}
                 autoCapitalize="words"
               />
@@ -94,8 +116,10 @@ const SignUp = () => {
                 secureTextEntry={true}
                 keyboardType="password"
               />
-              <SubmitBtn onPress= {handleSubmit}></SubmitBtn>
-              <Text>{JSON.stringify({ name, email, password }, null, 4)}</Text>
+              <SubmitBtn onPress={handleSubmit}></SubmitBtn>
+              <Text>
+                {JSON.stringify({ username, email, password }, null, 4)}
+              </Text>
             </View>
           </TouchableWithoutFeedback>
         </ScrollView>

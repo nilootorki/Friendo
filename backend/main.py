@@ -21,8 +21,27 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForSeque
 from datetime import datetime, date
 from fastapi.staticfiles import StaticFiles
 
-from schemas import UserFriendSchema
+from schemas import UserFriendSchema, UserCreate, UserResponse, SignupResponse
 from typing import List
+
+from sqlalchemy.exc import NoResultFound
+
+import regex as re
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+# Allow requests from all origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # You can specify specific origins instead of "*" for better security
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
+
 
 
 tokenizer = AutoTokenizer.from_pretrained("persiannlp/mt5-large-parsinlu-sentiment-analysis")
@@ -53,6 +72,16 @@ DATABASE_URL=os.getenv("DATABASE_URL")
 #check
 print("DATABASE_URL",DATABASE_URL)
 
+sentiment_mapping = {
+        'very negative': -1,
+        'negative': -0.5,
+        'neutral': 0,
+        'no sentiment expressed' : 0,
+        'mixed' : 0,
+        'positive': 0.5,
+        'very positive': 1
+    }
+
 
 app=FastAPI() #assign the dastapi to main app/web
 
@@ -72,8 +101,44 @@ base.metadata.create_all(bind=engine)  #ensure tables exist in the db
 #         yield db    #provides the session to FastAPI routes 
 #     finally:
 #         db.close()   #close the session after the request is complete
-        
-        
+
+
+@app.post("/signup/", response_model=SignupResponse)
+async def SignUp(user: UserCreate, db: Session = Depends(get_db)):
+    print(user.username, user.email, user.password)
+    print("WE ARE IN")
+    
+    # Check if username exists
+    if db.query(db_models.User).filter(db_models.User.username == user.username).first():
+        print("YEah")
+        print("Username already exists")
+        return {"success": False, "message": "Username already exists"}
+    
+    print("NO")
+    # Validate password and email
+    email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    pass_regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d._]{6,}$'
+
+    if not re.match(pass_regex, user.password):
+        return {"success": False, "message": "Invalid Password!"}
+
+    if not re.match(email_regex, user.email):
+        return {"success": False, "message": "Invalid Email!"}
+
+    # Create new user
+    db_record = db_models.User(
+        username=user.username,
+        email=user.email,
+        password_hash=user.password  # You should hash this before storing
+    )
+    db.add(db_record)
+    db.commit()
+    db.refresh(db_record)  # Ensures we get the generated user_id
+
+    return {"success": True, "message": "User registered successfully!"}
+    
+
+    
 @app.post("/upload_contacts/{1}")
 async def upload_contacts(user_id: int, file: UploadFile=File(...), db:Session=Depends(get_db)):
     content=await file.read()
@@ -359,13 +424,62 @@ def suggestion(user_id: int, friend_name: str, db: Session=Depends(get_db)):
     print(total_score.iloc[0], total_score_you.iloc[0], total_score_friend.iloc[0])
 
     if total_score_you.iloc[0] <= -0.5:
-        print(f"It seems that {friend_name} brings you down. I suggest not communicating with {friend_name}.")
+        suggestion = f"It seems that {friend_name} brings you down. I suggest not communicating with {friend_name}."
 
     elif (pd.Timestamp.today() - latest_chat).days > dates_diff:
-        print(f"You should text {friend_name}, it's been a long time.")
+       suggestion = f"You should text {friend_name}, it's been a long time."
 
     elif total_score_friend.iloc[0] < 0:
-        print(f"It's better to pay more attention to {friend_name}. She seems sad lately.")
+        suggestion = f"It's better to pay more attention to {friend_name}. She seems sad lately."
+    
+    else:
+        suggestion = f"Everything seems good with {friend_name}! Keep going..."
+
+    sentiment_mapping = {
+        'very negative': -1,
+        'negative': -0.5,
+        'neutral': 0,
+        'no sentiment expressed' : 0,
+        'mixed' : 0,
+        'positive': 0.5,
+        'very positive': 1
+    }
+
+    comment = "She is my good roommate :)"
+    comment_analyse = sentiment_mapping[run_model([comment])]
+
+    total_analyse_score = (comment_analyse + float(total_score.iloc[0])) / 2
+
+    if suggestion == f"It seems that {friend_name} brings you down. I suggest not communicating with {friend_name}." and total_analyse_score > 0:
+        suggestion = f"I know your recent chat has you feeling down, but {friend_name} seems like a good friend. Maybe talking about what's been going on could help!"
+
+    
+    
+    try:
+        # Check if the record exists
+        db_record = db.query(db_models.UserSuggestion).filter_by(user_id=user_id, friend_name=friend_name).one()
+
+        # Update existing record
+        db_record.suggestion = suggestion
+        db_record.comment = comment
+        db_record.total_score = total_analyse_score
+        db_record.timestamp = latest_chat  
+
+    except NoResultFound:
+        # Create a new record if none exists
+        db_record = db_models.UserSuggestion(
+            user_id=user_id,
+            username="Nel",
+            friend_name=friend_name,
+            suggestion=suggestion,
+            gender="Female",
+            comment=comment,
+            timestamp=latest_chat,
+            total_score=total_analyse_score
+        )
+        db.add(db_record)
+    
+    db.commit()
 
     return []
 
