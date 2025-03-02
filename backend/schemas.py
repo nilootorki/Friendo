@@ -35,6 +35,12 @@ class ProfileCreate(BaseModel):
     personality: str
     mbti: str
 
+class UserFriend(BaseModel):
+    username: str
+    password: str
+    email: str
+    contacts: List
+
 
 # Schema for returning user data (output)
 class UserResponse(BaseModel):

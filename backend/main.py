@@ -21,7 +21,7 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForSeque
 from datetime import datetime, date
 from fastapi.staticfiles import StaticFiles
 
-from schemas import UserFriendSchema, UserCreate, UserResponse, SignupResponse, ProfileCreate
+from schemas import UserFriendSchema, UserCreate, UserResponse, SignupResponse, ProfileCreate, UserFriend
 from typing import List
 
 from sqlalchemy.exc import NoResultFound
@@ -161,38 +161,35 @@ async def SignUp(user: UserCreate, db: Session = Depends(get_db)):
     
 
     
-@app.post("/upload_contacts/{1}")
-async def upload_contacts(user_id: int, file: UploadFile=File(...), db:Session=Depends(get_db)):
-    content=await file.read()
+@app.post("/upload_contacts/")
+async def upload_contacts(user_friends : UserFriend, db:Session=Depends(get_db)):  
+    print(user_friends.contacts)
     
-    if file.filename.endswith(".json"):
-        try:
-            contacts=json.load(content)  #convert json file content into a python dic.
-        except json.JSONDecodeError:
-            raise HTTPException(status_code=400,detail="Invalid JSON format!")
-        
-    elif file.filename.endswith(".csv"):
-        try:
-            df=pd.read_csv(file.file)
-            contacts=df.to_dict(orient="records")
-        except Exception:
-            raise HTTPException(status_code=400,detail=f"Error proccessing CSV:{str(Exception)}")
-        
-    else:
-        raise HTTPException(status_code=400,detail="only JSON or CSV file formats are allowed")
-    
-    #df validation:
-    
-    try:
-        contacts_validation=[schemas.FriendsBase(**contact).dict() for contact in contacts]
-    except Exception:
-        raise HTTPException(status_code=400, detail=f"Invalid contact list format:{str(Exception)}")
-    
-    
-    #save to database
-    user=db.query(db_models.User).filter(db_models.User.user_id==user_id).first()
+    # save to database
+    db_record = db.query(db_models.User).filter_by(username=user_friends.username, password_hash = user_friends.password, email = user_friends.email).one()
+    db_record.contacts = user_friends.contacts
 
-    return{"massage":"Welcome to Friendo!"}
+    user_id = db_record.user_id
+
+    for friend in user_friends.contacts:
+        print(friend)
+        name = friend["name"]
+        gender = friend["gender"]
+        db_record = db_models.UserSuggestion(
+            user_id=user_id,
+            username=user_friends.username,
+            friend_name=name,
+            suggestion="Nothing",
+            gender= gender,
+            comment=""
+        )
+        db.add(db_record)
+
+    db.commit()
+    
+
+
+    return{"Friends are added!"}
 
 
 UPLOAD_DIR = "uploads"

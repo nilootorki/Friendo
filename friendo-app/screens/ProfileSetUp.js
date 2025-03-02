@@ -65,7 +65,7 @@ const ProfileSetUp = () => {
 
         if (response.data.success) {
           Alert.alert("Success", response.data.message);
-          navigation.navigate("ContactsList");
+          navigation.navigate("ContactsList", {username, password, email});
         } else {
           Alert.alert("Failed!", response.data.message);
         }
