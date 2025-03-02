@@ -1,0 +1,2834 @@
+{
+ "name": "Naz♥️",
+ "type": "personal_chat",
+ "id": 327920531,
+ "messages": [
+  {
+   "id": 926273,
+   "type": "message",
+   "date": "2025-01-01T07:30:36",
+   "date_unixtime": "1735704036",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "file": "(File not included. Change data exporting settings to download.)",
+   "file_name": "video.mp4",
+   "file_size": 1412859,
+   "thumbnail": "(File not included. Change data exporting settings to download.)",
+   "thumbnail_file_size": 14080,
+   "media_type": "video_message",
+   "mime_type": "video/mp4",
+   "duration_seconds": 10,
+   "width": 400,
+   "height": 400,
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 926307,
+   "type": "message",
+   "date": "2025-01-01T08:49:00",
+   "date_unixtime": "1735708740",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "خواب موندی؟",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "خواب موندی؟"
+    }
+   ]
+  },
+  {
+   "id": 926308,
+   "type": "message",
+   "date": "2025-01-01T08:49:12",
+   "date_unixtime": "1735708752",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "بچم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "بچم"
+    }
+   ]
+  },
+  {
+   "id": 926309,
+   "type": "message",
+   "date": "2025-01-01T08:49:15",
+   "date_unixtime": "1735708755",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "چشات داد میزنه",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "چشات داد میزنه"
+    }
+   ]
+  },
+  {
+   "id": 926310,
+   "type": "message",
+   "date": "2025-01-01T08:54:24",
+   "date_unixtime": "1735709064",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "reply_to_message_id": 926307,
+   "text": "نااا",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "نااا"
+    }
+   ]
+  },
+  {
+   "id": 926311,
+   "type": "message",
+   "date": "2025-01-01T08:54:31",
+   "date_unixtime": "1735709071",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "ولی خوابم میاد",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "ولی خوابم میاد"
+    }
+   ]
+  },
+  {
+   "id": 926314,
+   "type": "message",
+   "date": "2025-01-01T08:59:06",
+   "date_unixtime": "1735709346",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "بارون داره میاد😭",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "بارون داره میاد😭"
+    }
+   ]
+  },
+  {
+   "id": 926315,
+   "type": "message",
+   "date": "2025-01-01T08:59:11",
+   "date_unixtime": "1735709351",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "نمخااااام برم آزمون بدم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "نمخااااام برم آزمون بدم"
+    }
+   ]
+  },
+  {
+   "id": 926316,
+   "type": "message",
+   "date": "2025-01-01T08:59:14",
+   "date_unixtime": "1735709354",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "باید کیو ببینم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "باید کیو ببینم"
+    }
+   ]
+  },
+  {
+   "id": 926331,
+   "type": "message",
+   "date": "2025-01-01T10:19:51",
+   "date_unixtime": "1735714191",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "file": "(File not included. Change data exporting settings to download.)",
+   "file_name": "video.mp4",
+   "file_size": 2824907,
+   "thumbnail": "(File not included. Change data exporting settings to download.)",
+   "thumbnail_file_size": 15632,
+   "media_type": "video_message",
+   "mime_type": "video/mp4",
+   "duration_seconds": 21,
+   "width": 400,
+   "height": 400,
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 926346,
+   "type": "message",
+   "date": "2025-01-01T11:20:15",
+   "date_unixtime": "1735717815",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "file": "(File not included. Change data exporting settings to download.)",
+   "file_name": "video.mp4",
+   "file_size": 4683965,
+   "thumbnail": "(File not included. Change data exporting settings to download.)",
+   "thumbnail_file_size": 13349,
+   "media_type": "video_message",
+   "mime_type": "video/mp4",
+   "duration_seconds": 34,
+   "width": 400,
+   "height": 400,
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 926372,
+   "type": "message",
+   "date": "2025-01-01T18:10:14",
+   "date_unixtime": "1735742414",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "reply_to_message_id": 926346,
+   "text": "نمییی‌تونم بخوابم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "نمییی‌تونم بخوابم"
+    }
+   ]
+  },
+  {
+   "id": 926373,
+   "type": "message",
+   "date": "2025-01-01T18:10:17",
+   "date_unixtime": "1735742417",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "کااار دارم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "کااار دارم"
+    }
+   ]
+  },
+  {
+   "id": 926374,
+   "type": "message",
+   "date": "2025-01-01T18:10:26",
+   "date_unixtime": "1735742426",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "reply_to_message_id": 926346,
+   "text": "تهران شمالش داره برف میاد مث اینکه",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "تهران شمالش داره برف میاد مث اینکه"
+    }
+   ]
+  },
+  {
+   "id": 926375,
+   "type": "message",
+   "date": "2025-01-01T18:10:29",
+   "date_unixtime": "1735742429",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "سمت ما هیچی نیست",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "سمت ما هیچی نیست"
+    }
+   ]
+  },
+  {
+   "id": 926376,
+   "type": "message",
+   "date": "2025-01-01T18:10:31",
+   "date_unixtime": "1735742431",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "نه برف",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "نه برف"
+    }
+   ]
+  },
+  {
+   "id": 926377,
+   "type": "message",
+   "date": "2025-01-01T18:10:33",
+   "date_unixtime": "1735742433",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "نه بارون جتی",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "نه بارون جتی"
+    }
+   ]
+  },
+  {
+   "id": 926422,
+   "type": "message",
+   "date": "2025-01-01T21:17:56",
+   "date_unixtime": "1735753676",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "reply_to_message_id": 926373,
+   "text": "چراااا؟!",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "چراااا؟!"
+    }
+   ]
+  },
+  {
+   "id": 926423,
+   "type": "message",
+   "date": "2025-01-01T21:17:59",
+   "date_unixtime": "1735753679",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "چه کار داااری؟!",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "چه کار داااری؟!"
+    }
+   ]
+  },
+  {
+   "id": 926424,
+   "type": "message",
+   "date": "2025-01-01T21:18:11",
+   "date_unixtime": "1735753691",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "عوضش یزد الااااان بارون و‌برفه",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "عوضش یزد الااااان بارون و‌برفه"
+    }
+   ]
+  },
+  {
+   "id": 926425,
+   "type": "message",
+   "date": "2025-01-01T21:18:21",
+   "date_unixtime": "1735753701",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "منم جاااات خالی از ۴ بعدازظهر تا حالا در بودم😭😂",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "منم جاااات خالی از ۴ بعدازظهر تا حالا در بودم😭😂"
+    }
+   ]
+  },
+  {
+   "id": 926426,
+   "type": "message",
+   "date": "2025-01-01T21:18:27",
+   "date_unixtime": "1735753707",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "دیه دق و دلیااااام خالی کردم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "دیه دق و دلیااااام خالی کردم"
+    }
+   ]
+  },
+  {
+   "id": 926843,
+   "type": "message",
+   "date": "2025-01-02T17:56:56",
+   "date_unixtime": "1735828016",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "reply_to_message_id": 926423,
+   "text": "پروژم دیع",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "پروژم دیع"
+    }
+   ]
+  },
+  {
+   "id": 926844,
+   "type": "message",
+   "date": "2025-01-02T17:57:00",
+   "date_unixtime": "1735828020",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "reply_to_message_id": 926425,
+   "text": "خوش به حالت",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "خوش به حالت"
+    }
+   ]
+  },
+  {
+   "id": 926845,
+   "type": "message",
+   "date": "2025-01-02T17:57:04",
+   "date_unixtime": "1735828024",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "من خیلی دلم گرفتههه",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "من خیلی دلم گرفتههه"
+    }
+   ]
+  },
+  {
+   "id": 926951,
+   "type": "message",
+   "date": "2025-01-02T18:44:17",
+   "date_unixtime": "1735830857",
+   "edited": "2025-01-02T18:44:19",
+   "edited_unixtime": "1735830859",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "reply_to_message_id": 926843,
+   "text": "کی باااید تحویل بدی",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "کی باااید تحویل بدی"
+    }
+   ]
+  },
+  {
+   "id": 926952,
+   "type": "message",
+   "date": "2025-01-02T18:44:42",
+   "date_unixtime": "1735830882",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "اقا بیایم تهرون یه شبم بریم در",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "اقا بیایم تهرون یه شبم بریم در"
+    }
+   ]
+  },
+  {
+   "id": 926953,
+   "type": "message",
+   "date": "2025-01-02T18:44:48",
+   "date_unixtime": "1735830888",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "تو امتحانااات شروع میشه؟؟",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "تو امتحانااات شروع میشه؟؟"
+    }
+   ]
+  },
+  {
+   "id": 927622,
+   "type": "message",
+   "date": "2025-01-03T10:22:46",
+   "date_unixtime": "1735887166",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "reply_to_message_id": 926953,
+   "text": "من پنجشنبش امتخان دارم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "من پنجشنبش امتخان دارم"
+    }
+   ]
+  },
+  {
+   "id": 927623,
+   "type": "message",
+   "date": "2025-01-03T10:22:51",
+   "date_unixtime": "1735887171",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "ولی این پروژمو بدم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "ولی این پروژمو بدم"
+    }
+   ]
+  },
+  {
+   "id": 927624,
+   "type": "message",
+   "date": "2025-01-03T10:22:55",
+   "date_unixtime": "1735887175",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "سعی مکنم بخونم درسامو",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "سعی مکنم بخونم درسامو"
+    }
+   ]
+  },
+  {
+   "id": 927625,
+   "type": "message",
+   "date": "2025-01-03T10:23:03",
+   "date_unixtime": "1735887183",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "که شما میاید دیه بتونم باهاتون بیام در",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "که شما میاید دیه بتونم باهاتون بیام در"
+    }
+   ]
+  },
+  {
+   "id": 928233,
+   "type": "message",
+   "date": "2025-01-03T18:53:00",
+   "date_unixtime": "1735917780",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "هاااااا اینکاااار بکن",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "هاااااا اینکاااار بکن"
+    }
+   ]
+  },
+  {
+   "id": 928234,
+   "type": "message",
+   "date": "2025-01-03T18:53:08",
+   "date_unixtime": "1735917788",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "بیاااایم تهرون فقط خوش گذروووونی😭",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "بیاااایم تهرون فقط خوش گذروووونی😭"
+    }
+   ]
+  },
+  {
+   "id": 929235,
+   "type": "message",
+   "date": "2025-01-04T09:00:21",
+   "date_unixtime": "1735968621",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "ایشالااا",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "ایشالااا"
+    }
+   ]
+  },
+  {
+   "id": 929236,
+   "type": "message",
+   "date": "2025-01-04T09:00:26",
+   "date_unixtime": "1735968626",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "ولی قول نمدمممم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "ولی قول نمدمممم"
+    }
+   ]
+  },
+  {
+   "id": 929241,
+   "type": "message",
+   "date": "2025-01-04T09:01:20",
+   "date_unixtime": "1735968680",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "تو میتونی",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "تو میتونی"
+    }
+   ]
+  },
+  {
+   "id": 929242,
+   "type": "message",
+   "date": "2025-01-04T09:01:27",
+   "date_unixtime": "1735968687",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "خوابم میاد",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "خوابم میاد"
+    }
+   ]
+  },
+  {
+   "id": 929243,
+   "type": "message",
+   "date": "2025-01-04T09:01:32",
+   "date_unixtime": "1735968692",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "دارم تکه پاره میشم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "دارم تکه پاره میشم"
+    }
+   ]
+  },
+  {
+   "id": 929245,
+   "type": "message",
+   "date": "2025-01-04T09:02:01",
+   "date_unixtime": "1735968721",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "چرااااااا تموم نمیشه",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "چرااااااا تموم نمیشه"
+    }
+   ]
+  },
+  {
+   "id": 929248,
+   "type": "message",
+   "date": "2025-01-04T09:02:36",
+   "date_unixtime": "1735968756",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "اخ ینی",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "اخ ینی"
+    }
+   ]
+  },
+  {
+   "id": 929249,
+   "type": "message",
+   "date": "2025-01-04T09:02:38",
+   "date_unixtime": "1735968758",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "فقط خواب",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "فقط خواب"
+    }
+   ]
+  },
+  {
+   "id": 929250,
+   "type": "message",
+   "date": "2025-01-04T09:02:43",
+   "date_unixtime": "1735968763",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "هیچی دیه از این دنیا نمخام",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "هیچی دیه از این دنیا نمخام"
+    }
+   ]
+  },
+  {
+   "id": 929251,
+   "type": "message",
+   "date": "2025-01-04T09:02:47",
+   "date_unixtime": "1735968767",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "یه ساعت خواب راحت",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "یه ساعت خواب راحت"
+    }
+   ]
+  },
+  {
+   "id": 929252,
+   "type": "message",
+   "date": "2025-01-04T09:02:51",
+   "date_unixtime": "1735968771",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "بدون دغدغههه",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "بدون دغدغههه"
+    }
+   ]
+  },
+  {
+   "id": 929256,
+   "type": "message",
+   "date": "2025-01-04T09:03:37",
+   "date_unixtime": "1735968817",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "واااااای دقیقا",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "واااااای دقیقا"
+    }
+   ]
+  },
+  {
+   "id": 929257,
+   "type": "message",
+   "date": "2025-01-04T09:03:44",
+   "date_unixtime": "1735968824",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "خدااااا از دهنت بشنوه😭",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "خدااااا از دهنت بشنوه😭"
+    }
+   ]
+  },
+  {
+   "id": 929258,
+   "type": "message",
+   "date": "2025-01-04T09:03:57",
+   "date_unixtime": "1735968837",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "file": "(File not included. Change data exporting settings to download.)",
+   "file_name": "sticker.webm",
+   "file_size": 114367,
+   "thumbnail": "(File not included. Change data exporting settings to download.)",
+   "thumbnail_file_size": 5478,
+   "media_type": "sticker",
+   "sticker_emoji": "🥱",
+   "mime_type": "video/webm",
+   "duration_seconds": 3,
+   "width": 512,
+   "height": 512,
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 929260,
+   "type": "message",
+   "date": "2025-01-04T09:04:12",
+   "date_unixtime": "1735968852",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "file": "(File not included. Change data exporting settings to download.)",
+   "file_name": "video.mp4",
+   "file_size": 618881,
+   "thumbnail": "(File not included. Change data exporting settings to download.)",
+   "thumbnail_file_size": 11631,
+   "media_type": "video_message",
+   "mime_type": "video/mp4",
+   "duration_seconds": 4,
+   "width": 400,
+   "height": 400,
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 929263,
+   "type": "message",
+   "date": "2025-01-04T09:04:39",
+   "date_unixtime": "1735968879",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "file": "(File not included. Change data exporting settings to download.)",
+   "file_name": "video.mp4",
+   "file_size": 409581,
+   "thumbnail": "(File not included. Change data exporting settings to download.)",
+   "thumbnail_file_size": 18903,
+   "media_type": "video_message",
+   "mime_type": "video/mp4",
+   "duration_seconds": 3,
+   "width": 400,
+   "height": 400,
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 929264,
+   "type": "message",
+   "date": "2025-01-04T09:04:45",
+   "date_unixtime": "1735968885",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "file": "(File not included. Change data exporting settings to download.)",
+   "file_name": "video.mp4",
+   "file_size": 555361,
+   "thumbnail": "(File not included. Change data exporting settings to download.)",
+   "thumbnail_file_size": 10865,
+   "media_type": "video_message",
+   "mime_type": "video/mp4",
+   "duration_seconds": 4,
+   "width": 400,
+   "height": 400,
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 929266,
+   "type": "message",
+   "date": "2025-01-04T09:04:58",
+   "date_unixtime": "1735968898",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "reply_to_message_id": 929264,
+   "text": "وقتی بابام برام لقمه میگیره:",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "وقتی بابام برام لقمه میگیره:"
+    }
+   ]
+  },
+  {
+   "id": 929269,
+   "type": "message",
+   "date": "2025-01-04T09:05:13",
+   "date_unixtime": "1735968913",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "reply_to_message_id": 929266,
+   "text": "خدا رو شکر کن یکی هه برات لقمه بگیره😔😔",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "خدا رو شکر کن یکی هه برات لقمه بگیره😔😔"
+    }
+   ]
+  },
+  {
+   "id": 929394,
+   "type": "message",
+   "date": "2025-01-04T12:09:57",
+   "date_unixtime": "1735979997",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "reply_to_message_id": 929269,
+   "text": "بیا من خودم برات لقمه بگیرم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "بیا من خودم برات لقمه بگیرم"
+    }
+   ]
+  },
+  {
+   "id": 929609,
+   "type": "message",
+   "date": "2025-01-05T08:34:14",
+   "date_unixtime": "1736053454",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "گناه دارم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "گناه دارم"
+    }
+   ]
+  },
+  {
+   "id": 929610,
+   "type": "message",
+   "date": "2025-01-05T08:34:16",
+   "date_unixtime": "1736053456",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "من بدبخت",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "من بدبخت"
+    }
+   ]
+  },
+  {
+   "id": 929627,
+   "type": "message",
+   "date": "2025-01-05T09:16:49",
+   "date_unixtime": "1736056009",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "دلوم برات تنگ شده🥲💅🏻",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "دلوم برات تنگ شده🥲💅🏻"
+    }
+   ]
+  },
+  {
+   "id": 930022,
+   "type": "message",
+   "date": "2025-01-06T00:07:18",
+   "date_unixtime": "1736109438",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "منمممم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "منمممم"
+    }
+   ]
+  },
+  {
+   "id": 930255,
+   "type": "message",
+   "date": "2025-01-06T08:20:31",
+   "date_unixtime": "1736139031",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "file": "(File not included. Change data exporting settings to download.)",
+   "file_name": "sticker.webm",
+   "file_size": 113702,
+   "thumbnail": "(File not included. Change data exporting settings to download.)",
+   "thumbnail_file_size": 8912,
+   "media_type": "sticker",
+   "sticker_emoji": "🙁",
+   "mime_type": "video/webm",
+   "duration_seconds": 3,
+   "width": 417,
+   "height": 512,
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 930306,
+   "type": "message",
+   "date": "2025-01-06T08:43:26",
+   "date_unixtime": "1736140406",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "file": "(File not included. Change data exporting settings to download.)",
+   "file_name": "sticker.webm",
+   "file_size": 130828,
+   "thumbnail": "(File not included. Change data exporting settings to download.)",
+   "thumbnail_file_size": 21846,
+   "media_type": "sticker",
+   "sticker_emoji": "😪",
+   "mime_type": "video/webm",
+   "duration_seconds": 2,
+   "width": 455,
+   "height": 512,
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 948633,
+   "type": "message",
+   "date": "2025-01-24T13:22:06",
+   "date_unixtime": "1737712326",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "نل",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "نل"
+    }
+   ]
+  },
+  {
+   "id": 948635,
+   "type": "message",
+   "date": "2025-01-24T13:22:18",
+   "date_unixtime": "1737712338",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "جوونم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "جوونم"
+    }
+   ]
+  },
+  {
+   "id": 948636,
+   "type": "message",
+   "date": "2025-01-24T13:23:22",
+   "date_unixtime": "1737712402",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "میگما من نمیخوام پری بابت کنسرت اصرار کنم که معذب بشین اینا خب٫ولی نگار دلش گرفته و اینا معلومه حالشم خوب نیست٫من میگم تو توی گروه بگو که بیاین حداقل با یه کنسرت رفتن دلش باز بشه٫کلی هم عشق و حال میکنیم٫من این نظرو دارم٫اما بازم تو خواهرشی بهتر میدونی🥹",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "میگما من نمیخوام پری بابت کنسرت اصرار کنم که معذب بشین اینا خب٫ولی نگار دلش گرفته و اینا معلومه حالشم خوب نیست٫من میگم تو توی گروه بگو که بیاین حداقل با یه کنسرت رفتن دلش باز بشه٫کلی هم عشق و حال میکنیم٫من این نظرو دارم٫اما بازم تو خواهرشی بهتر میدونی🥹"
+    }
+   ]
+  },
+  {
+   "id": 948637,
+   "type": "message",
+   "date": "2025-01-24T13:23:49",
+   "date_unixtime": "1737712429",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "reply_to_message_id": 948636,
+   "text": "مررررسی عشقوممممم😘😘😘♥️\nباشه الان مگممم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "مررررسی عشقوممممم😘😘😘♥️\nباشه الان مگممم"
+    }
+   ]
+  },
+  {
+   "id": 948638,
+   "type": "message",
+   "date": "2025-01-24T13:24:00",
+   "date_unixtime": "1737712440",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "راس میگی یکی ذره حال و هواش عوض مشه",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "راس میگی یکی ذره حال و هواش عوض مشه"
+    }
+   ]
+  },
+  {
+   "id": 948642,
+   "type": "message",
+   "date": "2025-01-24T13:25:07",
+   "date_unixtime": "1737712507",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "reply_to_message_id": 948637,
+   "text": "بخدا بازم نمیخوام معذب بشین و اینا٫فقط برای تقویت روحیه و انرژی گفتم🥹",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "بخدا بازم نمیخوام معذب بشین و اینا٫فقط برای تقویت روحیه و انرژی گفتم🥹"
+    }
+   ]
+  },
+  {
+   "id": 948643,
+   "type": "message",
+   "date": "2025-01-24T13:25:10",
+   "date_unixtime": "1737712510",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "reply_to_message_id": 948638,
+   "text": "آرهههه",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "آرهههه"
+    }
+   ]
+  },
+  {
+   "id": 948653,
+   "type": "message",
+   "date": "2025-01-24T13:35:01",
+   "date_unixtime": "1737713101",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "reply_to_message_id": 948642,
+   "text": "دورت بگردم منننن خوشگل مهربووون",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "دورت بگردم منننن خوشگل مهربووون"
+    }
+   ]
+  },
+  {
+   "id": 948694,
+   "type": "message",
+   "date": "2025-01-24T13:38:30",
+   "date_unixtime": "1737713310",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "خدااااا نکنه🥹🥹",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "خدااااا نکنه🥹🥹"
+    }
+   ]
+  },
+  {
+   "id": 948711,
+   "type": "message",
+   "date": "2025-01-24T13:40:06",
+   "date_unixtime": "1737713406",
+   "edited": "2025-01-24T13:42:55",
+   "edited_unixtime": "1737713575",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "file": "(File not included. Change data exporting settings to download.)",
+   "file_name": "sticker.webm",
+   "file_size": 101028,
+   "thumbnail": "(File not included. Change data exporting settings to download.)",
+   "thumbnail_file_size": 7492,
+   "media_type": "sticker",
+   "sticker_emoji": "😽",
+   "mime_type": "video/webm",
+   "duration_seconds": 1,
+   "width": 512,
+   "height": 512,
+   "text": "",
+   "text_entities": [],
+   "reactions": [
+     {
+      "type": "emoji",
+      "count": 1,
+      "emoji": "❤",
+      "recent": [
+       {
+        "from": "Naz♥️",
+        "from_id": "user327920531",
+        "date": "2025-01-24T13:42:55"
+       }
+      ]
+     }
+    ]
+  },
+  {
+   "id": 948833,
+   "type": "message",
+   "date": "2025-01-24T15:24:27",
+   "date_unixtime": "1737719667",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "نل",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "نل"
+    }
+   ]
+  },
+  {
+   "id": 948834,
+   "type": "message",
+   "date": "2025-01-24T15:24:39",
+   "date_unixtime": "1737719679",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "من سارا دوستم و خواهرشم هستن",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "من سارا دوستم و خواهرشم هستن"
+    }
+   ]
+  },
+  {
+   "id": 948835,
+   "type": "message",
+   "date": "2025-01-24T15:24:54",
+   "date_unixtime": "1737719694",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "یعنی الان بهم گفت که میخواد بیاد",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "یعنی الان بهم گفت که میخواد بیاد"
+    }
+   ]
+  },
+  {
+   "id": 948836,
+   "type": "message",
+   "date": "2025-01-24T15:25:10",
+   "date_unixtime": "1737719710",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "میخوای تو الکی نرو تو سایت که تعداد زیاد بشه برای بلیط و هزینش",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "میخوای تو الکی نرو تو سایت که تعداد زیاد بشه برای بلیط و هزینش"
+    }
+   ]
+  },
+  {
+   "id": 948838,
+   "type": "message",
+   "date": "2025-01-24T15:25:14",
+   "date_unixtime": "1737719714",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "من میرم و سارا",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "من میرم و سارا"
+    }
+   ]
+  },
+  {
+   "id": 948846,
+   "type": "message",
+   "date": "2025-01-24T15:40:01",
+   "date_unixtime": "1737720601",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "خب منم میرم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "خب منم میرم"
+    }
+   ]
+  },
+  {
+   "id": 948847,
+   "type": "message",
+   "date": "2025-01-24T15:40:07",
+   "date_unixtime": "1737720607",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "هرکی گیرش اومد برای همه بگیره",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "هرکی گیرش اومد برای همه بگیره"
+    }
+   ]
+  },
+  {
+   "id": 948851,
+   "type": "message",
+   "date": "2025-01-24T15:40:30",
+   "date_unixtime": "1737720630",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "حله",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "حله"
+    }
+   ]
+  },
+  {
+   "id": 948861,
+   "type": "message",
+   "date": "2025-01-24T15:43:19",
+   "date_unixtime": "1737720799",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "میشه ۶ تا پس",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "میشه ۶ تا پس"
+    }
+   ]
+  },
+  {
+   "id": 948862,
+   "type": "message",
+   "date": "2025-01-24T15:43:24",
+   "date_unixtime": "1737720804",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "اوکی",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "اوکی"
+    }
+   ]
+  },
+  {
+   "id": 948863,
+   "type": "message",
+   "date": "2025-01-24T15:43:29",
+   "date_unixtime": "1737720809",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "اسماشونم بگو",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "اسماشونم بگو"
+    }
+   ]
+  },
+  {
+   "id": 948865,
+   "type": "message",
+   "date": "2025-01-24T15:45:04",
+   "date_unixtime": "1737720904",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "سارا حمیدی فر",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "سارا حمیدی فر"
+    }
+   ]
+  },
+  {
+   "id": 948866,
+   "type": "message",
+   "date": "2025-01-24T15:45:07",
+   "date_unixtime": "1737720907",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "سوگند حمیدی فر",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "سوگند حمیدی فر"
+    }
+   ]
+  },
+  {
+   "id": 948870,
+   "type": "message",
+   "date": "2025-01-24T15:45:19",
+   "date_unixtime": "1737720919",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "فقط اگه گیرت اومد بگو که من سریع بگم که نگیرن",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "فقط اگه گیرت اومد بگو که من سریع بگم که نگیرن"
+    }
+   ]
+  },
+  {
+   "id": 948871,
+   "type": "message",
+   "date": "2025-01-24T15:45:24",
+   "date_unixtime": "1737720924",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "منم گیرم اومد میگم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "منم گیرم اومد میگم"
+    }
+   ]
+  },
+  {
+   "id": 948873,
+   "type": "message",
+   "date": "2025-01-24T15:45:29",
+   "date_unixtime": "1737720929",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "سارا هم گیرش اومد من میگم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "سارا هم گیرش اومد من میگم"
+    }
+   ]
+  },
+  {
+   "id": 948875,
+   "type": "message",
+   "date": "2025-01-24T15:45:44",
+   "date_unixtime": "1737720944",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "باشه",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "باشه"
+    }
+   ]
+  },
+  {
+   "id": 948886,
+   "type": "message",
+   "date": "2025-01-24T15:48:18",
+   "date_unixtime": "1737721098",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "بوسی",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "بوسی"
+    }
+   ]
+  },
+  {
+   "id": 948900,
+   "type": "message",
+   "date": "2025-01-24T16:01:21",
+   "date_unixtime": "1737721881",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "همش پرا رزروه",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "همش پرا رزروه"
+    }
+   ]
+  },
+  {
+   "id": 948901,
+   "type": "message",
+   "date": "2025-01-24T16:01:29",
+   "date_unixtime": "1737721889",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "حاجی پشمام",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "حاجی پشمام"
+    }
+   ]
+  },
+  {
+   "id": 948902,
+   "type": "message",
+   "date": "2025-01-24T16:04:12",
+   "date_unixtime": "1737722052",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "نمشه اصلا",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "نمشه اصلا"
+    }
+   ]
+  },
+  {
+   "id": 948954,
+   "type": "message",
+   "date": "2025-01-24T16:26:10",
+   "date_unixtime": "1737723370",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "ریدم تو سایتشون",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "ریدم تو سایتشون"
+    }
+   ]
+  },
+  {
+   "id": 954841,
+   "type": "message",
+   "date": "2025-01-29T00:49:54",
+   "date_unixtime": "1738099194",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "forwarded_from": "OUT OF TIME",
+   "text": "ولی نیلوفر دقیقا همون آدمیه که  کنارش بهترین حس دنیارو دارم:)",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "ولی نیلوفر دقیقا همون آدمیه که  کنارش بهترین حس دنیارو دارم:)"
+    }
+   ]
+  },
+  {
+   "id": 954842,
+   "type": "message",
+   "date": "2025-01-29T00:49:59",
+   "date_unixtime": "1738099199",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": ":)))))🥹🥹🥹🥹🥹🥹🥹🥹",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": ":)))))🥹🥹🥹🥹🥹🥹🥹🥹"
+    }
+   ]
+  },
+  {
+   "id": 954843,
+   "type": "message",
+   "date": "2025-01-29T00:52:16",
+   "date_unixtime": "1738099336",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "عررررررررررر😭😭😭😭😭",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "عررررررررررر😭😭😭😭😭"
+    }
+   ]
+  },
+  {
+   "id": 954844,
+   "type": "message",
+   "date": "2025-01-29T00:52:19",
+   "date_unixtime": "1738099339",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "عشق منیییی",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "عشق منیییی"
+    }
+   ]
+  },
+  {
+   "id": 954845,
+   "type": "message",
+   "date": "2025-01-29T00:52:29",
+   "date_unixtime": "1738099349",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "کوچولی منیییی😭😭😭😭",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "کوچولی منیییی😭😭😭😭"
+    }
+   ]
+  },
+  {
+   "id": 954850,
+   "type": "message",
+   "date": "2025-01-29T00:53:17",
+   "date_unixtime": "1738099397",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "بوسی🥹🤍",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "بوسی🥹🤍"
+    }
+   ]
+  },
+  {
+   "id": 954858,
+   "type": "message",
+   "date": "2025-01-29T00:56:32",
+   "date_unixtime": "1738099592",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "file": "(File not included. Change data exporting settings to download.)",
+   "file_name": "sticker.webm",
+   "file_size": 91182,
+   "thumbnail": "(File not included. Change data exporting settings to download.)",
+   "thumbnail_file_size": 4758,
+   "media_type": "sticker",
+   "sticker_emoji": "😽",
+   "mime_type": "video/webm",
+   "duration_seconds": 2,
+   "width": 410,
+   "height": 512,
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 955148,
+   "type": "message",
+   "date": "2025-01-29T19:53:21",
+   "date_unixtime": "1738167801",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "کی میاین",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "کی میاین"
+    }
+   ]
+  },
+  {
+   "id": 955149,
+   "type": "message",
+   "date": "2025-01-29T19:53:27",
+   "date_unixtime": "1738167807",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "کی از خونه مادر بزرگ میاین",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "کی از خونه مادر بزرگ میاین"
+    }
+   ]
+  },
+  {
+   "id": 955150,
+   "type": "message",
+   "date": "2025-01-29T19:56:41",
+   "date_unixtime": "1738168001",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "تازه رسیدیم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "تازه رسیدیم"
+    }
+   ]
+  },
+  {
+   "id": 955151,
+   "type": "message",
+   "date": "2025-01-29T19:56:56",
+   "date_unixtime": "1738168016",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "زودی میایمممم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "زودی میایمممم"
+    }
+   ]
+  },
+  {
+   "id": 955162,
+   "type": "message",
+   "date": "2025-01-29T20:17:42",
+   "date_unixtime": "1738169262",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "تازه رسیدین خونه مامان بزرگ؟",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "تازه رسیدین خونه مامان بزرگ؟"
+    }
+   ]
+  },
+  {
+   "id": 955163,
+   "type": "message",
+   "date": "2025-01-29T20:19:15",
+   "date_unixtime": "1738169355",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "در اومدیم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "در اومدیم"
+    }
+   ]
+  },
+  {
+   "id": 955164,
+   "type": "message",
+   "date": "2025-01-29T20:19:17",
+   "date_unixtime": "1738169357",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "داریم میم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "داریم میم"
+    }
+   ]
+  },
+  {
+   "id": 955511,
+   "type": "message",
+   "date": "2025-01-31T09:01:50",
+   "date_unixtime": "1738301510",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "سی سی حرکت کردین؟",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "سی سی حرکت کردین؟"
+    }
+   ]
+  },
+  {
+   "id": 955518,
+   "type": "message",
+   "date": "2025-01-31T09:22:02",
+   "date_unixtime": "1738302722",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "اره عشقممم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "اره عشقممم"
+    }
+   ]
+  },
+  {
+   "id": 955520,
+   "type": "message",
+   "date": "2025-01-31T09:22:02",
+   "date_unixtime": "1738302722",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "نزدیک اردستانیم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "نزدیک اردستانیم"
+    }
+   ]
+  },
+  {
+   "id": 955521,
+   "type": "message",
+   "date": "2025-01-31T09:23:07",
+   "date_unixtime": "1738302787",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "کلی مراقب خودت باشیا❤️🥲",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "کلی مراقب خودت باشیا❤️🥲"
+    }
+   ]
+  },
+  {
+   "id": 955522,
+   "type": "message",
+   "date": "2025-01-31T09:23:18",
+   "date_unixtime": "1738302798",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "منتظرم زود برگرد٫دلم خیلی برات تنگ میشه❤️🥲",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "منتظرم زود برگرد٫دلم خیلی برات تنگ میشه❤️🥲"
+    }
+   ]
+  },
+  {
+   "id": 955525,
+   "type": "message",
+   "date": "2025-01-31T09:37:49",
+   "date_unixtime": "1738303669",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "بوووس به تو عشق منن",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "بوووس به تو عشق منن"
+    }
+   ]
+  },
+  {
+   "id": 955526,
+   "type": "message",
+   "date": "2025-01-31T09:37:54",
+   "date_unixtime": "1738303674",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "زود برمیگردممم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "زود برمیگردممم"
+    }
+   ]
+  },
+  {
+   "id": 955527,
+   "type": "message",
+   "date": "2025-01-31T09:38:01",
+   "date_unixtime": "1738303681",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "ت‌ ازمون داادی؟",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "ت‌ ازمون داادی؟"
+    }
+   ]
+  },
+  {
+   "id": 955528,
+   "type": "message",
+   "date": "2025-01-31T09:38:54",
+   "date_unixtime": "1738303734",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "reply_to_message_id": 955526,
+   "text": "هوراااااا🥹",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "هوراااااا🥹"
+    }
+   ]
+  },
+  {
+   "id": 955529,
+   "type": "message",
+   "date": "2025-01-31T09:38:58",
+   "date_unixtime": "1738303738",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "reply_to_message_id": 955527,
+   "text": "آره آرهههه",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "آره آرهههه"
+    }
+   ]
+  },
+  {
+   "id": 955530,
+   "type": "message",
+   "date": "2025-01-31T09:50:46",
+   "date_unixtime": "1738304446",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "reply_to_message_id": 955529,
+   "text": "خوووب بود ؟",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "خوووب بود ؟"
+    }
+   ]
+  },
+  {
+   "id": 955531,
+   "type": "message",
+   "date": "2025-01-31T10:02:46",
+   "date_unixtime": "1738305166",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "آره خداروشکر",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "آره خداروشکر"
+    }
+   ]
+  },
+  {
+   "id": 955540,
+   "type": "message",
+   "date": "2025-01-31T10:27:21",
+   "date_unixtime": "1738306641",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "هووورااا",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "هووورااا"
+    }
+   ]
+  },
+  {
+   "id": 955541,
+   "type": "message",
+   "date": "2025-01-31T10:27:30",
+   "date_unixtime": "1738306650",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "افرین به شماااا",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "افرین به شماااا"
+    }
+   ]
+  },
+  {
+   "id": 955542,
+   "type": "message",
+   "date": "2025-01-31T10:28:57",
+   "date_unixtime": "1738306737",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "قربون شماااااا برم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "قربون شماااااا برم"
+    }
+   ]
+  },
+  {
+   "id": 955767,
+   "type": "message",
+   "date": "2025-01-31T12:22:21",
+   "date_unixtime": "1738313541",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "بووووووووس",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "بووووووووس"
+    }
+   ]
+  },
+  {
+   "id": 955801,
+   "type": "message",
+   "date": "2025-01-31T12:25:26",
+   "date_unixtime": "1738313726",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "file": "(File not included. Change data exporting settings to download.)",
+   "file_name": "sticker.webp",
+   "file_size": 9506,
+   "thumbnail": "(File not included. Change data exporting settings to download.)",
+   "thumbnail_file_size": 5630,
+   "media_type": "sticker",
+   "sticker_emoji": "😌",
+   "mime_type": "image/webp",
+   "width": 512,
+   "height": 512,
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 955837,
+   "type": "message",
+   "date": "2025-01-31T12:29:21",
+   "date_unixtime": "1738313961",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "file": "(File not included. Change data exporting settings to download.)",
+   "file_name": "sticker.webm",
+   "file_size": 112251,
+   "thumbnail": "(File not included. Change data exporting settings to download.)",
+   "thumbnail_file_size": 5556,
+   "media_type": "sticker",
+   "sticker_emoji": "🕺",
+   "mime_type": "video/webm",
+   "duration_seconds": 2,
+   "width": 512,
+   "height": 512,
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 955875,
+   "type": "message",
+   "date": "2025-01-31T12:32:52",
+   "date_unixtime": "1738314172",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "کی میرسین",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "کی میرسین"
+    }
+   ]
+  },
+  {
+   "id": 955884,
+   "type": "message",
+   "date": "2025-01-31T12:33:38",
+   "date_unixtime": "1738314218",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "یه ساعت دیه نقریبا",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "یه ساعت دیه نقریبا"
+    }
+   ]
+  },
+  {
+   "id": 955925,
+   "type": "message",
+   "date": "2025-01-31T12:57:02",
+   "date_unixtime": "1738315622",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "جااااان",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "جااااان"
+    }
+   ]
+  },
+  {
+   "id": 958605,
+   "type": "message",
+   "date": "2025-02-02T23:24:18",
+   "date_unixtime": "1738526058",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "سلااااام عشقوم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "سلااااام عشقوم"
+    }
+   ]
+  },
+  {
+   "id": 958607,
+   "type": "message",
+   "date": "2025-02-02T23:24:20",
+   "date_unixtime": "1738526060",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "خوبیییییی",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "خوبیییییی"
+    }
+   ]
+  },
+  {
+   "id": 958608,
+   "type": "message",
+   "date": "2025-02-02T23:24:24",
+   "date_unixtime": "1738526064",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "فردااااا کی میای",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "فردااااا کی میای"
+    }
+   ]
+  },
+  {
+   "id": 958755,
+   "type": "message",
+   "date": "2025-02-02T23:46:06",
+   "date_unixtime": "1738527366",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "سلاااام عشقووووم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "سلاااام عشقووووم"
+    }
+   ]
+  },
+  {
+   "id": 958756,
+   "type": "message",
+   "date": "2025-02-02T23:46:13",
+   "date_unixtime": "1738527373",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "قربونت بشم تو خوووبی؟",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "قربونت بشم تو خوووبی؟"
+    }
+   ]
+  },
+  {
+   "id": 958757,
+   "type": "message",
+   "date": "2025-02-02T23:46:21",
+   "date_unixtime": "1738527381",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "من ۳ و ۴۰ راه میفتم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "من ۳ و ۴۰ راه میفتم"
+    }
+   ]
+  },
+  {
+   "id": 958758,
+   "type": "message",
+   "date": "2025-02-02T23:46:30",
+   "date_unixtime": "1738527390",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "یازده و نیم ایشالا یزدم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "یازده و نیم ایشالا یزدم"
+    }
+   ]
+  },
+  {
+   "id": 958819,
+   "type": "message",
+   "date": "2025-02-03T00:56:30",
+   "date_unixtime": "1738531590",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "reply_to_message_id": 958756,
+   "text": "قربونت برم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "قربونت برم"
+    }
+   ]
+  },
+  {
+   "id": 958820,
+   "type": "message",
+   "date": "2025-02-03T00:56:37",
+   "date_unixtime": "1738531597",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "reply_to_message_id": 958758,
+   "text": "به به🥹🥹🥹",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "به به🥹🥹🥹"
+    }
+   ]
+  },
+  {
+   "id": 958859,
+   "type": "message",
+   "date": "2025-02-03T14:41:53",
+   "date_unixtime": "1738581113",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "file": "(File not included. Change data exporting settings to download.)",
+   "file_name": "sticker.webm",
+   "file_size": 167330,
+   "thumbnail": "(File not included. Change data exporting settings to download.)",
+   "thumbnail_file_size": 21376,
+   "media_type": "sticker",
+   "sticker_emoji": "💃",
+   "mime_type": "video/webm",
+   "duration_seconds": 3,
+   "width": 432,
+   "height": 512,
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 965675,
+   "type": "message",
+   "date": "2025-02-11T14:00:45",
+   "date_unixtime": "1739269845",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "عشقوم مگم که برای پنجشنبه که من میخوام کادو فرحانو بدم برای اینکه جلو عمه اینا ضایع نشه غمته که نیم ساعت کلاس نگار بشینی٫اگه غمته من بگم با ستاره برم٫اصلا نمیخوام رودروایسی گیر کنی🫠",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "عشقوم مگم که برای پنجشنبه که من میخوام کادو فرحانو بدم برای اینکه جلو عمه اینا ضایع نشه غمته که نیم ساعت کلاس نگار بشینی٫اگه غمته من بگم با ستاره برم٫اصلا نمیخوام رودروایسی گیر کنی🫠"
+    }
+   ]
+  },
+  {
+   "id": 965693,
+   "type": "message",
+   "date": "2025-02-11T14:11:59",
+   "date_unixtime": "1739270519",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "نه عشقم این چه حرفیه",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "نه عشقم این چه حرفیه"
+    }
+   ]
+  },
+  {
+   "id": 965694,
+   "type": "message",
+   "date": "2025-02-11T14:12:01",
+   "date_unixtime": "1739270521",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "باه ممرم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "باه ممرم"
+    }
+   ]
+  },
+  {
+   "id": 965695,
+   "type": "message",
+   "date": "2025-02-11T14:12:05",
+   "date_unixtime": "1739270525",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "منم مرم کلاس نگار",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "منم مرم کلاس نگار"
+    }
+   ]
+  },
+  {
+   "id": 965798,
+   "type": "message",
+   "date": "2025-02-11T17:16:39",
+   "date_unixtime": "1739281599",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "مطمئنی عشقوم؟",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "مطمئنی عشقوم؟"
+    }
+   ]
+  },
+  {
+   "id": 965869,
+   "type": "service",
+   "date": "2025-02-11T19:43:16",
+   "date_unixtime": "1739290396",
+   "actor": "Niloofar Torki",
+   "actor_id": "user611755372",
+   "action": "phone_call",
+   "duration_seconds": 22,
+   "discard_reason": "hangup",
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 968023,
+   "type": "message",
+   "date": "2025-02-16T00:51:31",
+   "date_unixtime": "1739654491",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "file": "(File not included. Change data exporting settings to download.)",
+   "file_name": "IMG_2345.MOV",
+   "file_size": 77571582,
+   "thumbnail": "(File not included. Change data exporting settings to download.)",
+   "thumbnail_file_size": 6737,
+   "media_type": "video_file",
+   "mime_type": "video/mp4",
+   "duration_seconds": 204,
+   "width": 464,
+   "height": 848,
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 968024,
+   "type": "message",
+   "date": "2025-02-16T00:52:11",
+   "date_unixtime": "1739654531",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "reply_to_message_id": 968023,
+   "text": "بووووس مرسییی",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "بووووس مرسییی"
+    }
+   ]
+  },
+  {
+   "id": 968026,
+   "type": "message",
+   "date": "2025-02-16T00:52:46",
+   "date_unixtime": "1739654566",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "file": "(File not included. Change data exporting settings to download.)",
+   "file_name": "sticker.webm",
+   "file_size": 101028,
+   "thumbnail": "(File not included. Change data exporting settings to download.)",
+   "thumbnail_file_size": 7492,
+   "media_type": "sticker",
+   "sticker_emoji": "😽",
+   "mime_type": "video/webm",
+   "duration_seconds": 2,
+   "width": 512,
+   "height": 512,
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 968027,
+   "type": "message",
+   "date": "2025-02-16T00:52:51",
+   "date_unixtime": "1739654571",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "عشقوم مراقب خودت باش",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "عشقوم مراقب خودت باش"
+    }
+   ]
+  },
+  {
+   "id": 968028,
+   "type": "message",
+   "date": "2025-02-16T00:52:57",
+   "date_unixtime": "1739654577",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "زودی بیا دلوم تنگ میشه🫠",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "زودی بیا دلوم تنگ میشه🫠"
+    }
+   ]
+  },
+  {
+   "id": 968030,
+   "type": "message",
+   "date": "2025-02-16T00:53:32",
+   "date_unixtime": "1739654612",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "چشمممم عشقممم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "چشمممم عشقممم"
+    }
+   ]
+  },
+  {
+   "id": 968031,
+   "type": "message",
+   "date": "2025-02-16T00:53:37",
+   "date_unixtime": "1739654617",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "دل منم تنگ مشهههه",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "دل منم تنگ مشهههه"
+    }
+   ]
+  },
+  {
+   "id": 968032,
+   "type": "message",
+   "date": "2025-02-16T00:54:19",
+   "date_unixtime": "1739654659",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "زود بیا پس😭😭😭",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "زود بیا پس😭😭😭"
+    }
+   ]
+  },
+  {
+   "id": 968037,
+   "type": "message",
+   "date": "2025-02-16T00:55:36",
+   "date_unixtime": "1739654736",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "چشممم😭😭😘😘",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "چشممم😭😭😘😘"
+    }
+   ]
+  },
+  {
+   "id": 968459,
+   "type": "message",
+   "date": "2025-02-16T13:18:36",
+   "date_unixtime": "1739699316",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "عشقوم رسیدی؟!",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "عشقوم رسیدی؟!"
+    }
+   ]
+  },
+  {
+   "id": 968463,
+   "type": "message",
+   "date": "2025-02-16T13:19:06",
+   "date_unixtime": "1739699346",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "اره عشقمم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "اره عشقمم"
+    }
+   ]
+  },
+  {
+   "id": 968464,
+   "type": "message",
+   "date": "2025-02-16T13:19:08",
+   "date_unixtime": "1739699348",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "همین الان",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "همین الان"
+    }
+   ]
+  },
+  {
+   "id": 968468,
+   "type": "message",
+   "date": "2025-02-16T13:19:54",
+   "date_unixtime": "1739699394",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "رسیدنت بخیر عشقوووووم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "رسیدنت بخیر عشقوووووم"
+    }
+   ]
+  },
+  {
+   "id": 968675,
+   "type": "message",
+   "date": "2025-02-16T14:00:58",
+   "date_unixtime": "1739701858",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "بووووس به شما",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "بووووس به شما"
+    }
+   ]
+  },
+  {
+   "id": 968721,
+   "type": "message",
+   "date": "2025-02-16T16:07:03",
+   "date_unixtime": "1739709423",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "file": "(File not included. Change data exporting settings to download.)",
+   "file_name": "sticker.webm",
+   "file_size": 101028,
+   "thumbnail": "(File not included. Change data exporting settings to download.)",
+   "thumbnail_file_size": 7492,
+   "media_type": "sticker",
+   "sticker_emoji": "😽",
+   "mime_type": "video/webm",
+   "duration_seconds": 2,
+   "width": 512,
+   "height": 512,
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 968742,
+   "type": "message",
+   "date": "2025-02-16T16:51:55",
+   "date_unixtime": "1739712115",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "file": "(File not included. Change data exporting settings to download.)",
+   "file_name": "AnimatedSticker.tgs",
+   "file_size": 37853,
+   "thumbnail": "(File not included. Change data exporting settings to download.)",
+   "thumbnail_file_size": 3894,
+   "media_type": "sticker",
+   "sticker_emoji": "😽",
+   "mime_type": "application/x-tgsticker",
+   "width": 512,
+   "height": 512,
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 976712,
+   "type": "message",
+   "date": "2025-02-27T23:56:18",
+   "date_unixtime": "1740687978",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "سلااااام",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "سلااااام"
+    }
+   ]
+  },
+  {
+   "id": 976713,
+   "type": "message",
+   "date": "2025-02-27T23:56:21",
+   "date_unixtime": "1740687981",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "خوبیییی؟!",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "خوبیییی؟!"
+    }
+   ]
+  },
+  {
+   "id": 976714,
+   "type": "message",
+   "date": "2025-02-28T00:03:31",
+   "date_unixtime": "1740688411",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "سلام عشقممم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "سلام عشقممم"
+    }
+   ]
+  },
+  {
+   "id": 976715,
+   "type": "message",
+   "date": "2025-02-28T00:03:46",
+   "date_unixtime": "1740688426",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "قربونت بشم تو خوبییی؟",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "قربونت بشم تو خوبییی؟"
+    }
+   ]
+  },
+  {
+   "id": 976718,
+   "type": "message",
+   "date": "2025-02-28T00:05:19",
+   "date_unixtime": "1740688519",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "قربونت",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "قربونت"
+    }
+   ]
+  },
+  {
+   "id": 976719,
+   "type": "message",
+   "date": "2025-02-28T00:05:23",
+   "date_unixtime": "1740688523",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "چخبر؟",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "چخبر؟"
+    }
+   ]
+  },
+  {
+   "id": 976720,
+   "type": "message",
+   "date": "2025-02-28T00:05:27",
+   "date_unixtime": "1740688527",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "همه چی خوبه؟",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "همه چی خوبه؟"
+    }
+   ]
+  },
+  {
+   "id": 976722,
+   "type": "message",
+   "date": "2025-02-28T00:09:53",
+   "date_unixtime": "1740688793",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "قربوونت بشم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "قربوونت بشم"
+    }
+   ]
+  },
+  {
+   "id": 976723,
+   "type": "message",
+   "date": "2025-02-28T00:09:59",
+   "date_unixtime": "1740688799",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "تو خوبی؟",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "تو خوبی؟"
+    }
+   ]
+  },
+  {
+   "id": 976724,
+   "type": "message",
+   "date": "2025-02-28T00:09:59",
+   "date_unixtime": "1740688799",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "همه چی خوبه؟",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "همه چی خوبه؟"
+    }
+   ]
+  },
+  {
+   "id": 976725,
+   "type": "message",
+   "date": "2025-02-28T00:10:12",
+   "date_unixtime": "1740688812",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "reply_to_message_id": 976724,
+   "text": "خوووووبه خدااااروشکر",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "خوووووبه خدااااروشکر"
+    }
+   ]
+  },
+  {
+   "id": 976726,
+   "type": "message",
+   "date": "2025-02-28T00:10:15",
+   "date_unixtime": "1740688815",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "کی میایییییی",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "کی میایییییی"
+    }
+   ]
+  },
+  {
+   "id": 976733,
+   "type": "message",
+   "date": "2025-02-28T01:00:29",
+   "date_unixtime": "1740691829",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "reply_to_message_id": 976726,
+   "text": "هفته بعد با دوستام میاممم",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "هفته بعد با دوستام میاممم"
+    }
+   ]
+  },
+  {
+   "id": 976734,
+   "type": "message",
+   "date": "2025-02-28T01:00:35",
+   "date_unixtime": "1740691835",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "ولی بعدش دیه مره تا ۲۵",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "ولی بعدش دیه مره تا ۲۵"
+    }
+   ]
+  },
+  {
+   "id": 976735,
+   "type": "message",
+   "date": "2025-02-28T01:01:08",
+   "date_unixtime": "1740691868",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "reply_to_message_id": 976733,
+   "text": "اووووه جون",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "اووووه جون"
+    }
+   ]
+  },
+  {
+   "id": 976736,
+   "type": "message",
+   "date": "2025-02-28T01:01:17",
+   "date_unixtime": "1740691877",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "تا کی میمونی با دوستات",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "تا کی میمونی با دوستات"
+    }
+   ]
+  },
+  {
+   "id": 976737,
+   "type": "message",
+   "date": "2025-02-28T01:12:02",
+   "date_unixtime": "1740692522",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "reply_to_message_id": 976736,
+   "text": "جمعهه‌ش",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "جمعهه‌ش"
+    }
+   ]
+  },
+  {
+   "id": 976741,
+   "type": "message",
+   "date": "2025-02-28T01:53:45",
+   "date_unixtime": "1740695025",
+   "from": "Naz♥️",
+   "from_id": "user327920531",
+   "text": "میبینمتتتتت",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "میبینمتتتتت"
+    }
+   ]
+  },
+  {
+   "id": 976808,
+   "type": "message",
+   "date": "2025-02-28T12:09:21",
+   "date_unixtime": "1740731961",
+   "edited": "2025-02-28T17:35:06",
+   "edited_unixtime": "1740751506",
+   "from": "Niloofar Torki",
+   "from_id": "user611755372",
+   "text": "ایشالاااا",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "ایشالاااا"
+    }
+   ],
+   "reactions": [
+     {
+      "type": "emoji",
+      "count": 1,
+      "emoji": "❤",
+      "recent": [
+       {
+        "from": "Naz♥️",
+        "from_id": "user327920531",
+        "date": "2025-02-28T17:35:06"
+       }
+      ]
+     }
+    ]
+  }
+ ]
+}

@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, FlatList } from 'react-native';
+import { View, Text, Button, FlatList, TouchableOpacity, Alert } from 'react-native';
 import * as Contacts from 'expo-contacts';
 
 const ContactsList = () => {
   const [contacts, setContacts] = useState([]);
+  const [selectedContacts, setSelectedContacts] = useState([]);
 
   const loadContacts = async () => {
     const { status } = await Contacts.requestPermissionsAsync();
     if (status === 'granted') {
-      const { data } = await Contacts.getContactsAsync({
-        fields: [Contacts.Fields.PhoneNumbers],
-      });
+      const { data } = await Contacts.getContactsAsync();
 
       if (data.length > 0) {
         setContacts(data);
@@ -24,21 +23,58 @@ const ContactsList = () => {
     loadContacts();
   }, []);
 
+  const toggleSelection = (contact) => {
+    if (selectedContacts.some((c) => c.id === contact.id)) {
+      setSelectedContacts(selectedContacts.filter((c) => c.id !== contact.id));
+    } else {
+      setSelectedContacts([...selectedContacts, contact]);
+    }
+  };
+
+  const confirmSelection = () => {
+    Alert.alert(
+      "Selected Contacts",
+      selectedContacts.map((c) => c.name).join(", ") || "No contacts selected"
+    );
+  };
+
   return (
     <View style={{ flex: 1, padding: 20 }}>
-      <Text style={{ fontSize: 24, marginBottom: 10 }}>Contacts List</Text>
       <FlatList
         data={contacts}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={{ marginVertical: 5 }}>
-            <Text style={{ fontSize: 18 }}>{item.name}</Text>
-            {item.phoneNumbers?.map((phone, index) => (
-              <Text key={index}>{phone.number}</Text>
-            ))}
-          </View>
+          <TouchableOpacity
+            onPress={() => toggleSelection(item)}
+            style={{
+              padding: 15,
+              marginVertical: 5,
+              backgroundColor: selectedContacts.some((c) => c.id === item.id)
+                ? "#4CAF50"
+                : "#ddd",
+              borderRadius: 5,
+            }}
+          >
+            <Text style={{ fontSize: 16, textAlign: "center" }}>
+              {item.name}
+            </Text>
+          </TouchableOpacity>
         )}
       />
+
+      <TouchableOpacity
+        onPress={confirmSelection}
+        style={{
+          backgroundColor: "#007BFF",
+          padding: 15,
+          marginTop: 20,
+          borderRadius: 5,
+        }}
+      >
+        <Text style={{ color: "#fff", fontSize: 18, textAlign: "center" }}>
+          Confirm Selection
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };

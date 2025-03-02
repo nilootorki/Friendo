@@ -7,17 +7,14 @@ import {
   Keyboard,
   StyleSheet,
   View,
-  TextInput,
   TouchableOpacity,
-  Button,
+  Alert,
 } from "react-native";
 import Text from "@kaloraat/react-native-text";
-import UserInput from "../Components/auth/UserInput";
 import SubmitBtn from "../Components/auth/SubmitButton";
 import axios from "axios";
 import requestPermissions from "../Components/getCallMessages/getCall";
 import { useNavigation } from "@react-navigation/native";
-import ContactsList from "../Components/getContacts/getContacts";
 import { useRoute } from "@react-navigation/native";
 
 const ProfileSetUp = () => {
@@ -28,6 +25,27 @@ const ProfileSetUp = () => {
   const [personality, setPersonality] = useState("");
   const [mbti, setMbti] = useState("");
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
+  const personalityTypes = ["Introvert", "Extrovert"];
+  const mbtiTypes = [
+    "INTJ",
+    "INTP",
+    "ENTJ",
+    "ENTP",
+    "INFJ",
+    "INFP",
+    "ENFJ",
+    "ENFP",
+    "ISTJ",
+    "ISFJ",
+    "ESTJ",
+    "ESFJ",
+    "ISTP",
+    "ISFP",
+    "ESTP",
+    "ESFP",
+  ];
+
   const handleSubmit = async () => {
     if (personality && mbti) {
       try {
@@ -41,27 +59,25 @@ const ProfileSetUp = () => {
             mbti,
           },
           {
-            headers: { "Content-Type": "application/json" }, // Ensure JSON format
+            headers: { "Content-Type": "application/json" },
           }
         );
 
-        // Check the backend response and handle accordingly
         if (response.data.success) {
-          alert("Success", response.data.message);
+          Alert.alert("Success", response.data.message);
           navigation.navigate("ContactsList");
         } else {
-          alert(response.data.message);
+          Alert.alert("Failed!", response.data.message);
         }
       } catch (error) {
         console.error(error);
         alert("Error", "Failed to connect to server.");
       }
     } else {
-      alert("Please fill all fields");
+      alert("Please select both personality type and MBTI.");
     }
   };
 
-  // Listen for keyboard open/close events
   useEffect(() => {
     const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
       setKeyboardVisible(true);
@@ -77,8 +93,9 @@ const ProfileSetUp = () => {
   }, []);
 
   useEffect(() => {
-    requestPermissions(); // Request permissions when the app loads
+    requestPermissions();
   }, []);
+
   return (
     <View style={styles.container}>
       <KeyboardAvoidingView
@@ -100,13 +117,60 @@ const ProfileSetUp = () => {
                 Sign Up!
               </Text>
 
-              <UserInput
-                name="Personality (Introvert/Extrovert)"
-                value={personality}
-                setValue={setPersonality}
-              />
-              <UserInput name="MBTI type" value={mbti} setValue={setMbti} />
-              <SubmitBtn onPress={handleSubmit}></SubmitBtn>
+              {/* Personality Selection */}
+              <Text style={styles.question}>
+                Are you an Introvert or Extrovert?
+              </Text>
+              <View style={styles.optionsContainer}>
+                {personalityTypes.map((type) => (
+                  <TouchableOpacity
+                    key={type}
+                    style={[
+                      styles.button,
+                      personality === type && styles.selectedButton,
+                    ]}
+                    onPress={() => setPersonality(type)}
+                  >
+                    <Text
+                      style={[
+                        styles.buttonText,
+                        personality === type && styles.selectedText,
+                      ]}
+                    >
+                      {type}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+
+              {/* MBTI Selection */}
+              <Text style={styles.question}>
+                Select your MBTI personality type:
+              </Text>
+              <View style={styles.mbtiContainer}>
+                {mbtiTypes.map((type) => (
+                  <TouchableOpacity
+                    key={type}
+                    style={[
+                      styles.mbtiButton,
+                      mbti === type && styles.selectedButton,
+                    ]}
+                    onPress={() => setMbti(type)}
+                  >
+                    <Text
+                      style={[
+                        styles.buttonText,
+                        mbti === type && styles.selectedText,
+                      ]}
+                    >
+                      {type}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+
+              {/* Submit Button */}
+              <SubmitBtn onPress={handleSubmit} />
             </View>
           </TouchableWithoutFeedback>
         </ScrollView>
@@ -117,14 +181,50 @@ const ProfileSetUp = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // Wrap everything in a full-screen View
+    flex: 1,
   },
   scrollContainer: {
     padding: 20,
   },
-  innerContainer: {
+  question: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginVertical: 10,
+    textAlign: "center",
+  },
+  optionsContainer: {
+    flexDirection: "row",
     justifyContent: "center",
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: "#ddd",
+    padding: 12,
+    marginHorizontal: 10,
+    borderRadius: 8,
+  },
+  mbtiContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+  },
+  mbtiButton: {
+    backgroundColor: "#ddd",
+    padding: 10,
+    margin: 5,
+    borderRadius: 8,
+    width: 70,
     alignItems: "center",
+  },
+  selectedButton: {
+    backgroundColor: "#6200ea",
+  },
+  buttonText: {
+    fontSize: 16,
+    color: "#000",
+  },
+  selectedText: {
+    color: "#fff",
   },
 });
 
