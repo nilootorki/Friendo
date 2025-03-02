@@ -65,7 +65,7 @@ const ProfileSetUp = () => {
 
         if (response.data.success) {
           Alert.alert("Success", response.data.message);
-          navigation.navigate("ContactsList", {username, password, email});
+          navigation.navigate("ContactsList", { username, password, email });
         } else {
           Alert.alert("Failed!", response.data.message);
         }
@@ -112,9 +112,11 @@ const ProfileSetUp = () => {
           scrollEnabled={true}
         >
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={{ flex: 1, justifyContent: "center" }}>
-              <Text title center>
-                Sign Up!
+            <View
+              style={{ flex: 1, justifyContent: "center", marginBottom: 20 }}
+            >
+              <Text title center style={{ marginBottom: 40 }}>
+                Personality Information:
               </Text>
 
               {/* Personality Selection */}
@@ -191,6 +193,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginVertical: 10,
     textAlign: "center",
+    marginBottom: 20,
   },
   optionsContainer: {
     flexDirection: "row",
@@ -215,6 +218,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: 70,
     alignItems: "center",
+    marginBottom: 40,
   },
   selectedButton: {
     backgroundColor: "#6200ea",
