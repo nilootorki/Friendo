@@ -10,6 +10,7 @@ import {
   TextInput,
   TouchableOpacity,
   Button,
+  Alert
 } from "react-native";
 import Text from "@kaloraat/react-native-text";
 import UserInput from "../Components/auth/UserInput";
@@ -44,17 +45,17 @@ const SignUp = () => {
 
         // Check the backend response and handle accordingly
         if (response.data.success) {
-          alert("Success", response.data.message);
+          Alert.alert("Success", response.data.message);
           navigation.navigate("ProfileSetUp", {username, password, email});
         } else {
-          alert(response.data.message);
+          Alert.alert("Failed!", response.data.message);
         }
       } catch (error) {
         console.error(error);
-        alert("Error", "Failed to connect to server.");
+        Alert.alert("Error", "Failed to connect to server.");
       }
     } else {
-      alert("Please fill all fields");
+      Alert.alert("Please fill all fields");
     }
   };
 

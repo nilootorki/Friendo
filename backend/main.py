@@ -121,7 +121,7 @@ async def ProfileSetUp(profile: ProfileCreate,  db: Session = Depends(get_db)):
 
     db.commit()
 
-    return {"success": True, "message": "profile setup compeletly"}
+    return {"success": True, "message": "Your personality has been set up successfully :)"}
 
 
 
@@ -157,7 +157,7 @@ async def SignUp(user: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_record)  # Ensures we get the generated user_id
 
-    return {"success": True, "message": "User registered successfully!"}
+    return {"success": True, "message": "User has been registered successfully!"}
     
 
     
