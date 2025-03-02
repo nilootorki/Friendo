@@ -21,7 +21,7 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForSeque
 from datetime import datetime, date
 from fastapi.staticfiles import StaticFiles
 
-from schemas import UserFriendSchema, UserCreate, UserResponse, SignupResponse
+from schemas import UserFriendSchema, UserCreate, UserResponse, SignupResponse, ProfileCreate
 from typing import List
 
 from sqlalchemy.exc import NoResultFound
@@ -30,6 +30,8 @@ import regex as re
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import requests
+
 
 app = FastAPI()
 
@@ -103,6 +105,26 @@ base.metadata.create_all(bind=engine)  #ensure tables exist in the db
 #         db.close()   #close the session after the request is complete
 
 
+@app.post("/profileSetup/", response_model=SignupResponse)
+async def ProfileSetUp(profile: ProfileCreate,  db: Session = Depends(get_db)):
+    print("profile")
+    print(profile.username, profile.email, profile.password, profile.personality, profile.mbti)
+    print("WE ARE IN setup") 
+
+    db_record = db.query(db_models.User).filter_by(username=profile.username, password_hash = profile.password, email = profile.email).one()
+
+        # Update existing record
+    db_record.personality_type = profile.personality
+    db_record.mbti = profile.mbti
+
+    # Create new user
+
+    db.commit()
+
+    return {"success": True, "message": "profile setup compeletly"}
+
+
+
 @app.post("/signup/", response_model=SignupResponse)
 async def SignUp(user: UserCreate, db: Session = Depends(get_db)):
     print(user.username, user.email, user.password)
@@ -120,7 +142,7 @@ async def SignUp(user: UserCreate, db: Session = Depends(get_db)):
     pass_regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d._]{6,}$'
 
     if not re.match(pass_regex, user.password):
-        return {"success": False, "message": "Invalid Password!"}
+        return {"success": False, "message": "Invalid Password!\nValid password Contains:\n- At least 6 charachters\n- At least 1 upper case and 1 lower case alphabet\n- At least 1 number"}
 
     if not re.match(email_regex, user.email):
         return {"success": False, "message": "Invalid Email!"}

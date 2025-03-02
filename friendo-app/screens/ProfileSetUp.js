@@ -18,24 +18,27 @@ import axios from "axios";
 import requestPermissions from "../Components/getCallMessages/getCall";
 import { useNavigation } from "@react-navigation/native";
 import ContactsList from "../Components/getContacts/getContacts";
-import ProfileSetUp from "./ProfileSetUp";
+import { useRoute } from "@react-navigation/native";
 
-const SignUp = () => {
+const ProfileSetUp = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+  const { username, password, email } = route.params;
 
-  const [username, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [personality, setPersonality] = useState("");
+  const [mbti, setMbti] = useState("");
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const handleSubmit = async () => {
-    if (username && email && password) {
+    if (personality && mbti) {
       try {
         const response = await axios.post(
-          "http://10.0.2.2:8000/signup/",
+          "http://10.0.2.2:8000/profileSetup/",
           {
             username,
-            email,
             password,
+            email,
+            personality,
+            mbti,
           },
           {
             headers: { "Content-Type": "application/json" }, // Ensure JSON format
@@ -45,7 +48,7 @@ const SignUp = () => {
         // Check the backend response and handle accordingly
         if (response.data.success) {
           alert("Success", response.data.message);
-          navigation.navigate("ProfileSetUp", {username, password, email});
+          navigation.navigate("ContactsList");
         } else {
           alert(response.data.message);
         }
@@ -98,25 +101,11 @@ const SignUp = () => {
               </Text>
 
               <UserInput
-                name="Name"
-                value={username}
-                setValue={setName}
-                autoCapitalize="words"
+                name="Personality (Introvert/Extrovert)"
+                value={personality}
+                setValue={setPersonality}
               />
-              <UserInput
-                name="Email"
-                value={email}
-                setValue={setEmail}
-                autoCompleteType="email"
-                keyboardType="email-address"
-              />
-              <UserInput
-                name="Password"
-                value={password}
-                setValue={setPassword}
-                secureTextEntry={true}
-                keyboardType="password"
-              />
+              <UserInput name="MBTI type" value={mbti} setValue={setMbti} />
               <SubmitBtn onPress={handleSubmit}></SubmitBtn>
             </View>
           </TouchableWithoutFeedback>
@@ -139,4 +128,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUp;
+export default ProfileSetUp;
