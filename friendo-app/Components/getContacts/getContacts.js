@@ -1,42 +1,87 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Button, FlatList, TouchableOpacity, Alert } from 'react-native';
-import * as Contacts from 'expo-contacts';
+import React, { useEffect, useState } from "react";
+import { View, Text, FlatList, TouchableOpacity, Alert } from "react-native";
+import * as Contacts from "expo-contacts";
+import axios from "axios";
+import { useRoute } from "@react-navigation/native";
+
 
 const ContactsList = () => {
   const [contacts, setContacts] = useState([]);
-  const [selectedContacts, setSelectedContacts] = useState([]);
-
-  const loadContacts = async () => {
-    const { status } = await Contacts.requestPermissionsAsync();
-    if (status === 'granted') {
-      const { data } = await Contacts.getContactsAsync();
-
-      if (data.length > 0) {
-        setContacts(data);
-      }
-    } else {
-      alert('Permission to access contacts was denied');
-    }
-  };
+  const [selectedContacts, setSelectedContacts] = useState({});
+  const route = useRoute();
+  const { username, password, email } = route.params;
 
   useEffect(() => {
+    const loadContacts = async () => {
+      const { status } = await Contacts.requestPermissionsAsync();
+      if (status === "granted") {
+        const { data } = await Contacts.getContactsAsync();
+        if (data.length > 0) setContacts(data);
+      } else {
+        alert("Permission to access contacts was denied");
+      }
+    };
+
     loadContacts();
   }, []);
 
-  const toggleSelection = (contact) => {
-    if (selectedContacts.some((c) => c.id === contact.id)) {
-      setSelectedContacts(selectedContacts.filter((c) => c.id !== contact.id));
-    } else {
-      setSelectedContacts([...selectedContacts, contact]);
+  const handleSelectContact = (contact) => {
+    // If already selected, deselect it
+    if (selectedContacts[contact.name]) {
+      const updatedContacts = { ...selectedContacts };
+      delete updatedContacts[contact.name];
+      setSelectedContacts(updatedContacts);
+      return;
     }
-  };
 
-  const confirmSelection = () => {
+    // Otherwise, show gender selection
     Alert.alert(
-      "Selected Contacts",
-      selectedContacts.map((c) => c.name).join(", ") || "No contacts selected"
+      `Select Gender for ${contact.name}`,
+      "Choose gender:",
+      [
+        { text: "Cancel", style: "cancel" },
+        { text: "Male", onPress: () => saveContact(contact.name, "Male") },
+        { text: "Female", onPress: () => saveContact(contact.name, "Female") },
+      ],
+      { cancelable: true }
     );
   };
+
+  const saveContact = (name, gender) => {
+    setSelectedContacts((prev) => ({
+      ...prev,
+      [name]: gender,
+    }));
+  };
+
+  const confirmSelection = async () => {
+    const selectedList = Object.entries(selectedContacts).map(([name, gender]) => ({
+      name,
+      gender
+    }));
+    if (selectedList.length === 0) {
+      Alert.alert(
+        "No Contacts Selected",
+        "Please select at least one contact."
+      );
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://10.0.2.2:8000/upload_contacts/",
+        {username, password, email, contacts: selectedList}, // Data payload (body)
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      Alert.alert("Response from Server", response.data.message);
+    } catch (error) {
+      console.error("Error sending data:", error.response?.data || error.message);
+      Alert.alert("Error", error.response?.data?.message || "Could not send data to the server.");
+    };
+  }
 
   return (
     <View style={{ flex: 1, padding: 20 }}>
@@ -45,18 +90,19 @@ const ContactsList = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => toggleSelection(item)}
+            onPress={() => handleSelectContact(item)}
             style={{
               padding: 15,
               marginVertical: 5,
-              backgroundColor: selectedContacts.some((c) => c.id === item.id)
-                ? "#4CAF50"
-                : "#ddd",
+              backgroundColor: selectedContacts[item.name] ? "#4CAF50" : "#ddd",
               borderRadius: 5,
             }}
           >
             <Text style={{ fontSize: 16, textAlign: "center" }}>
-              {item.name}
+              {item.name}{" "}
+              {selectedContacts[item.name]
+                ? `(${selectedContacts[item.name]})`
+                : ""}
             </Text>
           </TouchableOpacity>
         )}
@@ -80,8 +126,3 @@ const ContactsList = () => {
 };
 
 export default ContactsList;
-
-
-
-
-
