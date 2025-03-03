@@ -50,7 +50,7 @@ const ProfileSetUp = () => {
     if (personality && mbti) {
       try {
         const response = await axios.post(
-          "http://10.0.2.2:8000/profileSetup/",
+          "http://172.17.85.9:8000/profileSetup/",
           {
             username,
             password,

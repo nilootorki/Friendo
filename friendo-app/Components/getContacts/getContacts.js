@@ -69,7 +69,7 @@ const ContactsList = () => {
 
     try {
       const response = await axios.post(
-        "http://10.0.2.2:8000/upload_contacts/",
+        "http://172.17.85.9:8000/upload_contacts/",
         {username, password, email, contacts: selectedList}, // Data payload (body)
         {
           headers: { "Content-Type": "application/json" },
