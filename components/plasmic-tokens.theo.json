@@ -391,6 +391,16 @@
       }
     },
     {
+      "name": "Size-16",
+      "type": "spacing",
+      "value": "1rem",
+      "category": "spacing",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "oFcNlmYfHib9"
+      }
+    },
+    {
       "name": "Size-2",
       "type": "spacing",
       "value": "0.125rem",
@@ -2031,6 +2041,46 @@
       }
     },
     {
+      "name": "Unnamed Style Token 56",
+      "type": "color",
+      "value": "#4C71AA",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "X5zkzXgNRnck"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 57",
+      "type": "color",
+      "value": "#6482AF",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "CMLaO7TnSHep"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 58",
+      "type": "color",
+      "value": "#6482AF",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "KMy8i6PX-6tb"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 59",
+      "type": "color",
+      "value": "#6482AF",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "yilKcLoUQ8_C"
+      }
+    },
+    {
       "name": "Unnamed Style Token 6",
       "type": "color",
       "value": "#F0F9FF",
@@ -2038,6 +2088,16 @@
       "meta": {
         "projectId": "d1S8dWKKr4PVKg3azHqMAd",
         "id": "OcIcO_3QRehF"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 60",
+      "type": "color",
+      "value": "#244B87",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "GHMphcJ0c9oQ"
       }
     },
     {

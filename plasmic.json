@@ -890,18 +890,111 @@
           "componentType": "component"
         },
         {
-          "id": "J8RatPaeNNWJ",
-          "name": "SeeFriends",
+          "id": "iWEXpMMIuiJP",
+          "name": "FriendsDetails",
           "type": "managed",
           "projectId": "d1S8dWKKr4PVKg3azHqMAd",
-          "renderModuleFilePath": "plasmic/friendo/PlasmicSeeFriends.jsx",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicFriendsDetails.jsx",
           "importSpec": {
-            "modulePath": "../pages/see-friends.jsx"
+            "modulePath": "../pages/friends-details.jsx"
           },
-          "cssFilePath": "plasmic/friendo/PlasmicSeeFriends.module.css",
+          "cssFilePath": "plasmic/friendo/PlasmicFriendsDetails.module.css",
           "scheme": "blackbox",
           "componentType": "page",
-          "path": "/see-friends"
+          "path": "/friends-details"
+        },
+        {
+          "id": "pFyODzmUsTrr",
+          "name": "FriendsPage",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicFriendsPage.jsx",
+          "importSpec": {
+            "modulePath": "../pages/friends-page.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicFriendsPage.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/friends-page"
+        },
+        {
+          "id": "zcnybJ5YUZhH",
+          "name": "MenuItem",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicMenuItem.jsx",
+          "importSpec": {
+            "modulePath": "MenuItem.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicMenuItem.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "AfjdpiB-P5Vp",
+          "name": "MenuSection",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicMenuSection.jsx",
+          "importSpec": {
+            "modulePath": "MenuSection.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicMenuSection.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "dvwTw_dfn0T0",
+          "name": "MenuPopover",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicMenuPopover.jsx",
+          "importSpec": {
+            "modulePath": "MenuPopover.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicMenuPopover.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "X52kQRY_iq9Z",
+          "name": "Combobox",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicCombobox.jsx",
+          "importSpec": {
+            "modulePath": "Combobox.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicCombobox.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "P5kxFOwE0QuU",
+          "name": "TelegramMessages",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicTelegramMessages.jsx",
+          "importSpec": {
+            "modulePath": "../pages/telegram-messages.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicTelegramMessages.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/telegram-messages"
+        },
+        {
+          "id": "AwKY7Z3tgwrS",
+          "name": "TextMessage",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicTextMessage.jsx",
+          "importSpec": {
+            "modulePath": "TextMessage.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicTextMessage.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
@@ -1011,6 +1104,11 @@
           "id": "bertbCK5Fjuk",
           "name": "icons8-edit-24.png",
           "filePath": "../public/plasmic/friendo/images/icons8Edit24Png.png"
+        },
+        {
+          "id": "ypgnkBWwrx6V",
+          "name": "icons8-profile-picture-96.png",
+          "filePath": "../public/plasmic/friendo/images/icons8ProfilePicture96Png.png"
         }
       ],
       "indirect": false,
@@ -1031,6 +1129,64 @@
         }
       ],
       "customFunctions": []
+    },
+    {
+      "projectId": "caTPwKxj5ZrD9LQ7DMdK4Z",
+      "projectApiToken": "vXGGQpdi9fhcncabBdg8DcMRUbkz0iRW6HS1jzQufQR6QH0MasPwr9SX7ap4SsK3xXwwXmzZtglWGe0Rm2nw",
+      "projectName": "plasmic-basic-components",
+      "version": ">0.0.0",
+      "cssFilePath": "plasmic/plasmic_basic_components/plasmic.module.css",
+      "components": [],
+      "icons": [],
+      "images": [],
+      "indirect": true,
+      "globalContextsFilePath": "",
+      "splitsProviderFilePath": "",
+      "codeComponents": [
+        {
+          "id": "CMDBvOhaI4s",
+          "name": "Iframe",
+          "displayName": "hostless-iframe",
+          "componentImportPath": "@plasmicpkgs/plasmic-basic-components"
+        },
+        {
+          "id": "RhitNJW5Zu-",
+          "name": "Video",
+          "displayName": "hostless-html-video",
+          "componentImportPath": "@plasmicpkgs/plasmic-basic-components"
+        },
+        {
+          "id": "PKldDYkH42",
+          "name": "Embed",
+          "displayName": "hostless-embed",
+          "componentImportPath": "@plasmicpkgs/plasmic-basic-components"
+        },
+        {
+          "id": "D4RbnlpRXg3",
+          "name": "DataProvider",
+          "displayName": "hostless-data-provider",
+          "componentImportPath": "@plasmicpkgs/plasmic-basic-components"
+        },
+        {
+          "id": "zlBHsvkFlN",
+          "name": "ConditionGuard",
+          "displayName": "hostless-condition-guard",
+          "componentImportPath": "@plasmicpkgs/plasmic-basic-components"
+        },
+        {
+          "id": "K-mWGqrHefEp",
+          "name": "SideEffect",
+          "displayName": "hostless-side-effect",
+          "componentImportPath": "@plasmicpkgs/plasmic-basic-components"
+        },
+        {
+          "id": "SpkzmXJqg27p",
+          "name": "Timer",
+          "displayName": "hostless-timer",
+          "componentImportPath": "@plasmicpkgs/plasmic-basic-components"
+        }
+      ],
+      "customFunctions": []
     }
   ],
   "globalVariants": {
@@ -1040,6 +1196,18 @@
         "name": "Screen",
         "projectId": "d1S8dWKKr4PVKg3azHqMAd",
         "contextFilePath": "plasmic/friendo/PlasmicGlobalVariant__Screen.jsx"
+      },
+      {
+        "id": "lmEUP9r96TgA",
+        "name": "UnnamedGlobalGroupOfVariants",
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "contextFilePath": "plasmic/friendo/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants.jsx"
+      },
+      {
+        "id": "d-7KXKQLcMSd",
+        "name": "UnnamedGlobalGroupOfVariants2",
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "contextFilePath": "plasmic/friendo/PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants2.jsx"
       }
     ]
   },

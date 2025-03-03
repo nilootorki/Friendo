@@ -8,7 +8,7 @@
   justify-items: center;
   justify-content: flex-start;
   align-items: center;
-  background: var(--token-AAsquHkB31dJ);
+  background: none;
   padding-bottom: 148px;
   min-width: 0;
   min-height: 0;
@@ -28,6 +28,12 @@
     grid-column: 4;
   }
 }
+.navBar:global(.__wab_instance) {
+  max-width: 100%;
+  width: 100%;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
+}
 .freeBox___1UhyR {
   display: flex;
   flex-direction: column;
@@ -40,36 +46,10 @@
   top: auto;
   left: auto;
   z-index: 1;
+  margin-top: 0px;
   grid-column-start: 3 !important;
   grid-column-end: -3 !important;
   padding: 0px;
-}
-.freeBox___3MZl {
-  display: flex;
-  width: 100%;
-  height: 71px;
-  max-width: 100%;
-  background: linear-gradient(0deg, var(--token-KzoV1vxcEP4w) 0%, #56b9ff 100%)
-      0% 0% / 100% 100% repeat,
-    var(--token-KzoV1vxcEP4w);
-  flex-grow: 0;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0px 4px 16px 0px #54515133;
-  left: 0px;
-  top: 0px;
-  z-index: 1;
-  position: fixed;
-  min-width: 0;
-  flex-shrink: 0;
-  padding: 0px 20px;
-}
-.navBar:global(.__wab_instance) {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  z-index: 1;
 }
 .freeBox___70QMx {
   display: flex;
@@ -80,7 +60,7 @@
   width: 1500px;
   height: auto;
   max-width: 100%;
-  margin-top: 100px;
+  margin-top: 45px;
   margin-left: 0px;
   padding: 8px;
 }
@@ -147,7 +127,7 @@
 }
 .freeBox__gDxqJ {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   position: relative;
   align-items: stretch;
   justify-content: space-around;
@@ -164,10 +144,21 @@
     margin-top: 2px;
   }
 }
+.freeBox__itbO {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  margin-bottom: 31px;
+  min-width: 0;
+  padding: 8px;
+}
 .checkbox:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
-  width: 50px;
-  flex-shrink: 0;
 }
 .freeBox__gSkfn {
   display: flex;

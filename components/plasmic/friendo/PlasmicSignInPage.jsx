@@ -23,6 +23,7 @@ import {
   useDollarState
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
+import { usePlasmicDataOp } from "@plasmicapp/react-web/lib/data-sources";
 import TextField from "../../TextField"; // plasmic-import: XtPi33MMKJk2/component
 import Button from "../../Button"; // plasmic-import: R-SJru1lXq4W/component
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -65,22 +66,35 @@ function PlasmicSignInPage__RenderFunc(props) {
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
+  let [$queries, setDollarQueries] = React.useState({});
   const stateSpecs = React.useMemo(
     () => [
       {
-        path: "textField.value",
+        path: "username.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "textField2.value",
+        path: "password.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
         path: "showpass",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "wrongUsername",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "wrongPassword",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
@@ -92,9 +106,25 @@ function PlasmicSignInPage__RenderFunc(props) {
   const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
-    $queries: {},
+    $queries: $queries,
     $refs
   });
+  const new$Queries = {
+    usersTable: usePlasmicDataOp(() => {
+      return {
+        sourceId: "jPx9VXTMGhi2nPHAixuLPM",
+        opId: "d3669a13-068f-4053-b073-74632e9142a7",
+        userArgs: {},
+        cacheKey: `plasmic.$.d3669a13-068f-4053-b073-74632e9142a7.$.`,
+        invalidatedKeys: null,
+        roleId: null
+      };
+    })
+  };
+  if (Object.keys(new$Queries).some(k => new$Queries[k] !== $queries[k])) {
+    setDollarQueries(new$Queries);
+    $queries = new$Queries;
+  }
   return (
     <React.Fragment>
       <Head></Head>
@@ -144,11 +174,11 @@ function PlasmicSignInPage__RenderFunc(props) {
               {"Sign In"}
             </div>
             <TextField
-              data-plasmic-name={"textField"}
-              data-plasmic-override={overrides.textField}
-              className={classNames("__wab_instance", sty.textField)}
+              data-plasmic-name={"username"}
+              data-plasmic-override={overrides.username}
+              className={classNames("__wab_instance", sty.username)}
               onChange={async (...eventArgs) => {
-                generateStateOnChangeProp($state, ["textField", "value"]).apply(
+                generateStateOnChangeProp($state, ["username", "value"]).apply(
                   null,
                   eventArgs
                 );
@@ -165,14 +195,37 @@ function PlasmicSignInPage__RenderFunc(props) {
               showLabel={true}
             />
 
+            {(() => {
+              try {
+                return $state.wrongUsername;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return true;
+                }
+                throw e;
+              }
+            })() ? (
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__gvtVk
+                )}
+              >
+                {"wrong username"}
+              </div>
+            ) : null}
             <div className={classNames(projectcss.all, sty.freeBox__s23Y)}>
               <TextField
-                data-plasmic-name={"textField2"}
-                data-plasmic-override={overrides.textField2}
-                className={classNames("__wab_instance", sty.textField2)}
+                data-plasmic-name={"password"}
+                data-plasmic-override={overrides.password}
+                className={classNames("__wab_instance", sty.password)}
                 onChange={async (...eventArgs) => {
                   generateStateOnChangeProp($state, [
-                    "textField2",
+                    "password",
                     "value"
                   ]).apply(null, eventArgs);
                   if (
@@ -253,6 +306,29 @@ function PlasmicSignInPage__RenderFunc(props) {
                 }}
               />
             </div>
+            {(() => {
+              try {
+                return $state.wrongPassword;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return true;
+                }
+                throw e;
+              }
+            })() ? (
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__uXwVd
+                )}
+              >
+                {"wrong password"}
+              </div>
+            ) : null}
             <Button
               data-plasmic-name={"button"}
               data-plasmic-override={overrides.button}
@@ -312,10 +388,10 @@ function PlasmicSignInPage__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "h1", "textField", "textField2", "img", "button"],
+  root: ["root", "h1", "username", "password", "img", "button"],
   h1: ["h1"],
-  textField: ["textField"],
-  textField2: ["textField2"],
+  username: ["username"],
+  password: ["password"],
   img: ["img"],
   button: ["button"]
 };
@@ -353,8 +429,8 @@ export const PlasmicSignInPage = Object.assign(
   {
     // Helper components rendering sub-elements
     h1: makeNodeComponent("h1"),
-    textField: makeNodeComponent("textField"),
-    textField2: makeNodeComponent("textField2"),
+    username: makeNodeComponent("username"),
+    password: makeNodeComponent("password"),
     img: makeNodeComponent("img"),
     button: makeNodeComponent("button"),
     // Metadata about props expected for PlasmicSignInPage

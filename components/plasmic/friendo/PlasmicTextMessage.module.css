@@ -1,0 +1,12 @@
+.root {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  text-align: right;
+  position: relative;
+  min-width: 0;
+}
+.root:active {
+  background: linear-gradient(0deg, #ce9fff 0%, #56b9ff 100%) 0% 0% / 100% 100%
+    repeat;
+}

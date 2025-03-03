@@ -23,8 +23,10 @@ import {
   useDollarState
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
+import { usePlasmicDataOp } from "@plasmicapp/react-web/lib/data-sources";
 import NavBar from "../../NavBar"; // plasmic-import: KnagBLotfm8n/component
 import TextInput from "../../TextInput"; // plasmic-import: B7pg-YS7wyr5/component
+import Combobox from "../../Combobox"; // plasmic-import: X52kQRY_iq9Z/component
 import "@plasmicapp/react-web/lib/plasmic.css";
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: d1S8dWKKr4PVKg3azHqMAd/projectcss
@@ -65,6 +67,7 @@ function PlasmicProfileEdit__RenderFunc(props) {
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
+  let [$queries, setDollarQueries] = React.useState({});
   const stateSpecs = React.useMemo(
     () => [
       {
@@ -126,6 +129,12 @@ function PlasmicProfileEdit__RenderFunc(props) {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => true
+      },
+      {
+        path: "combobox.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       }
     ],
 
@@ -134,9 +143,25 @@ function PlasmicProfileEdit__RenderFunc(props) {
   const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
-    $queries: {},
+    $queries: $queries,
     $refs
   });
+  const new$Queries = {
+    componentData: usePlasmicDataOp(() => {
+      return {
+        sourceId: "jPx9VXTMGhi2nPHAixuLPM",
+        opId: "d3669a13-068f-4053-b073-74632e9142a7",
+        userArgs: {},
+        cacheKey: `plasmic.$.d3669a13-068f-4053-b073-74632e9142a7.$.`,
+        invalidatedKeys: null,
+        roleId: null
+      };
+    })
+  };
+  if (Object.keys(new$Queries).some(k => new$Queries[k] !== $queries[k])) {
+    setDollarQueries(new$Queries);
+    $queries = new$Queries;
+  }
   return (
     <React.Fragment>
       <Head></Head>
@@ -238,6 +263,43 @@ function PlasmicProfileEdit__RenderFunc(props) {
           />
 
           <div className={classNames(projectcss.all, sty.freeBox__zq8Sl)}>
+            <div className={classNames(projectcss.all, sty.freeBox___1RiE)}>
+              <PlasmicImg__
+                alt={""}
+                className={classNames(sty.img__uL5Ib)}
+                displayHeight={"auto"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"100%"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"auto"}
+                loading={"lazy"}
+                src={{
+                  src: "/plasmic/friendo/images/icons8ProfilePicture96Png.png",
+                  fullWidth: 96,
+                  fullHeight: 96,
+                  aspectRatio: undefined
+                }}
+              />
+
+              <PlasmicImg__
+                alt={""}
+                className={classNames(sty.img__nlVUq)}
+                displayHeight={"20px"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"100%"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"20px"}
+                loading={"lazy"}
+                src={{
+                  src: "/plasmic/friendo/images/icons8Edit24Png.png",
+                  fullWidth: 24,
+                  fullHeight: 24,
+                  aspectRatio: undefined
+                }}
+              />
+            </div>
             <div className={classNames(projectcss.all, sty.freeBox__sNsix)}>
               <div
                 className={classNames(
@@ -350,7 +412,21 @@ function PlasmicProfileEdit__RenderFunc(props) {
                       sty.text__zGyMc
                     )}
                   >
-                    {"Mahshid"}
+                    <React.Fragment>
+                      {(() => {
+                        try {
+                          return $queries.componentData.data[0].username;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return "Mahshid";
+                          }
+                          throw e;
+                        }
+                      })()}
+                    </React.Fragment>
                   </div>
                   <PlasmicImg__
                     alt={""}
@@ -521,7 +597,21 @@ function PlasmicProfileEdit__RenderFunc(props) {
                       sty.text__aU4
                     )}
                   >
-                    {"123456"}
+                    <React.Fragment>
+                      {(() => {
+                        try {
+                          return $queries.componentData.data[0].password_hash;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return "123456";
+                          }
+                          throw e;
+                        }
+                      })()}
+                    </React.Fragment>
                   </div>
                   <PlasmicImg__
                     alt={""}
@@ -691,7 +781,21 @@ function PlasmicProfileEdit__RenderFunc(props) {
                       sty.text__vwQdj
                     )}
                   >
-                    {"mahshidsafaee06@gmail.com"}
+                    <React.Fragment>
+                      {(() => {
+                        try {
+                          return $queries.componentData.data[0].email;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return "mahshidsafaee06@gmail.com";
+                          }
+                          throw e;
+                        }
+                      })()}
+                    </React.Fragment>
                   </div>
                   <PlasmicImg__
                     alt={""}
@@ -750,6 +854,65 @@ function PlasmicProfileEdit__RenderFunc(props) {
                 </div>
               ) : null}
             </div>
+            <div className={classNames(projectcss.all, sty.freeBox__qjD6G)}>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__hoa7K
+                )}
+              >
+                {"Personality type:"}
+              </div>
+              <div className={classNames(projectcss.all, sty.freeBox__p6HzV)}>
+                <Combobox
+                  data-plasmic-name={"combobox"}
+                  data-plasmic-override={overrides.combobox}
+                  className={classNames("__wab_instance", sty.combobox)}
+                  onChange={async (...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "combobox",
+                      "value"
+                    ]).apply(null, eventArgs);
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
+                  }}
+                />
+              </div>
+              <div className={classNames(projectcss.all, sty.freeBox__uu8Oy)}>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__s0Lb
+                  )}
+                >
+                  {"Extrovert"}
+                </div>
+                <PlasmicImg__
+                  alt={""}
+                  className={classNames(sty.img__yfOpC)}
+                  displayHeight={"20px"}
+                  displayMaxHeight={"none"}
+                  displayMaxWidth={"100%"}
+                  displayMinHeight={"0"}
+                  displayMinWidth={"0"}
+                  displayWidth={"20px"}
+                  loading={"lazy"}
+                  src={{
+                    src: "/plasmic/friendo/images/icons8Edit24Png.png",
+                    fullWidth: 24,
+                    fullHeight: 24,
+                    aspectRatio: undefined
+                  }}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -758,11 +921,12 @@ function PlasmicProfileEdit__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "navBar", "textInput", "textInput2", "textInput3"],
+  root: ["root", "navBar", "textInput", "textInput2", "textInput3", "combobox"],
   navBar: ["navBar"],
   textInput: ["textInput"],
   textInput2: ["textInput2"],
-  textInput3: ["textInput3"]
+  textInput3: ["textInput3"],
+  combobox: ["combobox"]
 };
 
 function makeNodeComponent(nodeName) {
@@ -801,6 +965,7 @@ export const PlasmicProfileEdit = Object.assign(
     textInput: makeNodeComponent("textInput"),
     textInput2: makeNodeComponent("textInput2"),
     textInput3: makeNodeComponent("textInput3"),
+    combobox: makeNodeComponent("combobox"),
     // Metadata about props expected for PlasmicProfileEdit
     internalVariantProps: PlasmicProfileEdit__VariantProps,
     internalArgProps: PlasmicProfileEdit__ArgProps,

@@ -22,6 +22,7 @@ import {
   useDollarState
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
+import { usePlasmicDataOp } from "@plasmicapp/react-web/lib/data-sources";
 import NavBar from "../../NavBar"; // plasmic-import: KnagBLotfm8n/component
 import Button from "../../Button"; // plasmic-import: R-SJru1lXq4W/component
 import Checkbox from "../../Checkbox"; // plasmic-import: qcH6HD0MTML6/component
@@ -66,18 +67,13 @@ function PlasmicHome__RenderFunc(props) {
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
+  let [$queries, setDollarQueries] = React.useState({});
   const stateSpecs = React.useMemo(
     () => [
       {
-        path: "checkbox.isSelected",
-        type: "private",
-        variableType: "boolean",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
         path: "navBar.proTooltip",
         type: "private",
-        variableType: "text",
+        variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
       },
       {
@@ -97,6 +93,11 @@ function PlasmicHome__RenderFunc(props) {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "checkbox[].isSelected",
+        type: "private",
+        variableType: "boolean"
       }
     ],
 
@@ -105,9 +106,25 @@ function PlasmicHome__RenderFunc(props) {
   const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
-    $queries: {},
+    $queries: $queries,
     $refs
   });
+  const new$Queries = {
+    componentData: usePlasmicDataOp(() => {
+      return {
+        sourceId: "jPx9VXTMGhi2nPHAixuLPM",
+        opId: "2e947b72-8f4f-43f4-b032-c2f857fa9421",
+        userArgs: {},
+        cacheKey: `plasmic.$.2e947b72-8f4f-43f4-b032-c2f857fa9421.$.`,
+        invalidatedKeys: null,
+        roleId: null
+      };
+    })
+  };
+  if (Object.keys(new$Queries).some(k => new$Queries[k] !== $queries[k])) {
+    setDollarQueries(new$Queries);
+    $queries = new$Queries;
+  }
   const globalVariants = ensureGlobalVariants({
     screen: useScreenVariantss47GOinckgZx()
   });
@@ -137,82 +154,81 @@ function PlasmicHome__RenderFunc(props) {
             sty.root
           )}
         >
+          <NavBar
+            data-plasmic-name={"navBar"}
+            data-plasmic-override={overrides.navBar}
+            caltooltip={generateStateValueProp($state, [
+              "navBar",
+              "caltooltip"
+            ])}
+            className={classNames("__wab_instance", sty.navBar)}
+            messTooltip={generateStateValueProp($state, [
+              "navBar",
+              "messTooltip"
+            ])}
+            onCaltooltipChange={async (...eventArgs) => {
+              generateStateOnChangeProp($state, ["navBar", "caltooltip"]).apply(
+                null,
+                eventArgs
+              );
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
+            }}
+            onMessTooltipChange={async (...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "navBar",
+                "messTooltip"
+              ]).apply(null, eventArgs);
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
+            }}
+            onProTooltipChange={async (...eventArgs) => {
+              generateStateOnChangeProp($state, ["navBar", "proTooltip"]).apply(
+                null,
+                eventArgs
+              );
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
+            }}
+            onStatTooltipChange={async (...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "navBar",
+                "statTooltip"
+              ]).apply(null, eventArgs);
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
+            }}
+            proTooltip={generateStateValueProp($state, [
+              "navBar",
+              "proTooltip"
+            ])}
+            statTooltip={generateStateValueProp($state, [
+              "navBar",
+              "statTooltip"
+            ])}
+          />
+
           <div className={classNames(projectcss.all, sty.freeBox___1UhyR)}>
-            <div className={classNames(projectcss.all, sty.freeBox___3MZl)}>
-              <NavBar
-                data-plasmic-name={"navBar"}
-                data-plasmic-override={overrides.navBar}
-                caltooltip={generateStateValueProp($state, [
-                  "navBar",
-                  "caltooltip"
-                ])}
-                className={classNames("__wab_instance", sty.navBar)}
-                messTooltip={generateStateValueProp($state, [
-                  "navBar",
-                  "messTooltip"
-                ])}
-                onCaltooltipChange={async (...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "navBar",
-                    "caltooltip"
-                  ]).apply(null, eventArgs);
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onMessTooltipChange={async (...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "navBar",
-                    "messTooltip"
-                  ]).apply(null, eventArgs);
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onProTooltipChange={async (...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "navBar",
-                    "proTooltip"
-                  ]).apply(null, eventArgs);
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                onStatTooltipChange={async (...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "navBar",
-                    "statTooltip"
-                  ]).apply(null, eventArgs);
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                proTooltip={generateStateValueProp($state, [
-                  "navBar",
-                  "proTooltip"
-                ])}
-                statTooltip={generateStateValueProp($state, [
-                  "navBar",
-                  "statTooltip"
-                ])}
-              />
-            </div>
             <div className={classNames(projectcss.all, sty.freeBox___70QMx)}>
               <div
                 className={classNames(
@@ -239,6 +255,33 @@ function PlasmicHome__RenderFunc(props) {
                     {"See All Friends"}
                   </div>
                 }
+                onClick={async event => {
+                  const $steps = {};
+                  $steps["goToFriendsPage"] = true
+                    ? (() => {
+                        const actionArgs = { destination: `/friends-page` };
+                        return (({ destination }) => {
+                          if (
+                            typeof destination === "string" &&
+                            destination.startsWith("#")
+                          ) {
+                            document
+                              .getElementById(destination.substr(1))
+                              .scrollIntoView({ behavior: "smooth" });
+                          } else {
+                            __nextRouter?.push(destination);
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["goToFriendsPage"] != null &&
+                    typeof $steps["goToFriendsPage"] === "object" &&
+                    typeof $steps["goToFriendsPage"].then === "function"
+                  ) {
+                    $steps["goToFriendsPage"] = await $steps["goToFriendsPage"];
+                  }
+                }}
               />
 
               <div
@@ -253,67 +296,140 @@ function PlasmicHome__RenderFunc(props) {
             </div>
             <div className={classNames(projectcss.all, sty.freeBox__bLmrx)}>
               <div className={classNames(projectcss.all, sty.freeBox__gDxqJ)}>
-                <Checkbox
-                  data-plasmic-name={"checkbox"}
-                  data-plasmic-override={overrides.checkbox}
-                  className={classNames("__wab_instance", sty.checkbox)}
-                  label={null}
-                  onChange={async (...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "checkbox",
-                      "isSelected"
-                    ]).apply(null, eventArgs);
-                    if (
-                      eventArgs.length > 1 &&
-                      eventArgs[1] &&
-                      eventArgs[1]._plasmic_state_init_
-                    ) {
-                      return;
+                {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+                  (() => {
+                    try {
+                      return $queries.componentData.data;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return [];
+                      }
+                      throw e;
                     }
-                  }}
-                />
-
-                <div className={classNames(projectcss.all, sty.freeBox__gSkfn)}>
-                  <div
-                    className={classNames(projectcss.all, sty.freeBox__ny76X)}
-                  />
-
-                  <div
-                    className={classNames(projectcss.all, sty.freeBox___89Th2)}
-                  >
+                  })()
+                ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                  const currentItem = __plasmic_item_0;
+                  const currentIndex = __plasmic_idx_0;
+                  return (
                     <div
-                      className={classNames(projectcss.all, sty.freeBox__ekCDn)}
+                      className={classNames(projectcss.all, sty.freeBox__itbO)}
+                      key={currentIndex}
                     >
-                      {renderPlasmicSlot({
-                        defaultContents: (
-                          <React.Fragment>
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text__fYyVh
-                              )}
-                            >
-                              {"You should call sara, its been a long time!"}
-                            </div>
-                            <div
-                              className={classNames(
-                                projectcss.all,
-                                projectcss.__wab_text,
-                                sty.text___1IXC
-                              )}
-                            >
-                              {"2 hours ago"}
-                            </div>
-                          </React.Fragment>
-                        ),
+                      <Checkbox
+                        data-plasmic-name={"checkbox"}
+                        data-plasmic-override={overrides.checkbox}
+                        className={classNames("__wab_instance", sty.checkbox)}
+                        label={null}
+                        onChange={async (...eventArgs) => {
+                          generateStateOnChangeProp($state, [
+                            "checkbox",
+                            __plasmic_idx_0,
+                            "isSelected"
+                          ]).apply(null, eventArgs);
+                          if (
+                            eventArgs.length > 1 &&
+                            eventArgs[1] &&
+                            eventArgs[1]._plasmic_state_init_
+                          ) {
+                            return;
+                          }
+                        }}
+                      />
 
-                        value: args.children,
-                        className: classNames(sty.slotTargetChildren)
-                      })}
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          sty.freeBox__gSkfn
+                        )}
+                      >
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            sty.freeBox__ny76X
+                          )}
+                        />
+
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            sty.freeBox___89Th2
+                          )}
+                        >
+                          <div
+                            className={classNames(
+                              projectcss.all,
+                              sty.freeBox__ekCDn
+                            )}
+                          >
+                            {renderPlasmicSlot({
+                              defaultContents: (
+                                <React.Fragment>
+                                  <div
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.text__fYyVh
+                                    )}
+                                  >
+                                    <React.Fragment>
+                                      {(() => {
+                                        try {
+                                          return currentItem.suggestion;
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return "You should call sara, its been a long time!";
+                                          }
+                                          throw e;
+                                        }
+                                      })()}
+                                    </React.Fragment>
+                                  </div>
+                                  <div
+                                    className={classNames(
+                                      projectcss.all,
+                                      projectcss.__wab_text,
+                                      sty.text___1IXC
+                                    )}
+                                  >
+                                    <React.Fragment>
+                                      {(() => {
+                                        try {
+                                          return currentItem.timestamp.slice(
+                                            0,
+                                            10
+                                          );
+                                        } catch (e) {
+                                          if (
+                                            e instanceof TypeError ||
+                                            e?.plasmicType ===
+                                              "PlasmicUndefinedDataError"
+                                          ) {
+                                            return "2 hours ago";
+                                          }
+                                          throw e;
+                                        }
+                                      })()}
+                                    </React.Fragment>
+                                  </div>
+                                </React.Fragment>
+                              ),
+
+                              value: args.children,
+                              className: classNames(sty.slotTargetChildren)
+                            })}
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
               <div
                 className={classNames(

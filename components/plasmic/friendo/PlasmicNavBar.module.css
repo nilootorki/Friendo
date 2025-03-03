@@ -1,11 +1,10 @@
 .root {
   display: flex;
   width: 100%;
-  height: 71px;
+  height: 55px;
   max-width: 100%;
   background: linear-gradient(0deg, var(--token-om7sISMiJYUB) 0%, #655dbb 100%)
-      0% 0% / 100% 100% repeat,
-    var(--token-KzoV1vxcEP4w);
+    0% 0% / 100% 100% repeat;
   flex-grow: 0;
   flex-direction: row;
   justify-content: space-between;
@@ -24,8 +23,15 @@
   font-size: 60px;
   text-align: left;
   font-family: "Allura";
-  padding-left: 33px;
-  padding-top: 11px;
+  padding-left: 12px;
+  padding-top: 8px;
+  margin-left: 5px;
+  padding-right: 12px;
+  cursor: pointer;
+  border-radius: 100px;
+}
+.root .text__bLrN4:hover {
+  background: var(--token-KD8Z2YOfDWw1);
 }
 .freeBox__pzFTs {
   display: flex;
