@@ -216,6 +216,81 @@ async def upload_json(file: UploadFile = File(...)):
     # Redirect to the Analysis Page
     return RedirectResponse(url=f"/analyze-json/?filename={file.filename}", status_code=303)
 
+@app.post("/upload-calls/")
+async def upload_calls(username: str, file: UploadFile = File(...)):
+    # Ensure the file is a JSON file
+    if not file.filename.endswith(".json"):
+        return {"error": "Only JSON files are allowed"}
+
+    file_path = os.path.join(UPLOAD_DIR, file.filename)
+
+    # Save the uploaded JSON file
+    with open(file_path, "wb") as f:
+        f.write(await file.read())
+        print("ADDed SUCCESSFULLY")
+
+    print(file_path)
+
+    # Redirect to the Analysis Page
+    return RedirectResponse(url=f"/analyze-calls/?filename={file.filename}&username={username}", status_code=303)
+
+@app.get("/analyze-calls/")
+def analyze_calls(username: str, filename: str, db: Session=Depends(get_db)):
+    file_path = os.path.join(UPLOAD_DIR, filename)
+
+    # Read JSON File
+    with open(file_path, "r", encoding="utf-8") as f:
+        json_content = json.load(f)
+
+    db_record = db.query(db_models.User).filter_by(username=username).one()
+    contacts = db_record.contacts
+    user_id = db_record.user_id
+
+    for contact in contacts:
+        call_counts = 0
+        total_call_duration = 0
+        dates = []
+        latest_call = datetime(1999,1, 1)
+        contact_name = contact["name"]
+
+        for call in json_content["data"]:
+            if call["name"] == contact_name:
+                call_counts += 1
+                total_call_duration += call["callDuration"]
+                date = call["callDate"] / 1000
+                date = datetime.fromtimestamp(date)
+                date = date.strftime('%Y-%m-%d')
+                if date not in dates:
+                    date.append(date)
+                if date > latest_call:
+                    latest_call = date
+        
+        mean_call_duration = total_call_duration/call_counts
+
+        report = {
+            "total_score": 0,
+            "mean_duration": mean_call_duration,
+            "dates" : dates,
+            "latest_call" : latest_call
+        }
+
+        first_report = pd.DataFrame(report)
+
+        db_record = db_models.UserFriend(
+            user_id = user_id,
+            username = username, 
+            friend_name = contact_name,
+            interaction_type = "Call",
+            #message_count = Column(Integer, default=0) 
+            #call_duration = Column(Integer, default=0)  
+            timestamp = datetime.now().strftime('%Y-%m-%d'),
+            score=first_report
+        )
+        db.add(db_record)
+        db.commit()
+
+    return RedirectResponse(url=f"/suggest/?user_id=1&friend_name={contact_name}", status_code=303)
+
 
 
 
@@ -369,6 +444,7 @@ def analyze_data(json_data):
 @app.get("/suggest/", response_model=List[UserFriendSchema])
 def suggestion(user_id: int, friend_name: str, db: Session=Depends(get_db)):
     record = db.query(db_models.UserFriend).filter(db_models.UserFriend.user_id == user_id).all()
+    username = record.username
 
     # Handle if no record is found
     parsed_records = []
@@ -393,7 +469,8 @@ def suggestion(user_id: int, friend_name: str, db: Session=Depends(get_db)):
 
     print(friend_name)
     
-
+    total_score_call = 0
+    total_call_duration = 0
 
     
     total_score = 0
@@ -410,42 +487,65 @@ def suggestion(user_id: int, friend_name: str, db: Session=Depends(get_db)):
             analyse = pd.DataFrame(record.score)
             print("Latest_chat:", analyse["latest_chat"].iloc[0])
 
-            total_score += analyse["total_score"] * analyse["total_no_of_messages"]
-            total_messages += analyse["total_no_of_messages"]
+            if record.interaction_type == "SMS":
 
-            total_score_you += analyse["your_sentiment_score"] * analyse["total_no_of_your_messages"]
-            total_messages_you += analyse["total_no_of_your_messages"]
+                total_score += analyse["total_score"] * analyse["total_no_of_messages"]
+                total_messages += analyse["total_no_of_messages"]
 
-            total_score_friend += analyse["friend_sentiment_score"] * analyse["total_no_of_friend_messages"]
-            total_messages_friend += analyse["total_no_of_friend_messages"]
+                total_score_you += analyse["your_sentiment_score"] * analyse["total_no_of_your_messages"]
+                total_messages_you += analyse["total_no_of_your_messages"]
 
-            print(analyse)
+                total_score_friend += analyse["friend_sentiment_score"] * analyse["total_no_of_friend_messages"]
+                total_messages_friend += analyse["total_no_of_friend_messages"]
 
-            for dates_list in analyse["dates"]:
-                for date in dates_list:
-                    if date not in dates:
-                        dates.append(date)
+                for dates_list in analyse["dates"]:
+                    for date in dates_list:
+                        if date not in dates:
+                            dates.append(date)
 
-            if datetime.strptime(analyse["latest_chat"].iloc[0], "%Y-%m-%d")> latest_chat:
-                latest_chat = datetime.strptime(analyse["latest_chat"].iloc[0], "%Y-%m-%d")
+                if datetime.strptime(analyse["latest_chat"].iloc[0], "%Y-%m-%d")> latest_chat:
+                    latest_chat = datetime.strptime(analyse["latest_chat"].iloc[0], "%Y-%m-%d")
+
+                dates_df = pd.to_datetime(dates)
+                dates_diff_chats = dates_df.diff().mean().days
+
+                print(analyse)
+
+
+            elif record.interaction_type == "Call":
+                total_score_call += analyse["total_score"] * analyse["mean_duration"]
+                total_call_duration += analyse["mean_duration"]
+
+                for dates_list in analyse["dates"]:
+                    for date in dates_list:
+                        if date not in dates:
+                            dates.append(date)
+
+                if datetime.strptime(analyse["latest_chat"].iloc[0], "%Y-%m-%d")> latest_chat:
+                    latest_call = datetime.strptime(analyse["latest_call"].iloc[0], "%Y-%m-%d")
+
+                dates_df = pd.to_datetime(dates)
+                dates_diff_calls = dates_df.diff().mean().days
+
                 
+    if total_messages != 0:
+        total_score /= total_messages
+        total_score_you /= total_messages_you
+        total_score_friend /= total_messages_friend
 
-            
-    total_score /= total_messages
-    total_score_you /= total_messages_you
-    total_score_friend /= total_messages_friend
+    if total_call_duration != 0:
+        total_score_call /= total_call_duration
 
     print("Dates", dates)
 
-    dates_df = pd.to_datetime(dates)
-    dates_diff = dates_df.diff().mean().days
+    
 
     print(total_score.iloc[0], total_score_you.iloc[0], total_score_friend.iloc[0])
 
     if total_score_you.iloc[0] <= -0.5:
-        suggestion = f"It seems that {friend_name} brings you down. I suggest not communicating with {friend_name}."
+        suggestion = f"It seems that {friend_name} brings you down in your chats. I suggest not communicating with {friend_name}."
 
-    elif (pd.Timestamp.today() - latest_chat).days > dates_diff:
+    elif (pd.Timestamp.today() - latest_chat).days > dates_diff_chats:
        suggestion = f"You should text {friend_name}, it's been a long time."
 
     elif total_score_friend.iloc[0] < 0:
@@ -464,39 +564,34 @@ def suggestion(user_id: int, friend_name: str, db: Session=Depends(get_db)):
         'very positive': 1
     }
 
-    comment = "She is my good roommate :)"
+    comment = db.query(db_models.UserSuggestion).filter_by(user_id=user_id, username = username).one().comment
     comment_analyse = sentiment_mapping[run_model([comment])]
 
-    total_analyse_score = (comment_analyse + float(total_score.iloc[0])) / 2
+    reports = 0
+
+    if comment:
+        reports += 1
+    if total_messages:
+        reports += 1
+    if total_call_duration:
+        reports += 1
+
+    total_analyse_score = (comment_analyse + float(total_score.iloc[0]) + float(total_score_call)) / reports
 
     if suggestion == f"It seems that {friend_name} brings you down. I suggest not communicating with {friend_name}." and total_analyse_score > 0:
         suggestion = f"I know your recent chat has you feeling down, but {friend_name} seems like a good friend. Maybe talking about what's been going on could help!"
 
+    latest_interaction = max(latest_chat, latest_call)
+
     
     
-    try:
-        # Check if the record exists
-        db_record = db.query(db_models.UserSuggestion).filter_by(user_id=user_id, friend_name=friend_name).one()
 
-        # Update existing record
-        db_record.suggestion = suggestion
-        db_record.comment = comment
-        db_record.total_score = total_analyse_score
-        db_record.timestamp = latest_chat  
+    db_record = db.query(db_models.UserSuggestion).filter_by(user_id=user_id, username = username).one()
 
-    except NoResultFound:
-        # Create a new record if none exists
-        db_record = db_models.UserSuggestion(
-            user_id=user_id,
-            username="Nel",
-            friend_name=friend_name,
-            suggestion=suggestion,
-            gender="Female",
-            comment=comment,
-            timestamp=latest_chat,
-            total_score=total_analyse_score
-        )
-        db.add(db_record)
+    db_record.suggestion = suggestion
+    db_record.comment = comment
+    db_record.total_score = total_analyse_score
+    db_record.timestamp = latest_interaction
     
     db.commit()
 
