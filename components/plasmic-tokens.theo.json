@@ -503,7 +503,7 @@
     {
       "name": "Success/Success-Soft-Foreground",
       "type": "color",
-      "value": "#14532D",
+      "value": "#20432FF7",
       "category": "color",
       "meta": {
         "projectId": "d1S8dWKKr4PVKg3azHqMAd",
@@ -2101,6 +2101,96 @@
       }
     },
     {
+      "name": "Unnamed Style Token 61",
+      "type": "color",
+      "value": "#E4E1CC",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "w6C1m10iyURL"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 62",
+      "type": "color",
+      "value": "#09182F",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "bv2XqoUPfbQc"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 63",
+      "type": "color",
+      "value": "#07281DF7",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "wmgRgJzGjDQe"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 64",
+      "type": "color",
+      "value": "#BE855E",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "ZhhN7PTOWHfM"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 65",
+      "type": "color",
+      "value": "#8A3407",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "cduGHdGRTm28"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 66",
+      "type": "color",
+      "value": "#032823F7",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "6_tenYCEk9cA"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 67",
+      "type": "color",
+      "value": "#F5F1E6",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "1RZ8trgEHi8h"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 68",
+      "type": "color",
+      "value": "#0D2242",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "Crye-TSFZtG2"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 69",
+      "type": "color",
+      "value": "#072A24F7",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "sSQMBIf9V15O"
+      }
+    },
+    {
       "name": "Unnamed Style Token 7",
       "type": "color",
       "value": "#FFFFFF",
@@ -2108,6 +2198,46 @@
       "meta": {
         "projectId": "d1S8dWKKr4PVKg3azHqMAd",
         "id": "0aRdZZACFb6Z"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 70",
+      "type": "color",
+      "value": "#105549",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "y5ZnFs6iR8ml"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 71",
+      "type": "color",
+      "value": "#072A24F7",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "8KAF4UGJ1lOz"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 72",
+      "type": "color",
+      "value": "#093A32F7",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "SttGpHKVAEmZ"
+      }
+    },
+    {
+      "name": "Unnamed Style Token 73",
+      "type": "color",
+      "value": "#F1EEDC",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "Gok6G18VRXj-"
       }
     },
     {
@@ -2188,6 +2318,16 @@
       "meta": {
         "projectId": "d1S8dWKKr4PVKg3azHqMAd",
         "id": "0KiRV9e2F2E8"
+      }
+    },
+    {
+      "name": "friendo bg",
+      "type": "color",
+      "value": "#E4E1CC9E",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "pFRWedX2wzlz"
       }
     }
   ],

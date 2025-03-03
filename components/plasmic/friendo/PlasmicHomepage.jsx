@@ -191,25 +191,25 @@ function PlasmicHomepage__RenderFunc(props) {
               )
             })}
           >
-            <h1
-              data-plasmic-name={"h1"}
-              data-plasmic-override={overrides.h1}
-              className={classNames(
-                projectcss.all,
-                projectcss.h1,
-                projectcss.__wab_text,
-                sty.h1,
-                {
-                  [sty.h1textAppear]: hasVariant(
-                    $state,
-                    "textAppear",
-                    "textAppear"
-                  )
-                }
-              )}
-            >
-              {"Friendo "}
-            </h1>
+            <div className={classNames(projectcss.all, sty.freeBox__rKLbM)}>
+              <PlasmicImg__
+                alt={""}
+                className={classNames(sty.img__sYsdm)}
+                displayHeight={"auto"}
+                displayMaxHeight={"none"}
+                displayMaxWidth={"100%"}
+                displayMinHeight={"0"}
+                displayMinWidth={"0"}
+                displayWidth={"600px"}
+                loading={"lazy"}
+                src={{
+                  src: "/plasmic/friendo/images/_613F5Fed16381700041030D6Png.png",
+                  fullWidth: 2000,
+                  fullHeight: 1125,
+                  aspectRatio: undefined
+                }}
+              />
+            </div>
             <div
               className={classNames(
                 projectcss.all,
@@ -222,7 +222,7 @@ function PlasmicHomepage__RenderFunc(props) {
             <PlasmicImg__
               alt={""}
               className={classNames(sty.img__cAKmw)}
-              displayHeight={"500px"}
+              displayHeight={"516px"}
               displayMaxHeight={"none"}
               displayMaxWidth={"100%"}
               displayMinHeight={"0"}
@@ -230,9 +230,9 @@ function PlasmicHomepage__RenderFunc(props) {
               displayWidth={"500px"}
               loading={"lazy"}
               src={{
-                src: "/plasmic/friendo/images/d7A02Ad17A012Be9Afbd10644Cc7A41FJpg.jpg",
-                fullWidth: 736,
-                fullHeight: 900,
+                src: "/plasmic/friendo/images/images1Jpg.jpg",
+                fullWidth: 188,
+                fullHeight: 267,
                 aspectRatio: undefined
               }}
             />
@@ -434,17 +434,8 @@ function PlasmicHomepage__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  visibleText: [
-    "visibleText",
-    "section",
-    "h1",
-    "startBut",
-    "reveal",
-    "downloadbut"
-  ],
-
-  section: ["section", "h1"],
-  h1: ["h1"],
+  visibleText: ["visibleText", "section", "startBut", "reveal", "downloadbut"],
+  section: ["section"],
   startBut: ["startBut"],
   reveal: ["reveal", "downloadbut"],
   downloadbut: ["downloadbut"]
@@ -483,7 +474,6 @@ export const PlasmicHomepage = Object.assign(
   {
     // Helper components rendering sub-elements
     section: makeNodeComponent("section"),
-    h1: makeNodeComponent("h1"),
     startBut: makeNodeComponent("startBut"),
     reveal: makeNodeComponent("reveal"),
     downloadbut: makeNodeComponent("downloadbut"),

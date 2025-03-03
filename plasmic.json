@@ -995,6 +995,59 @@
           "cssFilePath": "plasmic/friendo/PlasmicTextMessage.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "rhDak0U6jLa5",
+          "name": "AddNewFriend",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicAddNewFriend.jsx",
+          "importSpec": {
+            "modulePath": "../pages/add-new-friend.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicAddNewFriend.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/add-new-friend"
+        },
+        {
+          "id": "6tqD7RxOexIY",
+          "name": "Radio",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicRadio.jsx",
+          "importSpec": {
+            "modulePath": "Radio.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicRadio.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "HYNio6jZqXQ9",
+          "name": "RadioGroup",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicRadioGroup.jsx",
+          "importSpec": {
+            "modulePath": "RadioGroup.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicRadioGroup.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "V2CRmMi9HuUW",
+          "name": "Select",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicSelect.jsx",
+          "importSpec": {
+            "modulePath": "Select.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicSelect.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [
@@ -1109,6 +1162,21 @@
           "id": "ypgnkBWwrx6V",
           "name": "icons8-profile-picture-96.png",
           "filePath": "../public/plasmic/friendo/images/icons8ProfilePicture96Png.png"
+        },
+        {
+          "id": "0XFFjoto4-St",
+          "name": "friends-logo-cover-958x575.png",
+          "filePath": "../public/plasmic/friendo/images/friendsLogoCover958X575Png.png"
+        },
+        {
+          "id": "E6ob_5Uy2u81",
+          "name": "613f5fed16381700041030d6.png",
+          "filePath": "../public/plasmic/friendo/images/_613F5Fed16381700041030D6Png.png"
+        },
+        {
+          "id": "dt5onsj82h7Q",
+          "name": "images (1).jpg",
+          "filePath": "../public/plasmic/friendo/images/images1Jpg.jpg"
         }
       ],
       "indirect": false,
@@ -1186,7 +1254,8 @@
           "componentImportPath": "@plasmicpkgs/plasmic-basic-components"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     }
   ],
   "globalVariants": {

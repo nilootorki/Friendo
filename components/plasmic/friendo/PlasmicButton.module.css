@@ -1,6 +1,6 @@
 .root:global(.__wab_instance) {
   position: relative;
-  background: none;
+  background: #ffffff;
   display: flex;
   cursor: pointer;
   box-sizing: border-box;
@@ -10,9 +10,10 @@
   line-height: var(--token-7NqASU3CjBt9);
   outline-style: none;
   text-decoration-line: none;
+  color: #ffffff;
   border-radius: var(--token-N7O5kgPgmNnT);
   padding: 0rem;
-  border-width: 0px;
+  border: 0px solid #fffdfd;
 }
 .root[data-focus-visible]:global(.__wab_instance) {
   outline-style: solid;
@@ -207,7 +208,7 @@
   align-items: stretch;
   width: 100%;
   height: 100%;
-  background: none;
+  background: var(--token-y6Nc89lUAs6v);
   flex-wrap: nowrap;
   align-content: stretch;
   mix-blend-mode: normal;

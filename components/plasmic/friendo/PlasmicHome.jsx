@@ -257,9 +257,25 @@ function PlasmicHome__RenderFunc(props) {
                 }
                 onClick={async event => {
                   const $steps = {};
-                  $steps["goToFriendsPage"] = true
+                  $steps["goToPage"] = true
                     ? (() => {
-                        const actionArgs = { destination: `/friends-page` };
+                        const actionArgs = {
+                          destination: (() => {
+                            try {
+                              return (
+                                "/friends-page?username=" + $ctx.query.username
+                              );
+                            } catch (e) {
+                              if (
+                                e instanceof TypeError ||
+                                e?.plasmicType === "PlasmicUndefinedDataError"
+                              ) {
+                                return `/friends-page`;
+                              }
+                              throw e;
+                            }
+                          })()
+                        };
                         return (({ destination }) => {
                           if (
                             typeof destination === "string" &&
@@ -275,11 +291,11 @@ function PlasmicHome__RenderFunc(props) {
                       })()
                     : undefined;
                   if (
-                    $steps["goToFriendsPage"] != null &&
-                    typeof $steps["goToFriendsPage"] === "object" &&
-                    typeof $steps["goToFriendsPage"].then === "function"
+                    $steps["goToPage"] != null &&
+                    typeof $steps["goToPage"] === "object" &&
+                    typeof $steps["goToPage"].then === "function"
                   ) {
-                    $steps["goToFriendsPage"] = await $steps["goToFriendsPage"];
+                    $steps["goToPage"] = await $steps["goToPage"];
                   }
                 }}
               />
@@ -299,7 +315,9 @@ function PlasmicHome__RenderFunc(props) {
                 {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                   (() => {
                     try {
-                      return $queries.componentData.data;
+                      return $queries.componentData.data.filter(
+                        component => component.username === $ctx.query.username
+                      );
                     } catch (e) {
                       if (
                         e instanceof TypeError ||

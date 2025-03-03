@@ -244,7 +244,9 @@ function PlasmicFriendsPage__RenderFunc(props) {
               {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                 (() => {
                   try {
-                    return $queries.suggestions.data;
+                    return $queries.suggestions.data.filter(
+                      suggestion => suggestion.username === $ctx.query.username
+                    );
                   } catch (e) {
                     if (
                       e instanceof TypeError ||
@@ -278,7 +280,9 @@ function PlasmicFriendsPage__RenderFunc(props) {
                                 try {
                                   return (
                                     "/friends-details?friendId=" +
-                                    currentItem.friend_name
+                                    currentItem.friend_name +
+                                    "&username=" +
+                                    $ctx.query.username
                                   );
                                 } catch (e) {
                                   if (

@@ -5,7 +5,7 @@
   height: 100%;
   align-content: flex-start;
   justify-items: center;
-  background: var(--token-0KiRV9e2F2E8);
+  background: var(--token-1RZ8trgEHi8h);
   box-shadow: 0px 10px 20px 0px var(--token-23Ysp7DLNQ-T);
   min-width: 0;
   min-height: 0;
@@ -105,13 +105,7 @@
   width: 100%;
   padding-left: 0;
   padding-right: 0px;
-  background: linear-gradient(
-        18.381890068571465deg,
-        var(--token-23Ysp7DLNQ-T) 0%,
-        #56fdff 100%
-      )
-      0% 0% / 100% 100% repeat,
-    var(--token-23Ysp7DLNQ-T);
+  background: var(--token-SttGpHKVAEmZ);
   padding-bottom: 215px;
   box-shadow: 0px 3px 16px 0px #63595933;
   margin-right: 0px;
@@ -144,26 +138,27 @@
 .sectiontextAppear > * {
   grid-column: 4;
 }
-.h1 {
+.freeBox__rKLbM {
+  display: flex;
+  flex-direction: column;
+  position: relative;
   width: 100%;
   height: auto;
   max-width: 100%;
-  padding-bottom: 0px;
-  text-align: left;
-  font-size: 100px;
-  margin-bottom: 14px;
-  margin-top: 116px;
-  color: var(--token-KzoV1vxcEP4w);
-  background: none;
-  margin-right: 0px;
-  padding-left: 0px;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 67px;
   grid-column-start: 3 !important;
   grid-column-end: -3 !important;
+  padding: 8px;
 }
-@media (min-width: 0px) and (max-width: 768px) {
-  .h1 {
-    font-size: 80px;
-  }
+.img__sYsdm {
+  object-fit: cover;
+  max-width: 100%;
+  width: 600px;
+}
+.img__sYsdm > picture > img {
+  object-fit: cover;
 }
 .text___3Vw4G {
   position: relative;
@@ -172,8 +167,9 @@
   max-width: 100%;
   text-align: left;
   font-size: 40px;
-  color: var(--token-KzoV1vxcEP4w);
+  color: var(--token-1RZ8trgEHi8h);
   margin-bottom: 0px;
+  margin-top: 32px;
   grid-column-start: 3 !important;
   grid-column-end: -3 !important;
 }
@@ -186,14 +182,13 @@
   object-fit: cover;
   max-width: 100%;
   width: 500px;
-  height: 500px;
-  margin-top: 66px;
-  margin-left: 3px;
+  height: 516px;
   justify-self: center;
   position: absolute;
   left: 500px;
-  top: 40px;
+  top: 222px;
   border-radius: 250px;
+  margin: 0px 78px 106px 3px;
 }
 .img__cAKmw > picture > img {
   object-fit: cover;
@@ -253,8 +248,9 @@
   font-size: 25px;
   margin-top: 120px;
   text-align: center;
-  color: var(--token-BWcqfLfZ_XdW);
+  color: var(--token-JrhHvorIP6kU);
   margin-right: 0px;
+  background: none;
   grid-column-start: 3 !important;
   grid-column-end: -3 !important;
 }

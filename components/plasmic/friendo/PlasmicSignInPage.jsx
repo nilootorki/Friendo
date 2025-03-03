@@ -344,9 +344,23 @@ function PlasmicSignInPage__RenderFunc(props) {
               }
               onClick={async event => {
                 const $steps = {};
-                $steps["goToHome"] = true
+                $steps["goToPage"] = true
                   ? (() => {
-                      const actionArgs = { destination: `/home` };
+                      const actionArgs = {
+                        destination: (() => {
+                          try {
+                            return "/home?username=" + $state.username.value;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()
+                      };
                       return (({ destination }) => {
                         if (
                           typeof destination === "string" &&
@@ -362,11 +376,11 @@ function PlasmicSignInPage__RenderFunc(props) {
                     })()
                   : undefined;
                 if (
-                  $steps["goToHome"] != null &&
-                  typeof $steps["goToHome"] === "object" &&
-                  typeof $steps["goToHome"].then === "function"
+                  $steps["goToPage"] != null &&
+                  typeof $steps["goToPage"] === "object" &&
+                  typeof $steps["goToPage"].then === "function"
                 ) {
-                  $steps["goToHome"] = await $steps["goToHome"];
+                  $steps["goToPage"] = await $steps["goToPage"];
                 }
               }}
             />

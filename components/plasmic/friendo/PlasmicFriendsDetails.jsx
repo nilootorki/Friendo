@@ -19,6 +19,7 @@ import {
   ensureGlobalVariants,
   generateStateOnChangeProp,
   generateStateValueProp,
+  get as $stateGet,
   hasVariant,
   set as $stateSet,
   useDollarState
@@ -26,6 +27,7 @@ import {
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
 import { usePlasmicDataOp } from "@plasmicapp/react-web/lib/data-sources";
 import NavBar from "../../NavBar"; // plasmic-import: KnagBLotfm8n/component
+import TextInput from "../../TextInput"; // plasmic-import: B7pg-YS7wyr5/component
 import Button from "../../Button"; // plasmic-import: R-SJru1lXq4W/component
 import { useUnnamedGlobalGroupOfVariants } from "./PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants"; // plasmic-import: lmEUP9r96TgA/globalVariant
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -110,6 +112,18 @@ function PlasmicFriendsDetails__RenderFunc(props) {
           timestamp: "",
           total_score: 0
         })
+      },
+      {
+        path: "textInput.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "noteUpdate",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => true
       }
     ],
 
@@ -284,7 +298,9 @@ function PlasmicFriendsDetails__RenderFunc(props) {
               {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                 (() => {
                   try {
-                    return $queries.query.data;
+                    return $queries.query.data.filter(
+                      item => item.username === $ctx.query.username
+                    );
                   } catch (e) {
                     if (
                       e instanceof TypeError ||
@@ -428,7 +444,12 @@ function PlasmicFriendsDetails__RenderFunc(props) {
                 <React.Fragment>
                   {(() => {
                     try {
-                      return $state.selectFriend.friend_name;
+                      return $queries.query.data.find(
+                        friend =>
+                          friend.friend_name ===
+                            $state.selectFriend.friend_name &&
+                          friend.username === $ctx.query.username
+                      )?.friend_name;
                     } catch (e) {
                       if (
                         e instanceof TypeError ||
@@ -468,7 +489,7 @@ function PlasmicFriendsDetails__RenderFunc(props) {
                         e instanceof TypeError ||
                         e?.plasmicType === "PlasmicUndefinedDataError"
                       ) {
-                        return " ";
+                        return " general mood";
                       }
                       throw e;
                     }
@@ -518,16 +539,25 @@ function PlasmicFriendsDetails__RenderFunc(props) {
               >
                 {"Personal Note:"}
               </div>
-              <div className={classNames(projectcss.all, sty.freeBox__mPlL)}>
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__v8Hd1
-                  )}
-                >
-                  <React.Fragment>
-                    {(() => {
+              {(() => {
+                try {
+                  return !$state.noteUpdate;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return true;
+                  }
+                  throw e;
+                }
+              })() ? (
+                <div className={classNames(projectcss.all, sty.freeBox__kbThc)}>
+                  <TextInput
+                    data-plasmic-name={"textInput"}
+                    data-plasmic-override={overrides.textInput}
+                    className={classNames("__wab_instance", sty.textInput)}
+                    defaultValue={(() => {
                       try {
                         return $state.selectFriend.comment;
                       } catch (e) {
@@ -535,31 +565,168 @@ function PlasmicFriendsDetails__RenderFunc(props) {
                           e instanceof TypeError ||
                           e?.plasmicType === "PlasmicUndefinedDataError"
                         ) {
-                          return "She is my best friend";
+                          return undefined;
                         }
                         throw e;
                       }
                     })()}
-                  </React.Fragment>
+                    onChange={async (...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "textInput",
+                        "value"
+                      ]).apply(null, eventArgs);
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    placeholder={``}
+                  />
+
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__gwG6F
+                    )}
+                    onClick={async event => {
+                      const $steps = {};
+                      $steps["updateNoteUpdate"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["noteUpdate"]
+                              },
+                              operation: 4
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+                              const oldValue = $stateGet(objRoot, variablePath);
+                              $stateSet(objRoot, variablePath, !oldValue);
+                              return !oldValue;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateNoteUpdate"] != null &&
+                        typeof $steps["updateNoteUpdate"] === "object" &&
+                        typeof $steps["updateNoteUpdate"].then === "function"
+                      ) {
+                        $steps["updateNoteUpdate"] = await $steps[
+                          "updateNoteUpdate"
+                        ];
+                      }
+                    }}
+                  >
+                    {"submit"}
+                  </div>
                 </div>
-                <PlasmicImg__
-                  alt={""}
-                  className={classNames(sty.img___04ErU)}
-                  displayHeight={"auto"}
-                  displayMaxHeight={"none"}
-                  displayMaxWidth={"100%"}
-                  displayMinHeight={"0"}
-                  displayMinWidth={"0"}
-                  displayWidth={"20px"}
-                  loading={"lazy"}
-                  src={{
-                    src: "/plasmic/friendo/images/icons8Edit24Png.png",
-                    fullWidth: 24,
-                    fullHeight: 24,
-                    aspectRatio: undefined
-                  }}
-                />
-              </div>
+              ) : null}
+              {(() => {
+                try {
+                  return $state.noteUpdate;
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return true;
+                  }
+                  throw e;
+                }
+              })() ? (
+                <div className={classNames(projectcss.all, sty.freeBox__mPlL)}>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__v8Hd1
+                    )}
+                  >
+                    <React.Fragment>
+                      {(() => {
+                        try {
+                          return $state.selectFriend.comment;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return "She is my best friend";
+                          }
+                          throw e;
+                        }
+                      })()}
+                    </React.Fragment>
+                  </div>
+                  <PlasmicImg__
+                    alt={""}
+                    className={classNames(sty.img___04ErU)}
+                    displayHeight={"auto"}
+                    displayMaxHeight={"none"}
+                    displayMaxWidth={"100%"}
+                    displayMinHeight={"0"}
+                    displayMinWidth={"0"}
+                    displayWidth={"20px"}
+                    loading={"lazy"}
+                    onClick={async event => {
+                      const $steps = {};
+                      $steps["updateNoteUpdate"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["noteUpdate"]
+                              },
+                              operation: 4
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+                              const oldValue = $stateGet(objRoot, variablePath);
+                              $stateSet(objRoot, variablePath, !oldValue);
+                              return !oldValue;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateNoteUpdate"] != null &&
+                        typeof $steps["updateNoteUpdate"] === "object" &&
+                        typeof $steps["updateNoteUpdate"].then === "function"
+                      ) {
+                        $steps["updateNoteUpdate"] = await $steps[
+                          "updateNoteUpdate"
+                        ];
+                      }
+                    }}
+                    src={{
+                      src: "/plasmic/friendo/images/icons8Edit24Png.png",
+                      fullWidth: 24,
+                      fullHeight: 24,
+                      aspectRatio: undefined
+                    }}
+                  />
+                </div>
+              ) : null}
               <div
                 className={classNames(
                   projectcss.all,
@@ -585,7 +752,7 @@ function PlasmicFriendsDetails__RenderFunc(props) {
                         e instanceof TypeError ||
                         e?.plasmicType === "PlasmicUndefinedDataError"
                       ) {
-                        return "You should text Sara, its been a long time!";
+                        return " call her";
                       }
                       throw e;
                     }
@@ -617,9 +784,10 @@ function PlasmicFriendsDetails__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "navBar", "friendCard", "button"],
+  root: ["root", "navBar", "friendCard", "textInput", "button"],
   navBar: ["navBar"],
   friendCard: ["friendCard"],
+  textInput: ["textInput"],
   button: ["button"]
 };
 
@@ -657,6 +825,7 @@ export const PlasmicFriendsDetails = Object.assign(
     // Helper components rendering sub-elements
     navBar: makeNodeComponent("navBar"),
     friendCard: makeNodeComponent("friendCard"),
+    textInput: makeNodeComponent("textInput"),
     button: makeNodeComponent("button"),
     // Metadata about props expected for PlasmicFriendsDetails
     internalVariantProps: PlasmicFriendsDetails__VariantProps,
