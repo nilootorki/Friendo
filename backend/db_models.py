@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, CheckConstraint, Float
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, CheckConstraint, Float, Boolean
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import JSON
@@ -22,11 +22,13 @@ class UserFriend(base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"))
     username=Column(String(50), nullable=False)
-    friend_name = Column(String(50), nullable=False)
+    friend_name = Column(String(50), nullable=False)  #i should make nullable True 
+    #friend_telegram_username = Column(String(50), nullable=True)
     interaction_type = Column(String(10), CheckConstraint("interaction_type IN ('Call', 'SMS')"))
     timestamp = Column(DateTime, server_default=func.now())
     messages = Column(JSON, nullable=True)
     score=Column(JSON, nullable=True)
+    #profile_photo=Column(Text, nullable=True)
     
 class UserSuggestion(base):
     __tablename__="user_suggestions"
@@ -36,10 +38,13 @@ class UserSuggestion(base):
     username=Column(String(50), nullable=False)
     friend_name = Column(String(50), nullable=False)
     suggestion = Column(String(500), nullable=False)
+    #suggestion = Column(String(500), nullable=True)
     gender = Column(String(50), nullable=True)
     comment = Column(String(500), nullable=True)
     timestamp = Column(DateTime, server_default=func.now())
     total_score=Column(Float, nullable=True)
+    #total_score=Column(String(50), nullable=True)
+    #checked=Column(Boolean, default=False)
     
     
     
