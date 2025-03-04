@@ -1,5 +1,5 @@
 #data validation to ensure that data we store, follows a proper format
-from pydantic import BaseModel   #pydantiic is a data validation and serialization library that FastAPII uses to ensure data is valid and structured properly
+from pydantic import BaseModel , EmailStr, constr  #pydantiic is a data validation and serialization library that FastAPII uses to ensure data is valid and structured properly
 from typing import Optional,List,Dict
 from datetime import datetime
 from typing import Any, Dict
@@ -85,3 +85,11 @@ class UserSuggestionSchema(BaseModel):
     class Config:
         from_attributes = True
         
+
+class UserLoginRequest(BaseModel):
+    email:str
+    password:str
+    
+class UserLoginResponse(BaseModel):
+    access_token:str
+    token_type:str
