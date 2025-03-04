@@ -39,13 +39,23 @@ CREATE TABLE IF NOT EXISTS user_suggestions (
     gender VARCHAR(50) DEFAULT NULL,
     comment VARCHAR(500) DEFAULT NULL,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    total_score FLOAT DEFAULT NULL 
+    total_score FLOAT DEFAULT NULL
+     
 );
 
 
 """
+#changes that should append:
 
+#friend_telegram_username VARCHAR(50) NOT NULL   in user_friends
 
+#checked BOOLEAN DEFAULT FALSE   in user_suggestion
+
+#total_score VARCHAR(500) DEFAULT NULL    in user_suggestions
+
+#suggestion VARCHAR(500) DEFAULT NULL     in user_suggestion
+
+#profile_photo TEXT DEFAULT NULL      in user_friends
 
 def connectxcreate():
     try:
