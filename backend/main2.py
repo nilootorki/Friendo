@@ -34,6 +34,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import requests
 
 
+app=FastAPI()
+
 
 
 
@@ -49,25 +51,25 @@ def get_db():
     finally:
         db.close()   #close the session after the request is complete
         
-@app.post("/upload_profile_photo/{user_id}")
-async def upload_profile_photo(user_id:int,file:UploadFile=File(...),db:Session=Depends(get_db)):
+@app.post("/upload_profile_photo/{user_id}/{friend_name}")
+async def upload_profile_photo(user_id:int,friend_name:str, file:UploadFile=File(...),db:Session=Depends(get_db)):
         allowed_files={"png","jpg","jpeg","gif"}
         file_type=file.filename.split(".")[-1].lower()
         if file_type not in allowed_files:
             raise HTTPException(status_code=400,detail="Invalid file format! only png, jpg, jpeg, gif files are accepted")
         
-        profile_path=f"{profile_DIR}{user_id}.{file_type}"
+        profile_path=f"{profile_DIR}{user_id}_{friend_name}.{file_type}"
         #open file in write-binary mode and copy into buffer
         with open(profile_path,"wb") as buffer:
             shutil.copyfileobj(file.file,buffer)
             
         
-        #update user's profile path in db
-        user=db.query(User).filter(User.id==user_id).first()
-        if not user:
-            raise HTTPException(status_code=404,detail="user not found!")
+        #update friend's profile path in db
+        friend=db.query(UserFriend).filter(UserFriend.user_id==user_id, UserFriend.friend_name==friend_name).first()
+        if not friend:
+            raise HTTPException(status_code=404,detail="friend not found!")
         
-        user.profile_photo=profile_path
+        friend.profile_photo=profile_path
         db.commit()
         
 #view profile photos from db
@@ -75,10 +77,10 @@ app.mount("/profile", StaticFiles(directory="profile"),name="profile")    #tells
 
         
 #creat API endpoint to get user profile photos
-@app.get("/profile_photo/{user_id}") 
-async def get_profile(user_id: int , db:Session=Depends(get_db)):
-    user=db.query(User).filter(User.id==user_id).first
-    if not user or not user.profile_photo:
+@app.get("/profile_photo/{user_id}/{friend_name}") 
+async def get_profile(user_id: int ,friend_name:str, db:Session=Depends(get_db)):
+    friend=db.query(UserFriend).filter(UserFriend.user_id==user_id, UserFriend.friend_name==friend_name).first()
+    if not friend or not friend.profile_photo:
         raise HTTPException(status_code=404, detail="Profile photo not found")
     
-    return {"image_url": f"/uploads/{user_id}.jpg"}
+    return {"image_url": f"/uploads/{friend.profile_photo}"}
