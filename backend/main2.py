@@ -84,3 +84,14 @@ async def get_profile(user_id: int ,friend_name:str, db:Session=Depends(get_db))
         raise HTTPException(status_code=404, detail="Profile photo not found")
     
     return {"image_url": f"/uploads/{friend.profile_photo}"}
+
+
+
+
+#should fix this in main.py:
+   # Create new user
+    # db_record = db_models.User(
+    #     username=user.username,
+    #     email=user.email,
+    #     password_hash=hash_password(user.password)  # You should hash this before storing
+    # )

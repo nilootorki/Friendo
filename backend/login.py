@@ -6,6 +6,8 @@ from auth import create_token
 from schemas import UserLoginResponse, UserLoginRequest
 import db_models
 from database import get_db
+from datetime import datetime, timedelta
+from config import secret_key, algorithm,access_token_expire_min
 
 
 app=FastAPI()
@@ -29,7 +31,11 @@ async def login(user:UserLoginRequest,db:Session=Depends(get_db)):
         raise HTTPException(status_code=400, detail="Incorrect password")
     
     # create a JWT token upon successful login
-    access_token = create_token(data={"sub": db_user.email})
+    #store user_id in JWT
+    #creat token with expiration time
+    expire_time = datetime.utcnow() + timedelta(minutes=access_token_expire_min)
     
-    return {"access_token": access_token, "token_type": "bearer"}
+    access_token = create_token(data={"sub": db_user.user_id ,"exp": expire_time.timestamp()})
+    
+    return {"access_token": access_token, "token_type": "bearer", "expires_at": expire_time.isoformat()}
 
