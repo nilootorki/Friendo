@@ -1,6 +1,6 @@
 #data validation to ensure that data we store, follows a proper format
 from pydantic import BaseModel , EmailStr, constr  #pydantiic is a data validation and serialization library that FastAPII uses to ensure data is valid and structured properly
-from typing import Optional,List,Dict
+from typing import Optional,List,Dict, Literal
 from datetime import datetime
 from typing import Any, Dict
 
@@ -98,19 +98,24 @@ class UserLoginResponse(BaseModel):
     token_type:str
     
     
+#GenderType = constr(regex="^(Male|Female)$")
     
-# class UserFriendCreate(BaseModel):
-#     friend_name:str
-#     friend_telegram_username:Optional[str]=None
-#     gender: Optional[constr(regex="^(Male|Female)$")] = None
-#     initial_note: Optional[str] = None
-#     messages: Optional[List[Dict[str, str]]] = None
-#     profile_photo: Optional[str] = None
+class UserFriendCreate(BaseModel):
+    friend_name:str
+    friend_telegram_username:Optional[str]=None
+    #gender: Optional[GenderType] = None
+    gender: Optional[Literal["Male", "Female"]] = None  
+    interaction_type: Optional[str] = None
+    initial_note: Optional[str] = None
+    messages: Optional[List[Dict[str, str]]] = None
+    score: Optional[dict] = None
+    profile_photo: Optional[str] = None
+    initial_note: Optional[str] = None
     
-# class UserFriendResponse(UserFriendCreate):
-#     id: int
-#     user_id: int
-#     timestamp: datetime
+class UserFriendResponse(UserFriendCreate):
+    id: int
+    user_id: int
+    timestamp: datetime
 
 #     class Config:
 #         from_attributes = True
