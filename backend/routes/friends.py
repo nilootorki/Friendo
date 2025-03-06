@@ -36,8 +36,19 @@ async def add_friend(friend:UserFriendCreate,db:Session=Depends(get_db),user_id:
 
 
 
-
-
+@router.delete("/friends/{friend_id}")
+async def delete_friend(friend_id:int, db:Session=Depends(get_db),user_id:int=Depends(get_current_user)):
+    
+    #check if friend exists for the user
+    friend=db.query(db_models.UserFriend).filter(db_models.UserFriend.id==friend_id, db_models.UserFriend.user_id==user_id).first()
+    
+    if not friend:
+        raise HTTPException(status_code=404, detail="Friend not found!")
+    
+    db.delete(friend)
+    db.commit()
+    
+    return("detail":"friend deleted sucessfully")
 
 
 

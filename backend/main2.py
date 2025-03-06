@@ -21,10 +21,8 @@ import numpy as np
 # from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForSequenceClassification
 from datetime import datetime, date
 from fastapi.staticfiles import StaticFiles
-
 from schemas import UserFriendSchema, UserCreate, UserResponse, SignupResponse, ProfileCreate, UserFriend
 from typing import List
-
 from sqlalchemy.exc import NoResultFound
 
 import regex as re
@@ -33,6 +31,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 
+from routes.friends import router as friend_router
 
 app=FastAPI()
 
@@ -41,7 +40,10 @@ def get_url():
     return{"massage":"Welcome to Friendo!"}
     
 
+app.include_router(friend_router)
+
 base.metadata.create_all(bind=engine)  #ensure tables exist in the db
+
 
 
 
