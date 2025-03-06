@@ -2,7 +2,8 @@ from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, Chec
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import JSON
-from database import base
+from backend.database import base
+
 
 class User(base):
     __tablename__ = "users"

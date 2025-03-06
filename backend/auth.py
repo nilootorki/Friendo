@@ -2,9 +2,9 @@ from datetime import datetime, timedelta
 from jose import jwt, JWTError # for creaating, encoding, and decoding JWTs
 from fastapi.security import OAuth2PasswordBearer  #to handle OAuth2 (used for token based authentications)
 from fastapi import Depends,HTTPException, status
-from config import secret_key, algorithm,access_token_expire_min
-import db_models
-from database import get_db
+from backend.config import secret_key, algorithm,access_token_expire_min
+import backend.db_models
+from backend.database import get_db
 from sqlalchemy.orm import Session
 
 

@@ -36,6 +36,12 @@ import requests
 
 app=FastAPI()
 
+@app.get("/")  #decorator that tells fastapi that get_url get requests to the root URL /
+def get_url():
+    return{"massage":"Welcome to Friendo!"}
+    
+
+base.metadata.create_all(bind=engine)  #ensure tables exist in the db
 
 
 

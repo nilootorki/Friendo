@@ -4,7 +4,6 @@ from typing import Optional,List,Dict
 from datetime import datetime
 from typing import Any, Dict
 
-
 #define Pydantic models
 class SignupResponse(BaseModel):
     success: bool
@@ -91,9 +90,27 @@ class UserSuggestionSchema(BaseModel):
         
 
 class UserLoginRequest(BaseModel):
-    email:str
+    username:str
     password:str
     
 class UserLoginResponse(BaseModel):
     access_token:str
     token_type:str
+    
+    
+    
+# class UserFriendCreate(BaseModel):
+#     friend_name:str
+#     friend_telegram_username:Optional[str]=None
+#     gender: Optional[constr(regex="^(Male|Female)$")] = None
+#     initial_note: Optional[str] = None
+#     messages: Optional[List[Dict[str, str]]] = None
+#     profile_photo: Optional[str] = None
+    
+# class UserFriendResponse(UserFriendCreate):
+#     id: int
+#     user_id: int
+#     timestamp: datetime
+
+#     class Config:
+#         from_attributes = True
