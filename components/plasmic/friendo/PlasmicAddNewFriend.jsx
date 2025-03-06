@@ -17,6 +17,7 @@ import {
   deriveRenderOpts,
   generateStateOnChangeProp,
   generateStateValueProp,
+  set as $stateSet,
   useDollarState
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
@@ -24,6 +25,8 @@ import NavBar from "../../NavBar"; // plasmic-import: KnagBLotfm8n/component
 import TextInput from "../../TextInput"; // plasmic-import: B7pg-YS7wyr5/component
 import Select from "../../Select"; // plasmic-import: V2CRmMi9HuUW/component
 import MenuItem from "../../MenuItem"; // plasmic-import: zcnybJ5YUZhH/component
+import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
+import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import Button from "../../Button"; // plasmic-import: R-SJru1lXq4W/component
 import "@plasmicapp/react-web/lib/plasmic.css";
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
@@ -108,6 +111,12 @@ function PlasmicAddNewFriend__RenderFunc(props) {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "upload.files",
+        type: "private",
+        variableType: "array",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       }
     ],
 
@@ -302,6 +311,42 @@ function PlasmicAddNewFriend__RenderFunc(props) {
                   projectcss.__wab_text,
                   sty.text__sqHbk
                 )}
+                onClick={async event => {
+                  const $steps = {};
+                  $steps["updateNavBarProTooltip"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["navBar", "proTooltip"]
+                          },
+                          operation: 0
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+                          $stateSet(objRoot, variablePath, value);
+                          return value;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateNavBarProTooltip"] != null &&
+                    typeof $steps["updateNavBarProTooltip"] === "object" &&
+                    typeof $steps["updateNavBarProTooltip"].then === "function"
+                  ) {
+                    $steps["updateNavBarProTooltip"] = await $steps[
+                      "updateNavBarProTooltip"
+                    ];
+                  }
+                }}
               >
                 {"personal note:"}
               </div>
@@ -324,20 +369,37 @@ function PlasmicAddNewFriend__RenderFunc(props) {
                 }}
               />
             </div>
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text__cjVrt
-              )}
+            <UploadWrapper
+              data-plasmic-name={"upload"}
+              data-plasmic-override={overrides.upload}
+              accept={""}
+              className={classNames("__wab_instance", sty.upload)}
+              files={generateStateValueProp($state, ["upload", "files"])}
+              onFilesChange={async (...eventArgs) => {
+                generateStateOnChangeProp($state, ["upload", "files"]).apply(
+                  null,
+                  eventArgs
+                );
+              }}
+              showUploadList={true}
             >
-              {"Upload Telegram Messages"}
-            </div>
+              <AntdButton
+                className={classNames("__wab_instance", sty.button__gESkr)}
+              >
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__tkYtj
+                  )}
+                >
+                  {"Upload Telegram messsages"}
+                </div>
+              </AntdButton>
+            </UploadWrapper>
           </div>
           <Button
-            data-plasmic-name={"button"}
-            data-plasmic-override={overrides.button}
-            className={classNames("__wab_instance", sty.button)}
+            className={classNames("__wab_instance", sty.button__mxPgO)}
             label={
               <div
                 className={classNames(
@@ -349,6 +411,48 @@ function PlasmicAddNewFriend__RenderFunc(props) {
                 {"Submit"}
               </div>
             }
+            onClick={async event => {
+              const $steps = {};
+              $steps["goToFriendsPage"] = true
+                ? (() => {
+                    const actionArgs = { destination: `/friends-page` };
+                    return (({ destination }) => {
+                      if (
+                        typeof destination === "string" &&
+                        destination.startsWith("#")
+                      ) {
+                        document
+                          .getElementById(destination.substr(1))
+                          .scrollIntoView({ behavior: "smooth" });
+                      } else {
+                        __nextRouter?.push(destination);
+                      }
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["goToFriendsPage"] != null &&
+                typeof $steps["goToFriendsPage"] === "object" &&
+                typeof $steps["goToFriendsPage"].then === "function"
+              ) {
+                $steps["goToFriendsPage"] = await $steps["goToFriendsPage"];
+              }
+              $steps["runElementAction"] = true
+                ? (() => {
+                    const actionArgs = {};
+                    return (({ tplRef, action, args }) => {
+                      return $refs?.[tplRef]?.[action]?.(...(args ?? []));
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["runElementAction"] != null &&
+                typeof $steps["runElementAction"] === "object" &&
+                typeof $steps["runElementAction"].then === "function"
+              ) {
+                $steps["runElementAction"] = await $steps["runElementAction"];
+              }
+            }}
           />
         </div>
       </div>
@@ -357,12 +461,12 @@ function PlasmicAddNewFriend__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "navBar", "textInput", "select", "textInput2", "button"],
+  root: ["root", "navBar", "textInput", "select", "textInput2", "upload"],
   navBar: ["navBar"],
   textInput: ["textInput"],
   select: ["select"],
   textInput2: ["textInput2"],
-  button: ["button"]
+  upload: ["upload"]
 };
 
 function makeNodeComponent(nodeName) {
@@ -401,7 +505,7 @@ export const PlasmicAddNewFriend = Object.assign(
     textInput: makeNodeComponent("textInput"),
     select: makeNodeComponent("select"),
     textInput2: makeNodeComponent("textInput2"),
-    button: makeNodeComponent("button"),
+    upload: makeNodeComponent("upload"),
     // Metadata about props expected for PlasmicAddNewFriend
     internalVariantProps: PlasmicAddNewFriend__VariantProps,
     internalArgProps: PlasmicAddNewFriend__ArgProps,

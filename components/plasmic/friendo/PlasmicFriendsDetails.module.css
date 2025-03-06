@@ -96,12 +96,6 @@
   border-style: solid;
   border-color: var(--token-iiqrps1yKdLE);
 }
-.root .friendCard:hover {
-  background: var(--token-X5zkzXgNRnck);
-}
-.root .friendCard:active {
-  background: var(--token-KD8Z2YOfDWw1);
-}
 .freeBox__fERo {
   display: flex;
   flex-direction: column;

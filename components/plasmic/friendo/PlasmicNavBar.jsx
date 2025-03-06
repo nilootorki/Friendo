@@ -430,6 +430,33 @@ function PlasmicNavBar__RenderFunc(props) {
         </div>
         <div
           className={classNames(projectcss.all, sty.freeBox__gPu4)}
+          onClick={async event => {
+            const $steps = {};
+            $steps["goToCallHistory"] = true
+              ? (() => {
+                  const actionArgs = { destination: `/call-history` };
+                  return (({ destination }) => {
+                    if (
+                      typeof destination === "string" &&
+                      destination.startsWith("#")
+                    ) {
+                      document
+                        .getElementById(destination.substr(1))
+                        .scrollIntoView({ behavior: "smooth" });
+                    } else {
+                      __nextRouter?.push(destination);
+                    }
+                  })?.apply(null, [actionArgs]);
+                })()
+              : undefined;
+            if (
+              $steps["goToCallHistory"] != null &&
+              typeof $steps["goToCallHistory"] === "object" &&
+              typeof $steps["goToCallHistory"].then === "function"
+            ) {
+              $steps["goToCallHistory"] = await $steps["goToCallHistory"];
+            }
+          }}
           onMouseEnter={async event => {
             const $steps = {};
             $steps["updateCaltooltip"] = true
@@ -661,6 +688,9 @@ function PlasmicNavBar__RenderFunc(props) {
               projectcss.__wab_text,
               sty.text___5LnP
             )}
+            onClick={async event => {
+              const $steps = {};
+            }}
           >
             {"About Us"}
           </div>

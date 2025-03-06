@@ -12,20 +12,32 @@ import * as React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import {
+  PlasmicImg as PlasmicImg__,
+  Stack as Stack__,
   classNames,
   createPlasmicElementProxy,
   deriveRenderOpts,
   ensureGlobalVariants,
   generateStateOnChangeProp,
   generateStateValueProp,
+  initializePlasmicStates,
   renderPlasmicSlot,
+  set as $stateSet,
   useDollarState
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
-import { usePlasmicDataOp } from "@plasmicapp/react-web/lib/data-sources";
+import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
+import {
+  executePlasmicDataOp,
+  usePlasmicDataOp,
+  usePlasmicInvalidate
+} from "@plasmicapp/react-web/lib/data-sources";
 import NavBar from "../../NavBar"; // plasmic-import: KnagBLotfm8n/component
 import Button from "../../Button"; // plasmic-import: R-SJru1lXq4W/component
 import Checkbox from "../../Checkbox"; // plasmic-import: qcH6HD0MTML6/component
+import Recommendation from "../../Recommendation"; // plasmic-import: k5tf2deh1V9A/component
+import Popover from "../../Popover"; // plasmic-import: pEo-eFzuH1TF/component
+import TextInput from "../../TextInput"; // plasmic-import: B7pg-YS7wyr5/component
 import { useScreenVariants as useScreenVariantss47GOinckgZx } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: s47GOinckgZX/globalVariant
 import "@plasmicapp/react-web/lib/plasmic.css";
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
@@ -98,6 +110,17 @@ function PlasmicHome__RenderFunc(props) {
         path: "checkbox[].isSelected",
         type: "private",
         variableType: "boolean"
+      },
+      {
+        path: "recommendation[].variable2",
+        type: "private",
+        variableType: "boolean"
+      },
+      {
+        path: "visibleCount",
+        type: "private",
+        variableType: "number",
+        initFunc: ({ $props, $state, $queries, $ctx }) => 5
       }
     ],
 
@@ -109,6 +132,8 @@ function PlasmicHome__RenderFunc(props) {
     $queries: $queries,
     $refs
   });
+  const dataSourcesCtx = usePlasmicDataSourceContext();
+  const plasmicInvalidate = usePlasmicInvalidate();
   const new$Queries = {
     componentData: usePlasmicDataOp(() => {
       return {
@@ -116,6 +141,16 @@ function PlasmicHome__RenderFunc(props) {
         opId: "2e947b72-8f4f-43f4-b032-c2f857fa9421",
         userArgs: {},
         cacheKey: `plasmic.$.2e947b72-8f4f-43f4-b032-c2f857fa9421.$.`,
+        invalidatedKeys: null,
+        roleId: null
+      };
+    }),
+    logIn: usePlasmicDataOp(() => {
+      return {
+        sourceId: "kyQLvzX4VBgHR6BbD2tTbc",
+        opId: "9d0f8f57-0d01-4fc8-a295-33374652a35d",
+        userArgs: {},
+        cacheKey: `plasmic.$.9d0f8f57-0d01-4fc8-a295-33374652a35d.$.`,
         invalidatedKeys: null,
         roleId: null
       };
@@ -230,14 +265,19 @@ function PlasmicHome__RenderFunc(props) {
 
           <div className={classNames(projectcss.all, sty.freeBox___1UhyR)}>
             <div className={classNames(projectcss.all, sty.freeBox___70QMx)}>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__v43Ei
-                )}
-              >
-                {"AI Recommendations"}
+              <div className={classNames(projectcss.all, sty.freeBox__nd047)}>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__v43Ei
+                  )}
+                  onClick={async event => {
+                    const $steps = {};
+                  }}
+                >
+                  {"AI Recommendations"}
+                </div>
               </div>
               <Button
                 data-plasmic-name={"button"}
@@ -297,6 +337,36 @@ function PlasmicHome__RenderFunc(props) {
                   ) {
                     $steps["goToPage"] = await $steps["goToPage"];
                   }
+                  $steps["useIntegration"] = true
+                    ? (() => {
+                        const actionArgs = {};
+                        return (async ({ dataOp, continueOnError }) => {
+                          try {
+                            const response = await executePlasmicDataOp(
+                              dataOp,
+                              {
+                                userAuthToken: dataSourcesCtx?.userAuthToken,
+                                user: dataSourcesCtx?.user
+                              }
+                            );
+                            await plasmicInvalidate(dataOp.invalidatedKeys);
+                            return response;
+                          } catch (e) {
+                            if (!continueOnError) {
+                              throw e;
+                            }
+                            return e;
+                          }
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["useIntegration"] != null &&
+                    typeof $steps["useIntegration"] === "object" &&
+                    typeof $steps["useIntegration"].then === "function"
+                  ) {
+                    $steps["useIntegration"] = await $steps["useIntegration"];
+                  }
                 }}
               />
 
@@ -315,9 +385,9 @@ function PlasmicHome__RenderFunc(props) {
                 {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                   (() => {
                     try {
-                      return $queries.componentData.data.filter(
-                        component => component.username === $ctx.query.username
-                      );
+                      return $queries.componentData.data
+                        .filter(component => component.username === "Nel")
+                        .slice(0, $state.visibleCount);
                     } catch (e) {
                       if (
                         e instanceof TypeError ||
@@ -357,30 +427,49 @@ function PlasmicHome__RenderFunc(props) {
                         }}
                       />
 
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          sty.freeBox__gSkfn
-                        )}
-                      >
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            sty.freeBox__ny76X
-                          )}
-                        />
+                      {(() => {
+                        const child$Props = {
+                          className: classNames(
+                            "__wab_instance",
+                            sty.recommendation
+                          ),
+                          currentItem: currentItem,
+                          onVariable2Change: async (...eventArgs) => {
+                            generateStateOnChangeProp($state, [
+                              "recommendation",
+                              __plasmic_idx_0,
+                              "variable2"
+                            ]).apply(null, eventArgs);
+                            if (
+                              eventArgs.length > 1 &&
+                              eventArgs[1] &&
+                              eventArgs[1]._plasmic_state_init_
+                            ) {
+                              return;
+                            }
+                          },
+                          variable2: generateStateValueProp($state, [
+                            "recommendation",
+                            __plasmic_idx_0,
+                            "variable2"
+                          ])
+                        };
+                        initializePlasmicStates(
+                          $state,
+                          [
+                            {
+                              name: "recommendation[].variable2",
+                              initFunc: ({ $props, $state, $queries }) => false
+                            }
+                          ],
 
-                        <div
-                          className={classNames(
-                            projectcss.all,
-                            sty.freeBox___89Th2
-                          )}
-                        >
-                          <div
-                            className={classNames(
-                              projectcss.all,
-                              sty.freeBox__ekCDn
-                            )}
+                          [__plasmic_idx_0]
+                        );
+                        return (
+                          <Recommendation
+                            data-plasmic-name={"recommendation"}
+                            data-plasmic-override={overrides.recommendation}
+                            {...child$Props}
                           >
                             {renderPlasmicSlot({
                               defaultContents: (
@@ -388,32 +477,298 @@ function PlasmicHome__RenderFunc(props) {
                                   <div
                                     className={classNames(
                                       projectcss.all,
-                                      projectcss.__wab_text,
-                                      sty.text__fYyVh
+                                      sty.freeBox__izIvh
                                     )}
                                   >
-                                    <React.Fragment>
-                                      {(() => {
-                                        try {
-                                          return currentItem.suggestion;
-                                        } catch (e) {
-                                          if (
-                                            e instanceof TypeError ||
-                                            e?.plasmicType ===
-                                              "PlasmicUndefinedDataError"
-                                          ) {
-                                            return "You should call sara, its been a long time!";
+                                    <div
+                                      className={classNames(
+                                        projectcss.all,
+                                        projectcss.__wab_text,
+                                        sty.text__tmo
+                                      )}
+                                      onClick={async event => {
+                                        const $steps = {};
+                                      }}
+                                    >
+                                      <React.Fragment>
+                                        {(() => {
+                                          try {
+                                            return currentItem.suggestion;
+                                          } catch (e) {
+                                            if (
+                                              e instanceof TypeError ||
+                                              e?.plasmicType ===
+                                                "PlasmicUndefinedDataError"
+                                            ) {
+                                              return "You should call sara, its been a long time!";
+                                            }
+                                            throw e;
                                           }
-                                          throw e;
-                                        }
-                                      })()}
-                                    </React.Fragment>
+                                        })()}
+                                      </React.Fragment>
+                                    </div>
+                                    <Popover
+                                      className={classNames(
+                                        "__wab_instance",
+                                        sty.popover__vtiBb
+                                      )}
+                                      content={
+                                        <Stack__
+                                          as={"div"}
+                                          hasGap={true}
+                                          className={classNames(
+                                            projectcss.all,
+                                            sty.freeBox__g3Q
+                                          )}
+                                        >
+                                          <div
+                                            className={classNames(
+                                              projectcss.all,
+                                              sty.freeBox__qyeex
+                                            )}
+                                          >
+                                            <div
+                                              className={classNames(
+                                                projectcss.all,
+                                                projectcss.__wab_text,
+                                                sty.text__bc2Gy
+                                              )}
+                                            >
+                                              {"This is a Popover!"}
+                                            </div>
+                                            <PlasmicImg__
+                                              alt={""}
+                                              className={classNames(
+                                                sty.img___49GMc
+                                              )}
+                                              displayHeight={"auto"}
+                                              displayMaxHeight={"none"}
+                                              displayMaxWidth={"100%"}
+                                              displayMinHeight={"0"}
+                                              displayMinWidth={"0"}
+                                              displayWidth={"20px"}
+                                              loading={"lazy"}
+                                              onClick={async event => {
+                                                const $steps = {};
+                                                $steps[
+                                                  "updateNavBarProTooltip"
+                                                ] = true
+                                                  ? (() => {
+                                                      const actionArgs = {
+                                                        variable: {
+                                                          objRoot: $state,
+                                                          variablePath: [
+                                                            "navBar",
+                                                            "proTooltip"
+                                                          ]
+                                                        },
+                                                        operation: 0
+                                                      };
+                                                      return (({
+                                                        variable,
+                                                        value,
+                                                        startIndex,
+                                                        deleteCount
+                                                      }) => {
+                                                        if (!variable) {
+                                                          return;
+                                                        }
+                                                        const {
+                                                          objRoot,
+                                                          variablePath
+                                                        } = variable;
+                                                        $stateSet(
+                                                          objRoot,
+                                                          variablePath,
+                                                          value
+                                                        );
+                                                        return value;
+                                                      })?.apply(null, [
+                                                        actionArgs
+                                                      ]);
+                                                    })()
+                                                  : undefined;
+                                                if (
+                                                  $steps[
+                                                    "updateNavBarProTooltip"
+                                                  ] != null &&
+                                                  typeof $steps[
+                                                    "updateNavBarProTooltip"
+                                                  ] === "object" &&
+                                                  typeof $steps[
+                                                    "updateNavBarProTooltip"
+                                                  ].then === "function"
+                                                ) {
+                                                  $steps[
+                                                    "updateNavBarProTooltip"
+                                                  ] = await $steps[
+                                                    "updateNavBarProTooltip"
+                                                  ];
+                                                }
+                                              }}
+                                              src={{
+                                                src: "/plasmic/friendo/images/icons8Edit24Png.png",
+                                                fullWidth: 24,
+                                                fullHeight: 24,
+                                                aspectRatio: undefined
+                                              }}
+                                            />
+                                          </div>
+                                          <div
+                                            className={classNames(
+                                              projectcss.all,
+                                              sty.freeBox__p2
+                                            )}
+                                          >
+                                            <TextInput
+                                              className={classNames(
+                                                "__wab_instance",
+                                                sty.textInput__lgy98
+                                              )}
+                                              placeholder={"Enter your comment"}
+                                            />
+
+                                            <div
+                                              className={classNames(
+                                                projectcss.all,
+                                                projectcss.__wab_text,
+                                                sty.text__dyBl4
+                                              )}
+                                            >
+                                              {"submit"}
+                                            </div>
+                                          </div>
+                                        </Stack__>
+                                      }
+                                      trigger={
+                                        <PlasmicImg__
+                                          alt={""}
+                                          className={classNames(sty.img__xdxDd)}
+                                          displayHeight={"25px"}
+                                          displayMaxHeight={"none"}
+                                          displayMaxWidth={"100%"}
+                                          displayMinHeight={"0"}
+                                          displayMinWidth={"0"}
+                                          displayWidth={"25px"}
+                                          loading={"lazy"}
+                                          onLoad={async event => {
+                                            const $steps = {};
+                                            $steps["runCode"] = true
+                                              ? (() => {
+                                                  const actionArgs = {
+                                                    customFunction:
+                                                      async () => {
+                                                        return (() => {
+                                                          const filteredItems =
+                                                            $queries.componentData.data.filter(
+                                                              item =>
+                                                                item.username ===
+                                                                "Nel"
+                                                            );
+                                                          const recomElements =
+                                                            document.querySelectorAll(
+                                                              ".plasmic_default__all.plasmic_default__div.Recommendation__freeBox__vqzaP"
+                                                            );
+                                                          return recomElements.forEach(
+                                                            (
+                                                              element,
+                                                              index
+                                                            ) => {
+                                                              const score =
+                                                                filteredItems[
+                                                                  index
+                                                                ]?.total_score;
+                                                              if (
+                                                                score !=
+                                                                undefined
+                                                              ) {
+                                                                if (
+                                                                  score < -0.5
+                                                                ) {
+                                                                  element.style.background =
+                                                                    "linear-gradient(90deg, #E25454, white)";
+                                                                } else if (
+                                                                  score <= 0.5
+                                                                ) {
+                                                                  element.style.background =
+                                                                    "linear-gradient(90deg, #C2BFBF, white)";
+                                                                } else {
+                                                                  element.style.background =
+                                                                    "linear-gradient(90deg, #69B1FF, white)";
+                                                                }
+                                                              }
+                                                            }
+                                                          );
+                                                        })();
+                                                      }
+                                                  };
+                                                  return (({
+                                                    customFunction
+                                                  }) => {
+                                                    return customFunction();
+                                                  })?.apply(null, [actionArgs]);
+                                                })()
+                                              : undefined;
+                                            if (
+                                              $steps["runCode"] != null &&
+                                              typeof $steps["runCode"] ===
+                                                "object" &&
+                                              typeof $steps["runCode"].then ===
+                                                "function"
+                                            ) {
+                                              $steps["runCode"] = await $steps[
+                                                "runCode"
+                                              ];
+                                            }
+                                          }}
+                                          src={{
+                                            src: "/plasmic/friendo/images/icons8Note50Png.png",
+                                            fullWidth: 50,
+                                            fullHeight: 50,
+                                            aspectRatio: undefined
+                                          }}
+                                        />
+                                      }
+                                    />
+                                  </div>
+                                  <div
+                                    className={classNames(
+                                      projectcss.all,
+                                      sty.freeBox__juqs1
+                                    )}
+                                  >
+                                    <div
+                                      className={classNames(
+                                        projectcss.all,
+                                        projectcss.__wab_text,
+                                        sty.text__cN9Cy
+                                      )}
+                                    >
+                                      {"this recommendation is great!"}
+                                    </div>
+                                    <PlasmicImg__
+                                      alt={""}
+                                      className={classNames(sty.img__sAf1X)}
+                                      displayHeight={"auto"}
+                                      displayMaxHeight={"none"}
+                                      displayMaxWidth={"100%"}
+                                      displayMinHeight={"0"}
+                                      displayMinWidth={"0"}
+                                      displayWidth={"auto"}
+                                      loading={"lazy"}
+                                      src={{
+                                        src: "/plasmic/friendo/images/icons8Edit24Png.png",
+                                        fullWidth: 24,
+                                        fullHeight: 24,
+                                        aspectRatio: undefined
+                                      }}
+                                    />
                                   </div>
                                   <div
                                     className={classNames(
                                       projectcss.all,
                                       projectcss.__wab_text,
-                                      sty.text___1IXC
+                                      sty.text__oaTti
                                     )}
                                   >
                                     <React.Fragment>
@@ -439,25 +794,80 @@ function PlasmicHome__RenderFunc(props) {
                                 </React.Fragment>
                               ),
 
-                              value: args.children,
-                              className: classNames(sty.slotTargetChildren)
+                              value: args.children
                             })}
-                          </div>
-                        </div>
-                      </div>
+                          </Recommendation>
+                        );
+                      })()}
                     </div>
                   );
                 })}
               </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__ho3Eb
-                )}
-              >
-                {"See all"}
-              </div>
+              {(() => {
+                try {
+                  return (
+                    $state.visibleCount <
+                    $queries.componentData.data.filter(
+                      com => com.username === "Nel"
+                    ).length
+                  );
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return true;
+                  }
+                  throw e;
+                }
+              })() ? (
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__ho3Eb
+                  )}
+                  onClick={async event => {
+                    const $steps = {};
+                    $steps["updateVisibleCount"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["visibleCount"]
+                            },
+                            operation: 0,
+                            value: $state.visibleCount + 5
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updateVisibleCount"] != null &&
+                      typeof $steps["updateVisibleCount"] === "object" &&
+                      typeof $steps["updateVisibleCount"].then === "function"
+                    ) {
+                      $steps["updateVisibleCount"] = await $steps[
+                        "updateVisibleCount"
+                      ];
+                    }
+                  }}
+                >
+                  {"See more"}
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -467,10 +877,11 @@ function PlasmicHome__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "navBar", "button", "checkbox"],
+  root: ["root", "navBar", "button", "checkbox", "recommendation"],
   navBar: ["navBar"],
   button: ["button"],
-  checkbox: ["checkbox"]
+  checkbox: ["checkbox"],
+  recommendation: ["recommendation"]
 };
 
 function makeNodeComponent(nodeName) {
@@ -508,6 +919,7 @@ export const PlasmicHome = Object.assign(
     navBar: makeNodeComponent("navBar"),
     button: makeNodeComponent("button"),
     checkbox: makeNodeComponent("checkbox"),
+    recommendation: makeNodeComponent("recommendation"),
     // Metadata about props expected for PlasmicHome
     internalVariantProps: PlasmicHome__VariantProps,
     internalArgProps: PlasmicHome__ArgProps,

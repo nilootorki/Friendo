@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter%3Aital%2Cwght%400%2C400%3B0%2C600%3B0%2C700&family=Inconsolata%3Aital%2Cwght%400%2C400%3B0%2C600%3B0%2C700&family=Inria+Serif%3Aital%2Cwght%400%2C400%3B0%2C700&family=Allura%3Aital%2Cwght%400%2C400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter%3Aital%2Cwght%400%2C400%3B0%2C500%3B0%2C600%3B0%2C700&family=Inconsolata%3Aital%2Cwght%400%2C400%3B0%2C500%3B0%2C600%3B0%2C700&family=Inria+Serif%3Aital%2Cwght%400%2C400%3B0%2C700&family=Allura%3Aital%2Cwght%400%2C400&display=swap");
 
 .plasmic_tokens {
   --token-K9KkPvofxTFE: #2563eb;
@@ -265,6 +265,10 @@
   --plasmic-token-unnamed-style-token-72: var(--token-SttGpHKVAEmZ);
   --token-Gok6G18VRXj-: #f1eedc;
   --plasmic-token-unnamed-style-token-73: var(--token-Gok6G18VRXj-);
+  --token-A9iq5fwh6BZf: #f8f7f2;
+  --plasmic-token-unnamed-style-token-74: var(--token-A9iq5fwh6BZf);
+  --token-CqRnaBKH-rnl: #69b1ff;
+  --plasmic-token-unnamed-style-token-75: var(--token-CqRnaBKH-rnl);
 }
 
 .plasmic_tokens {

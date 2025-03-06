@@ -1048,6 +1048,73 @@
           "cssFilePath": "plasmic/friendo/PlasmicSelect.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "DVa-YbIJ58vg",
+          "name": "CallHistory",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicCallHistory.jsx",
+          "importSpec": {
+            "modulePath": "../pages/call-history.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicCallHistory.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/call-history"
+        },
+        {
+          "id": "k5tf2deh1V9A",
+          "name": "Recommendation",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicRecommendation.jsx",
+          "importSpec": {
+            "modulePath": "Recommendation.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicRecommendation.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "pEo-eFzuH1TF",
+          "name": "Popover",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicPopover.jsx",
+          "importSpec": {
+            "modulePath": "Popover.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicPopover.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "TTtT2m4PE29g",
+          "name": "FriendComonent",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicFriendComonent.jsx",
+          "importSpec": {
+            "modulePath": "FriendComonent.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicFriendComonent.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "tGt2Vv6UjgKU",
+          "name": "AboutUs",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicAboutUs.jsx",
+          "importSpec": {
+            "modulePath": "../pages/about-us.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicAboutUs.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/about-us"
         }
       ],
       "icons": [
@@ -1177,6 +1244,46 @@
           "id": "dt5onsj82h7Q",
           "name": "images (1).jpg",
           "filePath": "../public/plasmic/friendo/images/images1Jpg.jpg"
+        },
+        {
+          "id": "B1amj_hvIdpE",
+          "name": "icons8-incoming-call-50.png",
+          "filePath": "../public/plasmic/friendo/images/icons8IncomingCall50Png.png"
+        },
+        {
+          "id": "vHn1NJ69YGgd",
+          "name": "icons8-outgoing-call-50.png",
+          "filePath": "../public/plasmic/friendo/images/icons8OutgoingCall50Png.png"
+        },
+        {
+          "id": "nvSeHRRywjmW",
+          "name": "icons8-missed-call-50.png",
+          "filePath": "../public/plasmic/friendo/images/icons8MissedCall50Png.png"
+        },
+        {
+          "id": "osrXlKkjn0FM",
+          "name": "icons8-note-48.png",
+          "filePath": "../public/plasmic/friendo/images/icons8Note48Png.png"
+        },
+        {
+          "id": "mwBmB9NQMLuc",
+          "name": "icons8-trash-50.png",
+          "filePath": "../public/plasmic/friendo/images/icons8Trash50Png.png"
+        },
+        {
+          "id": "cYq3nOJBhK6b",
+          "name": "icons8-trash-50 (1).png",
+          "filePath": "../public/plasmic/friendo/images/icons8Trash501Png.png"
+        },
+        {
+          "id": "D0KeIh0POEkn",
+          "name": "icons8-note-50.png",
+          "filePath": "../public/plasmic/friendo/images/icons8Note50Png.png"
+        },
+        {
+          "id": "qFdQdG_tT0I4",
+          "name": "icons8-upload-24.png",
+          "filePath": "../public/plasmic/friendo/images/icons8Upload24Png.png"
         }
       ],
       "indirect": false,
@@ -1256,6 +1363,28 @@
       ],
       "customFunctions": [],
       "jsBundleThemes": []
+    },
+    {
+      "projectId": "8PtdGodUbexNYgkuyBUcWu",
+      "projectApiToken": "34o5R5KswluuZ4sD83F88oQrcLWsNNeUpCptQ8Okf4hYqgjnHnX2idGAlhtB7WWQQelNAInf5XFazR1cGw",
+      "projectName": "plasmic-embed-css",
+      "version": ">0.0.0",
+      "cssFilePath": "plasmic/plasmic_embed_css/plasmic.module.css",
+      "components": [],
+      "icons": [],
+      "images": [],
+      "indirect": true,
+      "globalContextsFilePath": "plasmic/plasmic_embed_css/PlasmicGlobalContextsProvider.jsx",
+      "splitsProviderFilePath": "",
+      "codeComponents": [
+        {
+          "id": "qF0uJxFztB",
+          "name": "EmbedCss",
+          "displayName": "global-embed-css",
+          "componentImportPath": "@plasmicpkgs/plasmic-embed-css"
+        }
+      ],
+      "customFunctions": []
     }
   ],
   "globalVariants": {

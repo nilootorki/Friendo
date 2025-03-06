@@ -25,8 +25,10 @@ import {
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
 import { usePlasmicDataOp } from "@plasmicapp/react-web/lib/data-sources";
 import NavBar from "../../NavBar"; // plasmic-import: KnagBLotfm8n/component
+import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
 import TextInput from "../../TextInput"; // plasmic-import: B7pg-YS7wyr5/component
 import Combobox from "../../Combobox"; // plasmic-import: X52kQRY_iq9Z/component
+import MenuItem from "../../MenuItem"; // plasmic-import: zcnybJ5YUZhH/component
 import "@plasmicapp/react-web/lib/plasmic.css";
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: d1S8dWKKr4PVKg3azHqMAd/projectcss
@@ -135,6 +137,18 @@ function PlasmicProfileEdit__RenderFunc(props) {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "combobox2.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "upload.files",
+        type: "private",
+        variableType: "array",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       }
     ],
 
@@ -282,23 +296,38 @@ function PlasmicProfileEdit__RenderFunc(props) {
                 }}
               />
 
-              <PlasmicImg__
-                alt={""}
-                className={classNames(sty.img__nlVUq)}
-                displayHeight={"20px"}
-                displayMaxHeight={"none"}
-                displayMaxWidth={"100%"}
-                displayMinHeight={"0"}
-                displayMinWidth={"0"}
-                displayWidth={"20px"}
-                loading={"lazy"}
-                src={{
-                  src: "/plasmic/friendo/images/icons8Edit24Png.png",
-                  fullWidth: 24,
-                  fullHeight: 24,
-                  aspectRatio: undefined
+              <UploadWrapper
+                data-plasmic-name={"upload"}
+                data-plasmic-override={overrides.upload}
+                accept={""}
+                className={classNames("__wab_instance", sty.upload)}
+                files={generateStateValueProp($state, ["upload", "files"])}
+                onFilesChange={async (...eventArgs) => {
+                  generateStateOnChangeProp($state, ["upload", "files"]).apply(
+                    null,
+                    eventArgs
+                  );
                 }}
-              />
+                showUploadList={true}
+              >
+                <PlasmicImg__
+                  alt={""}
+                  className={classNames(sty.img__tfedi)}
+                  displayHeight={"auto"}
+                  displayMaxHeight={"none"}
+                  displayMaxWidth={"100%"}
+                  displayMinHeight={"0"}
+                  displayMinWidth={"0"}
+                  displayWidth={"auto"}
+                  loading={"lazy"}
+                  src={{
+                    src: "/plasmic/friendo/images/icons8Upload24Png.png",
+                    fullWidth: 24,
+                    fullHeight: 24,
+                    aspectRatio: undefined
+                  }}
+                />
+              </UploadWrapper>
             </div>
             <div className={classNames(projectcss.all, sty.freeBox__sNsix)}>
               <div
@@ -869,6 +898,12 @@ function PlasmicProfileEdit__RenderFunc(props) {
                   data-plasmic-name={"combobox"}
                   data-plasmic-override={overrides.combobox}
                   className={classNames("__wab_instance", sty.combobox)}
+                  items={
+                    <React.Fragment>
+                      <MenuItem label={"Introvert"} value={"item1"} />
+                      <MenuItem label={"extrovert"} value={"item2"} />
+                    </React.Fragment>
+                  }
                   onChange={async (...eventArgs) => {
                     generateStateOnChangeProp($state, [
                       "combobox",
@@ -882,6 +917,19 @@ function PlasmicProfileEdit__RenderFunc(props) {
                       return;
                     }
                   }}
+                  placeholder={(() => {
+                    try {
+                      return $queries.componentData.data[0].personality_type;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })()}
                 />
               </div>
               <div className={classNames(projectcss.all, sty.freeBox__uu8Oy)}>
@@ -913,6 +961,80 @@ function PlasmicProfileEdit__RenderFunc(props) {
                 />
               </div>
             </div>
+            <div className={classNames(projectcss.all, sty.freeBox__g9Doq)}>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__tUuci
+                )}
+              >
+                {"MBTI Type: "}
+              </div>
+              <div className={classNames(projectcss.all, sty.freeBox__vVlf2)}>
+                <Combobox
+                  data-plasmic-name={"combobox2"}
+                  data-plasmic-override={overrides.combobox2}
+                  className={classNames("__wab_instance", sty.combobox2)}
+                  description={null}
+                  items={
+                    <React.Fragment>
+                      <MenuItem label={"INFJ"} value={"infj"} />
+                      <MenuItem label={"INFP"} value={"infp"} />
+                      <MenuItem label={"INTJ"} value={"intj"} />
+                      <MenuItem label={"INTP"} value={"intp"} />
+                      <MenuItem label={"ISFJ"} value={"isfj"} />
+                      <MenuItem label={"ISFP"} value={"isfp"} />
+                      <MenuItem label={"ISTJ"} value={"istj"} />
+                      <MenuItem label={"ISTP"} value={"istp"} />
+                      <MenuItem label={"ENFJ"} value={"enfj"} />
+                      <MenuItem label={"ENFP"} value={"enfp"} />
+                      <MenuItem label={"ENTJ"} value={"entj"} />
+                      <MenuItem label={"ENTP"} value={"entp"} />
+                      <MenuItem label={"ESFJ"} value={"esfj"} />
+                      <MenuItem label={"ESFP"} value={"esfp"} />
+                      <MenuItem label={"ESTJ"} value={"estj"} />
+                      <MenuItem label={"ESTP"} value={"estp"} />
+                    </React.Fragment>
+                  }
+                  onChange={async (...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "combobox2",
+                      "value"
+                    ]).apply(null, eventArgs);
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
+                  }}
+                  placeholder={(() => {
+                    try {
+                      return $queries.componentData.data[0].mbti;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })()}
+                />
+              </div>
+            </div>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__ho3AR
+              )}
+            >
+              {"OK"}
+            </div>
           </div>
         </div>
       </div>
@@ -921,12 +1043,24 @@ function PlasmicProfileEdit__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "navBar", "textInput", "textInput2", "textInput3", "combobox"],
+  root: [
+    "root",
+    "navBar",
+    "upload",
+    "textInput",
+    "textInput2",
+    "textInput3",
+    "combobox",
+    "combobox2"
+  ],
+
   navBar: ["navBar"],
+  upload: ["upload"],
   textInput: ["textInput"],
   textInput2: ["textInput2"],
   textInput3: ["textInput3"],
-  combobox: ["combobox"]
+  combobox: ["combobox"],
+  combobox2: ["combobox2"]
 };
 
 function makeNodeComponent(nodeName) {
@@ -962,10 +1096,12 @@ export const PlasmicProfileEdit = Object.assign(
   {
     // Helper components rendering sub-elements
     navBar: makeNodeComponent("navBar"),
+    upload: makeNodeComponent("upload"),
     textInput: makeNodeComponent("textInput"),
     textInput2: makeNodeComponent("textInput2"),
     textInput3: makeNodeComponent("textInput3"),
     combobox: makeNodeComponent("combobox"),
+    combobox2: makeNodeComponent("combobox2"),
     // Metadata about props expected for PlasmicProfileEdit
     internalVariantProps: PlasmicProfileEdit__VariantProps,
     internalArgProps: PlasmicProfileEdit__ArgProps,

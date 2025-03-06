@@ -68,39 +68,9 @@
   max-width: 100%;
   padding: 8px;
 }
-.freeBox___0Gn7A {
-  display: flex;
-  flex-direction: column;
+.friendComonent:global(.__wab_instance) {
   position: relative;
-  width: 250px;
-  height: 130px;
-  max-width: 100%;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  border-radius: 20px;
-  padding: 0px;
   margin: 30px;
-}
-.root .freeBox___0Gn7A:hover {
-  background: var(--token-6hZ_gatT1I3C);
-}
-.img {
-  object-fit: cover;
-  max-width: 100%;
-  width: 70px;
-}
-.img > picture > img {
-  object-fit: cover;
-}
-.text__rZKo {
-  position: relative;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  margin-top: 6px;
-  font-size: 20px;
 }
 .text__jOnjn {
   position: relative;

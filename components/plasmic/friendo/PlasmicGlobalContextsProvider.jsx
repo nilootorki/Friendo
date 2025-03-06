@@ -5,9 +5,10 @@
 // Plasmic Project: d1S8dWKKr4PVKg3azHqMAd
 import * as React from "react";
 import { AntdConfigProvider } from "@plasmicpkgs/antd5/skinny/registerConfigProvider";
+import { EmbedCss } from "@plasmicpkgs/plasmic-embed-css";
 
 export default function GlobalContextsProvider(props) {
-  const { children, antdConfigProviderProps } = props;
+  const { children, antdConfigProviderProps, embedCssProps } = props;
   return (
     <AntdConfigProvider
       {...antdConfigProviderProps}
@@ -101,7 +102,16 @@ export default function GlobalContextsProvider(props) {
           : false
       }
     >
-      {children}
+      <EmbedCss
+        {...embedCssProps}
+        css={
+          embedCssProps && "css" in embedCssProps
+            ? embedCssProps.css
+            : undefined
+        }
+      >
+        {children}
+      </EmbedCss>
     </AntdConfigProvider>
   );
 }

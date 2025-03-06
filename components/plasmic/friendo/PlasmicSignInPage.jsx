@@ -18,12 +18,16 @@ import {
   deriveRenderOpts,
   generateStateOnChangeProp,
   get as $stateGet,
-  renderPlasmicSlot,
   set as $stateSet,
   useDollarState
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
-import { usePlasmicDataOp } from "@plasmicapp/react-web/lib/data-sources";
+import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
+import {
+  executePlasmicDataOp,
+  usePlasmicDataOp,
+  usePlasmicInvalidate
+} from "@plasmicapp/react-web/lib/data-sources";
 import TextField from "../../TextField"; // plasmic-import: XtPi33MMKJk2/component
 import Button from "../../Button"; // plasmic-import: R-SJru1lXq4W/component
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -35,7 +39,7 @@ createPlasmicElementProxy;
 
 export const PlasmicSignInPage__VariantProps = new Array();
 
-export const PlasmicSignInPage__ArgProps = new Array("children");
+export const PlasmicSignInPage__ArgProps = new Array();
 
 const $$ = {};
 
@@ -109,6 +113,8 @@ function PlasmicSignInPage__RenderFunc(props) {
     $queries: $queries,
     $refs
   });
+  const dataSourcesCtx = usePlasmicDataSourceContext();
+  const plasmicInvalidate = usePlasmicInvalidate();
   const new$Queries = {
     usersTable: usePlasmicDataOp(() => {
       return {
@@ -116,6 +122,16 @@ function PlasmicSignInPage__RenderFunc(props) {
         opId: "d3669a13-068f-4053-b073-74632e9142a7",
         userArgs: {},
         cacheKey: `plasmic.$.d3669a13-068f-4053-b073-74632e9142a7.$.`,
+        invalidatedKeys: null,
+        roleId: null
+      };
+    }),
+    query: usePlasmicDataOp(() => {
+      return {
+        sourceId: "fSBHCDiKQaXCxvx1oE84mu",
+        opId: "c6203751-7a07-44f1-980b-0f6fb92270f7",
+        userArgs: {},
+        cacheKey: `plasmic.$.c6203751-7a07-44f1-980b-0f6fb92270f7.$.`,
         invalidatedKeys: null,
         roleId: null
       };
@@ -334,53 +350,86 @@ function PlasmicSignInPage__RenderFunc(props) {
               data-plasmic-override={overrides.button}
               className={classNames("__wab_instance", sty.button)}
               label={
-                <div className={classNames(projectcss.all, sty.freeBox__tRbj0)}>
-                  {renderPlasmicSlot({
-                    defaultContents: "Sign In",
-                    value: args.children,
-                    className: classNames(sty.slotTargetChildren)
-                  })}
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text___8ZWe4
+                  )}
+                >
+                  {"Sign In"}
                 </div>
               }
               onClick={async event => {
                 const $steps = {};
-                $steps["goToPage"] = true
+                $steps["updateShowpass"] = true
                   ? (() => {
                       const actionArgs = {
-                        destination: (() => {
-                          try {
-                            return "/home?username=" + $state.username.value;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return undefined;
-                            }
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["showpass"]
+                        },
+                        operation: 0
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
+                        }
+                        const { objRoot, variablePath } = variable;
+                        $stateSet(objRoot, variablePath, value);
+                        return value;
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["updateShowpass"] != null &&
+                  typeof $steps["updateShowpass"] === "object" &&
+                  typeof $steps["updateShowpass"].then === "function"
+                ) {
+                  $steps["updateShowpass"] = await $steps["updateShowpass"];
+                }
+                $steps["checkSignIn"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        dataOp: {
+                          sourceId: "kyQLvzX4VBgHR6BbD2tTbc",
+                          opId: "cb90bf08-d970-468a-b069-ed344e25bded",
+                          userArgs: {
+                            body: [$state.username.value, $state.password.value]
+                          },
+                          cacheKey: null,
+                          invalidatedKeys: [],
+                          roleId: null
+                        }
+                      };
+                      return (async ({ dataOp, continueOnError }) => {
+                        try {
+                          const response = await executePlasmicDataOp(dataOp, {
+                            userAuthToken: dataSourcesCtx?.userAuthToken,
+                            user: dataSourcesCtx?.user
+                          });
+                          await plasmicInvalidate(dataOp.invalidatedKeys);
+                          return response;
+                        } catch (e) {
+                          if (!continueOnError) {
                             throw e;
                           }
-                        })()
-                      };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
+                          return e;
                         }
                       })?.apply(null, [actionArgs]);
                     })()
                   : undefined;
                 if (
-                  $steps["goToPage"] != null &&
-                  typeof $steps["goToPage"] === "object" &&
-                  typeof $steps["goToPage"].then === "function"
+                  $steps["checkSignIn"] != null &&
+                  typeof $steps["checkSignIn"] === "object" &&
+                  typeof $steps["checkSignIn"].then === "function"
                 ) {
-                  $steps["goToPage"] = await $steps["goToPage"];
+                  $steps["checkSignIn"] = await $steps["checkSignIn"];
                 }
               }}
             />

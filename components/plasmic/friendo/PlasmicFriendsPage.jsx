@@ -12,7 +12,6 @@ import * as React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import {
-  PlasmicImg as PlasmicImg__,
   classNames,
   createPlasmicElementProxy,
   deriveRenderOpts,
@@ -20,11 +19,13 @@ import {
   generateStateOnChangeProp,
   generateStateValueProp,
   hasVariant,
+  initializePlasmicStates,
   useDollarState
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
 import { usePlasmicDataOp } from "@plasmicapp/react-web/lib/data-sources";
 import NavBar from "../../NavBar"; // plasmic-import: KnagBLotfm8n/component
+import FriendComonent from "../../FriendComonent"; // plasmic-import: TTtT2m4PE29g/component
 import { useUnnamedGlobalGroupOfVariants } from "./PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants"; // plasmic-import: lmEUP9r96TgA/globalVariant
 import "@plasmicapp/react-web/lib/plasmic.css";
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
@@ -92,6 +93,11 @@ function PlasmicFriendsPage__RenderFunc(props) {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "friendComonent[].garbageHover",
+        type: "private",
+        variableType: "boolean"
       }
     ],
 
@@ -245,7 +251,7 @@ function PlasmicFriendsPage__RenderFunc(props) {
                 (() => {
                   try {
                     return $queries.suggestions.data.filter(
-                      suggestion => suggestion.username === $ctx.query.username
+                      suggestion => suggestion.username === "Nel"
                     );
                   } catch (e) {
                     if (
@@ -260,110 +266,61 @@ function PlasmicFriendsPage__RenderFunc(props) {
               ).map((__plasmic_item_0, __plasmic_idx_0) => {
                 const currentItem = __plasmic_item_0;
                 const currentIndex = __plasmic_idx_0;
-                return (
-                  <div
-                    className={classNames(projectcss.all, sty.freeBox___0Gn7A, {
-                      [sty.freeBoxglobal_unnamedGlobalGroupOfVariants_unnamedVariant2___0Gn7Ayjy5]:
-                        hasVariant(
-                          globalVariants,
-                          "unnamedGlobalGroupOfVariants",
-                          "unnamedVariant2"
-                        )
-                    })}
-                    key={currentIndex}
-                    onClick={async event => {
-                      const $steps = {};
-                      $steps["goToPage"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              destination: (() => {
-                                try {
-                                  return (
-                                    "/friends-details?friendId=" +
-                                    currentItem.friend_name +
-                                    "&username=" +
-                                    $ctx.query.username
-                                  );
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return `/friends-details`;
-                                  }
-                                  throw e;
-                                }
-                              })()
-                            };
-                            return (({ destination }) => {
-                              if (
-                                typeof destination === "string" &&
-                                destination.startsWith("#")
-                              ) {
-                                document
-                                  .getElementById(destination.substr(1))
-                                  .scrollIntoView({ behavior: "smooth" });
-                              } else {
-                                __nextRouter?.push(destination);
-                              }
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["goToPage"] != null &&
-                        typeof $steps["goToPage"] === "object" &&
-                        typeof $steps["goToPage"].then === "function"
-                      ) {
-                        $steps["goToPage"] = await $steps["goToPage"];
+                return (() => {
+                  const child$Props = {
+                    className: classNames(
+                      "__wab_instance",
+                      sty.friendComonent,
+                      {
+                        [sty.friendComonentglobal_unnamedGlobalGroupOfVariants_unnamedVariant2]:
+                          hasVariant(
+                            globalVariants,
+                            "unnamedGlobalGroupOfVariants",
+                            "unnamedVariant2"
+                          )
                       }
-                    }}
-                  >
-                    <PlasmicImg__
-                      data-plasmic-name={"img"}
-                      data-plasmic-override={overrides.img}
-                      alt={""}
-                      className={classNames(sty.img)}
-                      displayHeight={"auto"}
-                      displayMaxHeight={"none"}
-                      displayMaxWidth={"100%"}
-                      displayMinHeight={"0"}
-                      displayMinWidth={"0"}
-                      displayWidth={"70px"}
-                      loading={"lazy"}
-                      src={{
-                        src: "/plasmic/friendo/images/icons8ProfilePicture96Png.png",
-                        fullWidth: 96,
-                        fullHeight: 96,
-                        aspectRatio: undefined
-                      }}
-                    />
+                    ),
+                    currentItem: currentItem,
+                    garbageHover: generateStateValueProp($state, [
+                      "friendComonent",
+                      __plasmic_idx_0,
+                      "garbageHover"
+                    ]),
+                    key: currentIndex,
+                    onGarbageHoverChange: async (...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "friendComonent",
+                        __plasmic_idx_0,
+                        "garbageHover"
+                      ]).apply(null, eventArgs);
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }
+                  };
+                  initializePlasmicStates(
+                    $state,
+                    [
+                      {
+                        name: "friendComonent[].garbageHover",
+                        initFunc: ({ $props, $state, $queries }) => false
+                      }
+                    ],
 
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__rZKo
-                      )}
-                    >
-                      <React.Fragment>
-                        {(() => {
-                          try {
-                            return currentItem.friend_name;
-                          } catch (e) {
-                            if (
-                              e instanceof TypeError ||
-                              e?.plasmicType === "PlasmicUndefinedDataError"
-                            ) {
-                              return " ";
-                            }
-                            throw e;
-                          }
-                        })()}
-                      </React.Fragment>
-                    </div>
-                  </div>
-                );
+                    [__plasmic_idx_0]
+                  );
+                  return (
+                    <FriendComonent
+                      data-plasmic-name={"friendComonent"}
+                      data-plasmic-override={overrides.friendComonent}
+                      {...child$Props}
+                    />
+                  );
+                })();
               })}
             </div>
             <div
@@ -372,6 +329,33 @@ function PlasmicFriendsPage__RenderFunc(props) {
                 projectcss.__wab_text,
                 sty.text__jOnjn
               )}
+              onClick={async event => {
+                const $steps = {};
+                $steps["goToAddNewFriend"] = true
+                  ? (() => {
+                      const actionArgs = { destination: `/add-new-friend` };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToAddNewFriend"] != null &&
+                  typeof $steps["goToAddNewFriend"] === "object" &&
+                  typeof $steps["goToAddNewFriend"].then === "function"
+                ) {
+                  $steps["goToAddNewFriend"] = await $steps["goToAddNewFriend"];
+                }
+              }}
             >
               {"add a new friend"}
             </div>
@@ -383,9 +367,9 @@ function PlasmicFriendsPage__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "navBar", "img"],
+  root: ["root", "navBar", "friendComonent"],
   navBar: ["navBar"],
-  img: ["img"]
+  friendComonent: ["friendComonent"]
 };
 
 function makeNodeComponent(nodeName) {
@@ -421,7 +405,7 @@ export const PlasmicFriendsPage = Object.assign(
   {
     // Helper components rendering sub-elements
     navBar: makeNodeComponent("navBar"),
-    img: makeNodeComponent("img"),
+    friendComonent: makeNodeComponent("friendComonent"),
     // Metadata about props expected for PlasmicFriendsPage
     internalVariantProps: PlasmicFriendsPage__VariantProps,
     internalArgProps: PlasmicFriendsPage__ArgProps,

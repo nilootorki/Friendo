@@ -299,7 +299,7 @@ function PlasmicFriendsDetails__RenderFunc(props) {
                 (() => {
                   try {
                     return $queries.query.data.filter(
-                      item => item.username === $ctx.query.username
+                      item => item.username === "Nel"
                     );
                   } catch (e) {
                     if (
@@ -426,6 +426,28 @@ function PlasmicFriendsDetails__RenderFunc(props) {
                 displayMinWidth={"0"}
                 displayWidth={"130px"}
                 loading={"lazy"}
+                onLoad={async event => {
+                  const $steps = {};
+                  $steps["runCode"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return undefined;
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["runCode"] != null &&
+                    typeof $steps["runCode"] === "object" &&
+                    typeof $steps["runCode"].then === "function"
+                  ) {
+                    $steps["runCode"] = await $steps["runCode"];
+                  }
+                }}
                 src={{
                   src: "/plasmic/friendo/images/icons8ProfilePicture96Png.png",
                   fullWidth: 96,

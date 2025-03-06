@@ -13,14 +13,16 @@
     "@plasmicapp/react-web": "^0.2.374",
     "@plasmicpkgs/antd5": "^0.0.275",
     "@plasmicpkgs/lottie-react": "^0.0.202",
+    "@plasmicpkgs/plasmic-basic-components": "^0.0.234",
+    "@plasmicpkgs/plasmic-embed-css": "^0.1.196",
     "@plasmicpkgs/react-aria": "^0.0.116",
     "@plasmicpkgs/react-awesome-reveal": "^3.8.213",
-    "@plasmicpkgs/plasmic-basic-components": "^0.0.234",
     "next": "14.2.24",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
     "eslint": "^8",
-    "eslint-config-next": "14.2.24"}
+    "eslint-config-next": "14.2.24"
+  }
 }
