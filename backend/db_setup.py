@@ -12,10 +12,12 @@ CREATE TABLE IF NOT EXISTS users(
     username VARCHAR(50) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
+    gender VARCHAR(10) CHECK (gender IN ('Male', 'Female')) NOT NULL,
     personality_type VARCHAR(50) CHECK (personality_type IN ('Introvert','Extrovert','Ambivert')) DEFAULT NULL,
     mbti VARCHAR(4) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    contacts JSONB DEFAULT NULL
+    contacts JSONB DEFAULT NULL,
+    profile_photo TEXT DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS user_friends ( 
@@ -23,10 +25,13 @@ CREATE TABLE IF NOT EXISTS user_friends (
     user_id INT REFERENCES users(user_id) ON DELETE CASCADE,  
     username VARCHAR(50) NOT NULL,
     friend_name VARCHAR(50) NOT NULL,  
+    friend_telegram_username VARCHAR(50) NOT NULL,
+    gender VARCHAR(10) CHECK (gender IN ('Male', 'Female')) DEFAULT NULL,
     interaction_type VARCHAR(10) CHECK (interaction_type IN ('Call', 'SMS')),  
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     messages JSONB DEFAULT NULL,
-    score JSONB DEFAULT NULL  
+    score JSONB DEFAULT NULL,
+    initial_note TEXT DEFAULT NULL   
 );
 
 
@@ -35,11 +40,17 @@ CREATE TABLE IF NOT EXISTS user_suggestions (
     user_id INT REFERENCES users(user_id) ON DELETE CASCADE,  
     username VARCHAR(50) NOT NULL,
     friend_name VARCHAR(50) NOT NULL,  
-    suggestion VARCHAR(500) NOT NULL,   
+    suggestion VARCHAR(500) DEFAULT NULL,   
     gender VARCHAR(50) DEFAULT NULL,
+    interaction_type VARCHAR(10) CHECK (interaction_type IN ('Call', 'SMS')),
     comment VARCHAR(500) DEFAULT NULL,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    total_score FLOAT DEFAULT NULL
+    messages JSONB DEFAULT NULL,
+    score JSONB DEFAULT NULL,
+    initial_note TEXT DEFAULT NULL,
+    total_score VARCHAR(500) DEFAULT NULL,
+    checked BOOLEAN DEFAULT FALSE,
+    profile_photo TEXT DEFAULT NULL
      
 );
 
