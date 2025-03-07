@@ -46,13 +46,13 @@
   height: auto;
   max-width: 100%;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   top: auto;
   left: auto;
   z-index: 1;
   margin-top: 32px;
-  grid-column-start: 3 !important;
-  grid-column-end: -3 !important;
+  grid-column-start: 1 !important;
+  grid-column-end: -1 !important;
   padding: 0px;
 }
 .freeBox___70QMx {
@@ -61,7 +61,7 @@
   position: relative;
   align-items: center;
   justify-content: space-between;
-  width: 1500px;
+  width: 1200px;
   height: auto;
   max-width: 100%;
   margin-top: 45px;
@@ -107,16 +107,68 @@
     display: none;
   }
 }
-.button:global(.__wab_instance):global(.__wab_instance) {
+.freeBox___8CtKx {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 350px;
+  height: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-shrink: 0;
+  padding: 8px;
+}
+.freeBox__pT1B {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.button__ww1X:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
 }
-.svg__afLxf {
+.svg__vQVm {
   position: relative;
   height: 1em;
 }
-.text___9XrC {
+.text__l9TSd {
   white-space: pre;
-  margin-left: 17px;
+  padding-left: 0px;
+}
+.svg__zgXvf {
+  position: relative;
+  height: 1em;
+}
+.button__fnIwR:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+}
+.svg__i0IKt {
+  position: relative;
+  height: 1em;
+}
+.text__mvYd3 {
+  white-space: pre;
+  padding-top: 0px;
+}
+.svg__nz9PE {
+  position: relative;
+  height: 1em;
+}
+.text___3X6L0 {
+  position: absolute;
+  width: 300px;
+  height: auto;
+  max-width: 100%;
+  padding-left: 0px;
+  left: -60px;
+  top: 62px;
 }
 .text__xAnVj {
   width: 100%;

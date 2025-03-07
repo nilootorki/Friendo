@@ -1,6 +1,6 @@
 .root:global(.__wab_instance) {
   position: relative;
-  background: #ffffff;
+  background: none;
   display: flex;
   cursor: pointer;
   box-sizing: border-box;
@@ -208,7 +208,7 @@
   align-items: stretch;
   width: 100%;
   height: 100%;
-  background: none;
+  background: var(--token-SttGpHKVAEmZ);
   flex-wrap: nowrap;
   align-content: stretch;
   mix-blend-mode: normal;

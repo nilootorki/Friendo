@@ -20,18 +20,14 @@ import {
   ensureGlobalVariants,
   generateStateOnChangeProp,
   generateStateValueProp,
+  get as $stateGet,
   initializePlasmicStates,
   renderPlasmicSlot,
   set as $stateSet,
   useDollarState
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
-import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
-import {
-  executePlasmicDataOp,
-  usePlasmicDataOp,
-  usePlasmicInvalidate
-} from "@plasmicapp/react-web/lib/data-sources";
+import { usePlasmicDataOp } from "@plasmicapp/react-web/lib/data-sources";
 import NavBar from "../../NavBar"; // plasmic-import: KnagBLotfm8n/component
 import Button from "../../Button"; // plasmic-import: R-SJru1lXq4W/component
 import Checkbox from "../../Checkbox"; // plasmic-import: qcH6HD0MTML6/component
@@ -121,6 +117,18 @@ function PlasmicHome__RenderFunc(props) {
         type: "private",
         variableType: "number",
         initFunc: ({ $props, $state, $queries, $ctx }) => 5
+      },
+      {
+        path: "navBar.friendsTooltip",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "runAnalysisText",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
 
@@ -132,8 +140,6 @@ function PlasmicHome__RenderFunc(props) {
     $queries: $queries,
     $refs
   });
-  const dataSourcesCtx = usePlasmicDataSourceContext();
-  const plasmicInvalidate = usePlasmicInvalidate();
   const new$Queries = {
     componentData: usePlasmicDataOp(() => {
       return {
@@ -197,6 +203,10 @@ function PlasmicHome__RenderFunc(props) {
               "caltooltip"
             ])}
             className={classNames("__wab_instance", sty.navBar)}
+            friendsTooltip={generateStateValueProp($state, [
+              "navBar",
+              "friendsTooltip"
+            ])}
             messTooltip={generateStateValueProp($state, [
               "navBar",
               "messTooltip"
@@ -206,6 +216,19 @@ function PlasmicHome__RenderFunc(props) {
                 null,
                 eventArgs
               );
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
+            }}
+            onFriendsTooltipChange={async (...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "navBar",
+                "friendsTooltip"
+              ]).apply(null, eventArgs);
               if (
                 eventArgs.length > 1 &&
                 eventArgs[1] &&
@@ -279,97 +302,102 @@ function PlasmicHome__RenderFunc(props) {
                   {"AI Recommendations"}
                 </div>
               </div>
-              <Button
-                data-plasmic-name={"button"}
-                data-plasmic-override={overrides.button}
-                className={classNames("__wab_instance", sty.button)}
-                end={null}
-                label={
+              <div className={classNames(projectcss.all, sty.freeBox___8CtKx)}>
+                <div className={classNames(projectcss.all, sty.freeBox__pT1B)}>
+                  <Button
+                    className={classNames("__wab_instance", sty.button__ww1X)}
+                    label={
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__l9TSd
+                        )}
+                      >
+                        {"Run Analysis"}
+                      </div>
+                    }
+                    onClick={async event => {
+                      const $steps = {};
+                      $steps["updateRunAnalysisText"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["runAnalysisText"]
+                              },
+                              operation: 4
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+                              const oldValue = $stateGet(objRoot, variablePath);
+                              $stateSet(objRoot, variablePath, !oldValue);
+                              return !oldValue;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updateRunAnalysisText"] != null &&
+                        typeof $steps["updateRunAnalysisText"] === "object" &&
+                        typeof $steps["updateRunAnalysisText"].then ===
+                          "function"
+                      ) {
+                        $steps["updateRunAnalysisText"] = await $steps[
+                          "updateRunAnalysisText"
+                        ];
+                      }
+                    }}
+                  />
+
+                  <Button
+                    className={classNames("__wab_instance", sty.button__fnIwR)}
+                    label={
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__mvYd3
+                        )}
+                      >
+                        {"Mood Tracking"}
+                      </div>
+                    }
+                  />
+                </div>
+                {(() => {
+                  try {
+                    return $state.runAnalysisText;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return true;
+                    }
+                    throw e;
+                  }
+                })() ? (
                   <div
                     className={classNames(
                       projectcss.all,
                       projectcss.__wab_text,
-                      sty.text___9XrC
+                      sty.text___3X6L0
                     )}
                   >
-                    {"See All Friends"}
+                    {
+                      "Run analysis request registered. please come back later to see the results."
+                    }
                   </div>
-                }
-                onClick={async event => {
-                  const $steps = {};
-                  $steps["goToPage"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          destination: (() => {
-                            try {
-                              return (
-                                "/friends-page?username=" + $ctx.query.username
-                              );
-                            } catch (e) {
-                              if (
-                                e instanceof TypeError ||
-                                e?.plasmicType === "PlasmicUndefinedDataError"
-                              ) {
-                                return `/friends-page`;
-                              }
-                              throw e;
-                            }
-                          })()
-                        };
-                        return (({ destination }) => {
-                          if (
-                            typeof destination === "string" &&
-                            destination.startsWith("#")
-                          ) {
-                            document
-                              .getElementById(destination.substr(1))
-                              .scrollIntoView({ behavior: "smooth" });
-                          } else {
-                            __nextRouter?.push(destination);
-                          }
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["goToPage"] != null &&
-                    typeof $steps["goToPage"] === "object" &&
-                    typeof $steps["goToPage"].then === "function"
-                  ) {
-                    $steps["goToPage"] = await $steps["goToPage"];
-                  }
-                  $steps["useIntegration"] = true
-                    ? (() => {
-                        const actionArgs = {};
-                        return (async ({ dataOp, continueOnError }) => {
-                          try {
-                            const response = await executePlasmicDataOp(
-                              dataOp,
-                              {
-                                userAuthToken: dataSourcesCtx?.userAuthToken,
-                                user: dataSourcesCtx?.user
-                              }
-                            );
-                            await plasmicInvalidate(dataOp.invalidatedKeys);
-                            return response;
-                          } catch (e) {
-                            if (!continueOnError) {
-                              throw e;
-                            }
-                            return e;
-                          }
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["useIntegration"] != null &&
-                    typeof $steps["useIntegration"] === "object" &&
-                    typeof $steps["useIntegration"].then === "function"
-                  ) {
-                    $steps["useIntegration"] = await $steps["useIntegration"];
-                  }
-                }}
-              />
-
+                ) : null}
+              </div>
               <div
                 className={classNames(
                   projectcss.all,
@@ -877,9 +905,8 @@ function PlasmicHome__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "navBar", "button", "checkbox", "recommendation"],
+  root: ["root", "navBar", "checkbox", "recommendation"],
   navBar: ["navBar"],
-  button: ["button"],
   checkbox: ["checkbox"],
   recommendation: ["recommendation"]
 };
@@ -917,7 +944,6 @@ export const PlasmicHome = Object.assign(
   {
     // Helper components rendering sub-elements
     navBar: makeNodeComponent("navBar"),
-    button: makeNodeComponent("button"),
     checkbox: makeNodeComponent("checkbox"),
     recommendation: makeNodeComponent("recommendation"),
     // Metadata about props expected for PlasmicHome

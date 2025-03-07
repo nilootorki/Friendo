@@ -86,6 +86,12 @@ function PlasmicAboutUs__RenderFunc(props) {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "navBar.friendsTooltip",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
 
@@ -131,6 +137,10 @@ function PlasmicAboutUs__RenderFunc(props) {
               "caltooltip"
             ])}
             className={classNames("__wab_instance", sty.navBar)}
+            friendsTooltip={generateStateValueProp($state, [
+              "navBar",
+              "friendsTooltip"
+            ])}
             messTooltip={generateStateValueProp($state, [
               "navBar",
               "messTooltip"
@@ -140,6 +150,19 @@ function PlasmicAboutUs__RenderFunc(props) {
                 null,
                 eventArgs
               );
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
+            }}
+            onFriendsTooltipChange={async (...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "navBar",
+                "friendsTooltip"
+              ]).apply(null, eventArgs);
               if (
                 eventArgs.length > 1 &&
                 eventArgs[1] &&
@@ -197,45 +220,200 @@ function PlasmicAboutUs__RenderFunc(props) {
             ])}
           />
 
-          <h1
-            className={classNames(
-              projectcss.all,
-              projectcss.h1,
-              projectcss.__wab_text,
-              sty.h1__kxMsx
-            )}
-          >
-            {"what is friendo?"}
-          </h1>
-          <div
-            className={classNames(
-              projectcss.all,
-              projectcss.__wab_text,
-              sty.text___77DgS
-            )}
-          >
-            {
-              "Friendo is an AI-driven friendship management system that helps you evaluate \rand nurture your friendships by analyzing interactions, moods, and personalized AI insights. It is designed to help you increase the quality of your friendships effortlessly!"
-            }
+          <div className={classNames(projectcss.all, sty.freeBox__geD92)}>
+            <h4
+              className={classNames(
+                projectcss.all,
+                projectcss.h4,
+                projectcss.__wab_text,
+                sty.h4__kxMsx
+              )}
+            >
+              {"what is friendo?"}
+            </h4>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text___77DgS
+              )}
+            >
+              {
+                "Friendo is an AI-driven friendship management system that helps you evaluate \rand nurture your friendships by analyzing interactions, moods, and personalized AI insights. It is designed to help you increase the quality of your friendships effortlessly!"
+              }
+            </div>
           </div>
-          <h1
-            className={classNames(
-              projectcss.all,
-              projectcss.h1,
-              projectcss.__wab_text,
-              sty.h1__jAxix
-            )}
-          >
-            {"How can i use friendo?"}
-          </h1>
-          <div
-            className={classNames(
-              projectcss.all,
-              projectcss.__wab_text,
-              sty.text__bJtgH
-            )}
-          >
-            {"Enter some text"}
+          <div className={classNames(projectcss.all, sty.freeBox__aehsO)}>
+            <h4
+              className={classNames(
+                projectcss.all,
+                projectcss.h4,
+                projectcss.__wab_text,
+                sty.h4__jAxix
+              )}
+            >
+              {"How can i use friendo?"}
+            </h4>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__bJtgH
+              )}
+            >
+              {
+                "Friendo takes your telegram messages, call history and sms texts, analyzes them with AI, and gives you personalized suggestions about communicating with your friends. If it has been long since you interacted with a good friend, friendo reminds you. If a friend is bringing your mood down, friendo can detect that and tell you. frnindo can give you suggestions to communicate with which freind based on your moods. friendo shows statistics about your friendships to better analyze the quality of your communications."
+              }
+            </div>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__e94S9
+              )}
+            >
+              {
+                "Now lets dig deeper inside different parts and features of friendo!"
+              }
+            </div>
+          </div>
+          <div className={classNames(projectcss.all, sty.freeBox__gIu4F)}>
+            <h4
+              className={classNames(
+                projectcss.all,
+                projectcss.h4,
+                projectcss.__wab_text,
+                sty.h4___41K0T
+              )}
+            >
+              {"How do i get started?"}
+            </h4>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__dMo4Q
+              )}
+            >
+              {
+                "In order to get your calls and messages, friendo needs to access your contacts through your phone. first, you should download the friendo app. you sign up through the app, give access to the app to get your contacts and then choose which contacts you want frindo to analyze your friendship with. after that, you will be directed to the home page of this site, where you can start you journy of improving the quality of your friendships!"
+              }
+            </div>
+          </div>
+          <div className={classNames(projectcss.all, sty.freeBox__rijnB)}>
+            <h4
+              className={classNames(
+                projectcss.all,
+                projectcss.h4,
+                projectcss.__wab_text,
+                sty.h4__ulz1N
+              )}
+            >
+              {"How do i run an analysis?"}
+            </h4>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__ngLJu
+              )}
+            >
+              {
+                'the AI recommendations are shown on the homepage of the app. if this is the first time signing in to friendo, no suggestion is shown for you on this page. you can click the "see all friends" button in the nav bar at the top of the page and see the contacts you chose in the previous step. click on one of the friends, and you can see the details about that friend. in this page you can upload your telegram messages with that friend. you can do this for as many friends as you want, and then go back to the main page and click "run analysis". this might take a while, but the next time you log in to the site you can see AI suggestions for the chosen friends.\nfor each suggestion, you can add a note that shows your opinion about that suggestion. it sends a feedback to the AI so that the suggestions are better improved'
+              }
+            </div>
+          </div>
+          <div className={classNames(projectcss.all, sty.freeBox__dZxUx)}>
+            <h4
+              className={classNames(
+                projectcss.all,
+                projectcss.h4,
+                projectcss.__wab_text,
+                sty.h4__miMa
+              )}
+            >
+              {"your friends"}
+            </h4>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__v7GQ2
+              )}
+            >
+              {
+                "as mentioned before, you can see all of your friends in the friends page. you can add or delete friends, and you can also see some details about your friends, including the last time you interacted with them and the last AI suggestion regarding that friend. you can also upload your latest telegram messages with that friend. you can also add a note about each friend, which helps further improve the generated AI suggestion."
+              }
+            </div>
+          </div>
+          <div className={classNames(projectcss.all, sty.freeBox__i8At7)}>
+            <div className={classNames(projectcss.all, sty.freeBox___2RQxr)}>
+              <h4
+                className={classNames(
+                  projectcss.all,
+                  projectcss.h4,
+                  projectcss.__wab_text,
+                  sty.h4__xKlKa
+                )}
+              >
+                {"Call and message history"}
+              </h4>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__aB4N
+                )}
+              >
+                {
+                  "you can go to the call history page and the message history page from the nav bar at the top of the page.\nin the message history, you can see the telegram messages you had with a friend separated by each day. you can add notes about that days messages here. the call history page needs some setting up. in order for the AI to analyze your calls, you need to download an app to get your call history and then upload it to the site. then you can see your call history with different people in the app and add a note about that call and the topics discussed. "
+                }
+              </div>
+            </div>
+          </div>
+          <div className={classNames(projectcss.all, sty.freeBox__dyEKy)}>
+            <h4
+              className={classNames(
+                projectcss.all,
+                projectcss.h4,
+                projectcss.__wab_text,
+                sty.h4__qLYpv
+              )}
+            >
+              {"statistics"}
+            </h4>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__bihLr
+              )}
+            >
+              {"Enter some text"}
+            </div>
+          </div>
+          <div className={classNames(projectcss.all, sty.freeBox__lZoUz)}>
+            <h4
+              className={classNames(
+                projectcss.all,
+                projectcss.h4,
+                projectcss.__wab_text,
+                sty.h4__nwIqN
+              )}
+            >
+              {"mood tracking"}
+            </h4>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__vRr4H
+              )}
+            >
+              {
+                "you can see a mood tracking button at the top of the home page. this button takes you to a page in which you can type in how you are feeling today, and based on the previous analysis of your friends, the ai suggest which friend you should call or text today."
+              }
+            </div>
           </div>
         </div>
       </div>

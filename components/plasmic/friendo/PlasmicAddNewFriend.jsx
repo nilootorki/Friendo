@@ -117,6 +117,12 @@ function PlasmicAddNewFriend__RenderFunc(props) {
         type: "private",
         variableType: "array",
         initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "navBar.friendsTooltip",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
 
@@ -162,6 +168,10 @@ function PlasmicAddNewFriend__RenderFunc(props) {
               "caltooltip"
             ])}
             className={classNames("__wab_instance", sty.navBar)}
+            friendsTooltip={generateStateValueProp($state, [
+              "navBar",
+              "friendsTooltip"
+            ])}
             messTooltip={generateStateValueProp($state, [
               "navBar",
               "messTooltip"
@@ -171,6 +181,19 @@ function PlasmicAddNewFriend__RenderFunc(props) {
                 null,
                 eventArgs
               );
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
+            }}
+            onFriendsTooltipChange={async (...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "navBar",
+                "friendsTooltip"
+              ]).apply(null, eventArgs);
               if (
                 eventArgs.length > 1 &&
                 eventArgs[1] &&

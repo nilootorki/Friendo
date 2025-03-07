@@ -40,7 +40,9 @@ export const PlasmicNavBar__ArgProps = new Array(
   "caltooltip",
   "onCaltooltipChange",
   "messTooltip",
-  "onMessTooltipChange"
+  "onMessTooltipChange",
+  "friendsTooltip",
+  "onFriendsTooltipChange"
 );
 
 const $$ = {};
@@ -101,6 +103,13 @@ function PlasmicNavBar__RenderFunc(props) {
         variableType: "boolean",
         valueProp: "messTooltip",
         onChangeProp: "onMessTooltipChange"
+      },
+      {
+        path: "friendsTooltip",
+        type: "writable",
+        variableType: "boolean",
+        valueProp: "friendsTooltip",
+        onChangeProp: "onFriendsTooltipChange"
       }
     ],
 
@@ -678,6 +687,142 @@ function PlasmicNavBar__RenderFunc(props) {
               )}
             >
               {"Message History"}
+            </div>
+          ) : null}
+        </div>
+        <div
+          className={classNames(projectcss.all, sty.freeBox__bGuJ)}
+          onClick={async event => {
+            const $steps = {};
+            $steps["goToFriendsPage"] = true
+              ? (() => {
+                  const actionArgs = { destination: `/friends-page` };
+                  return (({ destination }) => {
+                    if (
+                      typeof destination === "string" &&
+                      destination.startsWith("#")
+                    ) {
+                      document
+                        .getElementById(destination.substr(1))
+                        .scrollIntoView({ behavior: "smooth" });
+                    } else {
+                      __nextRouter?.push(destination);
+                    }
+                  })?.apply(null, [actionArgs]);
+                })()
+              : undefined;
+            if (
+              $steps["goToFriendsPage"] != null &&
+              typeof $steps["goToFriendsPage"] === "object" &&
+              typeof $steps["goToFriendsPage"].then === "function"
+            ) {
+              $steps["goToFriendsPage"] = await $steps["goToFriendsPage"];
+            }
+          }}
+          onMouseEnter={async event => {
+            const $steps = {};
+            $steps["updateFriendsTooltip"] = true
+              ? (() => {
+                  const actionArgs = {
+                    variable: {
+                      objRoot: $state,
+                      variablePath: ["friendsTooltip"]
+                    },
+                    operation: 4
+                  };
+                  return (({ variable, value, startIndex, deleteCount }) => {
+                    if (!variable) {
+                      return;
+                    }
+                    const { objRoot, variablePath } = variable;
+                    const oldValue = $stateGet(objRoot, variablePath);
+                    $stateSet(objRoot, variablePath, !oldValue);
+                    return !oldValue;
+                  })?.apply(null, [actionArgs]);
+                })()
+              : undefined;
+            if (
+              $steps["updateFriendsTooltip"] != null &&
+              typeof $steps["updateFriendsTooltip"] === "object" &&
+              typeof $steps["updateFriendsTooltip"].then === "function"
+            ) {
+              $steps["updateFriendsTooltip"] = await $steps[
+                "updateFriendsTooltip"
+              ];
+            }
+          }}
+          onMouseLeave={async event => {
+            const $steps = {};
+            $steps["updateFriendsTooltip"] = true
+              ? (() => {
+                  const actionArgs = {
+                    variable: {
+                      objRoot: $state,
+                      variablePath: ["friendsTooltip"]
+                    },
+                    operation: 4
+                  };
+                  return (({ variable, value, startIndex, deleteCount }) => {
+                    if (!variable) {
+                      return;
+                    }
+                    const { objRoot, variablePath } = variable;
+                    const oldValue = $stateGet(objRoot, variablePath);
+                    $stateSet(objRoot, variablePath, !oldValue);
+                    return !oldValue;
+                  })?.apply(null, [actionArgs]);
+                })()
+              : undefined;
+            if (
+              $steps["updateFriendsTooltip"] != null &&
+              typeof $steps["updateFriendsTooltip"] === "object" &&
+              typeof $steps["updateFriendsTooltip"].then === "function"
+            ) {
+              $steps["updateFriendsTooltip"] = await $steps[
+                "updateFriendsTooltip"
+              ];
+            }
+          }}
+        >
+          <PlasmicImg__
+            alt={""}
+            className={classNames(sty.img__hUHpG)}
+            displayHeight={"40px"}
+            displayMaxHeight={"none"}
+            displayMaxWidth={"100%"}
+            displayMinHeight={"0"}
+            displayMinWidth={"0"}
+            displayWidth={"40px"}
+            loading={"lazy"}
+            src={{
+              src: "/plasmic/friendo/images/icons8Friends48Png.png",
+              fullWidth: 48,
+              fullHeight: 48,
+              aspectRatio: undefined
+            }}
+          />
+
+          {(() => {
+            try {
+              return $state.friendsTooltip;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return true;
+              }
+              throw e;
+            }
+          })() ? (
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__vcEDc
+              )}
+            >
+              {"See all friends"}
             </div>
           ) : null}
         </div>

@@ -27,7 +27,9 @@ import {
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
 import { usePlasmicDataOp } from "@plasmicapp/react-web/lib/data-sources";
 import NavBar from "../../NavBar"; // plasmic-import: KnagBLotfm8n/component
+import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
 import TextInput from "../../TextInput"; // plasmic-import: B7pg-YS7wyr5/component
+import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
 import Button from "../../Button"; // plasmic-import: R-SJru1lXq4W/component
 import { useUnnamedGlobalGroupOfVariants } from "./PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants"; // plasmic-import: lmEUP9r96TgA/globalVariant
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -124,6 +126,30 @@ function PlasmicFriendsDetails__RenderFunc(props) {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => true
+      },
+      {
+        path: "upload.files",
+        type: "private",
+        variableType: "array",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "imgUploadShow",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "upload2.files",
+        type: "private",
+        variableType: "array",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "navBar.friendsTooltip",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
 
@@ -212,6 +238,10 @@ function PlasmicFriendsDetails__RenderFunc(props) {
               "caltooltip"
             ])}
             className={classNames("__wab_instance", sty.navBar)}
+            friendsTooltip={generateStateValueProp($state, [
+              "navBar",
+              "friendsTooltip"
+            ])}
             messTooltip={generateStateValueProp($state, [
               "navBar",
               "messTooltip"
@@ -221,6 +251,19 @@ function PlasmicFriendsDetails__RenderFunc(props) {
                 null,
                 eventArgs
               );
+              if (
+                eventArgs.length > 1 &&
+                eventArgs[1] &&
+                eventArgs[1]._plasmic_state_init_
+              ) {
+                return;
+              }
+            }}
+            onFriendsTooltipChange={async (...eventArgs) => {
+              generateStateOnChangeProp($state, [
+                "navBar",
+                "friendsTooltip"
+              ]).apply(null, eventArgs);
               if (
                 eventArgs.length > 1 &&
                 eventArgs[1] &&
@@ -370,14 +413,14 @@ function PlasmicFriendsDetails__RenderFunc(props) {
                                       ".plasmic_default__all.plasmic_default__div.__wab_text.FriendsDetails__friendCard___3BG5A"
                                     )
                                     .forEach(friend => {
-                                      friend.style.background = "#244B87";
+                                      friend.style.background = "#093A32";
                                     });
                                   if (
                                     $state.selectFriend.friend_name ===
                                     currentItem.friend_name
                                   ) {
                                     return (event.target.style.background =
-                                      "linear-gradient(90deg, #244B87, white)");
+                                      "linear-gradient(90deg, #093A32, white)");
                                   }
                                 })();
                               }
@@ -416,46 +459,183 @@ function PlasmicFriendsDetails__RenderFunc(props) {
               })}
             </div>
             <div className={classNames(projectcss.all, sty.freeBox__fERo)}>
-              <PlasmicImg__
-                alt={""}
-                className={classNames(sty.img__wwTy2)}
-                displayHeight={"130px"}
-                displayMaxHeight={"none"}
-                displayMaxWidth={"100%"}
-                displayMinHeight={"0"}
-                displayMinWidth={"0"}
-                displayWidth={"130px"}
-                loading={"lazy"}
-                onLoad={async event => {
+              <div
+                className={classNames(projectcss.all, sty.freeBox__axtCi)}
+                onMouseEnter={async event => {
                   const $steps = {};
-                  $steps["runCode"] = true
+                  $steps["updateImgUploadShow"] = true
                     ? (() => {
                         const actionArgs = {
-                          customFunction: async () => {
-                            return undefined;
-                          }
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["imgUploadShow"]
+                          },
+                          operation: 4
                         };
-                        return (({ customFunction }) => {
-                          return customFunction();
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+                          const oldValue = $stateGet(objRoot, variablePath);
+                          $stateSet(objRoot, variablePath, !oldValue);
+                          return !oldValue;
                         })?.apply(null, [actionArgs]);
                       })()
                     : undefined;
                   if (
-                    $steps["runCode"] != null &&
-                    typeof $steps["runCode"] === "object" &&
-                    typeof $steps["runCode"].then === "function"
+                    $steps["updateImgUploadShow"] != null &&
+                    typeof $steps["updateImgUploadShow"] === "object" &&
+                    typeof $steps["updateImgUploadShow"].then === "function"
                   ) {
-                    $steps["runCode"] = await $steps["runCode"];
+                    $steps["updateImgUploadShow"] = await $steps[
+                      "updateImgUploadShow"
+                    ];
                   }
                 }}
-                src={{
-                  src: "/plasmic/friendo/images/icons8ProfilePicture96Png.png",
-                  fullWidth: 96,
-                  fullHeight: 96,
-                  aspectRatio: undefined
+                onMouseLeave={async event => {
+                  const $steps = {};
+                  $steps["updateImgUploadShow"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          variable: {
+                            objRoot: $state,
+                            variablePath: ["imgUploadShow"]
+                          },
+                          operation: 4
+                        };
+                        return (({
+                          variable,
+                          value,
+                          startIndex,
+                          deleteCount
+                        }) => {
+                          if (!variable) {
+                            return;
+                          }
+                          const { objRoot, variablePath } = variable;
+                          const oldValue = $stateGet(objRoot, variablePath);
+                          $stateSet(objRoot, variablePath, !oldValue);
+                          return !oldValue;
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["updateImgUploadShow"] != null &&
+                    typeof $steps["updateImgUploadShow"] === "object" &&
+                    typeof $steps["updateImgUploadShow"].then === "function"
+                  ) {
+                    $steps["updateImgUploadShow"] = await $steps[
+                      "updateImgUploadShow"
+                    ];
+                  }
                 }}
-              />
-
+              >
+                {(() => {
+                  try {
+                    return $state.imgUploadShow;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return true;
+                    }
+                    throw e;
+                  }
+                })() ? (
+                  <UploadWrapper
+                    data-plasmic-name={"upload"}
+                    data-plasmic-override={overrides.upload}
+                    accept={""}
+                    className={classNames("__wab_instance", sty.upload)}
+                    files={generateStateValueProp($state, ["upload", "files"])}
+                    onFilesChange={async (...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "upload",
+                        "files"
+                      ]).apply(null, eventArgs);
+                    }}
+                    showUploadList={true}
+                  >
+                    <PlasmicImg__
+                      alt={""}
+                      className={classNames(sty.img__h27Fw)}
+                      displayHeight={"auto"}
+                      displayMaxHeight={"none"}
+                      displayMaxWidth={"100%"}
+                      displayMinHeight={"0"}
+                      displayMinWidth={"0"}
+                      displayWidth={"auto"}
+                      loading={"lazy"}
+                      src={{
+                        src: "/plasmic/friendo/images/icons8Upload24Png.png",
+                        fullWidth: 24,
+                        fullHeight: 24,
+                        aspectRatio: undefined
+                      }}
+                    />
+                  </UploadWrapper>
+                ) : null}
+                <PlasmicImg__
+                  alt={""}
+                  className={classNames(sty.img__wwTy2)}
+                  displayHeight={"130px"}
+                  displayMaxHeight={"none"}
+                  displayMaxWidth={"100%"}
+                  displayMinHeight={"0"}
+                  displayMinWidth={"0"}
+                  displayWidth={"130px"}
+                  loading={"lazy"}
+                  onLoad={async event => {
+                    const $steps = {};
+                    $steps["runCode"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            customFunction: async () => {
+                              return undefined;
+                            }
+                          };
+                          return (({ customFunction }) => {
+                            return customFunction();
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["runCode"] != null &&
+                      typeof $steps["runCode"] === "object" &&
+                      typeof $steps["runCode"].then === "function"
+                    ) {
+                      $steps["runCode"] = await $steps["runCode"];
+                    }
+                  }}
+                  src={(() => {
+                    try {
+                      return $state.selectFriend.gender === "Male"
+                        ? "https://img.plasmic.app/img-optimizer/v1/img?src=https%3A%2F%2Fimg.plasmic.app%2Fimg-optimizer%2Fv1%2Fimg%2F8aa3beea7933bc5a7b78d0aaa354a5ca.png&q=75&f=webp"
+                        : "https://img.plasmic.app/img-optimizer/v1/img?src=https%3A%2F%2Fimg.plasmic.app%2Fimg-optimizer%2Fv1%2Fimg%2Fb36b73017b06c745dc3f4e67558686d1.png&q=75&f=webp";
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return {
+                          src: "/plasmic/friendo/images/icons8MaleUser100Png.png",
+                          fullWidth: 100,
+                          fullHeight: 100,
+                          aspectRatio: undefined
+                        };
+                      }
+                      throw e;
+                    }
+                  })()}
+                />
+              </div>
               <div
                 className={classNames(
                   projectcss.all,
@@ -525,7 +705,7 @@ function PlasmicFriendsDetails__RenderFunc(props) {
                   sty.text__oYfo
                 )}
               >
-                {"Date of your last connection:"}
+                {"Date of your last Interaction:"}
               </div>
               <div
                 className={classNames(
@@ -781,19 +961,45 @@ function PlasmicFriendsDetails__RenderFunc(props) {
                   })()}
                 </React.Fragment>
               </div>
+              <UploadWrapper
+                data-plasmic-name={"upload2"}
+                data-plasmic-override={overrides.upload2}
+                accept={""}
+                className={classNames("__wab_instance", sty.upload2)}
+                files={generateStateValueProp($state, ["upload2", "files"])}
+                onFilesChange={async (...eventArgs) => {
+                  generateStateOnChangeProp($state, ["upload2", "files"]).apply(
+                    null,
+                    eventArgs
+                  );
+                }}
+                showUploadList={true}
+              >
+                <AntdButton
+                  className={classNames("__wab_instance", sty.button__bSvHj)}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__dwj7U
+                    )}
+                  >
+                    {"Upload Telegram Messages"}
+                  </div>
+                </AntdButton>
+              </UploadWrapper>
               <Button
-                data-plasmic-name={"button"}
-                data-plasmic-override={overrides.button}
-                className={classNames("__wab_instance", sty.button)}
+                className={classNames("__wab_instance", sty.button__tg3I)}
                 label={
                   <div
                     className={classNames(
                       projectcss.all,
                       projectcss.__wab_text,
-                      sty.text__gtnoe
+                      sty.text__pfDff
                     )}
                   >
-                    {"See Telegram messages"}
+                    {"See Previous Telegram Messages"}
                   </div>
                 }
               />
@@ -806,11 +1012,12 @@ function PlasmicFriendsDetails__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "navBar", "friendCard", "textInput", "button"],
+  root: ["root", "navBar", "friendCard", "upload", "textInput", "upload2"],
   navBar: ["navBar"],
   friendCard: ["friendCard"],
+  upload: ["upload"],
   textInput: ["textInput"],
-  button: ["button"]
+  upload2: ["upload2"]
 };
 
 function makeNodeComponent(nodeName) {
@@ -847,8 +1054,9 @@ export const PlasmicFriendsDetails = Object.assign(
     // Helper components rendering sub-elements
     navBar: makeNodeComponent("navBar"),
     friendCard: makeNodeComponent("friendCard"),
+    upload: makeNodeComponent("upload"),
     textInput: makeNodeComponent("textInput"),
-    button: makeNodeComponent("button"),
+    upload2: makeNodeComponent("upload2"),
     // Metadata about props expected for PlasmicFriendsDetails
     internalVariantProps: PlasmicFriendsDetails__VariantProps,
     internalArgProps: PlasmicFriendsDetails__ArgProps,

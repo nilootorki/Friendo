@@ -1,1 +1,9 @@
-{}
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/friends-details": "pages/friends-details.js",
+  "/call-history": "pages/call-history.js",
+  "/home": "pages/home.js",
+  "/profile-edit": "pages/profile-edit.js"
+}

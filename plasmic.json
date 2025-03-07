@@ -1115,6 +1115,20 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/about-us"
+        },
+        {
+          "id": "QGsu4NsE0n29",
+          "name": "Statistics",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicStatistics.jsx",
+          "importSpec": {
+            "modulePath": "../pages/statistics.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicStatistics.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/statistics"
         }
       ],
       "icons": [
@@ -1284,6 +1298,26 @@
           "id": "qFdQdG_tT0I4",
           "name": "icons8-upload-24.png",
           "filePath": "../public/plasmic/friendo/images/icons8Upload24Png.png"
+        },
+        {
+          "id": "jJHTvrSTfZVE",
+          "name": "icons8-male-user-100.png",
+          "filePath": "../public/plasmic/friendo/images/icons8MaleUser100Png.png"
+        },
+        {
+          "id": "fTYzfaCvtOKl",
+          "name": "icons8-female-profile-100.png",
+          "filePath": "../public/plasmic/friendo/images/icons8FemaleProfile100Png.png"
+        },
+        {
+          "id": "BFzVsqBRgNdg",
+          "name": "icons8-friends-24.png",
+          "filePath": "../public/plasmic/friendo/images/icons8Friends24Png.png"
+        },
+        {
+          "id": "DOZDxvDnFBy5",
+          "name": "icons8-friends-48.png",
+          "filePath": "../public/plasmic/friendo/images/icons8Friends48Png.png"
         }
       ],
       "indirect": false,
@@ -1384,7 +1418,8 @@
           "componentImportPath": "@plasmicpkgs/plasmic-embed-css"
         }
       ],
-      "customFunctions": []
+      "customFunctions": [],
+      "jsBundleThemes": []
     }
   ],
   "globalVariants": {

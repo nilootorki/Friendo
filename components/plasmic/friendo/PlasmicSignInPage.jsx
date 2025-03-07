@@ -362,48 +362,41 @@ function PlasmicSignInPage__RenderFunc(props) {
               }
               onClick={async event => {
                 const $steps = {};
-                $steps["updateShowpass"] = true
+                $steps["goToHome"] = true
                   ? (() => {
-                      const actionArgs = {
-                        variable: {
-                          objRoot: $state,
-                          variablePath: ["showpass"]
-                        },
-                        operation: 0
-                      };
-                      return (({
-                        variable,
-                        value,
-                        startIndex,
-                        deleteCount
-                      }) => {
-                        if (!variable) {
-                          return;
+                      const actionArgs = { destination: `/home` };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
                         }
-                        const { objRoot, variablePath } = variable;
-                        $stateSet(objRoot, variablePath, value);
-                        return value;
                       })?.apply(null, [actionArgs]);
                     })()
                   : undefined;
                 if (
-                  $steps["updateShowpass"] != null &&
-                  typeof $steps["updateShowpass"] === "object" &&
-                  typeof $steps["updateShowpass"].then === "function"
+                  $steps["goToHome"] != null &&
+                  typeof $steps["goToHome"] === "object" &&
+                  typeof $steps["goToHome"].then === "function"
                 ) {
-                  $steps["updateShowpass"] = await $steps["updateShowpass"];
+                  $steps["goToHome"] = await $steps["goToHome"];
                 }
-                $steps["checkSignIn"] = true
+                $steps["httpPost"] = true
                   ? (() => {
                       const actionArgs = {
                         dataOp: {
                           sourceId: "kyQLvzX4VBgHR6BbD2tTbc",
-                          opId: "cb90bf08-d970-468a-b069-ed344e25bded",
+                          opId: "09fc49eb-21ee-40bf-9718-829b747b1988",
                           userArgs: {
                             body: [$state.username.value, $state.password.value]
                           },
                           cacheKey: null,
-                          invalidatedKeys: [],
+                          invalidatedKeys: ["plasmic_refresh_all"],
                           roleId: null
                         }
                       };
@@ -425,11 +418,11 @@ function PlasmicSignInPage__RenderFunc(props) {
                     })()
                   : undefined;
                 if (
-                  $steps["checkSignIn"] != null &&
-                  typeof $steps["checkSignIn"] === "object" &&
-                  typeof $steps["checkSignIn"].then === "function"
+                  $steps["httpPost"] != null &&
+                  typeof $steps["httpPost"] === "object" &&
+                  typeof $steps["httpPost"].then === "function"
                 ) {
-                  $steps["checkSignIn"] = await $steps["checkSignIn"];
+                  $steps["httpPost"] = await $steps["httpPost"];
                 }
               }}
             />
