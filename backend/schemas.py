@@ -52,7 +52,9 @@ class UserResponse(BaseModel):
     gender: str
     personality_type: Optional[str] = None
     mbti: Optional[str] = None
+    profile_photo: Optional[str]=None
     created_at: Optional[datetime] = None
+    updated_at:Optional[datetime]=None
     contacts: Optional[List[Dict[str, Any]]] = None
 
     class Config:
@@ -97,7 +99,6 @@ class UserLoginResponse(BaseModel):
     access_token:str
     token_type:str
     
-    
 #GenderType = constr(regex="^(Male|Female)$")
     
 class UserFriendCreate(BaseModel):
@@ -117,5 +118,19 @@ class UserFriendResponse(UserFriendCreate):
     user_id: int
     timestamp: datetime
 
-#     class Config:
-#         from_attributes = True
+    class Config:
+        from_attributes = True
+
+class UserEditRequest(BaseModel):
+    username: Optional[str]=None
+    email: Optional[EmailStr]=None
+    password: Optional[str]=None
+    personality_type: Optional[str]=None
+    mbti: Optional[str]=None
+    profile_photo:Optional[str]=None 
+    
+    class Config:
+        orm_mode =True  #allow conversion from ORM models
+        
+        
+        
