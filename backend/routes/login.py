@@ -9,11 +9,18 @@ from backend.database import get_db
 from datetime import datetime, timedelta
 from backend.config import secret_key, algorithm,access_token_expire_min
 
+# from utils import verify_password
+# from auth import create_token
+# from schemas import UserLoginResponse, UserLoginRequest
+# import db_models
+# from database import get_db
+# from datetime import datetime, timedelta
+# from config import secret_key, algorithm,access_token_expire_min
 
 router=APIRouter()
 
 #endpoint for user login
-@router.post("/login", response_model=UserLoginResponse)
+@router.post("/login/", response_model=UserLoginResponse)
 async def login(user:UserLoginRequest,db:Session=Depends(get_db)):
     
     #email validation
@@ -59,3 +66,37 @@ app.add_middleware(
 )
 
 
+# import logging
+# from fastapi import FastAPI, Request, HTTPException
+# from fastapi.responses import JSONResponse
+
+# # Set up logging
+# logging.basicConfig(level=logging.DEBUG)  # You can set to INFO or ERROR as needed
+# logger = logging.getLogger(__name__)
+
+# # Initialize FastAPI app
+# app = FastAPI()
+
+# # Log all HTTP requests
+# @app.middleware("http")
+# async def log_request(request: Request, call_next):
+#     logger.info(f"Request: {request.method} {request.url}")
+#     response = await call_next(request)
+#     return response
+
+# # Log HTTP errors (HTTPException)
+# @app.exception_handler(HTTPException)
+# async def custom_http_exception_handler(request, exc):
+#     logger.error(f"HTTP Error: {exc.status_code} - {exc.detail}")
+#     return JSONResponse(
+#         status_code=exc.status_code,
+#         content={"detail": exc.detail},
+#     )
+
+# # Add your routes here
+# @app.get("/")
+# def home():
+#     return {"message": "Backend is running"}
+
+# # Include other routers if necessary
+# # app.include_router(...)
