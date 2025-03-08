@@ -48,7 +48,7 @@ async def delete_friend(friend_id:int, db:Session=Depends(get_db),user_id:int=De
     db.delete(friend)
     db.commit()
     
-    return("detail":"friend deleted sucessfully")
+    return{"detail":"friend deleted sucessfully"}
 
 
 

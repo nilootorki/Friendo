@@ -1,4 +1,4 @@
-from fastapi import FastAPI,Depends,HTTPException
+from fastapi import FastAPI,Depends,HTTPException, APIRouter
 from sqlalchemy.orm import Session
 import re
 from backend.utils import verify_password
@@ -10,10 +10,10 @@ from datetime import datetime, timedelta
 from backend.config import secret_key, algorithm,access_token_expire_min
 
 
-app=FastAPI()
+router=APIRouter()
 
 #endpoint for user login
-@app.post("/login/", response_model=UserLoginResponse)
+@router.post("/login", response_model=UserLoginResponse)
 async def login(user:UserLoginRequest,db:Session=Depends(get_db)):
     
     #email validation
@@ -46,6 +46,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+app.include_router(router, prefix="/auth", tags=["auth"])
 
 from fastapi.middleware.cors import CORSMiddleware
 
