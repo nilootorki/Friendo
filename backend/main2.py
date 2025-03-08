@@ -24,7 +24,6 @@ import backend.utils
 import backend.schemas
 from backend.schemas import SignupResponse , ProfileCreate , UserCreate , UserFriend, UserFriendSchema
 from backend.db_models import User
-from routes.friends import router as friend_router
 from backend.utils import hash_password
 
 from typing import List
@@ -35,7 +34,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 
-
+#import routes
+from backend.routes.friends import router as friend_router
+from backend.routes.login import router as login_router
 
 app = FastAPI()
 
@@ -47,6 +48,15 @@ app.add_middleware(
     allow_methods=["*"],  # Allow all HTTP methods
     allow_headers=["*"],  # Allow all headers
 )
+
+#include routers
+app.include_router(login_router, prefix="/auth")
+app.include_router(friend_router,prefix="/friends")
+
+
+@app.get("/")
+def home():
+    return{"message": "Backend is running"}
 
 
 
@@ -241,8 +251,8 @@ def analyze_json(filename: str, db: Session=Depends(get_db)):
         user_id = 1,
         friend_id = 2,
         interaction_type = "SMS",
-        message_count = Column(Integer, default=0) 
-        call_duration = Column(Integer, default=0)  
+        # message_count = Column(Integer, default=0) ,
+        # call_duration = Column(Integer, default=0) , 
         timestamp = "2025-02-26",
         messages = json_content,
         score=analysis_result

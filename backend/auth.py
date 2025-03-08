@@ -3,13 +3,15 @@ from jose import jwt, JWTError # for creaating, encoding, and decoding JWTs
 from fastapi.security import OAuth2PasswordBearer  #to handle OAuth2 (used for token based authentications)
 from fastapi import Depends,HTTPException, status
 from backend.config import secret_key, algorithm,access_token_expire_min
-import backend.db_models
+import db_models
 from backend.database import get_db
 from sqlalchemy.orm import Session
 
 
 #defines authenticccation scheme
 oauth2_scheme=OAuth2PasswordBearer(tokenUrl="token")
+
+
 
 
 #create a JWT token
