@@ -18,14 +18,23 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForSeque
 from datetime import datetime, date
 from fastapi.staticfiles import StaticFiles
 
-from backend.database import engine, session , base, get_db, DATABASE_URL
-import backend.db_models
-import backend.utils
-import backend.schemas
-from backend.schemas import SignupResponse , ProfileCreate , UserCreate , UserFriend, UserFriendSchema
-from backend.db_models import User
-from backend.utils import hash_password
-from backend.routes.login import router as login_router
+# from backend.database import engine, session , base, get_db, DATABASE_URL
+# import backend.db_models
+# import backend.utils
+# import backend.schemas
+# from backend.schemas import SignupResponse , ProfileCreate , UserCreate , UserFriend, UserFriendSchema
+# from backend.db_models import User
+# from backend.utils import hash_password
+# from backend.routes.login import router as login_router
+
+from database import engine, session , base, get_db, DATABASE_URL
+import db_models
+import utils
+import schemas
+from schemas import SignupResponse , ProfileCreate , UserCreate , UserFriend, UserFriendSchema
+from db_models import User
+from utils import hash_password
+from routes.login import router as login_router
 
 from typing import List
 from sqlalchemy.exc import NoResultFound
@@ -35,9 +44,12 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 
+# #import routes
+# from backend.routes.friends import router as friend_router
+# from backend.routes.login import router as login_router
 #import routes
-from backend.routes.friends import router as friend_router
-from backend.routes.login import router as login_router
+from routes.friends import router as friend_router
+from routes.login import router as login_router
 
 # from transformers import T5Tokenizer
 
@@ -138,7 +150,8 @@ async def ProfileSetUp(profile: ProfileCreate,  db: Session = Depends(get_db)):
     print(profile.username, profile.email, profile.password, profile.personality, profile.mbti)
     print("WE ARE IN setup") 
 
-    db_record = db.query(backend.db_models.User).filter_by(username=profile.username, password_hash = profile.password, email = profile.email).one()
+    # db_record = db.query(backend.db_models.User).filter_by(username=profile.username, password_hash = profile.password, email = profile.email).one()
+    db_record = db.query(db_models.User).filter_by(username=profile.username, password_hash = profile.password, email = profile.email).one()
 
         # Update existing record
     db_record.personality_type = profile.personality
@@ -158,7 +171,8 @@ async def SignUp(user: UserCreate, db: Session = Depends(get_db)):
     print("WE ARE IN")
     
     # Check if username exists
-    if db.query(backend.db_models.User).filter(backend.db_models.User.username == user.username).first():
+    # if db.query(backend.db_models.User).filter(backend.db_models.User.username == user.username).first():
+    if db.query(db_models.User).filter(db_models.User.username == user.username).first():
         print("YEah")
         print("Username already exists")
         return {"success": False, "message": "Username already exists"}
@@ -177,7 +191,8 @@ async def SignUp(user: UserCreate, db: Session = Depends(get_db)):
     hashed_password= hash_password(user.password)
     
     # Create new user
-    db_record = backend.db_models.User(
+    # db_record = backend.db_models.User(
+    db_record = db_models.User(
         username=user.username,
         email=user.email,
         password_hash=hashed_password  # You should hash this before storing
@@ -195,7 +210,8 @@ async def upload_contacts(user_friends : UserFriend, db:Session=Depends(get_db))
     print(user_friends.contacts)
     
     # save to database
-    db_record = db.query(backend.db_models.User).filter_by(username=user_friends.username, password_hash = user_friends.password, email = user_friends.email).one()
+    # db_record = db.query(backend.db_models.User).filter_by(username=user_friends.username, password_hash = user_friends.password, email = user_friends.email).one()
+    db_record = db.query(db_models.User).filter_by(username=user_friends.username, password_hash = user_friends.password, email = user_friends.email).one()
     db_record.contacts = user_friends.contacts
 
     user_id = db_record.user_id
@@ -204,7 +220,8 @@ async def upload_contacts(user_friends : UserFriend, db:Session=Depends(get_db))
         print(friend)
         name = friend["name"]
         gender = friend["gender"]
-        db_record = backend.db_models.UserSuggestion(
+        # db_record = backend.db_models.UserSuggestion(
+        db_record = db_models.UserSuggestion(
             user_id=user_id,
             username=user_friends.username,
             friend_name=name,
@@ -263,7 +280,8 @@ def analyze_json(filename: str, db: Session=Depends(get_db)):
     analysis_result = analyze_data(json_content)
 
 #     # Store Analysis in Database
-    db_record = backend.db_models.UserFriend(
+    # db_record = backend.db_models.UserFriend(
+    db_record = db_models.UserFriend(
         user_id = 1,
         friend_id = 2,
         interaction_type = "SMS",
@@ -277,7 +295,8 @@ def analyze_json(filename: str, db: Session=Depends(get_db)):
     db.add(db_record)
     db.commit()
     # Store Analysis in Database
-    db_record = backend.db_models.UserFriend(
+    # db_record = backend.db_models.UserFriend(
+    db_record = db_models.UserFriend(
         user_id = 1,
         username = "Nel",
         friend_name = friend_name,
@@ -411,7 +430,8 @@ def analyze_data(json_data):
 
 @app.get("/suggest/", response_model=List[UserFriendSchema])
 def suggestion(user_id: int, friend_name: str, db: Session=Depends(get_db)):
-    record = db.query(backend.db_models.UserFriend).filter(backend.db_models.UserFriend.user_id == user_id).all()
+    # record = db.query(backend.db_models.UserFriend).filter(backend.db_models.UserFriend.user_id == user_id).all()
+    record = db.query(db_models.UserFriend).filter(db_models.UserFriend.user_id == user_id).all()
 
     # Handle if no record is found
     parsed_records = []
@@ -519,7 +539,8 @@ def suggestion(user_id: int, friend_name: str, db: Session=Depends(get_db)):
     
     try:
         # Check if the record exists
-        db_record = db.query(backend.db_models.UserSuggestion).filter_by(user_id=user_id, friend_name=friend_name).one()
+        # db_record = db.query(backend.db_models.UserSuggestion).filter_by(user_id=user_id, friend_name=friend_name).one()
+        db_record = db.query(db_models.UserSuggestion).filter_by(user_id=user_id, friend_name=friend_name).one()
 
         # Update existing record
         db_record.suggestion = suggestion
@@ -529,7 +550,8 @@ def suggestion(user_id: int, friend_name: str, db: Session=Depends(get_db)):
 
     except NoResultFound:
         # Create a new record if none exists
-        db_record = backend.db_models.UserSuggestion(
+        # db_record = backend.db_models.UserSuggestion(
+        db_record = db_models.UserSuggestion(
             user_id=user_id,
             username="Nel",
             friend_name=friend_name,
@@ -602,13 +624,20 @@ async def get_profile(user_id: int , db:Session=Depends(get_db)):
 from fastapi import FastAPI,Depends,HTTPException, APIRouter
 from sqlalchemy.orm import Session
 import re
-from backend.utils import verify_password
-from backend.auth import create_token
-from backend.schemas import UserLoginResponse, UserLoginRequest
-import backend.db_models
-from backend.database import get_db
+# from backend.utils import verify_password
+# from backend.auth import create_token
+# from backend.schemas import UserLoginResponse, UserLoginRequest
+# import backend.db_models
+# from backend.database import get_db
+# from datetime import datetime, timedelta
+# from backend.config import secret_key, algorithm,access_token_expire_min
+from utils import verify_password
+from auth import create_token
+from schemas import UserLoginResponse, UserLoginRequest
+import db_models
+from database import get_db
 from datetime import datetime, timedelta
-from backend.config import secret_key, algorithm,access_token_expire_min
+from config import secret_key, algorithm,access_token_expire_min
 
 # from utils import verify_password
 # from auth import create_token
@@ -630,7 +659,8 @@ async def login(user:UserLoginRequest,db:Session=Depends(get_db)):
     #     raise HTTPException(status_code=400, detail="Invalid Email format")
     
     #check if user exists in db
-    db_user=db.query(backend.db_models.User).filter(backend.db_models.User.username==user.username).first()
+    # db_user=db.query(backend.db_models.User).filter(backend.db_models.User.username==user.username).first()
+    db_user=db.query(db_models.User).filter(db_models.User.username==user.username).first()
     if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
     
