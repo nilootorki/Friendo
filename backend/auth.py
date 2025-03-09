@@ -1,11 +1,17 @@
 from fastapi import APIRouter, Depends, HTTPException
 from datetime import datetime, timedelta
-from jose import jwt, JWTError # for creaating, encoding, and decoding JWTs
+import jwt
+from jose import Error # for creating, encoding, and decoding JWTs
 from fastapi.security import OAuth2PasswordBearer  #to handle OAuth2 (used for token based authentications)
 from fastapi import Depends,HTTPException, status
-from backend.config import secret_key, algorithm,access_token_expire_min
-import backend.db_models
-from backend.database import get_db
+# from backend.config import secret_key, algorithm,access_token_expire_min
+# import backend.db_models
+
+from config import secret_key, algorithm,access_token_expire_min
+import db_models
+
+# from backend.database import get_db
+from database import get_db
 from sqlalchemy.orm import Session
 
 
@@ -45,12 +51,12 @@ def get_current_user(token:str=Depends(oauth2_scheme), db:Session=Depends(get_db
         user_id: int=payload.get("sub")    #sub(subject) represents the user identifier
         if user_id is None:
             raise exceptions
-        user = db.query(backend.db_models.User).filter(backend.db_models.User.user_id == int(user_id)).first()
+        user = db.query(db_models.User).filter(db_models.User.user_id == int(user_id)).first()
         if not user:
             raise exceptions
         
         return user_id
-    except JWTError:
+    except Error:
         raise exceptions
     
 # router=APIRouter()

@@ -1,13 +1,21 @@
 from fastapi import FastAPI,Depends,HTTPException, APIRouter
 from sqlalchemy.orm import Session
 import re
-from backend.utils import verify_password
-from backend.auth import create_token
-from backend.schemas import UserLoginResponse, UserLoginRequest
-import backend.db_models
-from backend.database import get_db
+# from backend.utils import verify_password
+# from backend.auth import create_token
+# from backend.schemas import UserLoginResponse, UserLoginRequest
+# import backend.db_models
+# from backend.database import get_db
+# from datetime import datetime, timedelta
+# from backend.config import secret_key, algorithm,access_token_expire_min
+
+from utils import verify_password
+from auth import create_token
+from schemas import UserLoginResponse, UserLoginRequest
+import db_models
+from database import get_db
 from datetime import datetime, timedelta
-from backend.config import secret_key, algorithm,access_token_expire_min
+from config import secret_key, algorithm,access_token_expire_min
 
 # from utils import verify_password
 # from auth import create_token
@@ -29,7 +37,7 @@ async def login(user:UserLoginRequest,db:Session=Depends(get_db)):
     #     raise HTTPException(status_code=400, detail="Invalid Email format")
     
     #check if user exists in db
-    db_user=db.query(backend.db_models.User).filter(backend.db_models.User.username==user.username).first()
+    db_user=db.query(db_models.User).filter(db_models.User.username==user.username).first()
     if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
     

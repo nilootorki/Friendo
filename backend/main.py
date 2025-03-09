@@ -97,6 +97,102 @@ def get_url():
 base.metadata.create_all(bind=engine)  #ensure tables exist in the db
 
 
+#profile images
+profile_DIR="profile/"
+os.makedirs(profile_DIR,exist_ok=True) # to ensure that directory exists
+
+#to avoid memory leaking
+def get_db():
+    db=Session()   #start a db session
+    try:
+        yield db    #provides the session to FastAPI routes 
+    finally:
+        db.close()   #close the session after the request is complete
+        
+@app.post("/upload_profile_photo/{user_id}")
+async def upload_profile_photo(user_id:int,file:UploadFile=File(...),db:Session=Depends(get_db)):
+        allowed_files={"png","jpg","jpeg","gif"}
+        file_type=file.filename.split(".")[-1].lower()
+        if file_type not in allowed_files:
+            raise HTTPException(status_code=400,detail="Invalid file format! only png, jpg, jpeg, gif files are accepted")
+        
+        profile_path=f"{profile_DIR}{user_id}.{file_type}"
+        #open file in write-binary mode and copy into buffer
+        with open(profile_path,"wb") as buffer:
+            shutil.copyfileobj(file.file,buffer)
+            
+        
+        #update user's profile path in db
+        user=db.query(User).filter(User.id==user_id).first()
+        if not user:
+            raise HTTPException(status_code=404,detail="user not found!")
+        
+        user.profile_photo=profile_path
+        db.commit()
+        
+#view profile photos from db
+app.mount("/profile", StaticFiles(directory="profile"),name="profile")    #tells fastAPI to serve all files inside the profile directory - available at http://localhost:8000/uploads/file name
+
+        
+#creat API endpoint to get user profile photos
+@app.get("/profile_photo/{user_id}") 
+async def get_profile(user_id: int , db:Session=Depends(get_db)):
+    user=db.query(User).filter(User.id==user_id).first
+    if not user or not user.profile_photo:
+        raise HTTPException(status_code=404, detail="Profile photo not found")
+    
+    return {"image_url": f"/uploads/{user_id}.jpg"}
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+# @app.post("/upload_contacts/{1}")
+# async def upload_contacts(user_id: int, file: UploadFile=File(...), db:Session=Depends(get_db)):
+#     content=await file.read()
+    
+#     if file.filename.endswith(".json"):
+#         try:
+#             contacts=json.load(content)  #convert json file content into a python dic.
+#         except json.JSONDecodeError:
+#             raise HTTPException(status_code=400,detail="Invalid JSON format!")
+        
+#     elif file.filename.endswith(".csv"):
+#         try:
+#             df=pd.read_csv(file.file)
+#             contacts=df.to_dict(orient="records")
+#         except Exception:
+#             raise HTTPException(status_code=400,detail=f"Error proccessing CSV:{str(Exception)}")
+        
+#     else:
+#         raise HTTPException(status_code=400,detail="only JSON or CSV file formats are allowed")
+    
+#     #df validation:
+    
+#     try:
+#         contacts_validation=[schemas.FriendsBase(**contact).dict() for contact in contacts]
+#     except Exception:
+#         raise HTTPException(status_code=400, detail=f"Invalid contact list format:{str(Exception)}")
+    
+    
+#     #save to database
+#     user=db.query(db_models.User).filter(db_models.User.user_id==user_id).first()
+
+#     return{"massage":"Welcome to Friendo!"}
+
 # #to avoid memory leaking
 # def get_db():
 #     db=Session()   #start a db session
@@ -399,6 +495,24 @@ def analyze_json(filename: str, db: Session=Depends(get_db)):
     with open(file_path, "r", encoding="utf-8") as f:
         json_content = json.load(f)
 
+#     # Perform Analysis
+#     analysis_result = analyze_data(json_content)
+
+#     # Store Analysis in Database
+#     db_record = db_models.UserFriend(
+#         user_id = 1,
+#         friend_id = 2,
+#         interaction_type = "SMS",
+#         #message_count = Column(Integer, default=0) 
+#         #call_duration = Column(Integer, default=0)  
+#         timestamp = "2025-02-26",
+#         messages = json_content,
+#         score=analysis_result
+#     )
+#     db.add(db_record)
+#     db.commit()
+
+#     return {"filename": filename, "analysis": analysis_result}
     friend_name = json_content["name"]
 
     # Perform Analysis
@@ -502,6 +616,21 @@ def analyze_data(json_data):
 
     # Group by 'date' and apply sentiment analysis (run_model)
     friend_sentiment_result["sentiment_result"] =friend_sentiment_result["messages"].apply(run_model)
+
+    friend_sentiment_result["sentiment_score"] = friend_sentiment_result["sentiment_result"].map(sentiment_mapping)
+    friend_sentiment_result["sentiment_score"] = friend_sentiment_result["sentiment_score"] * friend_sentiment_result["no_of_messages"]
+    friend_total_no_of_messages = friend_sentiment_result["no_of_messages"].sum()
+    friend_sentiment_score = friend_sentiment_result["sentiment_score"].sum()/friend_total_no_of_messages
+
+    analysis_result = {
+        "total_score" : [total_sentiment_score], 
+        "total_no_of_messages" : [total_no_of_messages_analyzed],
+        "your_sentiment_score" : [your_sentiment_score],
+        "total_no_of_your_messages" : [total_no_of_your_messages],
+        "friend_sentiment_score" : [friend_sentiment_score],
+        "total_no_of_friend_messages" : [friend_total_no_of_messages],
+    }
+    analysis_df = pd.DataFrame(analysis_result)
 
     friend_sentiment_result["sentiment_score"] = friend_sentiment_result["sentiment_result"].map(sentiment_mapping)
     friend_sentiment_result["sentiment_score"] = friend_sentiment_result["sentiment_score"] * friend_sentiment_result["no_of_messages"]
