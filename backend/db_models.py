@@ -1,8 +1,9 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, CheckConstraint, Float
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, CheckConstraint, Float, Boolean
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import JSON
-from database import base
+from backend.database import base
+
 
 class User(base):
     __tablename__ = "users"
@@ -11,10 +12,12 @@ class User(base):
     username=Column(String(50), nullable=False)
     email = Column(String(255), unique=True, nullable=False)
     password_hash = Column(Text, nullable=False)
+    gender = Column(String(10), CheckConstraint("gender IN ('Male', 'Female')"), nullable=False)
     personality_type = Column(String(50), nullable=True)
     mbti = Column(String(4), nullable=True)
     created_at = Column(DateTime, server_default=func.now())
     contacts = Column(JSON, nullable=True, default=[])
+    profile_photo=Column(Text, nullable=True)
     
 class UserFriend(base):
     __tablename__ = "user_friends"
@@ -22,11 +25,14 @@ class UserFriend(base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"))
     username=Column(String(50), nullable=False)
-    friend_name = Column(String(50), nullable=False)
+    friend_name = Column(String(50), nullable=False)  #i should make nullable True 
+    friend_telegram_username = Column(String(50), nullable=True)
+    gender = Column(String(10), CheckConstraint("gender IN ('Male', 'Female')"), nullable=True)
     interaction_type = Column(String(10), CheckConstraint("interaction_type IN ('Call', 'SMS')"))
     timestamp = Column(DateTime, server_default=func.now())
     messages = Column(JSON, nullable=True)
     score=Column(JSON, nullable=True)
+    initial_note = Column(Text, nullable=True)
     
 class UserSuggestion(base):
     __tablename__="user_suggestions"
@@ -35,12 +41,17 @@ class UserSuggestion(base):
     user_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"))
     username=Column(String(50), nullable=False)
     friend_name = Column(String(50), nullable=False)
-    suggestion = Column(String(500), nullable=False)
+    suggestion = Column(String(500), nullable=True)
     gender = Column(String(50), nullable=True)
+    interaction_type = Column(String(10), CheckConstraint("interaction_type IN ('Call', 'SMS')"))
     comment = Column(String(500), nullable=True)
     timestamp = Column(DateTime, server_default=func.now())
-    total_score=Column(Float, nullable=True)
-    
+    messages = Column(JSON, nullable=True)
+    score=Column(JSON, nullable=True)
+    initial_note = Column(Text, nullable=True)
+    total_score=Column(String(50), nullable=True)
+    checked=Column(Boolean, default=False)
+    profile_photo=Column(Text, nullable=True)
     
     
 # class Interaction(base):
