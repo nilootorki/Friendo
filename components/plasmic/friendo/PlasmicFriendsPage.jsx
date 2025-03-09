@@ -12,20 +12,29 @@ import * as React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import {
+  PlasmicImg as PlasmicImg__,
   classNames,
   createPlasmicElementProxy,
   deriveRenderOpts,
   ensureGlobalVariants,
   generateStateOnChangeProp,
   generateStateValueProp,
+  get as $stateGet,
   hasVariant,
   initializePlasmicStates,
+  set as $stateSet,
   useDollarState
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
 import { usePlasmicDataOp } from "@plasmicapp/react-web/lib/data-sources";
 import NavBar from "../../NavBar"; // plasmic-import: KnagBLotfm8n/component
 import FriendComonent from "../../FriendComonent"; // plasmic-import: TTtT2m4PE29g/component
+import TextInput from "../../TextInput"; // plasmic-import: B7pg-YS7wyr5/component
+import Select from "../../Select"; // plasmic-import: V2CRmMi9HuUW/component
+import MenuItem from "../../MenuItem"; // plasmic-import: zcnybJ5YUZhH/component
+import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
+import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
+import Button from "../../Button"; // plasmic-import: R-SJru1lXq4W/component
 import { useUnnamedGlobalGroupOfVariants } from "./PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants"; // plasmic-import: lmEUP9r96TgA/globalVariant
 import "@plasmicapp/react-web/lib/plasmic.css";
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
@@ -101,6 +110,36 @@ function PlasmicFriendsPage__RenderFunc(props) {
       },
       {
         path: "navBar.friendsTooltip",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "textInput.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "select.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "textInput2.value",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "upload.files",
+        type: "private",
+        variableType: "array",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
+      },
+      {
+        path: "popUp",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
@@ -354,35 +393,309 @@ function PlasmicFriendsPage__RenderFunc(props) {
               )}
               onClick={async event => {
                 const $steps = {};
-                $steps["goToAddNewFriend"] = true
+                $steps["updatePopUp"] = true
                   ? (() => {
-                      const actionArgs = { destination: `/add-new-friend` };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
+                      const actionArgs = {
+                        variable: {
+                          objRoot: $state,
+                          variablePath: ["popUp"]
+                        },
+                        operation: 4
+                      };
+                      return (({
+                        variable,
+                        value,
+                        startIndex,
+                        deleteCount
+                      }) => {
+                        if (!variable) {
+                          return;
                         }
+                        const { objRoot, variablePath } = variable;
+                        const oldValue = $stateGet(objRoot, variablePath);
+                        $stateSet(objRoot, variablePath, !oldValue);
+                        return !oldValue;
                       })?.apply(null, [actionArgs]);
                     })()
                   : undefined;
                 if (
-                  $steps["goToAddNewFriend"] != null &&
-                  typeof $steps["goToAddNewFriend"] === "object" &&
-                  typeof $steps["goToAddNewFriend"].then === "function"
+                  $steps["updatePopUp"] != null &&
+                  typeof $steps["updatePopUp"] === "object" &&
+                  typeof $steps["updatePopUp"].then === "function"
                 ) {
-                  $steps["goToAddNewFriend"] = await $steps["goToAddNewFriend"];
+                  $steps["updatePopUp"] = await $steps["updatePopUp"];
                 }
               }}
             >
               {"add a new friend"}
             </div>
+            {(() => {
+              try {
+                return $state.popUp;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return true;
+                }
+                throw e;
+              }
+            })() ? (
+              <div className={classNames(projectcss.all, sty.freeBox__mGdjL)}>
+                <div className={classNames(projectcss.all, sty.freeBox__m2Fe3)}>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text___6GHn1
+                    )}
+                  >
+                    {"Add a New Friend!"}
+                  </div>
+                  <PlasmicImg__
+                    data-plasmic-name={"img"}
+                    data-plasmic-override={overrides.img}
+                    alt={""}
+                    className={classNames(sty.img)}
+                    displayHeight={"25px"}
+                    displayMaxHeight={"none"}
+                    displayMaxWidth={"100%"}
+                    displayMinHeight={"0"}
+                    displayMinWidth={"0"}
+                    displayWidth={"25px"}
+                    loading={"lazy"}
+                    onClick={async event => {
+                      const $steps = {};
+                      $steps["updatePopUp"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              variable: {
+                                objRoot: $state,
+                                variablePath: ["popUp"]
+                              },
+                              operation: 0
+                            };
+                            return (({
+                              variable,
+                              value,
+                              startIndex,
+                              deleteCount
+                            }) => {
+                              if (!variable) {
+                                return;
+                              }
+                              const { objRoot, variablePath } = variable;
+                              $stateSet(objRoot, variablePath, value);
+                              return value;
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["updatePopUp"] != null &&
+                        typeof $steps["updatePopUp"] === "object" &&
+                        typeof $steps["updatePopUp"].then === "function"
+                      ) {
+                        $steps["updatePopUp"] = await $steps["updatePopUp"];
+                      }
+                    }}
+                    src={{
+                      src: "/plasmic/friendo/images/icons8XButton50Png.png",
+                      fullWidth: 50,
+                      fullHeight: 50,
+                      aspectRatio: undefined
+                    }}
+                  />
+                </div>
+                <div className={classNames(projectcss.all, sty.freeBox__kSp44)}>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__fiPIa
+                    )}
+                  >
+                    {"Friend Name:"}
+                  </div>
+                  <TextInput
+                    data-plasmic-name={"textInput"}
+                    data-plasmic-override={overrides.textInput}
+                    className={classNames("__wab_instance", sty.textInput)}
+                    onChange={async (...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "textInput",
+                        "value"
+                      ]).apply(null, eventArgs);
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                  />
+                </div>
+                <div className={classNames(projectcss.all, sty.freeBox__mUfJe)}>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text___2WUrI
+                    )}
+                  >
+                    {"Gender:"}
+                  </div>
+                  <Select
+                    data-plasmic-name={"select"}
+                    data-plasmic-override={overrides.select}
+                    className={classNames("__wab_instance", sty.select)}
+                    description={null}
+                    items={
+                      <React.Fragment>
+                        <MenuItem label={"Male"} value={"item1"} />
+                        <MenuItem label={"Female"} value={"item2"} />
+                      </React.Fragment>
+                    }
+                    label={null}
+                    onChange={async (...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "select",
+                        "value"
+                      ]).apply(null, eventArgs);
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                  />
+                </div>
+                <div className={classNames(projectcss.all, sty.freeBox__wtFf)}>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__lQnM
+                    )}
+                  >
+                    {"personal note:"}
+                  </div>
+                  <TextInput
+                    data-plasmic-name={"textInput2"}
+                    data-plasmic-override={overrides.textInput2}
+                    className={classNames("__wab_instance", sty.textInput2)}
+                    onChange={async (...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "textInput2",
+                        "value"
+                      ]).apply(null, eventArgs);
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                  />
+                </div>
+                <UploadWrapper
+                  data-plasmic-name={"upload"}
+                  data-plasmic-override={overrides.upload}
+                  accept={""}
+                  className={classNames("__wab_instance", sty.upload)}
+                  files={generateStateValueProp($state, ["upload", "files"])}
+                  onFilesChange={async (...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "upload",
+                      "files"
+                    ]).apply(null, eventArgs);
+                  }}
+                  showUploadList={true}
+                >
+                  <AntdButton
+                    className={classNames("__wab_instance", sty.button__ulBIx)}
+                  >
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___3OMSt
+                      )}
+                    >
+                      {"Upload Telegram messsages"}
+                    </div>
+                  </AntdButton>
+                </UploadWrapper>
+                <Button
+                  className={classNames("__wab_instance", sty.button___0BxuS)}
+                  label={
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__qmiec
+                      )}
+                    >
+                      {"Submit"}
+                    </div>
+                  }
+                  onClick={async event => {
+                    const $steps = {};
+                    $steps["updatePopUp"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            variable: {
+                              objRoot: $state,
+                              variablePath: ["popUp"]
+                            },
+                            operation: 0
+                          };
+                          return (({
+                            variable,
+                            value,
+                            startIndex,
+                            deleteCount
+                          }) => {
+                            if (!variable) {
+                              return;
+                            }
+                            const { objRoot, variablePath } = variable;
+                            $stateSet(objRoot, variablePath, value);
+                            return value;
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["updatePopUp"] != null &&
+                      typeof $steps["updatePopUp"] === "object" &&
+                      typeof $steps["updatePopUp"].then === "function"
+                    ) {
+                      $steps["updatePopUp"] = await $steps["updatePopUp"];
+                    }
+                  }}
+                />
+              </div>
+            ) : null}
           </div>
+          {(() => {
+            try {
+              return $state.popUp;
+            } catch (e) {
+              if (
+                e instanceof TypeError ||
+                e?.plasmicType === "PlasmicUndefinedDataError"
+              ) {
+                return true;
+              }
+              throw e;
+            }
+          })() ? (
+            <div className={classNames(projectcss.all, sty.freeBox__vggus)} />
+          ) : null}
         </div>
       </div>
     </React.Fragment>
@@ -390,9 +703,24 @@ function PlasmicFriendsPage__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "navBar", "friendComonent"],
+  root: [
+    "root",
+    "navBar",
+    "friendComonent",
+    "img",
+    "textInput",
+    "select",
+    "textInput2",
+    "upload"
+  ],
+
   navBar: ["navBar"],
-  friendComonent: ["friendComonent"]
+  friendComonent: ["friendComonent"],
+  img: ["img"],
+  textInput: ["textInput"],
+  select: ["select"],
+  textInput2: ["textInput2"],
+  upload: ["upload"]
 };
 
 function makeNodeComponent(nodeName) {
@@ -429,6 +757,11 @@ export const PlasmicFriendsPage = Object.assign(
     // Helper components rendering sub-elements
     navBar: makeNodeComponent("navBar"),
     friendComonent: makeNodeComponent("friendComonent"),
+    img: makeNodeComponent("img"),
+    textInput: makeNodeComponent("textInput"),
+    select: makeNodeComponent("select"),
+    textInput2: makeNodeComponent("textInput2"),
+    upload: makeNodeComponent("upload"),
     // Metadata about props expected for PlasmicFriendsPage
     internalVariantProps: PlasmicFriendsPage__VariantProps,
     internalArgProps: PlasmicFriendsPage__ArgProps,

@@ -194,8 +194,8 @@ function PlasmicHomepage__RenderFunc(props) {
             <div className={classNames(projectcss.all, sty.freeBox__rKLbM)}>
               <PlasmicImg__
                 alt={""}
-                className={classNames(sty.img__sYsdm)}
-                displayHeight={"auto"}
+                className={classNames(sty.img__aXau)}
+                displayHeight={"200px"}
                 displayMaxHeight={"none"}
                 displayMaxWidth={"100%"}
                 displayMinHeight={"0"}
@@ -203,9 +203,9 @@ function PlasmicHomepage__RenderFunc(props) {
                 displayWidth={"600px"}
                 loading={"lazy"}
                 src={{
-                  src: "/plasmic/friendo/images/_613F5Fed16381700041030D6Png.png",
-                  fullWidth: 2000,
-                  fullHeight: 1125,
+                  src: "/plasmic/friendo/images/sketch1741507911746Png.png",
+                  fullWidth: 1272,
+                  fullHeight: 1447,
                   aspectRatio: undefined
                 }}
               />

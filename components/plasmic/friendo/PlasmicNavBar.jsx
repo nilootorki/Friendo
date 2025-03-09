@@ -140,48 +140,24 @@ function PlasmicNavBar__RenderFunc(props) {
         sty.root
       )}
     >
-      <div
-        className={classNames(
-          projectcss.all,
-          projectcss.__wab_text,
-          sty.text__bLrN4
-        )}
-        onClick={async event => {
-          const $steps = {};
-          $steps["goToHome"] = true
-            ? (() => {
-                const actionArgs = { destination: `/home` };
-                return (({ destination }) => {
-                  if (
-                    typeof destination === "string" &&
-                    destination.startsWith("#")
-                  ) {
-                    document
-                      .getElementById(destination.substr(1))
-                      .scrollIntoView({ behavior: "smooth" });
-                  } else {
-                    __nextRouter?.push(destination);
-                  }
-                })?.apply(null, [actionArgs]);
-              })()
-            : undefined;
-          if (
-            $steps["goToHome"] != null &&
-            typeof $steps["goToHome"] === "object" &&
-            typeof $steps["goToHome"].then === "function"
-          ) {
-            $steps["goToHome"] = await $steps["goToHome"];
-          }
-        }}
-      >
-        <React.Fragment>
-          <span
-            className={"plasmic_default__all plasmic_default__span"}
-            style={{ color: "var(--token-iiqrps1yKdLE)" }}
-          >
-            {"Friendo"}
-          </span>
-        </React.Fragment>
+      <div className={classNames(projectcss.all, sty.freeBox__nmmXu)}>
+        <PlasmicImg__
+          alt={""}
+          className={classNames(sty.img__bd2Jw)}
+          displayHeight={"52px"}
+          displayMaxHeight={"none"}
+          displayMaxWidth={"100%"}
+          displayMinHeight={"0"}
+          displayMinWidth={"0"}
+          displayWidth={"300px"}
+          loading={"lazy"}
+          src={{
+            src: "/plasmic/friendo/images/sketch1741507911746Png.png",
+            fullWidth: 1272,
+            fullHeight: 1447,
+            aspectRatio: undefined
+          }}
+        />
       </div>
       <div className={classNames(projectcss.all, sty.freeBox__pzFTs)}>
         <div
@@ -835,6 +811,30 @@ function PlasmicNavBar__RenderFunc(props) {
             )}
             onClick={async event => {
               const $steps = {};
+              $steps["goToAboutUs"] = true
+                ? (() => {
+                    const actionArgs = { destination: `/about-us` };
+                    return (({ destination }) => {
+                      if (
+                        typeof destination === "string" &&
+                        destination.startsWith("#")
+                      ) {
+                        document
+                          .getElementById(destination.substr(1))
+                          .scrollIntoView({ behavior: "smooth" });
+                      } else {
+                        __nextRouter?.push(destination);
+                      }
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
+              if (
+                $steps["goToAboutUs"] != null &&
+                typeof $steps["goToAboutUs"] === "object" &&
+                typeof $steps["goToAboutUs"].then === "function"
+              ) {
+                $steps["goToAboutUs"] = await $steps["goToAboutUs"];
+              }
             }}
           >
             {"About Us"}

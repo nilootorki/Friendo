@@ -300,7 +300,10 @@ function PlasmicAboutUs__RenderFunc(props) {
               }
             </div>
           </div>
-          <div className={classNames(projectcss.all, sty.freeBox__rijnB)}>
+          <div
+            className={classNames(projectcss.all, sty.freeBox__rijnB)}
+            id={"recom-help"}
+          >
             <h4
               className={classNames(
                 projectcss.all,
@@ -392,7 +395,10 @@ function PlasmicAboutUs__RenderFunc(props) {
               {"Enter some text"}
             </div>
           </div>
-          <div className={classNames(projectcss.all, sty.freeBox__lZoUz)}>
+          <div
+            className={classNames(projectcss.all, sty.freeBox__lZoUz)}
+            id={"help-box"}
+          >
             <h4
               className={classNames(
                 projectcss.all,

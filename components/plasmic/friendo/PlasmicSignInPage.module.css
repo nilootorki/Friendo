@@ -10,8 +10,8 @@
   align-items: center;
   background: linear-gradient(
         0deg,
-        var(--token-KzoV1vxcEP4w) 0%,
-        var(--token-23Ysp7DLNQ-T) 100%
+        var(--token-SttGpHKVAEmZ) 0%,
+        var(--token-4lV69MWxGUVy) 100%
       )
       0% 0% / 100% 100% repeat,
     var(--token-23Ysp7DLNQ-T);
@@ -33,7 +33,7 @@
   width: 100%;
   height: auto;
   max-width: 100%;
-  color: var(--token-KzoV1vxcEP4w);
+  color: var(--token-SttGpHKVAEmZ);
   font-size: 80px;
   text-align: left;
   margin-top: 52px;
@@ -146,6 +146,7 @@
 }
 .button:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
+  margin-top: 20px;
 }
 .svg__lucN {
   position: relative;

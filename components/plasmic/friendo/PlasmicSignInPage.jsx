@@ -231,7 +231,7 @@ function PlasmicSignInPage__RenderFunc(props) {
                   sty.text__gvtVk
                 )}
               >
-                {"wrong username"}
+                {"Username not Found"}
               </div>
             ) : null}
             <div className={classNames(projectcss.all, sty.freeBox__s23Y)}>

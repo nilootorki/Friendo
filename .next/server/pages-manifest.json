@@ -2,8 +2,10 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/friends-details": "pages/friends-details.js",
-  "/call-history": "pages/call-history.js",
   "/home": "pages/home.js",
-  "/profile-edit": "pages/profile-edit.js"
+  "/friends-page": "pages/friends-page.js",
+  "/profile-edit": "pages/profile-edit.js",
+  "/call-history": "pages/call-history.js",
+  "/sign-in-page": "pages/sign-in-page.js",
+  "/": "pages/index.js"
 }

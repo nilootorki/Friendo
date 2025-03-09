@@ -997,20 +997,6 @@
           "componentType": "component"
         },
         {
-          "id": "rhDak0U6jLa5",
-          "name": "AddNewFriend",
-          "type": "managed",
-          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
-          "renderModuleFilePath": "plasmic/friendo/PlasmicAddNewFriend.jsx",
-          "importSpec": {
-            "modulePath": "../pages/add-new-friend.jsx"
-          },
-          "cssFilePath": "plasmic/friendo/PlasmicAddNewFriend.module.css",
-          "scheme": "blackbox",
-          "componentType": "page",
-          "path": "/add-new-friend"
-        },
-        {
           "id": "6tqD7RxOexIY",
           "name": "Radio",
           "type": "managed",
@@ -1129,6 +1115,20 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/statistics"
+        },
+        {
+          "id": "Q43YWLipWoOW",
+          "name": "MoodTracking",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicMoodTracking.jsx",
+          "importSpec": {
+            "modulePath": "../pages/mood-tracking.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicMoodTracking.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/mood-tracking"
         }
       ],
       "icons": [
@@ -1318,6 +1318,26 @@
           "id": "DOZDxvDnFBy5",
           "name": "icons8-friends-48.png",
           "filePath": "../public/plasmic/friendo/images/icons8Friends48Png.png"
+        },
+        {
+          "id": "NtTZPw9iOWEU",
+          "name": "icons8-x-button-50.png",
+          "filePath": "../public/plasmic/friendo/images/icons8XButton50Png.png"
+        },
+        {
+          "id": "HzBS--Z2pXSV",
+          "name": "icons8-help-50.png",
+          "filePath": "../public/plasmic/friendo/images/icons8Help50Png.png"
+        },
+        {
+          "id": "tbUwNpuTdhvr",
+          "name": "6124a605b3f5169aef18755f5490f8f4.jpg",
+          "filePath": "../public/plasmic/friendo/images/_6124A605B3F5169Aef18755F5490F8F4Jpg.jpg"
+        },
+        {
+          "id": "W5tcEOtZNFl9",
+          "name": "sketch1741507911746.png",
+          "filePath": "../public/plasmic/friendo/images/sketch1741507911746Png.png"
         }
       ],
       "indirect": false,

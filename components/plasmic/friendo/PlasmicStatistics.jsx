@@ -12,6 +12,7 @@ import * as React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import {
+  PlasmicImg as PlasmicImg__,
   classNames,
   createPlasmicElementProxy,
   deriveRenderOpts,
@@ -22,7 +23,6 @@ import {
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
 import { usePlasmicDataOp } from "@plasmicapp/react-web/lib/data-sources";
 import NavBar from "../../NavBar"; // plasmic-import: KnagBLotfm8n/component
-import Button from "../../Button"; // plasmic-import: R-SJru1lXq4W/component
 import "@plasmicapp/react-web/lib/plasmic.css";
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
 import projectcss from "./plasmic.module.css"; // plasmic-import: d1S8dWKKr4PVKg3azHqMAd/projectcss
@@ -239,121 +239,94 @@ function PlasmicStatistics__RenderFunc(props) {
             ])}
           />
 
-          <Button
-            data-plasmic-name={"button"}
-            data-plasmic-override={overrides.button}
-            className={classNames("__wab_instance", sty.button)}
-            onClick={async event => {
-              const $steps = {};
-              $steps["runCode"] = true
-                ? (() => {
-                    const actionArgs = {
-                      customFunction: async () => {
-                        return (() => {
-                          if (!window.Chart) {
-                            const script = document.createElement("script");
-                            script.src =
-                              "https://cdn.jsdeliver.net/npm/chart.js";
-                            script.onload = () => createChart();
-                            document.head.appendChild(script);
-                          } else {
-                            createChart();
-                          }
-                          function createChart() {
-                            const existingCanvas =
-                              document.getElementById("myChart");
-                            if (existingCanvas) {
-                              existingCanvas.remove();
-                            }
-                            const container = document.querySelector(
-                              ".plasmic_default__all.plasmic_default__div.Statistics__freeBox__vwEzq"
-                            );
-                            const canvas = document.createElement("canvas");
-                            canvas.id = "myChart";
-                            container.appendChild(canvas);
-                            const dataValues = [10, 20, 30, 25, 15];
-
-                            const labels = ["A", "B", "C", "D", "E"];
-
-                            new Chart(canvas, {
-                              type: "bar",
-                              data: {
-                                labels: labels,
-                                datasets: [
-                                  {
-                                    label: "Example Data",
-                                    data: dataValues,
-                                    backgroundColor: [
-                                      "red",
-                                      "blue",
-                                      "green",
-                                      "purple",
-                                      "orange"
-                                    ]
-                                  }
-                                ]
-                              }
-                            });
-                          }
-                          return function createChart() {
-                            const existingCanvas =
-                              document.getElementById("myChart");
-                            if (existingCanvas) {
-                              existingCanvas.remove();
-                            }
-                            const container = document.querySelector(
-                              ".plasmic_default__all.plasmic_default__div.Statistics__freeBox__vwEzq"
-                            );
-                            const canvas = document.createElement("canvas");
-                            canvas.id = "myChart";
-                            container.appendChild(canvas);
-                            const dataValues = [10, 20, 30, 25, 15];
-
-                            const labels = ["A", "B", "C", "D", "E"];
-
-                            new Chart(canvas, {
-                              type: "bar",
-                              data: {
-                                labels: labels,
-                                datasets: [
-                                  {
-                                    label: "Example Data",
-                                    data: dataValues,
-                                    backgroundColor: [
-                                      "red",
-                                      "blue",
-                                      "green",
-                                      "purple",
-                                      "orange"
-                                    ]
-                                  }
-                                ]
-                              }
-                            });
-                          };
-                        })();
-                      }
-                    };
-                    return (({ customFunction }) => {
-                      return customFunction();
-                    })?.apply(null, [actionArgs]);
-                  })()
-                : undefined;
-              if (
-                $steps["runCode"] != null &&
-                typeof $steps["runCode"] === "object" &&
-                typeof $steps["runCode"].then === "function"
-              ) {
-                $steps["runCode"] = await $steps["runCode"];
-              }
-            }}
-          />
-
           <div
             data-plasmic-name={"freeBox"}
             data-plasmic-override={overrides.freeBox}
             className={classNames(projectcss.all, sty.freeBox)}
-          />
+          >
+            {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))([
+              2, 3, 4
+            ]).map((__plasmic_item_0, __plasmic_idx_0) => {
+              const currentItem = __plasmic_item_0;
+              const currentIndex = __plasmic_idx_0;
+              return (
+                <PlasmicImg__
+                  alt={""}
+                  className={classNames(sty.img__anlC8)}
+                  displayHeight={"600px"}
+                  displayMaxHeight={"none"}
+                  displayMaxWidth={"100%"}
+                  displayMinHeight={"0"}
+                  displayMinWidth={"0"}
+                  displayWidth={"250px"}
+                  key={currentIndex}
+                  loading={"lazy"}
+                  src={{
+                    src: "/plasmic/friendo/images/_6124A605B3F5169Aef18755F5490F8F4Jpg.jpg",
+                    fullWidth: 736,
+                    fullHeight: 736,
+                    aspectRatio: undefined
+                  }}
+                />
+              );
+            })}
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__i9Xnd
+              )}
+            >
+              {"random1"}
+            </div>
+            <PlasmicImg__
+              alt={""}
+              className={classNames(sty.img__dp8ZO)}
+              displayHeight={"600px"}
+              displayMaxHeight={"none"}
+              displayMaxWidth={"100%"}
+              displayMinHeight={"0"}
+              displayMinWidth={"0"}
+              displayWidth={"250px"}
+              loading={"lazy"}
+              src={{
+                src: "/plasmic/friendo/images/_6124A605B3F5169Aef18755F5490F8F4Jpg.jpg",
+                fullWidth: 736,
+                fullHeight: 736,
+                aspectRatio: undefined
+              }}
+            />
+          </div>
+          {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+            (() => {
+              try {
+                return [2, 3, 4, 5, 6, 7, 8, 9, 10];
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return [];
+                }
+                throw e;
+              }
+            })()
+          ).map((__plasmic_item_0, __plasmic_idx_0) => {
+            const currentItem = __plasmic_item_0;
+            const currentIndex = __plasmic_idx_0;
+            return (
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__wsg2W
+                )}
+                key={currentIndex}
+              >
+                {"random 2"}
+              </div>
+            );
+          })}
         </div>
       </div>
     </React.Fragment>
@@ -361,9 +334,8 @@ function PlasmicStatistics__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "navBar", "button", "freeBox"],
+  root: ["root", "navBar", "freeBox"],
   navBar: ["navBar"],
-  button: ["button"],
   freeBox: ["freeBox"]
 };
 
@@ -400,7 +372,6 @@ export const PlasmicStatistics = Object.assign(
   {
     // Helper components rendering sub-elements
     navBar: makeNodeComponent("navBar"),
-    button: makeNodeComponent("button"),
     freeBox: makeNodeComponent("freeBox"),
     // Metadata about props expected for PlasmicStatistics
     internalVariantProps: PlasmicStatistics__VariantProps,

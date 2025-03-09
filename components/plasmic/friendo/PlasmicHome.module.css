@@ -10,6 +10,7 @@
   align-items: center;
   background: none;
   padding-bottom: 148px;
+  cursor: pointer;
   min-width: 0;
   min-height: 0;
   grid-template-columns:
@@ -402,4 +403,30 @@
 }
 .root .text__ho3Eb:hover {
   text-decoration-line: underline;
+}
+.freeBox__brWoq {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+.text__nG4Qt {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
+.text___6ODYz {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
+.root .text___6ODYz:hover {
+  color: var(--token-JHJihbO21-hH);
 }
