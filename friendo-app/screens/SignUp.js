@@ -32,7 +32,7 @@ const SignUp = () => {
     if (username && email && password) {
       try {
         const response = await axios.post(
-          "http://172.17.85.9:8000/signup/",
+          "http://172.20.10.2:8000/signup/",
           {
             username,
             email,
