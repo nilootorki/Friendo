@@ -86,8 +86,6 @@ sentiment_mapping = {
     }
 
 
-app=FastAPI() #assign the dastapi to main app/web
-
 
 @app.get("/")  #decorator that tells fastapi that get_url get requests to the root URL /
 def get_url():
@@ -102,12 +100,12 @@ profile_DIR="profile/"
 os.makedirs(profile_DIR,exist_ok=True) # to ensure that directory exists
 
 #to avoid memory leaking
-def get_db():
-    db=Session()   #start a db session
-    try:
-        yield db    #provides the session to FastAPI routes 
-    finally:
-        db.close()   #close the session after the request is complete
+# def get_db():
+#     db=Session()   #start a db session
+#     try:
+#         yield db    #provides the session to FastAPI routes 
+#     finally:
+#         db.close()   #close the session after the request is complete
         
 @app.post("/upload_profile_photo/{user_id}")
 async def upload_profile_photo(user_id:int,file:UploadFile=File(...),db:Session=Depends(get_db)):
@@ -224,7 +222,7 @@ async def ProfileSetUp(profile: ProfileCreate,  db: Session = Depends(get_db)):
 
 @app.post("/signup/", response_model=SignupResponse)
 async def SignUp(user: UserCreate, db: Session = Depends(get_db)):
-    print(user.username, user.email, user.password)
+    print(user.username, user.email, user.password, user.gender)
     print("WE ARE IN")
     
     # Check if username exists
@@ -248,7 +246,8 @@ async def SignUp(user: UserCreate, db: Session = Depends(get_db)):
     db_record = db_models.User(
         username=user.username,
         email=user.email,
-        password_hash=user.password  # You should hash this before storing
+        password_hash=user.password,  # You should hash this before storing
+        gender = user.gender
     )
     db.add(db_record)
     db.commit()
