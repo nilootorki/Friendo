@@ -24,26 +24,6 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/call-history": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/call-history.js"
-    ],
-    "/friends-page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/friends-page.js"
-    ],
-    "/home": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/home.js"
-    ],
-    "/profile-edit": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/profile-edit.js"
-    ],
     "/sign-in-page": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

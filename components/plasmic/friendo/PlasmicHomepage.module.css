@@ -110,10 +110,10 @@
   box-shadow: 0px 3px 16px 0px #63595933;
   margin-right: 0px;
   margin-bottom: 6px;
-  position: fixed;
+  position: relative;
   overflow: hidden;
-  left: 0px;
-  top: 0px;
+  left: auto;
+  top: auto;
   z-index: 1;
   height: 675px;
   grid-column-start: 1 !important;
@@ -141,6 +141,20 @@
 }
 .sectiontextAppear > * {
   grid-column: 4;
+}
+.button:global(.__wab_instance):global(.__wab_instance) {
+  max-width: 100%;
+}
+.svg__dqad {
+  position: relative;
+  height: 1em;
+}
+.text__e0Znl {
+  white-space: pre;
+}
+.svg__b772 {
+  position: relative;
+  height: 1em;
 }
 .freeBox__rKLbM {
   display: flex;
@@ -252,7 +266,7 @@
   height: auto;
   max-width: 100%;
   font-size: 25px;
-  margin-top: 799px;
+  margin-top: 255px;
   text-align: center;
   color: var(--token-JrhHvorIP6kU);
   margin-right: 0px;

@@ -34,8 +34,8 @@ import regex as re
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import requests
-from routes.friends import router as friend_router
-from routes.login import router as login_router
+# from routes.friends import router as friend_router
+# from routes.login import router as login_router
 
 
 
@@ -68,13 +68,13 @@ from transformers import AutoModelForSequenceClassification, AutoConfig
 
 #include routers
 # app.include_router(login_router, prefix="/auth",tags=["auth"])
-app.include_router(friend_router,prefix="/friends")
+# app.include_router(friend_router,prefix="/friends")
 
 @app.get("/")
 def home():
     return{"message": "Backend is running"}
 
-print("Routers loaded:", app.routes)
+# print("Routers loaded:", app.routes)
 
 tokenizer = AutoTokenizer.from_pretrained("persiannlp/mt5-large-parsinlu-sentiment-analysis", use_fast=False)
 model = AutoModelForSeq2SeqLM.from_pretrained("persiannlp/mt5-large-parsinlu-sentiment-analysis")
@@ -128,12 +128,12 @@ profile_DIR="profile/"
 os.makedirs(profile_DIR,exist_ok=True) # to ensure that directory exists
 
 #to avoid memory leaking
-def get_db():
-    db=Session()   #start a db session
-    try:
-        yield db    #provides the session to FastAPI routes 
-    finally:
-        db.close()   #close the session after the request is complete
+# def get_db():
+#     db=Session()   #start a db session
+#     try:
+#         yield db    #provides the session to FastAPI routes 
+#     finally:
+#         db.close()   #close the session after the request is complete
         
 @app.post("/upload_profile_photo/{user_id}")
 async def upload_profile_photo(user_id:int,file:UploadFile=File(...),db:Session=Depends(get_db)):
@@ -320,12 +320,12 @@ profile_DIR="profile/"
 os.makedirs(profile_DIR,exist_ok=True) # to ensure that directory exists
 
 #to avoid memory leaking
-def get_db():
-    db=Session()   #start a db session
-    try:
-        yield db    #provides the session to FastAPI routes 
-    finally:
-        db.close()   #close the session after the request is complete
+# def get_db():
+#     db=Session()   #start a db session
+#     try:
+#         yield db    #provides the session to FastAPI routes 
+#     finally:
+#         db.close()   #close the session after the request is complete
         
 @app.post("/upload_profile_photo/{user_id}")
 async def upload_profile_photo(user_id:int,file:UploadFile=File(...),db:Session=Depends(get_db)):
@@ -858,12 +858,12 @@ profile_DIR="profile/"
 os.makedirs(profile_DIR,exist_ok=True) # to ensure that directory exists
 
 #to avoid memory leaking
-def get_db():
-    db=Session()   #start a db session
-    try:
-        yield db    #provides the session to FastAPI routes 
-    finally:
-        db.close()   #close the session after the request is complete
+# def get_db():
+#     db=Session()   #start a db session
+#     try:
+#         yield db    #provides the session to FastAPI routes 
+#     finally:
+#         db.close()   #close the session after the request is complete
         
 @app.post("/upload_profile_photo/{user_id}")
 async def upload_profile_photo(user_id:int,file:UploadFile=File(...),db:Session=Depends(get_db)):
@@ -906,7 +906,7 @@ async def get_profile(user_id: int , db:Session=Depends(get_db)):
 
 
 
-from fastapi import FastAPI,Depends,HTTPException, APIRouter
+from fastapi import FastAPI,Depends,HTTPException
 from sqlalchemy.orm import Session
 import re
 # from backend.utils import verify_password
@@ -922,32 +922,7 @@ from schemas import UserLoginResponse, UserLoginRequest
 import db_models
 from database import get_db
 from datetime import datetime, timedelta
-from config import secret_key, algorithm,access_token_expire_min
-
-
-#endpoint for user login
-@app.post("/login/", response_model=UserLoginResponse)
-async def login(user:UserLoginRequest,db:Session=Depends(get_db)):
- 
-    db_user=db.query(db_models.User).filter(db_models.User.username==user.username).first()
-    if not db_user:
-        raise HTTPException(status_code=404, detail="User not found")
-    
-    #password verification
-    if not verify_password(user.password,db_user.password_hash):
-        raise HTTPException(status_code=400, detail="Incorrect password")
-    
-    # create a JWT token upon successful login
-    #store user_id in JWT
-    #creat token with expiration time
-    expire_time = datetime.utcnow() + timedelta(minutes=access_token_expire_min)
-    
-    access_token = create_token(data={"sub": db_user.user_id ,"exp": expire_time.timestamp()})
-    
-    return {"access_token": access_token, "token_type": "bearer", "expires_at": expire_time.isoformat()}
-
-
-
+# from config import secret_key, algorithm,access_token_expire_min
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -964,6 +939,35 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
         
+
+
+#endpoint for user login
+@app.post("/login/")
+async def login(user:UserLoginRequest,db:Session=Depends(get_db)):
+    print("uyguyg")
+ 
+    db_user=db.query(db_models.User).filter(db_models.User.username==user.username).first()
+    print("#",db_user)
+    if not db_user:
+        print("Nothing")
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    #password verification
+    if not verify_password(user.password,db_user.password_hash):
+        raise HTTPException(status_code=400, detail="Incorrect password")
+    
+    # create a JWT token upon successful login
+    #store user_id in JWT
+    #creat token with expiration time
+    # expire_time = datetime.utcnow() + timedelta(minutes=access_token_expire_min)
+    
+    # access_token = create_token(data={"sub": db_user.user_id ,"exp": expire_time.timestamp()})
+    
+    # return {"access_token": access_token, "token_type": "bearer", "expires_at": expire_time.isoformat()}
+    return []
+
+
+
 
 
 

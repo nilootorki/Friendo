@@ -444,6 +444,30 @@ function PlasmicButton__RenderFunc(props) {
         })}
         onMouseEnter={async event => {
           const $steps = {};
+          $steps["goToSignInPage"] = true
+            ? (() => {
+                const actionArgs = { destination: `/sign-in-page` };
+                return (({ destination }) => {
+                  if (
+                    typeof destination === "string" &&
+                    destination.startsWith("#")
+                  ) {
+                    document
+                      .getElementById(destination.substr(1))
+                      .scrollIntoView({ behavior: "smooth" });
+                  } else {
+                    __nextRouter?.push(destination);
+                  }
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+          if (
+            $steps["goToSignInPage"] != null &&
+            typeof $steps["goToSignInPage"] === "object" &&
+            typeof $steps["goToSignInPage"].then === "function"
+          ) {
+            $steps["goToSignInPage"] = await $steps["goToSignInPage"];
+          }
         }}
       >
         <div

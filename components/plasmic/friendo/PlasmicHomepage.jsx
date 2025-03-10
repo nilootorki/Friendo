@@ -191,6 +191,39 @@ function PlasmicHomepage__RenderFunc(props) {
               )
             })}
           >
+            <Button
+              data-plasmic-name={"button"}
+              data-plasmic-override={overrides.button}
+              className={classNames("__wab_instance", sty.button)}
+              onClick={async event => {
+                const $steps = {};
+                $steps["goToSignInPage"] = true
+                  ? (() => {
+                      const actionArgs = { destination: `/sign-in-page` };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToSignInPage"] != null &&
+                  typeof $steps["goToSignInPage"] === "object" &&
+                  typeof $steps["goToSignInPage"].then === "function"
+                ) {
+                  $steps["goToSignInPage"] = await $steps["goToSignInPage"];
+                }
+              }}
+            />
+
             <div className={classNames(projectcss.all, sty.freeBox__rKLbM)}>
               <PlasmicImg__
                 alt={""}
@@ -434,8 +467,17 @@ function PlasmicHomepage__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  visibleText: ["visibleText", "section", "startBut", "reveal", "downloadbut"],
-  section: ["section"],
+  visibleText: [
+    "visibleText",
+    "section",
+    "button",
+    "startBut",
+    "reveal",
+    "downloadbut"
+  ],
+
+  section: ["section", "button"],
+  button: ["button"],
   startBut: ["startBut"],
   reveal: ["reveal", "downloadbut"],
   downloadbut: ["downloadbut"]
@@ -474,6 +516,7 @@ export const PlasmicHomepage = Object.assign(
   {
     // Helper components rendering sub-elements
     section: makeNodeComponent("section"),
+    button: makeNodeComponent("button"),
     startBut: makeNodeComponent("startBut"),
     reveal: makeNodeComponent("reveal"),
     downloadbut: makeNodeComponent("downloadbut"),

@@ -22,12 +22,7 @@ import {
   useDollarState
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
-import { usePlasmicDataSourceContext } from "@plasmicapp/data-sources-context";
-import {
-  executePlasmicDataOp,
-  usePlasmicDataOp,
-  usePlasmicInvalidate
-} from "@plasmicapp/react-web/lib/data-sources";
+import { usePlasmicDataOp } from "@plasmicapp/react-web/lib/data-sources";
 import TextField from "../../TextField"; // plasmic-import: XtPi33MMKJk2/component
 import Button from "../../Button"; // plasmic-import: R-SJru1lXq4W/component
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -113,8 +108,6 @@ function PlasmicSignInPage__RenderFunc(props) {
     $queries: $queries,
     $refs
   });
-  const dataSourcesCtx = usePlasmicDataSourceContext();
-  const plasmicInvalidate = usePlasmicInvalidate();
   const new$Queries = {
     usersTable: usePlasmicDataOp(() => {
       return {
@@ -322,6 +315,77 @@ function PlasmicSignInPage__RenderFunc(props) {
                 }}
               />
             </div>
+            <Button
+              data-plasmic-name={"button"}
+              data-plasmic-override={overrides.button}
+              className={classNames("__wab_instance", sty.button)}
+              label={
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__ioou1
+                  )}
+                >
+                  {"sign in"}
+                </div>
+              }
+              onClick={async event => {
+                const $steps = {};
+                $steps["runCode"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        customFunction: async () => {
+                          return (async () => {
+                            async function fetchData() {
+                              const API_URL = "http://127.0.0.1:8000/login/";
+                              const requestData = {
+                                username: "test_user",
+                                password: "test_pass"
+                              };
+                              try {
+                                const response = await fetch(API_URL, {
+                                  method: "POST",
+                                  headers: {
+                                    "Content-Type": "application/json"
+                                  },
+                                  body: JSON.stringify(requestData)
+                                });
+                                const responseBody = await response.json();
+                                if (!response.ok) {
+                                  if (
+                                    response.status === 404 &&
+                                    responseBody.detail === "User not found"
+                                  ) {
+                                    $state.wrongUsername = true;
+                                  }
+                                }
+                                const data = await response.json();
+                                console.log("API Response:", data);
+                                return data;
+                              } catch (error) {
+                                console.error("Error fetching API:", error);
+                              }
+                            }
+                            return fetchData();
+                          })();
+                        }
+                      };
+                      return (({ customFunction }) => {
+                        return customFunction();
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["runCode"] != null &&
+                  typeof $steps["runCode"] === "object" &&
+                  typeof $steps["runCode"].then === "function"
+                ) {
+                  $steps["runCode"] = await $steps["runCode"];
+                }
+              }}
+            />
+
             {(() => {
               try {
                 return $state.wrongPassword;
@@ -345,88 +409,6 @@ function PlasmicSignInPage__RenderFunc(props) {
                 {"wrong password"}
               </div>
             ) : null}
-            <Button
-              data-plasmic-name={"button"}
-              data-plasmic-override={overrides.button}
-              className={classNames("__wab_instance", sty.button)}
-              label={
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text___8ZWe4
-                  )}
-                >
-                  {"Sign In"}
-                </div>
-              }
-              onClick={async event => {
-                const $steps = {};
-                $steps["goToHome"] = true
-                  ? (() => {
-                      const actionArgs = { destination: `/home` };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["goToHome"] != null &&
-                  typeof $steps["goToHome"] === "object" &&
-                  typeof $steps["goToHome"].then === "function"
-                ) {
-                  $steps["goToHome"] = await $steps["goToHome"];
-                }
-                $steps["httpPost"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        dataOp: {
-                          sourceId: "kyQLvzX4VBgHR6BbD2tTbc",
-                          opId: "09fc49eb-21ee-40bf-9718-829b747b1988",
-                          userArgs: {
-                            body: [$state.username.value, $state.password.value]
-                          },
-                          cacheKey: null,
-                          invalidatedKeys: ["plasmic_refresh_all"],
-                          roleId: null
-                        }
-                      };
-                      return (async ({ dataOp, continueOnError }) => {
-                        try {
-                          const response = await executePlasmicDataOp(dataOp, {
-                            userAuthToken: dataSourcesCtx?.userAuthToken,
-                            user: dataSourcesCtx?.user
-                          });
-                          await plasmicInvalidate(dataOp.invalidatedKeys);
-                          return response;
-                        } catch (e) {
-                          if (!continueOnError) {
-                            throw e;
-                          }
-                          return e;
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["httpPost"] != null &&
-                  typeof $steps["httpPost"] === "object" &&
-                  typeof $steps["httpPost"].then === "function"
-                ) {
-                  $steps["httpPost"] = await $steps["httpPost"];
-                }
-              }}
-            />
-
             <div
               className={classNames(
                 projectcss.all,
