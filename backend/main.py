@@ -24,6 +24,8 @@ from fastapi.staticfiles import StaticFiles
 
 from schemas import UserFriendSchema, UserCreate, UserResponse, SignupResponse, ProfileCreate, UserFriend
 from typing import List
+from utils import hash_password
+
 
 from sqlalchemy.exc import NoResultFound
 
@@ -32,6 +34,9 @@ import regex as re
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import requests
+from routes.friends import router as friend_router
+from routes.login import router as login_router
+
 
 
 app = FastAPI()
@@ -52,6 +57,27 @@ model = AutoModelForSeq2SeqLM.from_pretrained("persiannlp/mt5-large-parsinlu-sen
 from transformers import AutoModelForSequenceClassification, AutoConfig
 
 
+# auth_router = APIRouter()
+
+# @auth_router.post("/login")
+# async def login():
+#     return {"message": "Login successful"}
+
+# Include the auth router in the FastAPI app
+# app.include_router(auth_router, prefix="/auth")
+
+#include routers
+# app.include_router(login_router, prefix="/auth",tags=["auth"])
+app.include_router(friend_router,prefix="/friends")
+
+@app.get("/")
+def home():
+    return{"message": "Backend is running"}
+
+print("Routers loaded:", app.routes)
+
+tokenizer = AutoTokenizer.from_pretrained("persiannlp/mt5-large-parsinlu-sentiment-analysis", use_fast=False)
+model = AutoModelForSeq2SeqLM.from_pretrained("persiannlp/mt5-large-parsinlu-sentiment-analysis")
 
 
 
@@ -244,11 +270,13 @@ async def SignUp(user: UserCreate, db: Session = Depends(get_db)):
     if not re.match(email_regex, user.email):
         return {"success": False, "message": "Invalid Email!"}
 
+    hashed_password= hash_password(user.password)
+
     # Create new user
     db_record = db_models.User(
         username=user.username,
         email=user.email,
-        password_hash=user.password  # You should hash this before storing
+        password_hash=hashed_password  # You should hash this before storing
     )
     db.add(db_record)
     db.commit()
@@ -825,6 +853,116 @@ def suggestion(user_id: int, friend_name: str, db: Session=Depends(get_db)):
 
         
 
+#profile images
+profile_DIR="profile/"
+os.makedirs(profile_DIR,exist_ok=True) # to ensure that directory exists
+
+#to avoid memory leaking
+def get_db():
+    db=Session()   #start a db session
+    try:
+        yield db    #provides the session to FastAPI routes 
+    finally:
+        db.close()   #close the session after the request is complete
+        
+@app.post("/upload_profile_photo/{user_id}")
+async def upload_profile_photo(user_id:int,file:UploadFile=File(...),db:Session=Depends(get_db)):
+        allowed_files={"png","jpg","jpeg","gif"}
+        file_type=file.filename.split(".")[-1].lower()
+        if file_type not in allowed_files:
+            raise HTTPException(status_code=400,detail="Invalid file format! only png, jpg, jpeg, gif files are accepted")
+        
+        profile_path=f"{profile_DIR}{user_id}.{file_type}"
+        #open file in write-binary mode and copy into buffer
+        with open(profile_path,"wb") as buffer:
+            shutil.copyfileobj(file.file,buffer)
+            
+        
+        #update user's profile path in db
+        user=db.query(User).filter(User.id==user_id).first()
+        if not user:
+            raise HTTPException(status_code=404,detail="user not found!")
+        
+        user.profile_photo=profile_path
+        db.commit()
+        
+#view profile photos from db
+app.mount("/profile", StaticFiles(directory="profile"),name="profile")    #tells fastAPI to serve all files inside the profile directory - available at http://localhost:8000/uploads/file name
+
+        
+#creat API endpoint to get user profile photos
+@app.get("/profile_photo/{user_id}") 
+async def get_profile(user_id: int , db:Session=Depends(get_db)):
+    user=db.query(User).filter(User.id==user_id).first
+    if not user or not user.profile_photo:
+        raise HTTPException(status_code=404, detail="Profile photo not found")
+    
+    return {"image_url": f"/uploads/{user_id}.jpg"}
+
+        
+
+        
+
+
+
+
+from fastapi import FastAPI,Depends,HTTPException, APIRouter
+from sqlalchemy.orm import Session
+import re
+# from backend.utils import verify_password
+# from backend.auth import create_token
+# from backend.schemas import UserLoginResponse, UserLoginRequest
+# import backend.db_models
+# from backend.database import get_db
+# from datetime import datetime, timedelta
+# from backend.config import secret_key, algorithm,access_token_expire_min
+from utils import verify_password
+from auth import create_token
+from schemas import UserLoginResponse, UserLoginRequest
+import db_models
+from database import get_db
+from datetime import datetime, timedelta
+from config import secret_key, algorithm,access_token_expire_min
+
+
+#endpoint for user login
+@app.post("/login/", response_model=UserLoginResponse)
+async def login(user:UserLoginRequest,db:Session=Depends(get_db)):
+ 
+    db_user=db.query(db_models.User).filter(db_models.User.username==user.username).first()
+    if not db_user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    #password verification
+    if not verify_password(user.password,db_user.password_hash):
+        raise HTTPException(status_code=400, detail="Incorrect password")
+    
+    # create a JWT token upon successful login
+    #store user_id in JWT
+    #creat token with expiration time
+    expire_time = datetime.utcnow() + timedelta(minutes=access_token_expire_min)
+    
+    access_token = create_token(data={"sub": db_user.user_id ,"exp": expire_time.timestamp()})
+    
+    return {"access_token": access_token, "token_type": "bearer", "expires_at": expire_time.isoformat()}
+
+
+
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+# app.include_router(router, prefix="/auth", tags=["auth"])
+
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow requests from any frontend
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allow all headers
+)
         
 
 
