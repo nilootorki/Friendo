@@ -1,7 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from datetime import datetime, timedelta
 import jwt
-from jose import Error # for creating, encoding, and decoding JWTs
+from jose import JWTError # for creating, encoding, and decoding JWTs
 from fastapi.security import OAuth2PasswordBearer  #to handle OAuth2 (used for token based authentications)
 from fastapi import Depends,HTTPException, status
 # from backend.config import secret_key, algorithm,access_token_expire_min
@@ -35,29 +35,37 @@ def create_token(data:dict):
     return jwt.encode(data_copy,secret_key,algorithm=algorithm)
 
 #get current user
-def get_current_user(token:str=Depends(oauth2_scheme), db:Session=Depends(get_db)):
+def get_current_user(request:Request, db:Session=Depends(get_db)):
     
-    exceptions=HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Invalid authentication token",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
+    # exceptions=HTTPException(
+    #     status_code=status.HTTP_401_UNAUTHORIZED,
+    #     detail="Invalid authentication token",
+    #     headers={"WWW-Authenticate": "Bearer"},
+    # )
+    
+    token=request.cookies.get("access_token")
+    
+    if not token:
+        raise HTTPException(status_code=401, detail="Not authenticated")
     
     #the authentication type is bearer
     
     try:
         #decode the token
+        token = token.replace("Bearer ", "").strip()
         payload=jwt.decode(token, secret_key,algorithms=[algorithm])
         user_id: int=payload.get("sub")    #sub(subject) represents the user identifier
+        
         if user_id is None:
-            raise exceptions
+            raise HTTPException(status_code=401, detail="Invalid authentication token")
         user = db.query(db_models.User).filter(db_models.User.user_id == int(user_id)).first()
+        
         if not user:
-            raise exceptions
+            raise HTTPException(status_code=401, detail="User not found")
         
         return user_id
-    except Error:
-        raise exceptions
+    except JWTError:
+        raise HTTPException(status_code=401, detail="Token has expired or is invalid")
     
 # router=APIRouter()
 # @router.post("/login", response_model=UserLoginResponse)

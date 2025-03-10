@@ -1,4 +1,4 @@
-from fastapi import FastAPI , Depends, UploadFile, File, HTTPException
+from fastapi import FastAPI , Depends, UploadFile, File, HTTPException , Response
 from dotenv import load_dotenv
 import os
 from sqlalchemy.orm import Session
@@ -25,6 +25,8 @@ from fastapi.staticfiles import StaticFiles
 from schemas import UserFriendSchema, UserCreate, UserResponse, SignupResponse, ProfileCreate, UserFriend
 from typing import List
 from utils import hash_password
+from schemas import UserFriendCreate, UserFriendResponse, UserEditRequest, UserResponse
+from auth import get_current_user
 
 
 from sqlalchemy.exc import NoResultFound
@@ -34,8 +36,8 @@ import regex as re
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import requests
-# from routes.friends import router as friend_router
-# from routes.login import router as login_router
+from routes.friends import router as friend_router
+from routes.login import router as login_router
 
 
 
@@ -68,13 +70,13 @@ from transformers import AutoModelForSequenceClassification, AutoConfig
 
 #include routers
 # app.include_router(login_router, prefix="/auth",tags=["auth"])
-# app.include_router(friend_router,prefix="/friends")
+app.include_router(friend_router,prefix="/friends")
 
 @app.get("/")
 def home():
     return{"message": "Backend is running"}
 
-# print("Routers loaded:", app.routes)
+print("Routers loaded:", app.routes)
 
 tokenizer = AutoTokenizer.from_pretrained("persiannlp/mt5-large-parsinlu-sentiment-analysis", use_fast=False)
 model = AutoModelForSeq2SeqLM.from_pretrained("persiannlp/mt5-large-parsinlu-sentiment-analysis")
@@ -128,12 +130,12 @@ profile_DIR="profile/"
 os.makedirs(profile_DIR,exist_ok=True) # to ensure that directory exists
 
 #to avoid memory leaking
-# def get_db():
-#     db=Session()   #start a db session
-#     try:
-#         yield db    #provides the session to FastAPI routes 
-#     finally:
-#         db.close()   #close the session after the request is complete
+def get_db():
+    db=Session()   #start a db session
+    try:
+        yield db    #provides the session to FastAPI routes 
+    finally:
+        db.close()   #close the session after the request is complete
         
 @app.post("/upload_profile_photo/{user_id}")
 async def upload_profile_photo(user_id:int,file:UploadFile=File(...),db:Session=Depends(get_db)):
@@ -250,7 +252,7 @@ async def ProfileSetUp(profile: ProfileCreate,  db: Session = Depends(get_db)):
 
 @app.post("/signup/", response_model=SignupResponse)
 async def SignUp(user: UserCreate, db: Session = Depends(get_db)):
-    print(user.username, user.email, user.password)
+    print(user.username, user.email, user.password, user.gender)
     print("WE ARE IN")
     
     # Check if username exists
@@ -270,14 +272,16 @@ async def SignUp(user: UserCreate, db: Session = Depends(get_db)):
     if not re.match(email_regex, user.email):
         return {"success": False, "message": "Invalid Email!"}
 
-    hashed_password= hash_password(user.password)
+    # hashed_password= hash_password(user.password)
 
     # Create new user
     db_record = db_models.User(
         username=user.username,
         email=user.email,
-        password_hash=hashed_password  # You should hash this before storing
+        password_hash=user.password,   # You should hash this before storing
+        gender=user.gender           
     )
+    
     db.add(db_record)
     db.commit()
     db.refresh(db_record)  # Ensures we get the generated user_id
@@ -315,101 +319,6 @@ async def upload_contacts(user_friends : UserFriend, db:Session=Depends(get_db))
 
 
     return{"Friends are added!"}
-#profile images
-profile_DIR="profile/"
-os.makedirs(profile_DIR,exist_ok=True) # to ensure that directory exists
-
-#to avoid memory leaking
-# def get_db():
-#     db=Session()   #start a db session
-#     try:
-#         yield db    #provides the session to FastAPI routes 
-#     finally:
-#         db.close()   #close the session after the request is complete
-        
-@app.post("/upload_profile_photo/{user_id}")
-async def upload_profile_photo(user_id:int,file:UploadFile=File(...),db:Session=Depends(get_db)):
-        allowed_files={"png","jpg","jpeg","gif"}
-        file_type=file.filename.split(".")[-1].lower()
-        if file_type not in allowed_files:
-            raise HTTPException(status_code=400,detail="Invalid file format! only png, jpg, jpeg, gif files are accepted")
-        
-        profile_path=f"{profile_DIR}{user_id}.{file_type}"
-        #open file in write-binary mode and copy into buffer
-        with open(profile_path,"wb") as buffer:
-            shutil.copyfileobj(file.file,buffer)
-            
-        
-        #update user's profile path in db
-        user=db.query(User).filter(User.id==user_id).first()
-        if not user:
-            raise HTTPException(status_code=404,detail="user not found!")
-        
-        user.profile_photo=profile_path
-        db.commit()
-        
-#view profile photos from db
-app.mount("/profile", StaticFiles(directory="profile"),name="profile")    #tells fastAPI to serve all files inside the profile directory - available at http://localhost:8000/uploads/file name
-
-        
-#creat API endpoint to get user profile photos
-@app.get("/profile_photo/{user_id}") 
-async def get_profile(user_id: int , db:Session=Depends(get_db)):
-    user=db.query(User).filter(User.id==user_id).first
-    if not user or not user.profile_photo:
-        raise HTTPException(status_code=404, detail="Profile photo not found")
-    
-    return {"image_url": f"/uploads/{user_id}.jpg"}
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-@app.post("/upload_contacts/{1}")
-async def upload_contacts(user_id: int, file: UploadFile=File(...), db:Session=Depends(get_db)):
-    content=await file.read()
-    
-    if file.filename.endswith(".json"):
-        try:
-            contacts=json.load(content)  #convert json file content into a python dic.
-        except json.JSONDecodeError:
-            raise HTTPException(status_code=400,detail="Invalid JSON format!")
-        
-    elif file.filename.endswith(".csv"):
-        try:
-            df=pd.read_csv(file.file)
-            contacts=df.to_dict(orient="records")
-        except Exception:
-            raise HTTPException(status_code=400,detail=f"Error proccessing CSV:{str(Exception)}")
-        
-    else:
-        raise HTTPException(status_code=400,detail="only JSON or CSV file formats are allowed")
-    
-    #df validation:
-    
-    try:
-        contacts_validation=[schemas.FriendsBase(**contact).dict() for contact in contacts]
-    except Exception:
-        raise HTTPException(status_code=400, detail=f"Invalid contact list format:{str(Exception)}")
-    
-    
-    #save to database
-    user=db.query(db_models.User).filter(db_models.User.user_id==user_id).first()
-
-    return{"massage":"Welcome to Friendo!"}
 
 
 UPLOAD_DIR = "uploads"
@@ -435,6 +344,7 @@ async def upload_json(file: UploadFile = File(...)):
 
     # Redirect to the Analysis Page
     return RedirectResponse(url=f"/analyze-json/?filename={file.filename}", status_code=303)
+
 
 @app.post("/upload-calls/")
 async def upload_calls(username: str, file: UploadFile = File(...)):
@@ -678,12 +588,21 @@ def analyze_data(json_data):
     }
     analysis_df = pd.DataFrame(analysis_result)
 
+
     json_analysis_result = analysis_df.to_json(orient="records")
 
     print(friend_sentiment_result)
     print(friend_sentiment_score, friend_total_no_of_messages)
     print(json_analysis_result)
 
+
+#     if isinstance(json_data, dict):
+#         return json_analysis_result
+#     elif isinstance(json_data, list):
+#         num_items = len(json_data)
+#         return {"type": "Array", "num_items": num_items}
+#     else:
+#         return {"error": "Unsupported JSON format"}
 
     if isinstance(json_data, dict):
         return json_analysis_result
@@ -697,7 +616,8 @@ def analyze_data(json_data):
 @app.get("/suggest/", response_model=List[UserFriendSchema])
 def suggestion(user_id: int, friend_name: str, db: Session=Depends(get_db)):
     record = db.query(db_models.UserFriend).filter(db_models.UserFriend.user_id == user_id).all()
-    username = record.username
+    print(record)
+    username = record[0].username
 
     # Handle if no record is found
     parsed_records = []
@@ -734,6 +654,7 @@ def suggestion(user_id: int, friend_name: str, db: Session=Depends(get_db)):
     total_messages_friend = 0 
     dates = []
     latest_chat = datetime(1999,1, 1)
+    latest_call = datetime(1999,1, 1)
     for record in parsed_records:
         print("REcord", record.friend_name)
         if record.friend_name== friend_name:
@@ -781,7 +702,7 @@ def suggestion(user_id: int, friend_name: str, db: Session=Depends(get_db)):
                 dates_diff_calls = dates_df.diff().mean().days
 
                 
-    if total_messages != 0:
+    if total_messages.iloc[0] != 0:
         total_score /= total_messages
         total_score_you /= total_messages_you
         total_score_friend /= total_messages_friend
@@ -818,13 +739,15 @@ def suggestion(user_id: int, friend_name: str, db: Session=Depends(get_db)):
     }
 
     comment = db.query(db_models.UserSuggestion).filter_by(user_id=user_id, username = username).one().comment
-    comment_analyse = sentiment_mapping[run_model([comment])]
+    comment_analyse = 0
+    if comment:
+        comment_analyse = sentiment_mapping[run_model([comment])]
 
     reports = 0
 
     if comment:
         reports += 1
-    if total_messages:
+    if total_messages.iloc[0]:
         reports += 1
     if total_call_duration:
         reports += 1
@@ -841,6 +764,7 @@ def suggestion(user_id: int, friend_name: str, db: Session=Depends(get_db)):
 
     db_record = db.query(db_models.UserSuggestion).filter_by(user_id=user_id, username = username).one()
 
+
     db_record.suggestion = suggestion
     db_record.comment = comment
     db_record.total_score = total_analyse_score
@@ -851,22 +775,25 @@ def suggestion(user_id: int, friend_name: str, db: Session=Depends(get_db)):
     return []
 
 
-        
 
 #profile images
 profile_DIR="profile/"
 os.makedirs(profile_DIR,exist_ok=True) # to ensure that directory exists
 
 #to avoid memory leaking
-# def get_db():
-#     db=Session()   #start a db session
-#     try:
-#         yield db    #provides the session to FastAPI routes 
-#     finally:
-#         db.close()   #close the session after the request is complete
+def get_db():
+    db=Session()   #start a db session
+    try:
+        yield db    #provides the session to FastAPI routes 
+    finally:
+        db.close()   #close the session after the request is complete
         
+        
+#upload a profile photo by user        
 @app.post("/upload_profile_photo/{user_id}")
-async def upload_profile_photo(user_id:int,file:UploadFile=File(...),db:Session=Depends(get_db)):
+async def upload_profile_photo(file:UploadFile=File(...),db:Session=Depends(get_db),user_id: int = Depends(get_current_user)):
+        if not user_id:
+            raise HTTPException(status_code=404, detail="User not found")
         allowed_files={"png","jpg","jpeg","gif"}
         file_type=file.filename.split(".")[-1].lower()
         if file_type not in allowed_files:
@@ -874,9 +801,12 @@ async def upload_profile_photo(user_id:int,file:UploadFile=File(...),db:Session=
         
         profile_path=f"{profile_DIR}{user_id}.{file_type}"
         #open file in write-binary mode and copy into buffer
-        with open(profile_path,"wb") as buffer:
-            shutil.copyfileobj(file.file,buffer)
-            
+        
+        try:
+            with open(profile_path,"wb") as buffer:
+                shutil.copyfileobj(file.file,buffer)
+        finally:
+            file.file.close()
         
         #update user's profile path in db
         user=db.query(User).filter(User.id==user_id).first()
@@ -892,12 +822,15 @@ app.mount("/profile", StaticFiles(directory="profile"),name="profile")    #tells
         
 #creat API endpoint to get user profile photos
 @app.get("/profile_photo/{user_id}") 
-async def get_profile(user_id: int , db:Session=Depends(get_db)):
-    user=db.query(User).filter(User.id==user_id).first
+async def get_profile(db:Session=Depends(get_db),user_id: int = Depends(get_current_user)):
+    
+    user=db.query(User).filter(User.id==user_id).first()
     if not user or not user.profile_photo:
         raise HTTPException(status_code=404, detail="Profile photo not found")
     
-    return {"image_url": f"/uploads/{user_id}.jpg"}
+    file_extension = user.profile_photo.split('.')[-1]
+    
+    return {"image_url": f"/uploads/{user_id}.{file_extension}"}
 
         
 
@@ -906,23 +839,56 @@ async def get_profile(user_id: int , db:Session=Depends(get_db)):
 
 
 
-from fastapi import FastAPI,Depends,HTTPException
+from fastapi import FastAPI,Depends,HTTPException, APIRouter
 from sqlalchemy.orm import Session
 import re
-# from backend.utils import verify_password
-# from backend.auth import create_token
-# from backend.schemas import UserLoginResponse, UserLoginRequest
-# import backend.db_models
-# from backend.database import get_db
-# from datetime import datetime, timedelta
-# from backend.config import secret_key, algorithm,access_token_expire_min
 from utils import verify_password
 from auth import create_token
 from schemas import UserLoginResponse, UserLoginRequest
 import db_models
 from database import get_db
 from datetime import datetime, timedelta
-# from config import secret_key, algorithm,access_token_expire_min
+from config import secret_key, algorithm,access_token_expire_min
+
+
+#endpoint for user login
+@app.post("/login/", response_model=UserLoginResponse)
+async def login(user:UserLoginRequest,db:Session=Depends(get_db)):
+    
+    db_user=db.query(db_models.User).filter(db_models.User.username==user.username).first()
+    if not db_user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    # #password verification
+    # if not verify_password(user.password,db_user.password_hash):
+    #     raise HTTPException(status_code=400, detail="Incorrect password")
+    
+    if user.password != db_user.password:
+        raise HTTPException(status_code=400, detail="Incorrect password")
+    
+    # create a JWT token upon successful login
+    #store user_id in JWT
+    #creat token with expiration time
+    expire_time = datetime.utcnow() + timedelta(minutes=access_token_expire_min)
+    
+    access_token = create_token(data={"sub": db_user.user_id ,"exp": expire_time.timestamp()})
+    
+    
+    response = Response()
+    response.set_cookie( 
+                        key="access_token",
+                        value=f"Bearer {access_token}",
+                        httponly=True,
+                        secure=True,
+                        samesite="Lax"
+                    )
+    
+    
+    
+    # return {"access_token": access_token, "token_type": "bearer", "expires_at": expire_time.isoformat()}
+    return {"message":"Login successful"}
+
+
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -941,34 +907,97 @@ app.add_middleware(
         
 
 
-#endpoint for user login
-@app.post("/login/")
-async def login(user:UserLoginRequest,db:Session=Depends(get_db)):
-    print("uyguyg")
- 
-    db_user=db.query(db_models.User).filter(db_models.User.username==user.username).first()
-    print("#",db_user)
+
+    
+@app.post("/friends/", response_model=UserFriendResponse)
+async def add_friend(friend:UserFriendCreate,db:Session=Depends(get_db),user_id:int=Depends(get_current_user)):
+    # #check if the friend already exists
+    # existing_friend=db.query(backend.db_models.UserFriend).filter(backend.db_models
+    #                                                       .UserFriend.user_id==user_id,backend.db_models.UserFriend.friend_name==friend.friend_name).first()
+    
+        #check if the friend already exists
+    existing_friend=db.query(db_models.UserFriend).filter(db_models
+                                                          .UserFriend.user_id==user_id,db_models.UserFriend.friend_name==friend.friend_name).first()
+
+    if existing_friend:
+        raise HTTPException(status_code=400,detail="Friend already exists")
+    
+
+    new_friend=db_models.UserFriend(
+        user_id=user_id,
+        username=db.query(db_models.User).filter(db_models.User.user_id==user_id).first().username,
+        friend_name=friend.friend_name,
+        friend_telegram_username=friend.friend_telegram_username,
+        gender=friend.gender,
+        initial_note=friend.initial_note,
+        messages=friend.messages if friend.messages else [],
+        profile_photo=friend.profile_photo
+    )
+
+    db.add(new_friend)
+    db.commit()
+    db.refresh(new_friend)
+    
+    return new_friend
+        
+
+
+
+@app.delete("/friends/{friend_id}")
+async def delete_friend(friend_id:int, db:Session=Depends(get_db),user_id:int=Depends(get_current_user)):
+    
+    #check if user exists
+    user = db.query(db_models.User).filter(db_models.User.user_id==user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    
+    #check if friend exists for the user
+    friend=db.query(db_models.UserFriend).filter(db_models.UserFriend.id==friend_id, db_models.UserFriend.user_id==user_id).first()
+
+    if not friend:
+        raise HTTPException(status_code=404, detail="Friend not found!")
+    
+    db.delete(friend)
+    db.commit()
+    
+    return{"detail":"friend deleted sucessfully"}
+
+
+#edit user
+@app.put("/user/update", response_model=UserResponse) 
+async def edit_user(user_update:UserEditRequest, db:Session=Depends(get_db), current_user:int=Depends(get_current_user)):
+    
+    #check if user exists
+    db_user=db.query(db_models.User).filter(db_models.User.user_id==current_user).first()
     if not db_user:
-        print("Nothing")
         raise HTTPException(status_code=404, detail="User not found")
     
-    #password verification
-    if not verify_password(user.password,db_user.password_hash):
-        raise HTTPException(status_code=400, detail="Incorrect password")
+    #edit and update user
+    if user_update.username:
+        db_user.username=user_update.username
+        
+    if user_update.email:
+        db_user.email=user_update.email
     
-    # create a JWT token upon successful login
-    #store user_id in JWT
-    #creat token with expiration time
-    # expire_time = datetime.utcnow() + timedelta(minutes=access_token_expire_min)
+    if user_update.password:
+        db_user.password_hash=hash_password(user_update.password)
+        
+    if user_update.mbti:
+        db_user.mbti=user_update.mbti
+        
+    if user_update.personality_type:
+        db_user.personality_type=user_update.personality_type
+        
+    if user_update.profile_photo:
+        db_user.profile_photo=user_update.profile_photo
+        
+        
+    #set update time to current time    
+    db_user.updated_at=datetime.utcnow()
     
-    # access_token = create_token(data={"sub": db_user.user_id ,"exp": expire_time.timestamp()})
+    db.commit()
+    db.refresh(db_user)
     
-    # return {"access_token": access_token, "token_type": "bearer", "expires_at": expire_time.isoformat()}
-    return []
-
-
-
-
-
-
+    return db_user
     

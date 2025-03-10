@@ -96,8 +96,8 @@ class UserLoginRequest(BaseModel):
     password:str
     
 class UserLoginResponse(BaseModel):
-    access_token:str
-    token_type:str
+    message: str
+
     
 #GenderType = constr(regex="^(Male|Female)$")
     
