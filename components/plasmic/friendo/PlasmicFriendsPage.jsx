@@ -34,7 +34,6 @@ import Select from "../../Select"; // plasmic-import: V2CRmMi9HuUW/component
 import MenuItem from "../../MenuItem"; // plasmic-import: zcnybJ5YUZhH/component
 import { UploadWrapper } from "@plasmicpkgs/antd5/skinny/registerUpload";
 import { AntdButton } from "@plasmicpkgs/antd5/skinny/registerButton";
-import Button from "../../Button"; // plasmic-import: R-SJru1lXq4W/component
 import { useUnnamedGlobalGroupOfVariants } from "./PlasmicGlobalVariant__UnnamedGlobalGroupOfVariants"; // plasmic-import: lmEUP9r96TgA/globalVariant
 import "@plasmicapp/react-web/lib/plasmic.css";
 import plasmic_antd_5_hostless_css from "../antd_5_hostless/plasmic.module.css"; // plasmic-import: ohDidvG9XsCeFumugENU3J/projectcss
@@ -429,220 +428,29 @@ function PlasmicFriendsPage__RenderFunc(props) {
             >
               {"add a new friend"}
             </div>
-            {(() => {
-              try {
-                return $state.popUp;
-              } catch (e) {
-                if (
-                  e instanceof TypeError ||
-                  e?.plasmicType === "PlasmicUndefinedDataError"
-                ) {
-                  return true;
-                }
-                throw e;
-              }
-            })() ? (
-              <div className={classNames(projectcss.all, sty.freeBox__mGdjL)}>
-                <div className={classNames(projectcss.all, sty.freeBox__m2Fe3)}>
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text___6GHn1
-                    )}
-                  >
-                    {"Add a New Friend!"}
-                  </div>
-                  <PlasmicImg__
-                    data-plasmic-name={"img"}
-                    data-plasmic-override={overrides.img}
-                    alt={""}
-                    className={classNames(sty.img)}
-                    displayHeight={"25px"}
-                    displayMaxHeight={"none"}
-                    displayMaxWidth={"100%"}
-                    displayMinHeight={"0"}
-                    displayMinWidth={"0"}
-                    displayWidth={"25px"}
-                    loading={"lazy"}
-                    onClick={async event => {
-                      const $steps = {};
-                      $steps["updatePopUp"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["popUp"]
-                              },
-                              operation: 0
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-                              $stateSet(objRoot, variablePath, value);
-                              return value;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updatePopUp"] != null &&
-                        typeof $steps["updatePopUp"] === "object" &&
-                        typeof $steps["updatePopUp"].then === "function"
-                      ) {
-                        $steps["updatePopUp"] = await $steps["updatePopUp"];
-                      }
-                    }}
-                    src={{
-                      src: "/plasmic/friendo/images/icons8XButton50Png.png",
-                      fullWidth: 50,
-                      fullHeight: 50,
-                      aspectRatio: undefined
-                    }}
-                  />
-                </div>
-                <div className={classNames(projectcss.all, sty.freeBox__kSp44)}>
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__fiPIa
-                    )}
-                  >
-                    {"Friend Name:"}
-                  </div>
-                  <TextInput
-                    data-plasmic-name={"textInput"}
-                    data-plasmic-override={overrides.textInput}
-                    className={classNames("__wab_instance", sty.textInput)}
-                    onChange={async (...eventArgs) => {
-                      generateStateOnChangeProp($state, [
-                        "textInput",
-                        "value"
-                      ]).apply(null, eventArgs);
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                  />
-                </div>
-                <div className={classNames(projectcss.all, sty.freeBox__mUfJe)}>
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text___2WUrI
-                    )}
-                  >
-                    {"Gender:"}
-                  </div>
-                  <Select
-                    data-plasmic-name={"select"}
-                    data-plasmic-override={overrides.select}
-                    className={classNames("__wab_instance", sty.select)}
-                    description={null}
-                    items={
-                      <React.Fragment>
-                        <MenuItem label={"Male"} value={"item1"} />
-                        <MenuItem label={"Female"} value={"item2"} />
-                      </React.Fragment>
-                    }
-                    label={null}
-                    onChange={async (...eventArgs) => {
-                      generateStateOnChangeProp($state, [
-                        "select",
-                        "value"
-                      ]).apply(null, eventArgs);
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                  />
-                </div>
-                <div className={classNames(projectcss.all, sty.freeBox__wtFf)}>
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__lQnM
-                    )}
-                  >
-                    {"personal note:"}
-                  </div>
-                  <TextInput
-                    data-plasmic-name={"textInput2"}
-                    data-plasmic-override={overrides.textInput2}
-                    className={classNames("__wab_instance", sty.textInput2)}
-                    onChange={async (...eventArgs) => {
-                      generateStateOnChangeProp($state, [
-                        "textInput2",
-                        "value"
-                      ]).apply(null, eventArgs);
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                  />
-                </div>
-                <UploadWrapper
-                  data-plasmic-name={"upload"}
-                  data-plasmic-override={overrides.upload}
-                  accept={""}
-                  className={classNames("__wab_instance", sty.upload)}
-                  files={generateStateValueProp($state, ["upload", "files"])}
-                  onFilesChange={async (...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "upload",
-                      "files"
-                    ]).apply(null, eventArgs);
-                  }}
-                  showUploadList={true}
+            <div className={classNames(projectcss.all, sty.freeBox__mGdjL)}>
+              <div className={classNames(projectcss.all, sty.freeBox__m2Fe3)}>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text___6GHn1
+                  )}
                 >
-                  <AntdButton
-                    className={classNames("__wab_instance", sty.button__ulBIx)}
-                  >
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text___3OMSt
-                      )}
-                    >
-                      {"Upload Telegram messsages"}
-                    </div>
-                  </AntdButton>
-                </UploadWrapper>
-                <Button
-                  className={classNames("__wab_instance", sty.button___0BxuS)}
-                  label={
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__qmiec
-                      )}
-                    >
-                      {"Submit"}
-                    </div>
-                  }
+                  {"Add a New Friend!"}
+                </div>
+                <PlasmicImg__
+                  data-plasmic-name={"img"}
+                  data-plasmic-override={overrides.img}
+                  alt={""}
+                  className={classNames(sty.img)}
+                  displayHeight={"25px"}
+                  displayMaxHeight={"none"}
+                  displayMaxWidth={"100%"}
+                  displayMinHeight={"0"}
+                  displayMinWidth={"0"}
+                  displayWidth={"25px"}
+                  loading={"lazy"}
                   onClick={async event => {
                     const $steps = {};
                     $steps["updatePopUp"] = true
@@ -677,9 +485,211 @@ function PlasmicFriendsPage__RenderFunc(props) {
                       $steps["updatePopUp"] = await $steps["updatePopUp"];
                     }
                   }}
+                  src={{
+                    src: "/plasmic/friendo/images/icons8XButton50Png.png",
+                    fullWidth: 50,
+                    fullHeight: 50,
+                    aspectRatio: undefined
+                  }}
                 />
               </div>
-            ) : null}
+              <div className={classNames(projectcss.all, sty.freeBox__kSp44)}>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__fiPIa
+                  )}
+                >
+                  {"Friend Name:"}
+                </div>
+                <TextInput
+                  data-plasmic-name={"textInput"}
+                  data-plasmic-override={overrides.textInput}
+                  className={classNames("__wab_instance", sty.textInput)}
+                  onChange={async (...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "textInput",
+                      "value"
+                    ]).apply(null, eventArgs);
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
+                  }}
+                />
+              </div>
+              <div className={classNames(projectcss.all, sty.freeBox__mUfJe)}>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text___2WUrI
+                  )}
+                >
+                  {"Gender:"}
+                </div>
+                <Select
+                  data-plasmic-name={"select"}
+                  data-plasmic-override={overrides.select}
+                  className={classNames("__wab_instance", sty.select)}
+                  description={null}
+                  items={
+                    <React.Fragment>
+                      <MenuItem label={"Male"} value={"item1"} />
+                      <MenuItem label={"Female"} value={"item2"} />
+                    </React.Fragment>
+                  }
+                  label={null}
+                  onChange={async (...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "select",
+                      "value"
+                    ]).apply(null, eventArgs);
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
+                  }}
+                />
+              </div>
+              <div className={classNames(projectcss.all, sty.freeBox__wtFf)}>
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__lQnM
+                  )}
+                >
+                  {"personal note:"}
+                </div>
+                <TextInput
+                  data-plasmic-name={"textInput2"}
+                  data-plasmic-override={overrides.textInput2}
+                  className={classNames("__wab_instance", sty.textInput2)}
+                  onChange={async (...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "textInput2",
+                      "value"
+                    ]).apply(null, eventArgs);
+                    if (
+                      eventArgs.length > 1 &&
+                      eventArgs[1] &&
+                      eventArgs[1]._plasmic_state_init_
+                    ) {
+                      return;
+                    }
+                  }}
+                />
+              </div>
+              <UploadWrapper
+                data-plasmic-name={"upload"}
+                data-plasmic-override={overrides.upload}
+                accept={""}
+                className={classNames("__wab_instance", sty.upload)}
+                files={generateStateValueProp($state, ["upload", "files"])}
+                onFilesChange={async (...eventArgs) => {
+                  generateStateOnChangeProp($state, ["upload", "files"]).apply(
+                    null,
+                    eventArgs
+                  );
+                  (async files => {
+                    const $steps = {};
+                  }).apply(null, eventArgs);
+                }}
+                showUploadList={true}
+              >
+                <AntdButton
+                  data-plasmic-name={"button"}
+                  data-plasmic-override={overrides.button}
+                  className={classNames("__wab_instance", sty.button)}
+                >
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text___3OMSt
+                    )}
+                  >
+                    {"Upload Telegram messsages"}
+                  </div>
+                </AntdButton>
+              </UploadWrapper>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text__cgivB
+                )}
+                onClick={async event => {
+                  const $steps = {};
+                  $steps["runCode"] = true
+                    ? (() => {
+                        const actionArgs = {
+                          customFunction: async () => {
+                            return (async () => {
+                              async function fetchData() {
+                                const API_URL =
+                                  "http://127.0.0.1:8000/upload-json/";
+                                const fileObj = $state.upload.files[0];
+                                console.log($state.upload);
+                                const payload = {
+                                  filename: fileObj.name,
+                                  filedata: fileObj.contents
+                                };
+                                console.log("Payload to send:", payload);
+                                try {
+                                  const response = await fetch(API_URL, {
+                                    method: "POST",
+                                    headers: {
+                                      "Content-Type": "application/json"
+                                    },
+                                    body: JSON.stringify(payload),
+                                    redirect: "follow"
+                                  });
+                                  if (response.redirected) {
+                                    window.location.href = response.url;
+                                  } else {
+                                    const responseBody = await response.json();
+                                    console.log(
+                                      "File uploaded successfully:",
+                                      responseBody
+                                    );
+                                  }
+                                } catch (error) {
+                                  console.error(
+                                    "Error uploading JSON file:",
+                                    error
+                                  );
+                                }
+                              }
+                              return fetchData();
+                            })();
+                          }
+                        };
+                        return (({ customFunction }) => {
+                          return customFunction();
+                        })?.apply(null, [actionArgs]);
+                      })()
+                    : undefined;
+                  if (
+                    $steps["runCode"] != null &&
+                    typeof $steps["runCode"] === "object" &&
+                    typeof $steps["runCode"].then === "function"
+                  ) {
+                    $steps["runCode"] = await $steps["runCode"];
+                  }
+                }}
+              >
+                {"submit"}
+              </div>
+            </div>
           </div>
           {(() => {
             try {
@@ -711,7 +721,8 @@ const PlasmicDescendants = {
     "textInput",
     "select",
     "textInput2",
-    "upload"
+    "upload",
+    "button"
   ],
 
   navBar: ["navBar"],
@@ -720,7 +731,8 @@ const PlasmicDescendants = {
   textInput: ["textInput"],
   select: ["select"],
   textInput2: ["textInput2"],
-  upload: ["upload"]
+  upload: ["upload", "button"],
+  button: ["button"]
 };
 
 function makeNodeComponent(nodeName) {
@@ -762,6 +774,7 @@ export const PlasmicFriendsPage = Object.assign(
     select: makeNodeComponent("select"),
     textInput2: makeNodeComponent("textInput2"),
     upload: makeNodeComponent("upload"),
+    button: makeNodeComponent("button"),
     // Metadata about props expected for PlasmicFriendsPage
     internalVariantProps: PlasmicFriendsPage__VariantProps,
     internalArgProps: PlasmicFriendsPage__ArgProps,

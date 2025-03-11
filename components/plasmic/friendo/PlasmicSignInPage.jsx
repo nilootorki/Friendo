@@ -97,6 +97,12 @@ function PlasmicSignInPage__RenderFunc(props) {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "page",
+        type: "private",
+        variableType: "text",
+        initFunc: ({ $props, $state, $queries, $ctx }) => "/sign-in-page"
       }
     ],
 
@@ -315,77 +321,6 @@ function PlasmicSignInPage__RenderFunc(props) {
                 }}
               />
             </div>
-            <Button
-              data-plasmic-name={"button"}
-              data-plasmic-override={overrides.button}
-              className={classNames("__wab_instance", sty.button)}
-              label={
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__ioou1
-                  )}
-                >
-                  {"sign in"}
-                </div>
-              }
-              onClick={async event => {
-                const $steps = {};
-                $steps["runCode"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        customFunction: async () => {
-                          return (async () => {
-                            async function fetchData() {
-                              const API_URL = "http://127.0.0.1:8000/login/";
-                              const requestData = {
-                                username: "test_user",
-                                password: "test_pass"
-                              };
-                              try {
-                                const response = await fetch(API_URL, {
-                                  method: "POST",
-                                  headers: {
-                                    "Content-Type": "application/json"
-                                  },
-                                  body: JSON.stringify(requestData)
-                                });
-                                const responseBody = await response.json();
-                                if (!response.ok) {
-                                  if (
-                                    response.status === 404 &&
-                                    responseBody.detail === "User not found"
-                                  ) {
-                                    $state.wrongUsername = true;
-                                  }
-                                }
-                                const data = await response.json();
-                                console.log("API Response:", data);
-                                return data;
-                              } catch (error) {
-                                console.error("Error fetching API:", error);
-                              }
-                            }
-                            return fetchData();
-                          })();
-                        }
-                      };
-                      return (({ customFunction }) => {
-                        return customFunction();
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["runCode"] != null &&
-                  typeof $steps["runCode"] === "object" &&
-                  typeof $steps["runCode"].then === "function"
-                ) {
-                  $steps["runCode"] = await $steps["runCode"];
-                }
-              }}
-            />
-
             {(() => {
               try {
                 return $state.wrongPassword;
@@ -409,6 +344,134 @@ function PlasmicSignInPage__RenderFunc(props) {
                 {"wrong password"}
               </div>
             ) : null}
+            <Button
+              data-plasmic-name={"button"}
+              data-plasmic-override={overrides.button}
+              className={classNames("__wab_instance", sty.button)}
+              label={
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__ioou1
+                  )}
+                >
+                  {"sign in"}
+                </div>
+              }
+              onClick={async event => {
+                const $steps = {};
+                $steps["runCode"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        customFunction: async () => {
+                          return (async () => {
+                            console.log(
+                              "State before request:",
+                              $state.username,
+                              $state.password
+                            );
+                            const username = $state.username?.value || "";
+                            const password = $state.password?.value || "";
+                            async function fetchData() {
+                              const API_URL = "http://127.0.0.1:8000/login/";
+                              const requestData = {
+                                username: username,
+                                password: password
+                              };
+                              try {
+                                const response = await fetch(API_URL, {
+                                  method: "POST",
+                                  headers: {
+                                    "Content-Type": "application/json"
+                                  },
+                                  body: JSON.stringify(requestData)
+                                });
+                                const responseBody = await response.json();
+                                if (!response.ok) {
+                                  if (
+                                    response.status === 404 &&
+                                    responseBody.detail === "User not found"
+                                  ) {
+                                    $state.wrongUsername = true;
+                                  } else if (
+                                    response.status === 400 &&
+                                    responseBody.detail === "Incorrect password"
+                                  ) {
+                                    $state.wrongPassword = true;
+                                  }
+                                }
+                                if (
+                                  responseBody.message === "Login successful"
+                                ) {
+                                  $state.wrongPassword = false;
+                                  $state.wrongUsername = false;
+                                  $state.page = "/home?username=" + username;
+                                  return;
+                                }
+                                console.log("API Response:", data);
+                                return data;
+                              } catch (error) {
+                                console.error("Error fetching API:", error);
+                              }
+                            }
+                            return fetchData();
+                          })();
+                        }
+                      };
+                      return (({ customFunction }) => {
+                        return customFunction();
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["runCode"] != null &&
+                  typeof $steps["runCode"] === "object" &&
+                  typeof $steps["runCode"].then === "function"
+                ) {
+                  $steps["runCode"] = await $steps["runCode"];
+                }
+                $steps["goToPage"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        destination: (() => {
+                          try {
+                            return $state.page;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return undefined;
+                            }
+                            throw e;
+                          }
+                        })()
+                      };
+                      return (({ destination }) => {
+                        if (
+                          typeof destination === "string" &&
+                          destination.startsWith("#")
+                        ) {
+                          document
+                            .getElementById(destination.substr(1))
+                            .scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          __nextRouter?.push(destination);
+                        }
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["goToPage"] != null &&
+                  typeof $steps["goToPage"] === "object" &&
+                  typeof $steps["goToPage"].then === "function"
+                ) {
+                  $steps["goToPage"] = await $steps["goToPage"];
+                }
+              }}
+            />
+
             <div
               className={classNames(
                 projectcss.all,

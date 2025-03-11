@@ -327,23 +327,67 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 
 
+from fastapi import FastAPI
+from pydantic import BaseModel
+import base64
+import os
+import json
+
+app = FastAPI()
+UPLOAD_DIR = "uploads"
+
+# Ensure upload directory exists
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+# Define a request model for receiving Base64 JSON
+class Base64FileRequest(BaseModel):
+    filename: str
+    filedata: str  # This will contain the base64 string
+
 @app.post("/upload-json/")
-async def upload_json(file: UploadFile = File(...)):
-    # Ensure the file is a JSON file
-    if not file.filename.endswith(".json"):
-        return {"error": "Only JSON files are allowed"}
+async def upload_json(request: Base64FileRequest):
+    try:
+        # Ensure the file has a .json extension
+        if not request.filename.endswith(".json"):
+            return {"error": "Only JSON files are allowed"}
 
-    file_path = os.path.join(UPLOAD_DIR, file.filename)
+        # Decode the Base64 file data
+        file_bytes = base64.b64decode(request.filedata)
 
-    # Save the uploaded JSON file
-    with open(file_path, "wb") as f:
-        f.write(await file.read())
-        print("ADDed SUCCESSFULLY")
+        # Convert bytes to a valid JSON string (optional validation)
+        try:
+            json.loads(file_bytes.decode("utf-8"))
+        except json.JSONDecodeError:
+            return {"error": "Invalid JSON format"}
 
-    print(file_path)
+        # Save the decoded JSON file
+        file_path = os.path.join(UPLOAD_DIR, request.filename)
+        with open(file_path, "wb") as f:
+            f.write(file_bytes)
 
-    # Redirect to the Analysis Page
-    return RedirectResponse(url=f"/analyze-json/?filename={file.filename}", status_code=303)
+        return RedirectResponse(url=f"http://127.0.0.1:8000/analyze-json/?filename={request.filename}", status_code=303)
+
+    except Exception as e:
+        return {"error": str(e)}
+
+
+# @app.post("/upload-json/")
+# async def upload_json(file: UploadFile = File(...)):
+#     # Ensure the file is a JSON file
+#     if not file.filename.endswith(".json"):
+#         return {"error": "Only JSON files are allowed"}
+
+#     file_path = os.path.join(UPLOAD_DIR, file.filename)
+
+#     # Save the uploaded JSON file
+#     with open(file_path, "wb") as f:
+#         f.write(await file.read())
+#         print("ADDed SUCCESSFULLY")
+
+#     print(file_path)
+
+#     # Redirect to the Analysis Page
+#     return RedirectResponse(url=f"/analyze-json/?filename={file.filename}", status_code=303)
 
 
 @app.post("/upload-calls/")
@@ -863,7 +907,7 @@ async def login(user:UserLoginRequest,db:Session=Depends(get_db)):
     # if not verify_password(user.password,db_user.password_hash):
     #     raise HTTPException(status_code=400, detail="Incorrect password")
     
-    if user.password != db_user.password:
+    if user.password != db_user.password_hash:
         raise HTTPException(status_code=400, detail="Incorrect password")
     
     # create a JWT token upon successful login
