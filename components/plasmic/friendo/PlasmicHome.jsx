@@ -305,7 +305,9 @@ function PlasmicHome__RenderFunc(props) {
               <div className={classNames(projectcss.all, sty.freeBox___8CtKx)}>
                 <div className={classNames(projectcss.all, sty.freeBox__pT1B)}>
                   <Button
-                    className={classNames("__wab_instance", sty.button__ww1X)}
+                    data-plasmic-name={"button"}
+                    data-plasmic-override={overrides.button}
+                    className={classNames("__wab_instance", sty.button)}
                     label={
                       <div
                         className={classNames(
@@ -357,20 +359,60 @@ function PlasmicHome__RenderFunc(props) {
                     }}
                   />
 
-                  <Button
-                    className={classNames("__wab_instance", sty.button__fnIwR)}
-                    label={
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__mvYd3
-                        )}
-                      >
-                        {"Mood Tracking"}
-                      </div>
-                    }
-                  />
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__ss15H
+                    )}
+                    onClick={async event => {
+                      const $steps = {};
+                      $steps["goToPage"] = true
+                        ? (() => {
+                            const actionArgs = {
+                              destination: (() => {
+                                try {
+                                  return (
+                                    "mood-tracking?username=" +
+                                    $ctx.query.username
+                                  );
+                                } catch (e) {
+                                  if (
+                                    e instanceof TypeError ||
+                                    e?.plasmicType ===
+                                      "PlasmicUndefinedDataError"
+                                  ) {
+                                    return `/mood-tracking`;
+                                  }
+                                  throw e;
+                                }
+                              })()
+                            };
+                            return (({ destination }) => {
+                              if (
+                                typeof destination === "string" &&
+                                destination.startsWith("#")
+                              ) {
+                                document
+                                  .getElementById(destination.substr(1))
+                                  .scrollIntoView({ behavior: "smooth" });
+                              } else {
+                                __nextRouter?.push(destination);
+                              }
+                            })?.apply(null, [actionArgs]);
+                          })()
+                        : undefined;
+                      if (
+                        $steps["goToPage"] != null &&
+                        typeof $steps["goToPage"] === "object" &&
+                        typeof $steps["goToPage"].then === "function"
+                      ) {
+                        $steps["goToPage"] = await $steps["goToPage"];
+                      }
+                    }}
+                  >
+                    {"Mood Tracking"}
+                  </div>
                 </div>
                 {(() => {
                   try {
@@ -413,9 +455,16 @@ function PlasmicHome__RenderFunc(props) {
                 {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                   (() => {
                     try {
-                      return $queries.componentData.data
-                        .filter(component => component.username === "Nel")
-                        .slice(0, $state.visibleCount);
+                      return (() => {
+                        const jwt = $ctx.query.username;
+                        return $queries.componentData.data
+                          .filter(
+                            component =>
+                              component.jwt_token === jwt &&
+                              component.suggestion
+                          )
+                          .slice(0, $state.visibleCount);
+                      })();
                     } catch (e) {
                       if (
                         e instanceof TypeError ||
@@ -966,8 +1015,9 @@ function PlasmicHome__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "navBar", "checkbox", "recommendation"],
+  root: ["root", "navBar", "button", "checkbox", "recommendation"],
   navBar: ["navBar"],
+  button: ["button"],
   checkbox: ["checkbox"],
   recommendation: ["recommendation"]
 };
@@ -1005,6 +1055,7 @@ export const PlasmicHome = Object.assign(
   {
     // Helper components rendering sub-elements
     navBar: makeNodeComponent("navBar"),
+    button: makeNodeComponent("button"),
     checkbox: makeNodeComponent("checkbox"),
     recommendation: makeNodeComponent("recommendation"),
     // Metadata about props expected for PlasmicHome

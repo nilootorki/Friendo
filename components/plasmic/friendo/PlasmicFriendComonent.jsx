@@ -267,6 +267,51 @@ function PlasmicFriendComonent__RenderFunc(props) {
           displayMinWidth={"0"}
           displayWidth={"20px"}
           loading={"lazy"}
+          onClick={async event => {
+            const $steps = {};
+            $steps["runCode"] = true
+              ? (() => {
+                  const actionArgs = {
+                    customFunction: async () => {
+                      return (async () => {
+                        const friend_name =
+                          $props.currentItem.friend_name?.valueOf || "";
+                        const token = $ctx.query.username || "";
+                        async function fetchData() {
+                          const API_URL =
+                            "http://127.0.0.1:8000/deletefriends/";
+                          const requestData = {
+                            token: token,
+                            friend_name: friend_name
+                          };
+                          console.log(requestData);
+                          try {
+                            const response = await fetch(API_URL, {
+                              method: "delete",
+                              headers: { "Content-Type": "application/json" },
+                              body: JSON.stringify(requestData)
+                            });
+                          } catch (error) {
+                            console.error("Error fetching API:", error);
+                          }
+                        }
+                        return fetchData();
+                      })();
+                    }
+                  };
+                  return (({ customFunction }) => {
+                    return customFunction();
+                  })?.apply(null, [actionArgs]);
+                })()
+              : undefined;
+            if (
+              $steps["runCode"] != null &&
+              typeof $steps["runCode"] === "object" &&
+              typeof $steps["runCode"].then === "function"
+            ) {
+              $steps["runCode"] = await $steps["runCode"];
+            }
+          }}
           src={{
             src: "/plasmic/friendo/images/icons8Trash501Png.png",
             fullWidth: 50,

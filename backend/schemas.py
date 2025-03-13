@@ -40,7 +40,6 @@ class UserFriend(BaseModel):
     password: str
     email: str
     contacts: List
-    gender: Optional[str]
     initial_note: Optional[str] = None
 
 
@@ -102,9 +101,9 @@ class UserLoginResponse(BaseModel):
 #GenderType = constr(regex="^(Male|Female)$")
     
 class UserFriendCreate(BaseModel):
-    friend_name:str
+    friend_name:Optional[str]=None
+    token :str
     friend_telegram_username:Optional[str]=None
-    #gender: Optional[GenderType] = None
     gender: Optional[Literal["Male", "Female"]] = None  
     interaction_type: Optional[str] = None
     initial_note: Optional[str] = None
@@ -113,15 +112,35 @@ class UserFriendCreate(BaseModel):
     profile_photo: Optional[str] = None
     initial_note: Optional[str] = None
     
-class UserFriendResponse(UserFriendCreate):
+class UserFriendResponse(BaseModel):
     id: int
     user_id: int
+    friend_name: Optional[str] = None
+    friend_telegram_username: Optional[str] = None
+    gender: Optional[Literal["Male", "Female"]] = None  
+    interaction_type: Optional[str] = None
+    initial_note: Optional[str] = None
+    messages: Optional[List[Dict[str, str]]] = None
+    score: Optional[dict] = None
+    profile_photo: Optional[str] = None
     timestamp: datetime
 
     class Config:
         from_attributes = True
 
+
+class UserFriendDCreate(BaseModel):
+    friend_name:Optional[str]=None
+    token :str
+
+class UserFriendDResponse(BaseModel):
+    class Config:
+        from_attributes = True
+
+
+
 class UserEditRequest(BaseModel):
+    token :str
     username: Optional[str]=None
     email: Optional[EmailStr]=None
     password: Optional[str]=None
@@ -133,4 +152,17 @@ class UserEditRequest(BaseModel):
         orm_mode =True  #allow conversion from ORM models
         
         
-        
+class UserStatistics(BaseModel):
+    token :str
+
+    
+    class Config:
+        orm_mode =True  #allow conversion from ORM models
+
+
+class SuggestFriend(BaseModel):
+    token :str
+    mood:str
+    
+    class Config:
+        orm_mode =True  #allow conversion from ORM models

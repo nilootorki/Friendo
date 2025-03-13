@@ -150,6 +150,12 @@ function PlasmicFriendsDetails__RenderFunc(props) {
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "tickApear",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
       }
     ],
 
@@ -341,9 +347,12 @@ function PlasmicFriendsDetails__RenderFunc(props) {
               {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
                 (() => {
                   try {
-                    return $queries.query.data.filter(
-                      item => item.username === "Nel"
-                    );
+                    return (() => {
+                      token = $ctx.query.username;
+                      return $queries.query.data.filter(
+                        item => item.jwt_token === token
+                      );
+                    })();
                   } catch (e) {
                     if (
                       e instanceof TypeError ||
@@ -410,7 +419,7 @@ function PlasmicFriendsDetails__RenderFunc(props) {
                                 return (() => {
                                   document
                                     .querySelectorAll(
-                                      ".plasmic_default__all.plasmic_default__div.__wab_text.FriendsDetails__friendCard___3BG5A"
+                                      ".plasmic_all__fiCS5.PlasmicFriendsDetails_friendCard__UeDen"
                                     )
                                     .forEach(friend => {
                                       friend.style.background = "#093A32";
@@ -961,34 +970,113 @@ function PlasmicFriendsDetails__RenderFunc(props) {
                   })()}
                 </React.Fragment>
               </div>
-              <UploadWrapper
-                data-plasmic-name={"upload2"}
-                data-plasmic-override={overrides.upload2}
-                accept={""}
-                className={classNames("__wab_instance", sty.upload2)}
-                files={generateStateValueProp($state, ["upload2", "files"])}
-                onFilesChange={async (...eventArgs) => {
-                  generateStateOnChangeProp($state, ["upload2", "files"]).apply(
-                    null,
-                    eventArgs
-                  );
-                }}
-                showUploadList={true}
-              >
-                <AntdButton
-                  className={classNames("__wab_instance", sty.button__bSvHj)}
+              <div className={classNames(projectcss.all, sty.freeBox__nvwXy)}>
+                <UploadWrapper
+                  data-plasmic-name={"upload2"}
+                  data-plasmic-override={overrides.upload2}
+                  accept={""}
+                  className={classNames("__wab_instance", sty.upload2)}
+                  files={generateStateValueProp($state, ["upload2", "files"])}
+                  onFilesChange={async (...eventArgs) => {
+                    generateStateOnChangeProp($state, [
+                      "upload2",
+                      "files"
+                    ]).apply(null, eventArgs);
+                  }}
+                  showUploadList={true}
                 >
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__dwj7U
-                    )}
+                  <AntdButton
+                    className={classNames("__wab_instance", sty.button__bSvHj)}
                   >
-                    {"Upload Telegram Messages"}
-                  </div>
-                </AntdButton>
-              </UploadWrapper>
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__dwj7U
+                      )}
+                    >
+                      {"Upload Telegram Messages"}
+                    </div>
+                  </AntdButton>
+                </UploadWrapper>
+                <PlasmicImg__
+                  alt={""}
+                  className={classNames(sty.img__dvlpv)}
+                  displayHeight={"30px"}
+                  displayMaxHeight={"none"}
+                  displayMaxWidth={"100%"}
+                  displayMinHeight={"0"}
+                  displayMinWidth={"0"}
+                  displayWidth={"30px"}
+                  loading={"lazy"}
+                  onClick={async event => {
+                    const $steps = {};
+                    $steps["runCode"] = true
+                      ? (() => {
+                          const actionArgs = {
+                            customFunction: async () => {
+                              return (async () => {
+                                async function fetchData() {
+                                  const API_URL =
+                                    "http://127.0.0.1:8000/upload-json/";
+                                  const fileObj = $state.upload2.files[0];
+                                  console.log($state.upload2);
+                                  const payload = {
+                                    filename: fileObj.name,
+                                    filedata: fileObj.contents
+                                  };
+                                  console.log("Payload to send:", payload);
+                                  try {
+                                    const response = await fetch(API_URL, {
+                                      method: "POST",
+                                      headers: {
+                                        "Content-Type": "application/json"
+                                      },
+                                      body: JSON.stringify(payload),
+                                      redirect: "follow"
+                                    });
+                                    if (response.redirected) {
+                                      window.location.href = response.url;
+                                    } else {
+                                      const responseBody =
+                                        await response.json();
+                                      console.log(
+                                        "File uploaded successfully:",
+                                        responseBody
+                                      );
+                                    }
+                                  } catch (error) {
+                                    console.error(
+                                      "Error uploading JSON file:",
+                                      error
+                                    );
+                                  }
+                                }
+                                return fetchData();
+                              })();
+                            }
+                          };
+                          return (({ customFunction }) => {
+                            return customFunction();
+                          })?.apply(null, [actionArgs]);
+                        })()
+                      : undefined;
+                    if (
+                      $steps["runCode"] != null &&
+                      typeof $steps["runCode"] === "object" &&
+                      typeof $steps["runCode"].then === "function"
+                    ) {
+                      $steps["runCode"] = await $steps["runCode"];
+                    }
+                  }}
+                  src={{
+                    src: "/plasmic/friendo/images/icons8Tick50Png.png",
+                    fullWidth: 50,
+                    fullHeight: 50,
+                    aspectRatio: undefined
+                  }}
+                />
+              </div>
               <Button
                 className={classNames("__wab_instance", sty.button__tg3I)}
                 label={

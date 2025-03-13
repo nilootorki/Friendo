@@ -2351,6 +2351,36 @@
       }
     },
     {
+      "name": "button color",
+      "type": "color",
+      "value": "#8DD0C3",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "BdSqnmJ-3NNy"
+      }
+    },
+    {
+      "name": "button hover",
+      "type": "color",
+      "value": "#97BCB6",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "LFvW0_x8k2hA"
+      }
+    },
+    {
+      "name": "button pressed",
+      "type": "color",
+      "value": "#B8D0CC",
+      "category": "color",
+      "meta": {
+        "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+        "id": "7qqjUfs1DM1E"
+      }
+    },
+    {
       "name": "friendo bg",
       "type": "color",
       "value": "#E4E1CC9E",

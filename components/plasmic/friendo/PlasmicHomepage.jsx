@@ -17,16 +17,12 @@ import {
   createPlasmicElementProxy,
   deriveRenderOpts,
   ensureGlobalVariants,
-  generateStateOnChangeProp,
-  generateStateValueProp,
+  get as $stateGet,
   hasVariant,
-  renderPlasmicSlot,
   set as $stateSet,
   useDollarState
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
-import Button from "../../Button"; // plasmic-import: R-SJru1lXq4W/component
-import StartBut from "../../StartBut"; // plasmic-import: 8wb4OZrnW-52/component
 import { Reveal } from "@plasmicpkgs/react-awesome-reveal";
 import { useScreenVariants as useScreenVariantss47GOinckgZx } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: s47GOinckgZX/globalVariant
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -38,7 +34,7 @@ createPlasmicElementProxy;
 
 export const PlasmicHomepage__VariantProps = new Array("textAppear");
 
-export const PlasmicHomepage__ArgProps = new Array("children");
+export const PlasmicHomepage__ArgProps = new Array();
 
 const $$ = {};
 
@@ -78,7 +74,7 @@ function PlasmicHomepage__RenderFunc(props) {
         initFunc: ({ $props, $state, $queries, $ctx }) => $props.textAppear
       },
       {
-        path: "startBut.showel",
+        path: "reveal",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
@@ -129,23 +125,43 @@ function PlasmicHomepage__RenderFunc(props) {
             }
           )}
         >
-          <div className={classNames(projectcss.all, sty.freeBox___8BIe9)}>
-            {renderPlasmicSlot({
-              defaultContents: (
-                <Button
-                  className={classNames("__wab_instance", sty.button__z72M2)}
-                  disabled={false}
-                  label={
-                    <div
-                      className={classNames(
-                        projectcss.all,
-                        projectcss.__wab_text,
-                        sty.text__mWc3
-                      )}
-                    >
-                      {"Sign In"}
-                    </div>
-                  }
+          <section
+            data-plasmic-name={"section"}
+            data-plasmic-override={overrides.section}
+            className={classNames(projectcss.all, sty.section, {
+              [sty.sectiontextAppear]: hasVariant(
+                $state,
+                "textAppear",
+                "textAppear"
+              )
+            })}
+          >
+            <div className={classNames(projectcss.all, sty.freeBox__lk0Rk)}>
+              <div className={classNames(projectcss.all, sty.freeBox__rKLbM)}>
+                <PlasmicImg__
+                  alt={""}
+                  className={classNames(sty.img__aXau)}
+                  displayHeight={"200px"}
+                  displayMaxHeight={"none"}
+                  displayMaxWidth={"100%"}
+                  displayMinHeight={"0"}
+                  displayMinWidth={"0"}
+                  displayWidth={"616px"}
+                  loading={"lazy"}
+                  src={{
+                    src: "/plasmic/friendo/images/sketch1741507911746Png.png",
+                    fullWidth: 1272,
+                    fullHeight: 1447,
+                    aspectRatio: undefined
+                  }}
+                />
+
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text___21Xb
+                  )}
                   onClick={async event => {
                     const $steps = {};
                     $steps["goToSignInPage"] = true
@@ -173,99 +189,34 @@ function PlasmicHomepage__RenderFunc(props) {
                       $steps["goToSignInPage"] = await $steps["goToSignInPage"];
                     }
                   }}
-                />
-              ),
-
-              value: args.children,
-              className: classNames(sty.slotTargetChildren)
-            })}
-          </div>
-          <section
-            data-plasmic-name={"section"}
-            data-plasmic-override={overrides.section}
-            className={classNames(projectcss.all, sty.section, {
-              [sty.sectiontextAppear]: hasVariant(
-                $state,
-                "textAppear",
-                "textAppear"
-              )
-            })}
-          >
-            <Button
-              data-plasmic-name={"button"}
-              data-plasmic-override={overrides.button}
-              className={classNames("__wab_instance", sty.button)}
-              onClick={async event => {
-                const $steps = {};
-                $steps["goToSignInPage"] = true
-                  ? (() => {
-                      const actionArgs = { destination: `/sign-in-page` };
-                      return (({ destination }) => {
-                        if (
-                          typeof destination === "string" &&
-                          destination.startsWith("#")
-                        ) {
-                          document
-                            .getElementById(destination.substr(1))
-                            .scrollIntoView({ behavior: "smooth" });
-                        } else {
-                          __nextRouter?.push(destination);
-                        }
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["goToSignInPage"] != null &&
-                  typeof $steps["goToSignInPage"] === "object" &&
-                  typeof $steps["goToSignInPage"].then === "function"
-                ) {
-                  $steps["goToSignInPage"] = await $steps["goToSignInPage"];
-                }
-              }}
-            />
-
-            <div className={classNames(projectcss.all, sty.freeBox__rKLbM)}>
-              <PlasmicImg__
-                alt={""}
-                className={classNames(sty.img__aXau)}
-                displayHeight={"200px"}
-                displayMaxHeight={"none"}
-                displayMaxWidth={"100%"}
-                displayMinHeight={"0"}
-                displayMinWidth={"0"}
-                displayWidth={"600px"}
-                loading={"lazy"}
-                src={{
-                  src: "/plasmic/friendo/images/sketch1741507911746Png.png",
-                  fullWidth: 1272,
-                  fullHeight: 1447,
-                  aspectRatio: undefined
-                }}
-              />
-            </div>
-            <div
-              className={classNames(
-                projectcss.all,
-                projectcss.__wab_text,
-                sty.text___3Vw4G
-              )}
-            >
-              {"AI friendship quality assurance"}
+                >
+                  {"Sign In"}
+                </div>
+              </div>
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text___3Vw4G
+                )}
+              >
+                {"AI friendship quality assurance"}
+              </div>
             </div>
             <PlasmicImg__
               alt={""}
               className={classNames(sty.img__cAKmw)}
-              displayHeight={"516px"}
+              displayHeight={"500px"}
               displayMaxHeight={"none"}
               displayMaxWidth={"100%"}
               displayMinHeight={"0"}
               displayMinWidth={"0"}
-              displayWidth={"500px"}
+              displayWidth={"900px"}
               loading={"lazy"}
               src={{
-                src: "/plasmic/friendo/images/images1Jpg.jpg",
-                fullWidth: 188,
-                fullHeight: 267,
+                src: "/plasmic/friendo/images/homepagePicPng.png",
+                fullWidth: 1695,
+                fullHeight: 974,
                 aspectRatio: undefined
               }}
             />
@@ -325,26 +276,45 @@ function PlasmicHomepage__RenderFunc(props) {
               "Friendo is an AI-driven friendship management system that helps you evaluate \rand nurture your friendships by analyzing interactions, moods, and personalized AI insights. It is designed to help you increase the quality of your friendships effortlessly!"
             }
           </div>
-          <StartBut
-            data-plasmic-name={"startBut"}
-            data-plasmic-override={overrides.startBut}
-            className={classNames("__wab_instance", sty.startBut)}
-            onShowelChange={async (...eventArgs) => {
-              generateStateOnChangeProp($state, ["startBut", "showel"]).apply(
-                null,
-                eventArgs
-              );
+          <div
+            className={classNames(
+              projectcss.all,
+              projectcss.__wab_text,
+              sty.text__zhAd6
+            )}
+            onClick={async event => {
+              const $steps = {};
+              $steps["updateReveal"] = true
+                ? (() => {
+                    const actionArgs = {
+                      variable: {
+                        objRoot: $state,
+                        variablePath: ["reveal"]
+                      },
+                      operation: 4
+                    };
+                    return (({ variable, value, startIndex, deleteCount }) => {
+                      if (!variable) {
+                        return;
+                      }
+                      const { objRoot, variablePath } = variable;
+                      const oldValue = $stateGet(objRoot, variablePath);
+                      $stateSet(objRoot, variablePath, !oldValue);
+                      return !oldValue;
+                    })?.apply(null, [actionArgs]);
+                  })()
+                : undefined;
               if (
-                eventArgs.length > 1 &&
-                eventArgs[1] &&
-                eventArgs[1]._plasmic_state_init_
+                $steps["updateReveal"] != null &&
+                typeof $steps["updateReveal"] === "object" &&
+                typeof $steps["updateReveal"].then === "function"
               ) {
-                return;
+                $steps["updateReveal"] = await $steps["updateReveal"];
               }
             }}
-            showel={generateStateValueProp($state, ["startBut", "showel"])}
-          />
-
+          >
+            {"Get Started Right Now!"}
+          </div>
           <Reveal
             data-plasmic-name={"reveal"}
             data-plasmic-override={overrides.reveal}
@@ -362,7 +332,7 @@ function PlasmicHomepage__RenderFunc(props) {
                 ? true
                 : (() => {
                     try {
-                      return $state.startBut.showel;
+                      return $state.reveal;
                     } catch (e) {
                       if (
                         e instanceof TypeError ||
@@ -382,42 +352,6 @@ function PlasmicHomepage__RenderFunc(props) {
                     "textAppear"
                   )
                 })}
-                onClick={async event => {
-                  const $steps = {};
-                  $steps["updateUnnamedVariant"] = true
-                    ? (() => {
-                        const actionArgs = {
-                          variable: {
-                            objRoot: $state,
-                            variablePath: ["textAppear"]
-                          },
-                          operation: 0
-                        };
-                        return (({
-                          variable,
-                          value,
-                          startIndex,
-                          deleteCount
-                        }) => {
-                          if (!variable) {
-                            return;
-                          }
-                          const { objRoot, variablePath } = variable;
-                          $stateSet(objRoot, variablePath, value);
-                          return value;
-                        })?.apply(null, [actionArgs]);
-                      })()
-                    : undefined;
-                  if (
-                    $steps["updateUnnamedVariant"] != null &&
-                    typeof $steps["updateUnnamedVariant"] === "object" &&
-                    typeof $steps["updateUnnamedVariant"].then === "function"
-                  ) {
-                    $steps["updateUnnamedVariant"] = await $steps[
-                      "updateUnnamedVariant"
-                    ];
-                  }
-                }}
               >
                 <div
                   className={classNames(
@@ -440,22 +374,15 @@ function PlasmicHomepage__RenderFunc(props) {
                   {"Download friendo app:"}
                 </div>
                 <div className={classNames(projectcss.all, sty.freeBox__xIsV)}>
-                  <Button
-                    data-plasmic-name={"downloadbut"}
-                    data-plasmic-override={overrides.downloadbut}
-                    className={classNames("__wab_instance", sty.downloadbut)}
-                    label={
-                      <div
-                        className={classNames(
-                          projectcss.all,
-                          projectcss.__wab_text,
-                          sty.text__nych6
-                        )}
-                      >
-                        {"Download"}
-                      </div>
-                    }
-                  />
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__t1Xaf
+                    )}
+                  >
+                    {"Download"}
+                  </div>
                 </div>
               </div>
             ) : null}
@@ -467,20 +394,9 @@ function PlasmicHomepage__RenderFunc(props) {
 }
 
 const PlasmicDescendants = {
-  visibleText: [
-    "visibleText",
-    "section",
-    "button",
-    "startBut",
-    "reveal",
-    "downloadbut"
-  ],
-
-  section: ["section", "button"],
-  button: ["button"],
-  startBut: ["startBut"],
-  reveal: ["reveal", "downloadbut"],
-  downloadbut: ["downloadbut"]
+  visibleText: ["visibleText", "section", "reveal"],
+  section: ["section"],
+  reveal: ["reveal"]
 };
 
 function makeNodeComponent(nodeName) {
@@ -516,10 +432,7 @@ export const PlasmicHomepage = Object.assign(
   {
     // Helper components rendering sub-elements
     section: makeNodeComponent("section"),
-    button: makeNodeComponent("button"),
-    startBut: makeNodeComponent("startBut"),
     reveal: makeNodeComponent("reveal"),
-    downloadbut: makeNodeComponent("downloadbut"),
     // Metadata about props expected for PlasmicHomepage
     internalVariantProps: PlasmicHomepage__VariantProps,
     internalArgProps: PlasmicHomepage__ArgProps,

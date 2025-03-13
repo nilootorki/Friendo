@@ -28,6 +28,11 @@ def create_token(data:dict):
     if "sub" not in data_copy:
         raise ValueError("Token data must include a 'sub' field for the user identifier")
 
+
+    data_copy["sub"]=str(data_copy["sub"])
+
+    print(f"DEBUG: Creating token with sub={data_copy['sub']} (type={type(data_copy['sub'])})")  # Debugging line
+
     #set expiration time
     expire=datetime.utcnow() +timedelta(minutes=access_token_expire_min)
     data_copy.update({"exp":expire})
@@ -35,7 +40,7 @@ def create_token(data:dict):
     return jwt.encode(data_copy,secret_key,algorithm=algorithm)
 
 #get current user
-def get_current_user(request:Request, db:Session=Depends(get_db)):
+def get_current_user(request:Request, db:Session=Depends(get_db),token:str=None):
     
     # exceptions=HTTPException(
     #     status_code=status.HTTP_401_UNAUTHORIZED,
@@ -43,8 +48,15 @@ def get_current_user(request:Request, db:Session=Depends(get_db)):
     #     headers={"WWW-Authenticate": "Bearer"},
     # )
     
-    token=request.cookies.get("access_token")
+    print("token is decoding", token)
+    if not token:
+        token=request.cookies.get("access_token")
     
+    if not token:
+        auth_header= request.header.get("Authorization")
+        if auth_header and auth_header.startswith("Bearer "):
+            token=auth_header[len("Bearer "):]
+
     if not token:
         raise HTTPException(status_code=401, detail="Not authenticated")
     
@@ -54,13 +66,15 @@ def get_current_user(request:Request, db:Session=Depends(get_db)):
         #decode the token
         token = token.replace("Bearer ", "").strip()
         payload=jwt.decode(token, secret_key,algorithms=[algorithm])
-        user_id: int=payload.get("sub")    #sub(subject) represents the user identifier
-        
+        user_id= payload.get("sub")    #sub(subject) represents the user identifier
+
         if user_id is None:
             raise HTTPException(status_code=401, detail="Invalid authentication token")
-        user = db.query(db_models.User).filter(db_models.User.user_id == int(user_id)).first()
         
-        if not user:
+        user_id=int(user_id)
+        user = db.query(db_models.User).filter(db_models.User.user_id == int(user_id)).first()
+        print(user_id)
+        if not user or user.jwt_token!=token:
             raise HTTPException(status_code=401, detail="User not found")
         
         return user_id

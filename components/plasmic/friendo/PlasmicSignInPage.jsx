@@ -400,13 +400,11 @@ function PlasmicSignInPage__RenderFunc(props) {
                                   ) {
                                     $state.wrongPassword = true;
                                   }
-                                }
-                                if (
-                                  responseBody.message === "Login successful"
-                                ) {
+                                } else {
                                   $state.wrongPassword = false;
                                   $state.wrongUsername = false;
-                                  $state.page = "/home?username=" + username;
+                                  $state.page =
+                                    "/home?username=" + responseBody.message;
                                   return;
                                 }
                                 console.log("API Response:", data);

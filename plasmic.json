@@ -718,19 +718,6 @@
           "componentType": "component"
         },
         {
-          "id": "8wb4OZrnW-52",
-          "name": "StartBut",
-          "type": "managed",
-          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
-          "renderModuleFilePath": "plasmic/friendo/PlasmicStartBut.jsx",
-          "importSpec": {
-            "modulePath": "StartBut.jsx"
-          },
-          "cssFilePath": "plasmic/friendo/PlasmicStartBut.module.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
           "id": "NyC0ja4FReyd",
           "name": "SignInPage",
           "type": "managed",
@@ -1103,20 +1090,6 @@
           "path": "/about-us"
         },
         {
-          "id": "QGsu4NsE0n29",
-          "name": "Statistics",
-          "type": "managed",
-          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
-          "renderModuleFilePath": "plasmic/friendo/PlasmicStatistics.jsx",
-          "importSpec": {
-            "modulePath": "../pages/statistics.jsx"
-          },
-          "cssFilePath": "plasmic/friendo/PlasmicStatistics.module.css",
-          "scheme": "blackbox",
-          "componentType": "page",
-          "path": "/statistics"
-        },
-        {
           "id": "Q43YWLipWoOW",
           "name": "MoodTracking",
           "type": "managed",
@@ -1129,6 +1102,20 @@
           "scheme": "blackbox",
           "componentType": "page",
           "path": "/mood-tracking"
+        },
+        {
+          "id": "HSr2qyS5g5Vp",
+          "name": "Statistics",
+          "type": "managed",
+          "projectId": "d1S8dWKKr4PVKg3azHqMAd",
+          "renderModuleFilePath": "plasmic/friendo/PlasmicStatistics.jsx",
+          "importSpec": {
+            "modulePath": "../pages/statistics.jsx"
+          },
+          "cssFilePath": "plasmic/friendo/PlasmicStatistics.module.css",
+          "scheme": "blackbox",
+          "componentType": "page",
+          "path": "/statistics"
         }
       ],
       "icons": [
@@ -1338,6 +1325,21 @@
           "id": "W5tcEOtZNFl9",
           "name": "sketch1741507911746.png",
           "filePath": "../public/plasmic/friendo/images/sketch1741507911746Png.png"
+        },
+        {
+          "id": "q5b0-9iHNVrM",
+          "name": "icons8-tick-50.png",
+          "filePath": "../public/plasmic/friendo/images/icons8Tick50Png.png"
+        },
+        {
+          "id": "Zv56WbCd_OAs",
+          "name": "ho.png",
+          "filePath": "../public/plasmic/friendo/images/hoPng.png"
+        },
+        {
+          "id": "YFAr3wb8yY_0",
+          "name": "homepage pic.png",
+          "filePath": "../public/plasmic/friendo/images/homepagePicPng.png"
         }
       ],
       "indirect": false,

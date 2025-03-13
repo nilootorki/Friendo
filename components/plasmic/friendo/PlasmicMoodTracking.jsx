@@ -21,6 +21,7 @@ import {
   useDollarState
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
+import { usePlasmicDataOp } from "@plasmicapp/react-web/lib/data-sources";
 import NavBar from "../../NavBar"; // plasmic-import: KnagBLotfm8n/component
 import TextAreaInput from "../../TextAreaInput"; // plasmic-import: r8IC48IXXK4Y/component
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -63,6 +64,7 @@ function PlasmicMoodTracking__RenderFunc(props) {
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
+  let [$queries, setDollarQueries] = React.useState({});
   const stateSpecs = React.useMemo(
     () => [
       {
@@ -100,6 +102,18 @@ function PlasmicMoodTracking__RenderFunc(props) {
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+      },
+      {
+        path: "people",
+        type: "private",
+        variableType: "object",
+        initFunc: ({ $props, $state, $queries, $ctx }) => ({})
+      },
+      {
+        path: "people2",
+        type: "private",
+        variableType: "array",
+        initFunc: ({ $props, $state, $queries, $ctx }) => []
       }
     ],
 
@@ -108,9 +122,25 @@ function PlasmicMoodTracking__RenderFunc(props) {
   const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
-    $queries: {},
+    $queries: $queries,
     $refs
   });
+  const new$Queries = {
+    query: usePlasmicDataOp(() => {
+      return {
+        sourceId: "jPx9VXTMGhi2nPHAixuLPM",
+        opId: "d3669a13-068f-4053-b073-74632e9142a7",
+        userArgs: {},
+        cacheKey: `plasmic.$.d3669a13-068f-4053-b073-74632e9142a7.$.`,
+        invalidatedKeys: null,
+        roleId: null
+      };
+    })
+  };
+  if (Object.keys(new$Queries).some(k => new$Queries[k] !== $queries[k])) {
+    setDollarQueries(new$Queries);
+    $queries = new$Queries;
+  }
   return (
     <React.Fragment>
       <Head></Head>
@@ -229,6 +259,88 @@ function PlasmicMoodTracking__RenderFunc(props) {
           />
 
           <div className={classNames(projectcss.all, sty.freeBox__di1EL)}>
+            <PlasmicImg__
+              alt={""}
+              className={classNames(sty.img__cGIj2)}
+              displayHeight={"30px"}
+              displayMaxHeight={"none"}
+              displayMaxWidth={"100%"}
+              displayMinHeight={"0"}
+              displayMinWidth={"0"}
+              displayWidth={"30px"}
+              loading={"lazy"}
+              onClick={async event => {
+                const $steps = {};
+                $steps["runCode"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        customFunction: async () => {
+                          return (async () => {
+                            const mood = $state.textAreaInput?.value || "";
+                            const token = $ctx.query.username || "";
+                            async function fetchData() {
+                              const API_URL =
+                                "http://127.0.0.1:8000/suggest-friend/";
+                              const requestData = {
+                                mood: mood,
+                                token: token
+                              };
+                              console.log(requestData);
+                              try {
+                                const response = await fetch(API_URL, {
+                                  method: "POST",
+                                  headers: {
+                                    "Content-Type": "application/json"
+                                  },
+                                  body: JSON.stringify(requestData)
+                                });
+                                const responseBody = await response.json();
+                                if (response.ok) {
+                                  $state.people = responseBody;
+                                  console.log($state.people);
+                                  $effect(() => {
+                                    if ($state.people) {
+                                      sessionStorage.setItem(
+                                        "peopleState",
+                                        JSON.stringify($state.people)
+                                      );
+                                    }
+                                  }, [$state.people]);
+                                  const savedPeople =
+                                    sessionStorage.getItem("peopleState");
+                                  if (savedPeople) {
+                                    $state.people = JSON.parse(savedPeople);
+                                  }
+                                }
+                              } catch (error) {
+                                console.error("Error fetching API:", error);
+                              }
+                            }
+                            return fetchData();
+                          })();
+                        }
+                      };
+                      return (({ customFunction }) => {
+                        return customFunction();
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["runCode"] != null &&
+                  typeof $steps["runCode"] === "object" &&
+                  typeof $steps["runCode"].then === "function"
+                ) {
+                  $steps["runCode"] = await $steps["runCode"];
+                }
+              }}
+              src={{
+                src: "/plasmic/friendo/images/icons8Tick50Png.png",
+                fullWidth: 50,
+                fullHeight: 50,
+                aspectRatio: undefined
+              }}
+            />
+
             <TextAreaInput
               data-plasmic-name={"textAreaInput"}
               data-plasmic-override={overrides.textAreaInput}
@@ -245,6 +357,9 @@ function PlasmicMoodTracking__RenderFunc(props) {
                 ) {
                   return;
                 }
+                (async val => {
+                  const $steps = {};
+                }).apply(null, eventArgs);
               }}
               placeholder={"What's on your mind?"}
             />
@@ -319,35 +434,86 @@ function PlasmicMoodTracking__RenderFunc(props) {
               {"Here is a list of friends you can call or text today:"}
             </div>
             <div className={classNames(projectcss.all, sty.freeBox__uFMyX)}>
-              <div className={classNames(projectcss.all, sty.freeBox___6UhiQ)}>
-                <PlasmicImg__
-                  alt={""}
-                  className={classNames(sty.img___8O8KV)}
-                  displayHeight={"auto"}
-                  displayMaxHeight={"none"}
-                  displayMaxWidth={"100%"}
-                  displayMinHeight={"0"}
-                  displayMinWidth={"0"}
-                  displayWidth={"50px"}
-                  loading={"lazy"}
-                  src={{
-                    src: "/plasmic/friendo/images/icons8FemaleProfile100Png.png",
-                    fullWidth: 100,
-                    fullHeight: 100,
-                    aspectRatio: undefined
-                  }}
-                />
+              {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+                (() => {
+                  try {
+                    return $state.people;
+                  } catch (e) {
+                    if (
+                      e instanceof TypeError ||
+                      e?.plasmicType === "PlasmicUndefinedDataError"
+                    ) {
+                      return [];
+                    }
+                    throw e;
+                  }
+                })()
+              ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                const currentItem = __plasmic_item_0;
+                const currentIndex = __plasmic_idx_0;
+                return (
+                  <div
+                    className={classNames(projectcss.all, sty.freeBox___6UhiQ)}
+                    key={currentIndex}
+                  >
+                    <PlasmicImg__
+                      alt={""}
+                      className={classNames(sty.img___8O8KV)}
+                      displayHeight={"auto"}
+                      displayMaxHeight={"none"}
+                      displayMaxWidth={"100%"}
+                      displayMinHeight={"0"}
+                      displayMinWidth={"0"}
+                      displayWidth={"50px"}
+                      loading={"lazy"}
+                      src={(() => {
+                        try {
+                          return currentItem.gender === "Female"
+                            ? "https://img.plasmic.app/img-optimizer/v1/img?src=https%3A%2F%2Fimg.plasmic.app%2Fimg-optimizer%2Fv1%2Fimg%2Fb36b73017b06c745dc3f4e67558686d1.png&q=75"
+                            : "https://img.plasmic.app/img-optimizer/v1/img?src=https%3A%2F%2Fimg.plasmic.app%2Fimg-optimizer%2Fv1%2Fimg%2F8aa3beea7933bc5a7b78d0aaa354a5ca.png&q=75";
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return {
+                              src: "/plasmic/friendo/images/icons8FemaleProfile100Png.png",
+                              fullWidth: 100,
+                              fullHeight: 100,
+                              aspectRatio: undefined
+                            };
+                          }
+                          throw e;
+                        }
+                      })()}
+                    />
 
-                <div
-                  className={classNames(
-                    projectcss.all,
-                    projectcss.__wab_text,
-                    sty.text__z34F5
-                  )}
-                >
-                  {"Rojan"}
-                </div>
-              </div>
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__z34F5
+                      )}
+                    >
+                      <React.Fragment>
+                        {(() => {
+                          try {
+                            return currentItem.friend_name;
+                          } catch (e) {
+                            if (
+                              e instanceof TypeError ||
+                              e?.plasmicType === "PlasmicUndefinedDataError"
+                            ) {
+                              return "Rojan";
+                            }
+                            throw e;
+                          }
+                        })()}
+                      </React.Fragment>
+                    </div>
+                  </div>
+                );
+              })}
               <div className={classNames(projectcss.all, sty.freeBox__boIr4)}>
                 <PlasmicImg__
                   alt={""}
@@ -360,7 +526,7 @@ function PlasmicMoodTracking__RenderFunc(props) {
                   displayWidth={"50px"}
                   loading={"lazy"}
                   src={{
-                    src: "/plasmic/friendo/images/icons8MaleUser100Png.png",
+                    src: "/plasmic/friendo/images/icons8FemaleProfile100Png.png",
                     fullWidth: 100,
                     fullHeight: 100,
                     aspectRatio: undefined

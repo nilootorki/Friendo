@@ -103,13 +103,7 @@ function PlasmicProfileEdit__RenderFunc(props) {
         initFunc: ({ $props, $state, $queries, $ctx }) => true
       },
       {
-        path: "textInput.value",
-        type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
-      },
-      {
-        path: "textInput2.value",
+        path: "password.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -121,7 +115,7 @@ function PlasmicProfileEdit__RenderFunc(props) {
         initFunc: ({ $props, $state, $queries, $ctx }) => true
       },
       {
-        path: "textInput3.value",
+        path: "email.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -133,13 +127,13 @@ function PlasmicProfileEdit__RenderFunc(props) {
         initFunc: ({ $props, $state, $queries, $ctx }) => true
       },
       {
-        path: "combobox.value",
+        path: "personalityType.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
       },
       {
-        path: "combobox2.value",
+        path: "mbti.value",
         type: "private",
         variableType: "text",
         initFunc: ({ $props, $state, $queries, $ctx }) => undefined
@@ -152,6 +146,12 @@ function PlasmicProfileEdit__RenderFunc(props) {
       },
       {
         path: "navBar.friendsTooltip",
+        type: "private",
+        variableType: "boolean",
+        initFunc: ({ $props, $state, $queries, $ctx }) => false
+      },
+      {
+        path: "ok",
         type: "private",
         variableType: "boolean",
         initFunc: ({ $props, $state, $queries, $ctx }) => false
@@ -364,87 +364,6 @@ function PlasmicProfileEdit__RenderFunc(props) {
               </div>
               {(() => {
                 try {
-                  return !$state.usernameEdit;
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return true;
-                  }
-                  throw e;
-                }
-              })() ? (
-                <div className={classNames(projectcss.all, sty.freeBox__zuFt9)}>
-                  <TextInput
-                    data-plasmic-name={"textInput"}
-                    data-plasmic-override={overrides.textInput}
-                    className={classNames("__wab_instance", sty.textInput)}
-                    onChange={async (...eventArgs) => {
-                      generateStateOnChangeProp($state, [
-                        "textInput",
-                        "value"
-                      ]).apply(null, eventArgs);
-                      if (
-                        eventArgs.length > 1 &&
-                        eventArgs[1] &&
-                        eventArgs[1]._plasmic_state_init_
-                      ) {
-                        return;
-                      }
-                    }}
-                  />
-
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__wn1Gq
-                    )}
-                    onClick={async event => {
-                      const $steps = {};
-                      $steps["updateUsernameEdit"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["usernameEdit"]
-                              },
-                              operation: 4
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-                              const oldValue = $stateGet(objRoot, variablePath);
-                              $stateSet(objRoot, variablePath, !oldValue);
-                              return !oldValue;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateUsernameEdit"] != null &&
-                        typeof $steps["updateUsernameEdit"] === "object" &&
-                        typeof $steps["updateUsernameEdit"].then === "function"
-                      ) {
-                        $steps["updateUsernameEdit"] = await $steps[
-                          "updateUsernameEdit"
-                        ];
-                      }
-                    }}
-                  >
-                    {"submit"}
-                  </div>
-                </div>
-              ) : null}
-              {(() => {
-                try {
                   return $state.usernameEdit;
                 } catch (e) {
                   if (
@@ -467,73 +386,21 @@ function PlasmicProfileEdit__RenderFunc(props) {
                     <React.Fragment>
                       {(() => {
                         try {
-                          return $queries.componentData.data[0].username;
+                          return $queries.componentData.data.find(
+                            user => user.jwt_token === $ctx.query.username
+                          ).username;
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
                             e?.plasmicType === "PlasmicUndefinedDataError"
                           ) {
-                            return "Mahshid";
+                            return " ";
                           }
                           throw e;
                         }
                       })()}
                     </React.Fragment>
                   </div>
-                  <PlasmicImg__
-                    alt={""}
-                    className={classNames(sty.img__a9Nhk)}
-                    displayHeight={"20px"}
-                    displayMaxHeight={"none"}
-                    displayMaxWidth={"100%"}
-                    displayMinHeight={"0"}
-                    displayMinWidth={"0"}
-                    displayWidth={"20px"}
-                    loading={"lazy"}
-                    onClick={async event => {
-                      const $steps = {};
-                      $steps["updateUsernameEdit"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["usernameEdit"]
-                              },
-                              operation: 4
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-                              const oldValue = $stateGet(objRoot, variablePath);
-                              $stateSet(objRoot, variablePath, !oldValue);
-                              return !oldValue;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateUsernameEdit"] != null &&
-                        typeof $steps["updateUsernameEdit"] === "object" &&
-                        typeof $steps["updateUsernameEdit"].then === "function"
-                      ) {
-                        $steps["updateUsernameEdit"] = await $steps[
-                          "updateUsernameEdit"
-                        ];
-                      }
-                    }}
-                    src={{
-                      src: "/plasmic/friendo/images/icons8Edit24Png.png",
-                      fullWidth: 24,
-                      fullHeight: 24,
-                      aspectRatio: undefined
-                    }}
-                  />
                 </div>
               ) : null}
             </div>
@@ -562,12 +429,27 @@ function PlasmicProfileEdit__RenderFunc(props) {
               })() ? (
                 <div className={classNames(projectcss.all, sty.freeBox__mtQxW)}>
                   <TextInput
-                    data-plasmic-name={"textInput2"}
-                    data-plasmic-override={overrides.textInput2}
-                    className={classNames("__wab_instance", sty.textInput2)}
+                    data-plasmic-name={"password"}
+                    data-plasmic-override={overrides.password}
+                    className={classNames("__wab_instance", sty.password)}
+                    defaultValue={(() => {
+                      try {
+                        return $queries.componentData.data.find(
+                          user => user.jwt_token === $ctx.query.username
+                        ).password_hash;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return undefined;
+                        }
+                        throw e;
+                      }
+                    })()}
                     onChange={async (...eventArgs) => {
                       generateStateOnChangeProp($state, [
-                        "textInput2",
+                        "password",
                         "value"
                       ]).apply(null, eventArgs);
                       if (
@@ -579,53 +461,6 @@ function PlasmicProfileEdit__RenderFunc(props) {
                       }
                     }}
                   />
-
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text__d8Th8
-                    )}
-                    onClick={async event => {
-                      const $steps = {};
-                      $steps["updatePasswordEdit"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["passwordEdit"]
-                              },
-                              operation: 4
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-                              const oldValue = $stateGet(objRoot, variablePath);
-                              $stateSet(objRoot, variablePath, !oldValue);
-                              return !oldValue;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updatePasswordEdit"] != null &&
-                        typeof $steps["updatePasswordEdit"] === "object" &&
-                        typeof $steps["updatePasswordEdit"].then === "function"
-                      ) {
-                        $steps["updatePasswordEdit"] = await $steps[
-                          "updatePasswordEdit"
-                        ];
-                      }
-                    }}
-                  >
-                    {"submit"}
-                  </div>
                 </div>
               ) : null}
               {(() => {
@@ -652,13 +487,15 @@ function PlasmicProfileEdit__RenderFunc(props) {
                     <React.Fragment>
                       {(() => {
                         try {
-                          return $queries.componentData.data[0].password_hash;
+                          return $queries.componentData.data.find(
+                            user => user.jwt_token === $ctx.query.username
+                          ).password_hash;
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
                             e?.plasmicType === "PlasmicUndefinedDataError"
                           ) {
-                            return "123456";
+                            return " ";
                           }
                           throw e;
                         }
@@ -746,12 +583,27 @@ function PlasmicProfileEdit__RenderFunc(props) {
               })() ? (
                 <div className={classNames(projectcss.all, sty.freeBox__ropOd)}>
                   <TextInput
-                    data-plasmic-name={"textInput3"}
-                    data-plasmic-override={overrides.textInput3}
-                    className={classNames("__wab_instance", sty.textInput3)}
+                    data-plasmic-name={"email"}
+                    data-plasmic-override={overrides.email}
+                    className={classNames("__wab_instance", sty.email)}
+                    defaultValue={(() => {
+                      try {
+                        return $queries.componentData.data.find(
+                          user => user.jwt_token === $ctx.query.username
+                        ).email;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return undefined;
+                        }
+                        throw e;
+                      }
+                    })()}
                     onChange={async (...eventArgs) => {
                       generateStateOnChangeProp($state, [
-                        "textInput3",
+                        "email",
                         "value"
                       ]).apply(null, eventArgs);
                       if (
@@ -763,53 +615,6 @@ function PlasmicProfileEdit__RenderFunc(props) {
                       }
                     }}
                   />
-
-                  <div
-                    className={classNames(
-                      projectcss.all,
-                      projectcss.__wab_text,
-                      sty.text___9Rbvs
-                    )}
-                    onClick={async event => {
-                      const $steps = {};
-                      $steps["updateEmailEdit"] = true
-                        ? (() => {
-                            const actionArgs = {
-                              variable: {
-                                objRoot: $state,
-                                variablePath: ["emailEdit"]
-                              },
-                              operation: 4
-                            };
-                            return (({
-                              variable,
-                              value,
-                              startIndex,
-                              deleteCount
-                            }) => {
-                              if (!variable) {
-                                return;
-                              }
-                              const { objRoot, variablePath } = variable;
-                              const oldValue = $stateGet(objRoot, variablePath);
-                              $stateSet(objRoot, variablePath, !oldValue);
-                              return !oldValue;
-                            })?.apply(null, [actionArgs]);
-                          })()
-                        : undefined;
-                      if (
-                        $steps["updateEmailEdit"] != null &&
-                        typeof $steps["updateEmailEdit"] === "object" &&
-                        typeof $steps["updateEmailEdit"].then === "function"
-                      ) {
-                        $steps["updateEmailEdit"] = await $steps[
-                          "updateEmailEdit"
-                        ];
-                      }
-                    }}
-                  >
-                    {"submit"}
-                  </div>
                 </div>
               ) : null}
               {(() => {
@@ -836,13 +641,15 @@ function PlasmicProfileEdit__RenderFunc(props) {
                     <React.Fragment>
                       {(() => {
                         try {
-                          return $queries.componentData.data[0].email;
+                          return $queries.componentData.data.find(
+                            user => user.jwt_token === $ctx.query.username
+                          ).email;
                         } catch (e) {
                           if (
                             e instanceof TypeError ||
                             e?.plasmicType === "PlasmicUndefinedDataError"
                           ) {
-                            return "mahshidsafaee06@gmail.com";
+                            return " ";
                           }
                           throw e;
                         }
@@ -918,18 +725,18 @@ function PlasmicProfileEdit__RenderFunc(props) {
               </div>
               <div className={classNames(projectcss.all, sty.freeBox__p6HzV)}>
                 <Combobox
-                  data-plasmic-name={"combobox"}
-                  data-plasmic-override={overrides.combobox}
-                  className={classNames("__wab_instance", sty.combobox)}
+                  data-plasmic-name={"personalityType"}
+                  data-plasmic-override={overrides.personalityType}
+                  className={classNames("__wab_instance", sty.personalityType)}
                   items={
                     <React.Fragment>
-                      <MenuItem label={"Introvert"} value={"item1"} />
-                      <MenuItem label={"extrovert"} value={"item2"} />
+                      <MenuItem label={"Introvert"} value={"Introvert"} />
+                      <MenuItem label={"extrovert"} value={"Extrovert"} />
                     </React.Fragment>
                   }
                   onChange={async (...eventArgs) => {
                     generateStateOnChangeProp($state, [
-                      "combobox",
+                      "personalityType",
                       "value"
                     ]).apply(null, eventArgs);
                     if (
@@ -942,7 +749,9 @@ function PlasmicProfileEdit__RenderFunc(props) {
                   }}
                   placeholder={(() => {
                     try {
-                      return $queries.componentData.data[0].personality_type;
+                      return $queries.componentData.data.find(
+                        user => user.jwt_token === $ctx.query.username
+                      ).personality_type;
                     } catch (e) {
                       if (
                         e instanceof TypeError ||
@@ -996,35 +805,35 @@ function PlasmicProfileEdit__RenderFunc(props) {
               </div>
               <div className={classNames(projectcss.all, sty.freeBox__vVlf2)}>
                 <Combobox
-                  data-plasmic-name={"combobox2"}
-                  data-plasmic-override={overrides.combobox2}
-                  className={classNames("__wab_instance", sty.combobox2)}
+                  data-plasmic-name={"mbti"}
+                  data-plasmic-override={overrides.mbti}
+                  className={classNames("__wab_instance", sty.mbti)}
                   description={null}
                   items={
                     <React.Fragment>
-                      <MenuItem label={"INFJ"} value={"infj"} />
-                      <MenuItem label={"INFP"} value={"infp"} />
-                      <MenuItem label={"INTJ"} value={"intj"} />
-                      <MenuItem label={"INTP"} value={"intp"} />
-                      <MenuItem label={"ISFJ"} value={"isfj"} />
-                      <MenuItem label={"ISFP"} value={"isfp"} />
-                      <MenuItem label={"ISTJ"} value={"istj"} />
-                      <MenuItem label={"ISTP"} value={"istp"} />
-                      <MenuItem label={"ENFJ"} value={"enfj"} />
-                      <MenuItem label={"ENFP"} value={"enfp"} />
-                      <MenuItem label={"ENTJ"} value={"entj"} />
-                      <MenuItem label={"ENTP"} value={"entp"} />
-                      <MenuItem label={"ESFJ"} value={"esfj"} />
-                      <MenuItem label={"ESFP"} value={"esfp"} />
-                      <MenuItem label={"ESTJ"} value={"estj"} />
-                      <MenuItem label={"ESTP"} value={"estp"} />
+                      <MenuItem label={"INFJ"} value={"INFJ"} />
+                      <MenuItem label={"INFP"} value={"INFP"} />
+                      <MenuItem label={"INTJ"} value={"INTJ"} />
+                      <MenuItem label={"INTP"} value={"INTP"} />
+                      <MenuItem label={"ISFJ"} value={"ISFJ"} />
+                      <MenuItem label={"ISFP"} value={"ISFP"} />
+                      <MenuItem label={"ISTJ"} value={"ISTJ"} />
+                      <MenuItem label={"ISTP"} value={"ISTP"} />
+                      <MenuItem label={"ENFJ"} value={"ENFJ"} />
+                      <MenuItem label={"ENFP"} value={"ENFP"} />
+                      <MenuItem label={"ENTJ"} value={"ENTJ"} />
+                      <MenuItem label={"ENTP"} value={"ENTP"} />
+                      <MenuItem label={"ESFJ"} value={"ESFJ"} />
+                      <MenuItem label={"ESFP"} value={"ESFP"} />
+                      <MenuItem label={"ESTJ"} value={"ESTJ"} />
+                      <MenuItem label={"ESTP"} value={"ESTP"} />
                     </React.Fragment>
                   }
                   onChange={async (...eventArgs) => {
-                    generateStateOnChangeProp($state, [
-                      "combobox2",
-                      "value"
-                    ]).apply(null, eventArgs);
+                    generateStateOnChangeProp($state, ["mbti", "value"]).apply(
+                      null,
+                      eventArgs
+                    );
                     if (
                       eventArgs.length > 1 &&
                       eventArgs[1] &&
@@ -1035,7 +844,9 @@ function PlasmicProfileEdit__RenderFunc(props) {
                   }}
                   placeholder={(() => {
                     try {
-                      return $queries.componentData.data[0].mbti;
+                      return $queries.componentData.data.find(
+                        user => user.jwt_token === $ctx.query.username
+                      ).mbti;
                     } catch (e) {
                       if (
                         e instanceof TypeError ||
@@ -1055,9 +866,100 @@ function PlasmicProfileEdit__RenderFunc(props) {
                 projectcss.__wab_text,
                 sty.text__ho3AR
               )}
+              onClick={async event => {
+                const $steps = {};
+                $steps["runCode"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        customFunction: async () => {
+                          return (async () => {
+                            const password = $state.password?.value || "";
+                            const email =
+                              $state.email?.value ||
+                              $queries.componentData.data.find(
+                                user => user.jwt_token === $ctx.query.username
+                              ).email ||
+                              "";
+                            const personality_type =
+                              $state.personalityType?.value || "";
+                            const mbti = $state.mbti?.value || "";
+                            const jwt = $ctx.query.username;
+                            async function fetchData() {
+                              const API_URL =
+                                "http://127.0.0.1:8000/user/update";
+                              const requestData = {
+                                password: password,
+                                email: email,
+                                personality_type: personality_type,
+                                mbti: mbti,
+                                token: jwt
+                              };
+                              console.log(requestData);
+                              try {
+                                const response = await fetch(API_URL, {
+                                  method: "PUT",
+                                  headers: {
+                                    "Content-Type": "application/json"
+                                  },
+                                  body: JSON.stringify(requestData)
+                                });
+                                const responseBody = await response.json();
+                                if (
+                                  responseBody.username ===
+                                  $queries.componentData.data.find(
+                                    user =>
+                                      user.jwt_token === $ctx.query.username
+                                  ).username
+                                ) {
+                                  $state.ok = true;
+                                }
+                              } catch (error) {
+                                console.error("Error fetching API:", error);
+                              }
+                            }
+                            return fetchData();
+                          })();
+                        }
+                      };
+                      return (({ customFunction }) => {
+                        return customFunction();
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["runCode"] != null &&
+                  typeof $steps["runCode"] === "object" &&
+                  typeof $steps["runCode"].then === "function"
+                ) {
+                  $steps["runCode"] = await $steps["runCode"];
+                }
+              }}
             >
               {"OK"}
             </div>
+            {(() => {
+              try {
+                return $state.ok;
+              } catch (e) {
+                if (
+                  e instanceof TypeError ||
+                  e?.plasmicType === "PlasmicUndefinedDataError"
+                ) {
+                  return true;
+                }
+                throw e;
+              }
+            })() ? (
+              <div
+                className={classNames(
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text___4Bcd
+                )}
+              >
+                {"submitted, please refresh the page"}
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
@@ -1070,20 +972,18 @@ const PlasmicDescendants = {
     "root",
     "navBar",
     "upload",
-    "textInput",
-    "textInput2",
-    "textInput3",
-    "combobox",
-    "combobox2"
+    "password",
+    "email",
+    "personalityType",
+    "mbti"
   ],
 
   navBar: ["navBar"],
   upload: ["upload"],
-  textInput: ["textInput"],
-  textInput2: ["textInput2"],
-  textInput3: ["textInput3"],
-  combobox: ["combobox"],
-  combobox2: ["combobox2"]
+  password: ["password"],
+  email: ["email"],
+  personalityType: ["personalityType"],
+  mbti: ["mbti"]
 };
 
 function makeNodeComponent(nodeName) {
@@ -1120,11 +1020,10 @@ export const PlasmicProfileEdit = Object.assign(
     // Helper components rendering sub-elements
     navBar: makeNodeComponent("navBar"),
     upload: makeNodeComponent("upload"),
-    textInput: makeNodeComponent("textInput"),
-    textInput2: makeNodeComponent("textInput2"),
-    textInput3: makeNodeComponent("textInput3"),
-    combobox: makeNodeComponent("combobox"),
-    combobox2: makeNodeComponent("combobox2"),
+    password: makeNodeComponent("password"),
+    email: makeNodeComponent("email"),
+    personalityType: makeNodeComponent("personalityType"),
+    mbti: makeNodeComponent("mbti"),
     // Metadata about props expected for PlasmicProfileEdit
     internalVariantProps: PlasmicProfileEdit__VariantProps,
     internalArgProps: PlasmicProfileEdit__ArgProps,

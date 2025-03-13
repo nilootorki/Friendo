@@ -140,7 +140,50 @@ function PlasmicNavBar__RenderFunc(props) {
         sty.root
       )}
     >
-      <div className={classNames(projectcss.all, sty.freeBox__nmmXu)}>
+      <div
+        className={classNames(projectcss.all, sty.freeBox__nmmXu)}
+        onClick={async event => {
+          const $steps = {};
+          $steps["goToPage"] = true
+            ? (() => {
+                const actionArgs = {
+                  destination: (() => {
+                    try {
+                      return "/home?username=" + $ctx.query.username;
+                    } catch (e) {
+                      if (
+                        e instanceof TypeError ||
+                        e?.plasmicType === "PlasmicUndefinedDataError"
+                      ) {
+                        return undefined;
+                      }
+                      throw e;
+                    }
+                  })()
+                };
+                return (({ destination }) => {
+                  if (
+                    typeof destination === "string" &&
+                    destination.startsWith("#")
+                  ) {
+                    document
+                      .getElementById(destination.substr(1))
+                      .scrollIntoView({ behavior: "smooth" });
+                  } else {
+                    __nextRouter?.push(destination);
+                  }
+                })?.apply(null, [actionArgs]);
+              })()
+            : undefined;
+          if (
+            $steps["goToPage"] != null &&
+            typeof $steps["goToPage"] === "object" &&
+            typeof $steps["goToPage"].then === "function"
+          ) {
+            $steps["goToPage"] = await $steps["goToPage"];
+          }
+        }}
+      >
         <PlasmicImg__
           alt={""}
           className={classNames(sty.img__bd2Jw)}
@@ -164,9 +207,23 @@ function PlasmicNavBar__RenderFunc(props) {
           className={classNames(projectcss.all, sty.freeBox__hSiP0)}
           onClick={async event => {
             const $steps = {};
-            $steps["goToProfileEdit"] = true
+            $steps["goToPage"] = true
               ? (() => {
-                  const actionArgs = { destination: `/profile-edit` };
+                  const actionArgs = {
+                    destination: (() => {
+                      try {
+                        return "profile-edit?username=" + $ctx.query.username;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return `/profile-edit`;
+                        }
+                        throw e;
+                      }
+                    })()
+                  };
                   return (({ destination }) => {
                     if (
                       typeof destination === "string" &&
@@ -182,11 +239,11 @@ function PlasmicNavBar__RenderFunc(props) {
                 })()
               : undefined;
             if (
-              $steps["goToProfileEdit"] != null &&
-              typeof $steps["goToProfileEdit"] === "object" &&
-              typeof $steps["goToProfileEdit"].then === "function"
+              $steps["goToPage"] != null &&
+              typeof $steps["goToPage"] === "object" &&
+              typeof $steps["goToPage"].then === "function"
             ) {
-              $steps["goToProfileEdit"] = await $steps["goToProfileEdit"];
+              $steps["goToPage"] = await $steps["goToPage"];
             }
           }}
           onMouseEnter={async event => {
@@ -302,6 +359,47 @@ function PlasmicNavBar__RenderFunc(props) {
         </div>
         <div
           className={classNames(projectcss.all, sty.freeBox__zmy9O)}
+          onClick={async event => {
+            const $steps = {};
+            $steps["goToPage"] = true
+              ? (() => {
+                  const actionArgs = {
+                    destination: (() => {
+                      try {
+                        return "statistics?username=" + $ctx.query.username;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return undefined;
+                        }
+                        throw e;
+                      }
+                    })()
+                  };
+                  return (({ destination }) => {
+                    if (
+                      typeof destination === "string" &&
+                      destination.startsWith("#")
+                    ) {
+                      document
+                        .getElementById(destination.substr(1))
+                        .scrollIntoView({ behavior: "smooth" });
+                    } else {
+                      __nextRouter?.push(destination);
+                    }
+                  })?.apply(null, [actionArgs]);
+                })()
+              : undefined;
+            if (
+              $steps["goToPage"] != null &&
+              typeof $steps["goToPage"] === "object" &&
+              typeof $steps["goToPage"].then === "function"
+            ) {
+              $steps["goToPage"] = await $steps["goToPage"];
+            }
+          }}
           onMouseEnter={async event => {
             const $steps = {};
             $steps["updateStatTooltip"] = true
@@ -670,9 +768,23 @@ function PlasmicNavBar__RenderFunc(props) {
           className={classNames(projectcss.all, sty.freeBox__bGuJ)}
           onClick={async event => {
             const $steps = {};
-            $steps["goToFriendsPage"] = true
+            $steps["goToPage"] = true
               ? (() => {
-                  const actionArgs = { destination: `/friends-page` };
+                  const actionArgs = {
+                    destination: (() => {
+                      try {
+                        return "/friends-page?username=" + $ctx.query.username;
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return `/friends-page`;
+                        }
+                        throw e;
+                      }
+                    })()
+                  };
                   return (({ destination }) => {
                     if (
                       typeof destination === "string" &&
@@ -688,11 +800,11 @@ function PlasmicNavBar__RenderFunc(props) {
                 })()
               : undefined;
             if (
-              $steps["goToFriendsPage"] != null &&
-              typeof $steps["goToFriendsPage"] === "object" &&
-              typeof $steps["goToFriendsPage"].then === "function"
+              $steps["goToPage"] != null &&
+              typeof $steps["goToPage"] === "object" &&
+              typeof $steps["goToPage"].then === "function"
             ) {
-              $steps["goToFriendsPage"] = await $steps["goToFriendsPage"];
+              $steps["goToPage"] = await $steps["goToPage"];
             }
           }}
           onMouseEnter={async event => {

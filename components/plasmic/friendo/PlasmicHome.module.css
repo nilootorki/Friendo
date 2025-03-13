@@ -132,7 +132,7 @@
   min-width: 0;
   padding: 8px;
 }
-.button__ww1X:global(.__wab_instance):global(.__wab_instance) {
+.button:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
 }
 .svg__vQVm {
@@ -147,20 +147,25 @@
   position: relative;
   height: 1em;
 }
-.button__fnIwR:global(.__wab_instance):global(.__wab_instance) {
+.text__ss15H {
+  position: relative;
+  width: auto;
+  height: auto;
   max-width: 100%;
+  margin-top: 0px;
+  font-size: 18px;
+  color: var(--token-SttGpHKVAEmZ);
+  background: var(--token-BdSqnmJ-3NNy);
+  cursor: pointer;
+  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 30px;
+  padding: 3px 10px;
 }
-.svg__i0IKt {
-  position: relative;
-  height: 1em;
+.root .text__ss15H:hover {
+  background: var(--token-LFvW0_x8k2hA);
 }
-.text__mvYd3 {
-  white-space: pre;
-  padding-top: 0px;
-}
-.svg__nz9PE {
-  position: relative;
-  height: 1em;
+.root .text__ss15H:active {
+  background: var(--token-7qqjUfs1DM1E);
 }
 .text___3X6L0 {
   position: absolute;

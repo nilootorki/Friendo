@@ -1,9 +1,9 @@
-from fastapi import FastAPI , Depends, UploadFile, File, HTTPException , Response
+from fastapi import FastAPI , Depends, UploadFile, File, HTTPException , Response, Query
 from dotenv import load_dotenv
 import os
 from sqlalchemy.orm import Session
 from database import engine, session , base, get_db
-from db_models import User
+from db_models import User, UserSuggestion, UserFriend
 import db_models
 import pandas as pd
 import json
@@ -22,11 +22,12 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForSeque
 from datetime import datetime, date
 from fastapi.staticfiles import StaticFiles
 
-from schemas import UserFriendSchema, UserCreate, UserResponse, SignupResponse, ProfileCreate, UserFriend
+from schemas import UserFriendSchema, UserCreate, UserResponse, SignupResponse, ProfileCreate, UserFriend, UserStatistics, UserFriendDResponse, UserFriendDCreate, SuggestFriend
 from typing import List
 from utils import hash_password
 from schemas import UserFriendCreate, UserFriendResponse, UserEditRequest, UserResponse
 from auth import get_current_user
+from routes.statistics import interaction_plot , total_score_plot
 
 
 from sqlalchemy.exc import NoResultFound
@@ -130,12 +131,12 @@ profile_DIR="profile/"
 os.makedirs(profile_DIR,exist_ok=True) # to ensure that directory exists
 
 #to avoid memory leaking
-def get_db():
-    db=Session()   #start a db session
-    try:
-        yield db    #provides the session to FastAPI routes 
-    finally:
-        db.close()   #close the session after the request is complete
+# def get_db():
+#     db=Session()   #start a db session
+#     try:
+#         yield db    #provides the session to FastAPI routes 
+#     finally:
+#         db.close()   #close the session after the request is complete
         
 @app.post("/upload_profile_photo/{user_id}")
 async def upload_profile_photo(user_id:int,file:UploadFile=File(...),db:Session=Depends(get_db)):
@@ -825,12 +826,12 @@ profile_DIR="profile/"
 os.makedirs(profile_DIR,exist_ok=True) # to ensure that directory exists
 
 #to avoid memory leaking
-def get_db():
-    db=Session()   #start a db session
-    try:
-        yield db    #provides the session to FastAPI routes 
-    finally:
-        db.close()   #close the session after the request is complete
+# def get_db():
+#     db=Session()   #start a db session
+#     try:
+#         yield db    #provides the session to FastAPI routes 
+#     finally:
+#         db.close()   #close the session after the request is complete
         
         
 #upload a profile photo by user        
@@ -900,6 +901,9 @@ from config import secret_key, algorithm,access_token_expire_min
 async def login(user:UserLoginRequest,db:Session=Depends(get_db)):
     
     db_user=db.query(db_models.User).filter(db_models.User.username==user.username).first()
+    db_userfriend=db.query(db_models.UserFriend).filter(db_models.UserFriend.username==user.username).all()
+    db_usersuggestion=db.query(db_models.UserSuggestion).filter(db_models.UserSuggestion.username==user.username).all()
+
     if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
     
@@ -917,6 +921,35 @@ async def login(user:UserLoginRequest,db:Session=Depends(get_db)):
     
     access_token = create_token(data={"sub": db_user.user_id ,"exp": expire_time.timestamp()})
     
+    db_user.jwt_token = None
+    db.commit()
+    db_user.jwt_token=access_token
+    db.commit()
+    db.refresh(db_user)
+
+    
+    for row in db_userfriend:
+        row.jwt_token=None
+    db.commit()
+
+    for row in db_userfriend:
+        row.jwt_token=access_token
+    db.commit()
+
+    for row in db_userfriend:
+        db.refresh(row)
+
+    for row in db_usersuggestion:
+        row.jwt_token=None
+    db.commit()
+
+    for row in db_usersuggestion:
+        row.jwt_token=access_token
+    db.commit()
+
+    for row in db_usersuggestion:
+        db.refresh(row)
+
     
     response = Response()
     response.set_cookie( 
@@ -927,11 +960,12 @@ async def login(user:UserLoginRequest,db:Session=Depends(get_db)):
                         samesite="Lax"
                     )
     
-    
-    
-    # return {"access_token": access_token, "token_type": "bearer", "expires_at": expire_time.isoformat()}
-    return {"message":"Login successful"}
 
+    
+    
+    #return {"access_token": access_token, "token_type": "bearer", "expires_at": expire_time.isoformat()}
+    return {"message":access_token}
+    
 
 
 from fastapi import FastAPI
@@ -954,28 +988,33 @@ app.add_middleware(
 
     
 @app.post("/friends/", response_model=UserFriendResponse)
-async def add_friend(friend:UserFriendCreate,db:Session=Depends(get_db),user_id:int=Depends(get_current_user)):
+async def add_friend(add_friend:UserFriendCreate,db:Session=Depends(get_db)):
     # #check if the friend already exists
     # existing_friend=db.query(backend.db_models.UserFriend).filter(backend.db_models
     #                                                       .UserFriend.user_id==user_id,backend.db_models.UserFriend.friend_name==friend.friend_name).first()
     
         #check if the friend already exists
-    existing_friend=db.query(db_models.UserFriend).filter(db_models
-                                                          .UserFriend.user_id==user_id,db_models.UserFriend.friend_name==friend.friend_name).first()
+
+    token=add_friend.token
+
+    if not token: 
+        raise HTTPException(status_code=401, detail="Token is required")
+
+    user_id=get_current_user(request=None, db=db,token=add_friend.token)
+
+    existing_friend=db.query(db_models.UserFriend).filter(db_models.UserFriend.user_id==user_id,db_models.UserFriend.friend_name==add_friend.friend_name).first()
 
     if existing_friend:
         raise HTTPException(status_code=400,detail="Friend already exists")
     
 
-    new_friend=db_models.UserFriend(
+    new_friend=db_models.UserSuggestion(
         user_id=user_id,
         username=db.query(db_models.User).filter(db_models.User.user_id==user_id).first().username,
-        friend_name=friend.friend_name,
-        friend_telegram_username=friend.friend_telegram_username,
-        gender=friend.gender,
-        initial_note=friend.initial_note,
-        messages=friend.messages if friend.messages else [],
-        profile_photo=friend.profile_photo
+        jwt_token=add_friend.token,
+        friend_name=add_friend.friend_name,
+        gender=add_friend.gender,
+        initial_note=add_friend.initial_note,
     )
 
     db.add(new_friend)
@@ -983,49 +1022,69 @@ async def add_friend(friend:UserFriendCreate,db:Session=Depends(get_db),user_id:
     db.refresh(new_friend)
     
     return new_friend
-        
 
 
 
-@app.delete("/friends/{friend_id}")
-async def delete_friend(friend_id:int, db:Session=Depends(get_db),user_id:int=Depends(get_current_user)):
+@app.delete("/deletefriends/", response_model=UserFriendDResponse)
+async def delete_friend( delete_friend:UserFriendDCreate,db:Session=Depends(get_db)):
     
     #check if user exists
-    user = db.query(db_models.User).filter(db_models.User.user_id==user_id).first()
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
+    token=delete_friend.token
+    friend_name=delete_friend.friend_name
 
+    if not token: 
+        raise HTTPException(status_code=401, detail="Token is required")
+
+    user_id=get_current_user(request=None, db=db,token=delete_friend.token)
     
     #check if friend exists for the user
-    friend=db.query(db_models.UserFriend).filter(db_models.UserFriend.id==friend_id, db_models.UserFriend.user_id==user_id).first()
+    friend1=db.query(db_models.UserFriend).filter(db_models.UserFriend.id==friend_name, db_models.UserFriend.user_id==user_id).all()
 
-    if not friend:
+    friend2=db.query(db_models.UserSuggestion).filter(db_models.UserSuggestion.id==friend_name, db_models.UserSuggestion.user_id==user_id).all()
+
+    print("friend 1 & 2 defined")
+    if not friend1:
+        print("friend 1 not found")
         raise HTTPException(status_code=404, detail="Friend not found!")
     
-    db.delete(friend)
+    if not friend2:
+
+        print("friend 1 not found")
+        raise HTTPException(status_code=404, detail="Friend not found!")
+
+    
+    db.delete(friend1)
+    db.commit()
+
+    db.delete(friend2)
     db.commit()
     
-    return{"detail":"friend deleted sucessfully"}
+    return{"detail":"friend deleted successfully"}
 
 
 #edit user
 @app.put("/user/update", response_model=UserResponse) 
-async def edit_user(user_update:UserEditRequest, db:Session=Depends(get_db), current_user:int=Depends(get_current_user)):
-    
+async def edit_user(user_update:UserEditRequest, db:Session=Depends(get_db)):
+    token=user_update.token
+
+    if not token: raise HTTPException(status_code=401, detail="Token is required")
+
+    current_user=get_current_user(request=None, db=db,token=user_update.token)
+
     #check if user exists
     db_user=db.query(db_models.User).filter(db_models.User.user_id==current_user).first()
     if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
     
     #edit and update user
-    if user_update.username:
+    if  user_update.username:
         db_user.username=user_update.username
         
-    if user_update.email:
+    if  user_update.email:
         db_user.email=user_update.email
     
     if user_update.password:
-        db_user.password_hash=hash_password(user_update.password)
+        db_user.password_hash=user_update.password
         
     if user_update.mbti:
         db_user.mbti=user_update.mbti
@@ -1044,4 +1103,70 @@ async def edit_user(user_update:UserEditRequest, db:Session=Depends(get_db), cur
     db.refresh(db_user)
     
     return db_user
+    #return{"detail":"Edited successfully"}
     
+
+    
+@app.get("/statistics/interaction_plot")
+async def get_interaction_plot(token: str = Query(...), db: Session = Depends(get_db)):
+
+    if not token: 
+        raise HTTPException(status_code=401, detail="Token is required")
+
+    user_id=get_current_user(request=None, db=db,token=token)    
+    plot_img = interaction_plot(user_id, db)
+    
+    return Response(content=plot_img, media_type="image/png")
+    
+    
+@app.get("/statistics/total_score_plot")
+async def get_total_score_plot(token: str = Query(...), db: Session = Depends(get_db)):
+
+    if not token: 
+        raise HTTPException(status_code=401, detail="Token is required")
+
+    user_id=get_current_user(request=None, db=db,token=token)        
+    plot_img = total_score_plot(user_id, db)
+    
+    return Response(content=plot_img, media_type="image/png")
+
+
+
+@app.post("/suggest-friend/")
+def suggest_friend( suggest_friend:SuggestFriend, db: Session=Depends(get_db)):
+
+    token=suggest_friend.token
+    mood=suggest_friend.mood
+    print(token)
+    if not token: 
+        raise HTTPException(status_code=401, detail="Token is required")
+
+    user_id=get_current_user(request=None, db=db,token=suggest_friend.token)
+    print(user_id)
+
+
+    db_record = db.query(db_models.UserSuggestion).filter_by(user_id =user_id).all()
+    friends_list = {"friend_name" : [], "total_score" : [], "suggestion" : [], "gender" :[]}
+    friend_df = pd.DataFrame(friends_list)
+    for record in db_record:
+        friend_name = record.friend_name
+        total_score = record.total_score
+        suggestion = record.suggestion
+        gender = record.gender
+        friend_df.loc[len(friend_df)] = [friend_name, total_score, suggestion, gender]
+
+    mood_analysis = run_model([mood])
+    if mood_analysis == "very negative" or mood_analysis == "negative":
+        friend_df_suggestion = friend_df.sort_values(by = "total_score", ascending = False)
+        friend_df_suggestion.reset_index(drop=True, inplace=True)
+    elif mood_analysis == "positive" or mood_analysis == "very positive":
+        friend_df_suggestion = friend_df[friend_df["suggestion"].str.contains("pay more attention")]
+        friend_df_suggestion.reset_index(drop=True, inplace=True)
+    else: 
+        friend_df_suggestion = friend_df[friend_df["suggestion"].str.contains("it's been a long time")]
+        friend_df_suggestion.reset_index(drop=True, inplace=True)
+    
+    sub_friend_dict = friend_df_suggestion[["friend_name", "gender"]]
+    friend_dict = sub_friend_dict.to_dict(orient = "index")
+    print(friend_dict)
+    return friend_dict

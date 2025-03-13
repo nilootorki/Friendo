@@ -39,8 +39,21 @@
   min-width: 0;
   padding: 8px;
 }
+.img__cGIj2 {
+  object-fit: cover;
+  max-width: 100%;
+  width: 30px;
+  height: 30px;
+  margin-right: 22px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.img__cGIj2 > picture > img {
+  object-fit: cover;
+}
 .textAreaInput:global(.__wab_instance):global(.__wab_instance) {
   max-width: 100%;
+  margin-left: 0px;
 }
 .img__pbt5W {
   object-fit: cover;

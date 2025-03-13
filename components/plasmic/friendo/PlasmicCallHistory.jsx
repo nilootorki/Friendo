@@ -21,6 +21,7 @@ import {
   useDollarState
 } from "@plasmicapp/react-web";
 import { useDataEnv } from "@plasmicapp/react-web/lib/host";
+import { usePlasmicDataOp } from "@plasmicapp/react-web/lib/data-sources";
 import NavBar from "../../NavBar"; // plasmic-import: KnagBLotfm8n/component
 import TextInput from "../../TextInput"; // plasmic-import: B7pg-YS7wyr5/component
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -63,6 +64,7 @@ function PlasmicCallHistory__RenderFunc(props) {
   const $ctx = useDataEnv?.() || {};
   const refsRef = React.useRef({});
   const $refs = refsRef.current;
+  let [$queries, setDollarQueries] = React.useState({});
   const stateSpecs = React.useMemo(
     () => [
       {
@@ -90,10 +92,9 @@ function PlasmicCallHistory__RenderFunc(props) {
         initFunc: ({ $props, $state, $queries, $ctx }) => false
       },
       {
-        path: "textInput.value",
+        path: "textInput[].value",
         type: "private",
-        variableType: "text",
-        initFunc: ({ $props, $state, $queries, $ctx }) => undefined
+        variableType: "text"
       },
       {
         path: "navBar.friendsTooltip",
@@ -108,9 +109,25 @@ function PlasmicCallHistory__RenderFunc(props) {
   const $state = useDollarState(stateSpecs, {
     $props,
     $ctx,
-    $queries: {},
+    $queries: $queries,
     $refs
   });
+  const new$Queries = {
+    query: usePlasmicDataOp(() => {
+      return {
+        sourceId: "jPx9VXTMGhi2nPHAixuLPM",
+        opId: "5b508eee-6b09-4363-b01a-75f8ba0c25dd",
+        userArgs: {},
+        cacheKey: `plasmic.$.5b508eee-6b09-4363-b01a-75f8ba0c25dd.$.`,
+        invalidatedKeys: null,
+        roleId: null
+      };
+    })
+  };
+  if (Object.keys(new$Queries).some(k => new$Queries[k] !== $queries[k])) {
+    setDollarQueries(new$Queries);
+    $queries = new$Queries;
+  }
   return (
     <React.Fragment>
       <Head></Head>
@@ -228,104 +245,179 @@ function PlasmicCallHistory__RenderFunc(props) {
             ])}
           />
 
-          <div className={classNames(projectcss.all, sty.freeBox___3Z5Or)}>
-            <div className={classNames(projectcss.all, sty.freeBox__l2P7G)}>
-              <PlasmicImg__
-                alt={""}
-                className={classNames(sty.img__drzO3)}
-                displayHeight={"27px"}
-                displayMaxHeight={"none"}
-                displayMaxWidth={"100%"}
-                displayMinHeight={"0"}
-                displayMinWidth={"0"}
-                displayWidth={"27px"}
-                loading={"lazy"}
-                src={{
-                  src: "/plasmic/friendo/images/icons8IncomingCall50Png.png",
-                  fullWidth: 50,
-                  fullHeight: 50,
-                  aspectRatio: undefined
-                }}
-              />
-
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__hccX
-                )}
-              >
-                {"date:"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text___8J6XF
-                )}
-              >
-                {"2025-3-12"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__wdIVz
-                )}
-              >
-                {"from:"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__sxoHy
-                )}
-              >
-                {"Niloo"}
-              </div>
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text___6FPuY
-                )}
-              >
-                {"comment:"}
-              </div>
-              <TextInput
-                data-plasmic-name={"textInput"}
-                data-plasmic-override={overrides.textInput}
-                className={classNames("__wab_instance", sty.textInput)}
-                defaultValue={``}
-                disabled={false}
-                onChange={async (...eventArgs) => {
-                  generateStateOnChangeProp($state, [
-                    "textInput",
-                    "value"
-                  ]).apply(null, eventArgs);
-                  if (
-                    eventArgs.length > 1 &&
-                    eventArgs[1] &&
-                    eventArgs[1]._plasmic_state_init_
-                  ) {
-                    return;
-                  }
-                }}
-                placeholder={"Enter your thoughts about the call"}
-                readOnly={false}
-              />
-
-              <div
-                className={classNames(
-                  projectcss.all,
-                  projectcss.__wab_text,
-                  sty.text__robRi
-                )}
-              >
-                {"submit"}
-              </div>
+          <div className={classNames(projectcss.all, sty.freeBox__haMm)}>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text___0YGbn
+              )}
+            >
+              {"Call Date"}
             </div>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__klIwR
+              )}
+            >
+              {"Call Duration"}
+            </div>
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__osNl
+              )}
+            >
+              {"Comment"}
+            </div>
+          </div>
+          <div className={classNames(projectcss.all, sty.freeBox___3Z5Or)}>
+            {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
+              (() => {
+                try {
+                  return (() => {
+                    const rawData = $queries.query.data.find(
+                      item =>
+                        item.username === "Mahshid" &&
+                        item.friend_name === "Rojan"
+                    )?.call;
+                    return JSON.parse(rawData);
+                  })();
+                } catch (e) {
+                  if (
+                    e instanceof TypeError ||
+                    e?.plasmicType === "PlasmicUndefinedDataError"
+                  ) {
+                    return [];
+                  }
+                  throw e;
+                }
+              })()
+            ).map((__plasmic_item_0, __plasmic_idx_0) => {
+              const currentItem = __plasmic_item_0;
+              const currentIndex = __plasmic_idx_0;
+              return (
+                <div
+                  className={classNames(projectcss.all, sty.freeBox__l2P7G)}
+                  key={currentIndex}
+                >
+                  <PlasmicImg__
+                    alt={""}
+                    className={classNames(sty.img__drzO3)}
+                    displayHeight={"27px"}
+                    displayMaxHeight={"none"}
+                    displayMaxWidth={"100%"}
+                    displayMinHeight={"0"}
+                    displayMinWidth={"0"}
+                    displayWidth={"27px"}
+                    loading={"lazy"}
+                    src={(() => {
+                      try {
+                        return currentItem.type === "INCOMING"
+                          ? "https://img.plasmic.app/img-optimizer/v1/img?src=https%3A%2F%2Fimg.plasmic.app%2Fimg-optimizer%2Fv1%2Fimg%2F27dec4483be927eafa2bdedd04ee70b8.png&q=75"
+                          : currentItem.type === "OUTGOING"
+                          ? "https://img.plasmic.app/img-optimizer/v1/img?src=https%3A%2F%2Fimg.plasmic.app%2Fimg-optimizer%2Fv1%2Fimg%2F4bcbd95f65d8792e191af4f82b762996.png&q=75"
+                          : "https://img.plasmic.app/img-optimizer/v1/img?src=https%3A%2F%2Fimg.plasmic.app%2Fimg-optimizer%2Fv1%2Fimg%2F738e90c05c308f4aa09f3147f1d6d25a.png&q=75";
+                      } catch (e) {
+                        if (
+                          e instanceof TypeError ||
+                          e?.plasmicType === "PlasmicUndefinedDataError"
+                        ) {
+                          return {
+                            src: "/plasmic/friendo/images/icons8IncomingCall50Png.png",
+                            fullWidth: 50,
+                            fullHeight: 50,
+                            aspectRatio: undefined
+                          };
+                        }
+                        throw e;
+                      }
+                    })()}
+                  />
+
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text___8J6XF
+                    )}
+                  >
+                    <React.Fragment>
+                      {(() => {
+                        try {
+                          return currentItem.date;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return "2025-3-12";
+                          }
+                          throw e;
+                        }
+                      })()}
+                    </React.Fragment>
+                  </div>
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__wdIVz
+                    )}
+                  >
+                    <React.Fragment>
+                      {(() => {
+                        try {
+                          return (() => {
+                            const time = Number(currentItem.duration);
+                            const minute = Math.floor(time / 60);
+                            const seconds = (time % 60)
+                              .toString()
+                              .padStart(2, "0");
+                            const formattedTime = `${minute}:${seconds}`;
+                            return formattedTime;
+                          })();
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return "from:";
+                          }
+                          throw e;
+                        }
+                      })()}
+                    </React.Fragment>
+                  </div>
+                  <TextInput
+                    data-plasmic-name={"textInput"}
+                    data-plasmic-override={overrides.textInput}
+                    className={classNames("__wab_instance", sty.textInput)}
+                    defaultValue={``}
+                    disabled={false}
+                    onChange={async (...eventArgs) => {
+                      generateStateOnChangeProp($state, [
+                        "textInput",
+                        __plasmic_idx_0,
+                        "value"
+                      ]).apply(null, eventArgs);
+                      if (
+                        eventArgs.length > 1 &&
+                        eventArgs[1] &&
+                        eventArgs[1]._plasmic_state_init_
+                      ) {
+                        return;
+                      }
+                    }}
+                    placeholder={"Enter your thoughts about the call"}
+                    readOnly={false}
+                  />
+                </div>
+              );
+            })}
             <div className={classNames(projectcss.all, sty.freeBox___61Rxh)}>
               <PlasmicImg__
                 alt={""}
@@ -338,7 +430,7 @@ function PlasmicCallHistory__RenderFunc(props) {
                 displayWidth={"27px"}
                 loading={"lazy"}
                 src={{
-                  src: "/plasmic/friendo/images/icons8OutgoingCall50Png.png",
+                  src: "/plasmic/friendo/images/icons8IncomingCall50Png.png",
                   fullWidth: 50,
                   fullHeight: 50,
                   aspectRatio: undefined
