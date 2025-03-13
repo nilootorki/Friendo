@@ -166,3 +166,22 @@ class SuggestFriend(BaseModel):
     
     class Config:
         orm_mode =True  #allow conversion from ORM models
+
+
+class CallInfo(BaseModel):
+    dialer : str
+    reciever: str
+    call_type: str
+    date_str: str
+    duration: int
+    note: str
+
+
+class AddCalls(BaseModel):
+    token:str
+    friend_name:str
+    CallInfo: CallInfo  
+
+    class Config:
+        orm_mode =True  #allow conversion from ORM models
+
